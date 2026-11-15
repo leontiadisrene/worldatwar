@@ -30,24 +30,20 @@ def tavily(query, depth="basic"):
 
 # ---------- tolerant JSON parse ----------
 def parse_json(text):
-    """Parse JSON, tolerating code fences and trailing content."""
     if isinstance(text, dict):
         return text
     if not isinstance(text, str):
         raise ValueError(f"expected str or dict, got {type(text)}")
     s = text.strip()
-    # strip markdown fences if present
     if s.startswith("```"):
         s = s.split("```", 2)
         s = s[1] if len(s) > 1 else s[0]
         if s.startswith("json"):
             s = s[4:]
         s = s.strip()
-    # try direct parse
     try:
         return json.loads(s)
     except json.JSONDecodeError:
-        # try to trim trailing garbage after the last closing brace
         depth, end = 0, None
         for i, ch in enumerate(s):
             if ch == "{": depth += 1
@@ -59,7 +55,7 @@ def parse_json(text):
         raise
 
 # ---------- models ----------
-def groq(model, prompt, max_tokens=2048):
+def groq(model, prompt, max_tokens=1200):
     r = requests.post(
         "https://api.groq.com/openai/v1/chat/completions",
         headers={"Authorization": f"Bearer {GROQ}", "Content-Type": "application/json"},
@@ -76,11 +72,14 @@ def groq(model, prompt, max_tokens=2048):
     content = r.json()["choices"][0]["message"]["content"]
     return parse_json(content)
 
-def cloudflare(model, prompt):
+def cloudflare(model, prompt, max_tokens=1200):
     r = requests.post(
         f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCT}/ai/run/{model}",
         headers={"Authorization": f"Bearer {CF_TOKEN}", "Content-Type": "application/json"},
-        json={"messages": [{"role": "user", "content": prompt}]},
+        json={
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": max_tokens,
+        },
         timeout=120,
     )
     if not r.ok:
@@ -89,7 +88,6 @@ def cloudflare(model, prompt):
     if not body.get("success"):
         raise RuntimeError(f"CF error: {body.get('errors')}")
     result = body["result"]["response"]
-    # Cloudflare sometimes returns a dict, sometimes a JSON string
     if isinstance(result, dict):
         return result
     return parse_json(result)
@@ -156,20 +154,19 @@ def compare(a, b):
     flags = []
     if a.get("confidence") != b.get("confidence"):
         flags.append("confidence mismatch")
-    ua = {s.get("url","") for s in a.get("sources", []) if isinstance(s, dict)}
-    ub = {s.get("url","") for s in b.get("sources", []) if isinstance(s, dict)}
-    if ua != ub:
-        flags.append("source-list mismatch")
     da = {e.get("date","") for e in a.get("events", []) if isinstance(e, dict)}
     db = {e.get("date","") for e in b.get("events", []) if isinstance(e, dict)}
     if da != db:
         flags.append("event-date mismatch")
+    # source-list mismatch is NOT a review trigger — both models legitimately
+    # pick different URLs from the same Tavily result set. url_alive() gates
+    # the sources independently.
     return flags
 
 # ---------- validation ----------
 def url_alive(url):
     try:
-        h = requests.head(url, allow_redirects=True, timeout=8,
+        h = requests.head(url, allow_redirects=True, timeout=3,
                           headers={"User-Agent": "Mozilla/5.0"})
         return h.status_code < 400
     except Exception:
@@ -209,14 +206,14 @@ def main():
             a = None
             try:
                 a = cloudflare("@cf/meta/llama-3.3-70b-instruct-fp8-fast", prompt)
-                time.sleep(0.5)
+                time.sleep(1.0)
             except Exception as e:
                 print(f"  cloudflare failed for {c['name']}: {e}")
 
             b = None
             try:
-                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=2048)
-                time.sleep(2.0)
+                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=1200)
+                time.sleep(3.0)
             except Exception as e:
                 print(f"  groq failed for {c['name']}: {e}")
 
@@ -235,8 +232,8 @@ def main():
                     try:
                         final = groq("openai/gpt-oss-120b",
                                      review_prompt(c, results, a, b, flags),
-                                     max_tokens=2048)
-                        time.sleep(2.0)
+                                     max_tokens=1200)
+                        time.sleep(3.0)
                         verified = "cloudflare+groq+groq-review"
                     except Exception as e:
                         print(f"  reviewer failed for {c['name']}: {e}; using A")
@@ -244,7 +241,6 @@ def main():
                 else:
                     final, verified = a, "cloudflare+groq"
 
-            # sanity check
             if not isinstance(final, dict) or "current" not in final:
                 print(f"SKIP {c['name']}: final output missing 'current'")
                 continue
@@ -256,8 +252,8 @@ def main():
                 continue
 
             c["current"]    = final["current"]
-            c["sources"]    = live[:5]
-            c["confidence"] = final.get("confidence", "medium")
+            c["sources"]    = live[:3]
+            c["confidence"] = final.get("confidence") or "medium"
             c["verified_by"] = verified
             c["updated"]    = datetime.now(timezone.utc).isoformat(timespec="seconds")
             ok += 1
@@ -278,7 +274,7 @@ def main():
                     "source": "auto",
                 })
 
-            print(f"OK {c['name']} ({len(live)} src, {final.get('confidence')})")
+            print(f"OK {c['name']} ({len(live)} src, {c['confidence']})")
 
         except Exception as e:
             print(f"FAIL {c['name']}: {e}")
