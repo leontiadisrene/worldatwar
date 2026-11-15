@@ -85,7 +85,8 @@ def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
     min_future_cost = runs_remaining * searches_per_run
     spare = max(0, budget_left - min_future_cost)
 
-    advanced_days_total = spare // searches_per_run
+    max_possible = full_days_after + 1   # this run + future second-runs
+    advanced_days_total = min(spare // searches_per_run, max_possible)
     advanced_done = usage.get("advanced_days_done", 0)
     last_adv_date = usage.get("last_advanced_date")
     today_str = now.date().isoformat()
