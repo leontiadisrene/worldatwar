@@ -18,6 +18,15 @@
     "source": "auto"
   },
   {
+    "id": "e8cd71502aab",
+    "date": "2026-11-15",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran Attacks Bahrain",
+    "description": "Drone attack on Bahrain for the second time in days",
+    "source": "auto"
+  },
+  {
     "id": "0105e406db08",
     "date": "2026-11-14",
     "conflict": "Ukraine",
@@ -78,6 +87,15 @@
     "tier": "flash",
     "title": "Xi Jinping's reunification statement",
     "description": "Xi Jinping stated Taiwan's 'complete reunification' with China will happen",
+    "source": "auto"
+  },
+  {
+    "id": "2489d2cad04b",
+    "date": "2026-11-12",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Xi Jinping's statement",
+    "description": "Xi Jinping says Taiwan's 'complete reunification' with China will happen",
     "source": "auto"
   },
   {
