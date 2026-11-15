@@ -147,12 +147,18 @@ If the results do not resolve the dispute, set confidence to "low"."""
 # ---------- structural comparison ----------
 def compare(a, b):
     flags = []
-    if a.get("confidence") != b.get("confidence"):
-        flags.append("confidence mismatch")
-    da = {e.get("date","") for e in a.get("events", []) if isinstance(e, dict)}
-    db = {e.get("date","") for e in b.get("events", []) if isinstance(e, dict)}
-    if da != db:
-        flags.append("event-date mismatch")
+    ca, cb = a.get("confidence"), b.get("confidence")
+    # only flag confidence when the gap is large (high vs low)
+    if ca == "high" and cb == "low" or ca == "low" and cb == "high":
+        flags.append("confidence mismatch (large)")
+    # only flag event-date mismatch when BOTH models returned events
+    ea = [e for e in a.get("events", []) if isinstance(e, dict) and e.get("date")]
+    eb = [e for e in b.get("events", []) if isinstance(e, dict) and e.get("date")]
+    if ea and eb:
+        da = {e["date"] for e in ea}
+        db = {e["date"] for e in eb}
+        if da != db and not (da & db):  # no overlap at all = real conflict
+            flags.append("event-date mismatch")
     return flags
 
 # ---------- validation ----------
@@ -242,7 +248,7 @@ def main():
                     try:
                         final = groq("openai/gpt-oss-120b",
                                      review_prompt(c, results, a, b, flags),
-                                     max_tokens=1500, json_mode=False)
+                                     max_tokens=2000, json_mode=False)
                         time.sleep(5.0)
                         verified = "cloudflare+groq+groq-review"
                     except Exception as e:
