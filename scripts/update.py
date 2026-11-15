@@ -55,7 +55,7 @@ def parse_json(text):
         raise
 
 # ---------- models ----------
-def groq(model, prompt, max_tokens=800, json_mode=True):
+def groq(model, prompt, max_tokens=700, json_mode=True, retries=1):
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
@@ -64,14 +64,19 @@ def groq(model, prompt, max_tokens=800, json_mode=True):
     }
     if json_mode:
         payload["response_format"] = {"type": "json_object"}
-    r = requests.post(
-        "https://api.groq.com/openai/v1/chat/completions",
-        headers={"Authorization": f"Bearer {GROQ}", "Content-Type": "application/json"},
-        json=payload, timeout=120,
-    )
-    if not r.ok:
-        raise RuntimeError(f"Groq {model} HTTP {r.status_code}: {r.text[:200]}")
-    return parse_json(r.json()["choices"][0]["message"]["content"])
+    for attempt in range(retries + 1):
+        r = requests.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={"Authorization": f"Bearer {GROQ}", "Content-Type": "application/json"},
+            json=payload, timeout=120,
+        )
+        if r.status_code == 429 and attempt < retries:
+            print(f"  {model} 429 (used {r.text.split('Used ')[1].split(',')[0] if 'Used ' in r.text else '?'}), waiting 20s to retry")
+            time.sleep(20)
+            continue
+        if not r.ok:
+            raise RuntimeError(f"Groq {model} HTTP {r.status_code}: {r.text[:200]}")
+        return parse_json(r.json()["choices"][0]["message"]["content"])
 
 def cloudflare(model, prompt, max_tokens=1200):
     r = requests.post(
@@ -148,23 +153,19 @@ If the results do not resolve the dispute, set confidence to "low"."""
 def compare(a, b):
     flags = []
     ca, cb = a.get("confidence"), b.get("confidence")
-    # only flag confidence when the gap is large (high vs low)
     if ca == "high" and cb == "low" or ca == "low" and cb == "high":
         flags.append("confidence mismatch (large)")
-    # only flag event-date mismatch when BOTH models returned events
     ea = [e for e in a.get("events", []) if isinstance(e, dict) and e.get("date")]
     eb = [e for e in b.get("events", []) if isinstance(e, dict) and e.get("date")]
     if ea and eb:
         da = {e["date"] for e in ea}
         db = {e["date"] for e in eb}
-        if da != db and not (da & db):  # no overlap at all = real conflict
+        if da != db and not (da & db):
             flags.append("event-date mismatch")
     return flags
 
 # ---------- validation ----------
 def url_alive(url):
-    """GET with a small Range — far more reliable than HEAD, which many
-    news sites 403 unconditionally. 403 is accepted as 'live but bot-blocked'."""
     try:
         h = requests.get(url, allow_redirects=True, timeout=6, stream=True,
                          headers={
@@ -178,8 +179,6 @@ def url_alive(url):
         return False
 
 def url_valid(url, tavily_urls):
-    """Trust URLs that came verbatim from Tavily (Tavily only returns live URLs).
-    Only HTTP-check URLs the model introduced that weren't in the result set."""
     base = url.split('?')[0].rstrip('/')
     for tu in tavily_urls:
         if tu.split('?')[0].rstrip('/') == base:
@@ -227,7 +226,7 @@ def main():
 
             b = None
             try:
-                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=800)
+                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=700, retries=1)
                 time.sleep(5.0)
             except Exception as e:
                 print(f"  groq failed for {c['name']}: {e}")
@@ -248,7 +247,7 @@ def main():
                     try:
                         final = groq("openai/gpt-oss-120b",
                                      review_prompt(c, results, a, b, flags),
-                                     max_tokens=2000, json_mode=False)
+                                     max_tokens=2000, json_mode=False, retries=1)
                         time.sleep(5.0)
                         verified = "cloudflare+groq+groq-review"
                     except Exception as e:
