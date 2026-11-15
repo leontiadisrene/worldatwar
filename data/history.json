@@ -27,6 +27,24 @@
     "source": "auto"
   },
   {
+    "id": "59be4b180268",
+    "date": "2026-11-15",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran launches drone attack on Bahrain",
+    "description": "Iran launched a drone attack on Bahrain for the second time in days.",
+    "source": "auto"
+  },
+  {
+    "id": "977429e3e6d5",
+    "date": "2026-11-15",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "ASEAN leaders gather amid South China Sea tensions",
+    "description": "Analysts say finishing negotiations for disputed South China Sea agreement will be a ‘tall order’",
+    "source": "auto"
+  },
+  {
     "id": "0105e406db08",
     "date": "2026-11-14",
     "conflict": "Ukraine",
@@ -63,6 +81,15 @@
     "source": "auto"
   },
   {
+    "id": "6b0d587a74fe",
+    "date": "2026-11-13",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Myanmar junta airstrike",
+    "description": "At least 50 people killed and 58 injured in a market in rebel territory",
+    "source": "auto"
+  },
+  {
     "id": "1434c57e9321",
     "date": "2026-11-12",
     "conflict": "Gaza",
@@ -96,6 +123,15 @@
     "tier": "flash",
     "title": "Xi Jinping's statement",
     "description": "Xi Jinping says Taiwan's 'complete reunification' with China will happen",
+    "source": "auto"
+  },
+  {
+    "id": "6ce78db1e48b",
+    "date": "2026-11-12",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Xi Jinping's statement on Taiwan reunification",
+    "description": "Xi Jinping stated that Taiwan's 'complete reunification' with China will happen.",
     "source": "auto"
   },
   {
@@ -144,6 +180,33 @@
     "source": "auto"
   },
   {
+    "id": "5181fec5b028",
+    "date": "2026-11-06",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Militant attack in Cantine",
+    "description": "Militants affiliated with the Islamic State group attacked Cantine, North Kivu, Congo.",
+    "source": "auto"
+  },
+  {
+    "id": "7eac73f9ce98",
+    "date": "2026-11-05",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russia and Ukraine exchange airstrikes",
+    "description": "Renewed security talks described as productive",
+    "source": "auto"
+  },
+  {
+    "id": "d8261acdf367",
+    "date": "2026-11-03",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "China's military deployment around Taiwan",
+    "description": "China deployed 100 ships and 49 aircraft around Taiwan.",
+    "source": "auto"
+  },
+  {
     "id": "095cbfc94e77",
     "date": "2026-10-27",
     "conflict": "Korean peninsula",
@@ -159,6 +222,15 @@
     "tier": "flash",
     "title": "South Korea and U.S. conclude joint “Hoguk” military exercises",
     "description": "The two‑week drill involved combined forces and multilateral “Keen Sword” exercises in Japan, underscoring allied readiness.",
+    "source": "auto"
+  },
+  {
+    "id": "cd0e53a68e36",
+    "date": "2026-10-18",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "IS Sahel attacks",
+    "description": "Suspected IS Sahel attacks left scores of civilians dead in Ménaka region",
     "source": "auto"
   },
   {
@@ -214,6 +286,15 @@
     "title": "Hemedti sworn in to head a rival government in Nyala",
     "description": "RSF commander \"Hemedti\" is formally sworn in as head of the parallel \"Tasis\" administration, edging Sudan toward partition.",
     "source": "archive"
+  },
+  {
+    "id": "7a61b0ab17dc",
+    "date": "2026-08-29",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "US announces deal for stake in Venezuela's oil reserves",
+    "description": "President Donald Trump announced a deal giving the US a stake in Venezuela's oil reserves.",
+    "source": "auto"
   },
   {
     "id": "2026-07-24-scs-watercannon",
@@ -330,6 +411,24 @@
     "tier": "watch",
     "title": "Fighting enters fifth day and UN warns of civilian risk",
     "description": "Renewed combat near historic temples marked the fifth day of clashes, with the UN rights chief warning that strikes were moving further into each side’s territory and endangering civilians.",
+    "source": "auto"
+  },
+  {
+    "id": "dbab689494f5",
+    "date": "2025-12-11",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Renewed fighting",
+    "description": "Fighting raged at the border of Cambodia and Thailand, with combat heard near centuries-old temples",
+    "source": "auto"
+  },
+  {
+    "id": "7cc6d182b50e",
+    "date": "2025-12-07",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Fighting reignites",
+    "description": "Fighting reignited on the Cambodia-Thailand border",
     "source": "auto"
   },
   {
