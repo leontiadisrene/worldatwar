@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 """
-Refresh conflict briefings with per-event time verification.
+Balanced schedule: every day has a mandatory all-basic run (00:17 UTC)
+and a second run (12:17 UTC) that becomes all-advanced on evenly-spaced
+"advanced days" spread across the month. Budget is recomputed each run
+from live credits_used so it never overspends the free tier.
 """
 import json, os, re, time, hashlib, requests
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timezone, timedelta
 
 TAVILY    = os.environ["TAVILY_API_KEY"]
 GROQ      = os.environ["GROQ_API_KEY"]
 CF_ACCT   = os.environ["CF_ACCOUNT_ID"]
 CF_TOKEN  = os.environ["CF_API_TOKEN"]
+
+USAGE_FILE    = "data/tavily_usage.json"
+CYCLE_BUDGET  = 1000
+SAFETY_BUFFER = 50
 
 ALLOWED = [
     "reuters.com","apnews.com","afp.com","bbc.com","bbc.co.uk","aljazeera.com",
@@ -24,6 +31,94 @@ def tavily(query, depth="basic"):
     }, timeout=60)
     r.raise_for_status()
     return r.json().get("results", [])
+
+# ---------- usage tracking ----------
+def load_usage():
+    now = datetime.now(timezone.utc)
+    cycle_key = now.strftime("%Y-%m")
+    try:
+        with open(USAGE_FILE) as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        data = {}
+    if data.get("cycle") != cycle_key:
+        data = {
+            "cycle": cycle_key,
+            "cycle_budget": CYCLE_BUDGET,
+            "credits_used": 0,
+            "advanced_days_done": 0,
+            "last_advanced_date": None,
+            "last_updated": now.isoformat(),
+        }
+    data.setdefault("advanced_days_done", 0)
+    data.setdefault("last_advanced_date", None)
+    return data
+
+def save_usage(usage):
+    usage["last_updated"] = datetime.now(timezone.utc).isoformat()
+    with open(USAGE_FILE, "w") as f:
+        json.dump(usage, f, indent=2)
+
+def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
+    """
+    Returns (advanced_count, info).
+    - First run of day: 0 advanced, 100% basic.
+    - Second run: 0 or all-advanced based on evenly-spaced day thresholds.
+    """
+    if not is_second_run:
+        return 0, {"reason": "first run of day → mandatory all-basic"}
+
+    month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    next_month = (month_start.replace(year=now.year + 1, month=1)
+                  if now.month == 12
+                  else month_start.replace(month=now.month + 1))
+
+    seconds_in_month = (next_month - month_start).total_seconds()
+    progress = (now - month_start).total_seconds() / seconds_in_month
+
+    tomorrow = (now.replace(hour=0, minute=0, second=0, microsecond=0)
+                + timedelta(days=1))
+    full_days_after = max(0, (next_month - tomorrow).days)
+    runs_remaining = 1 + full_days_after * 2
+
+    budget_left = usage["cycle_budget"] - SAFETY_BUFFER - usage["credits_used"]
+    min_future_cost = runs_remaining * searches_per_run
+    spare = max(0, budget_left - min_future_cost)
+
+    advanced_days_total = spare // searches_per_run
+    advanced_done = usage.get("advanced_days_done", 0)
+    last_adv_date = usage.get("last_advanced_date")
+    today_str = now.date().isoformat()
+
+    if advanced_done >= advanced_days_total:
+        return 0, {
+            "reason": f"all {advanced_days_total} advanced days already used",
+            "progress": progress,
+            "spare": spare,
+            "advanced_days_total": advanced_days_total,
+        }
+
+    next_threshold = (advanced_done + 1) / (advanced_days_total + 1)
+
+    if progress >= next_threshold and last_adv_date != today_str:
+        upgrades = min(searches_per_run, spare)
+        usage["advanced_days_done"] = advanced_done + 1
+        usage["last_advanced_date"] = today_str
+        return upgrades, {
+            "reason": f"ADVANCED DAY #{advanced_done + 1} of {advanced_days_total} "
+                      f"(threshold {next_threshold*100:.0f}%, progress {progress*100:.0f}%)",
+            "progress": progress,
+            "spare": spare,
+            "advanced_days_total": advanced_days_total,
+        }
+
+    return 0, {
+        "reason": (f"basic day — next advanced at {next_threshold*100:.0f}% "
+                   f"(now {progress*100:.0f}%)"),
+        "progress": progress,
+        "spare": spare,
+        "advanced_days_total": advanced_days_total,
+    }
 
 # ---------- tolerant JSON parse ----------
 def parse_json(text):
@@ -82,7 +177,6 @@ def normalize_event_time(ev):
         variance = int(ev.get("time_variance_minutes") or 999)
     except (ValueError, TypeError):
         variance = 999
-
     parsed = parse_time_string(raw_time)
     if not parsed:
         ev["time"] = None
@@ -90,10 +184,8 @@ def normalize_event_time(ev):
         ev.pop("time_source_count", None)
         ev.pop("time_variance_minutes", None)
         return ev
-
     h, mi = parsed
     time_str = f"{h:02d}:{mi:02d}"
-
     if count >= 2 and variance <= 25:
         ev["time"] = time_str
         ev["time_verified"] = "verified"
@@ -103,7 +195,6 @@ def normalize_event_time(ev):
     else:
         ev["time"] = None
         ev["time_verified"] = None
-
     ev.pop("time_source_count", None)
     ev.pop("time_variance_minutes", None)
     return ev
@@ -169,22 +260,13 @@ SCHEMA = """{
 
 TIME_RULES = """
 TIME-VERIFICATION RULES (strict — apply to every event):
-- Extract the time the EVENT itself happened (e.g. "the strike occurred
-  at 14:30 local time"), NEVER the article's publication time.
-- Collect every distinct hour:minute the search results state for when
-  the event occurred.
-- Cluster those times. If two or more sources report a time within
-  25 minutes of each other, that is a valid cluster.
-- Set "time" to the MEDIAN HH:MM of the largest cluster (24-hour format).
-  If no cluster of at least 2 exists, set "time" to null.
-- Set "time_source_count" to the number of sources in that largest cluster.
-- Set "time_variance_minutes" to (max - min) of the cluster, in minutes.
-  For a single-source reading, use 0. If no cluster, use 999.
-- Set "timezone" to the zone the time is reported in ("UTC", "EET", etc.,
-  or "local"). If sources disagree, use "local".
-- DO NOT fabricate times. If none of the results mention a specific time,
-  return "time": null, "time_source_count": 0, "time_variance_minutes": 999.
-- A missing time is always better than a wrong one.
+- Extract the time the EVENT itself happened, NEVER the article's publication time.
+- Cluster the hour:minute values across sources; 2+ sources within 25 minutes = valid cluster.
+- "time" = MEDIAN HH:MM of the largest cluster. If none, use null.
+- "time_source_count" = number of sources in that cluster.
+- "time_variance_minutes" = (max - min) of cluster. Single source = 0. No cluster = 999.
+- "timezone" = zone reported ("UTC", "EET", "local", etc.).
+- DO NOT fabricate times. Missing is better than wrong.
 """
 
 def research_prompt(conflict, results):
@@ -198,16 +280,16 @@ Conflict: {conflict['name']} (tier: {conflict['tier']}).
 Verified search results from the last 10 days:
 {ctx}
 
-Return ONLY valid JSON, no markdown, exactly this shape:
+Return ONLY valid JSON, exactly this shape:
 {SCHEMA}
 
 {TIME_RULES}
 
 Other rules:
-- Every factual claim in "current" must be supported by a result above.
-- "sources": include AT LEAST 3 items, 3-5 total. Only URLs from the list above.
-- "events": 0-3 items. Only include developments dated within the last 7 days that
-  appear in at least two results.
+- Every claim in "current" must be supported by a result above.
+- "sources": AT LEAST 3, up to 5. Only URLs from the list above.
+- "events": 0-3 items, only developments dated within the last 7 days
+  that appear in at least two results.
 - Keep every string under 400 characters."""
 
 def review_prompt(conflict, results, a, b, flags):
@@ -216,7 +298,7 @@ def review_prompt(conflict, results, a, b, flags):
         for x in results
     )
     return f"""Today is {date.today().isoformat()}.
-You are the REVIEWER for the "{conflict['name']}" conflict. Two models disagreed.
+You are the REVIEWER for "{conflict['name']}". Two models disagreed.
 
 Search results:
 {ctx}
@@ -227,15 +309,15 @@ Model A:
 Model B:
 {json.dumps(b, ensure_ascii=False)}
 
-Disagreement flags: {', '.join(flags)}
+Flags: {', '.join(flags)}
 
-Decide which claims the search results actually support. Apply the time rules
-below exactly. Output ONLY the JSON object, in this shape:
+Decide which claims the search results actually support. Output ONLY the
+JSON object in this shape:
 {SCHEMA}
 
 {TIME_RULES}
 
-If the results do not resolve the dispute, set confidence to "low"."""
+If results don't resolve the dispute, set confidence to "low"."""
 
 # ---------- structural comparison ----------
 def compare(a, b):
@@ -290,14 +372,34 @@ def main():
     conflicts = json.load(open("data/conflicts.json"))
     history   = json.load(open("data/history.json"))
     seen      = {h["id"] for h in history}
-    ok        = 0
+    searches_per_run = len(conflicts)
 
+    usage = load_usage()
+    now = datetime.now(timezone.utc)
+    is_second_run = (now.hour >= 12)
+
+    advanced_count, info = compute_advanced_this_run(
+        usage, now, is_second_run, searches_per_run
+    )
+
+    print(f"Tavily cycle {usage['cycle']}: {usage['credits_used']}/{usage['cycle_budget']} used")
+    print(f"Run type: {'SECOND (12:00-23:59 UTC)' if is_second_run else 'FIRST (00:00-11:59 UTC)'}")
+    print(f"Plan: {advanced_count} advanced + {searches_per_run - advanced_count} basic "
+          f"= {advanced_count*2 + (searches_per_run - advanced_count)} credits")
+    print(f"Reason: {info['reason']}")
+    print("")
+
+    save_usage(usage)
+
+    ok = 0
     for i, c in enumerate(conflicts):
+        use_adv = (i < advanced_count)
+        depth = "advanced" if use_adv else "basic"
         try:
-            results = tavily(
-                f"{c['name']} conflict latest news",
-                depth="advanced" if i % 2 == 0 else "basic",
-            )
+            results = tavily(f"{c['name']} conflict latest news", depth=depth)
+            usage["credits_used"] += (2 if use_adv else 1)
+            save_usage(usage)
+
             if not results:
                 print(f"SKIP {c['name']}: no search results")
                 continue
@@ -387,7 +489,7 @@ def main():
                         entry["timezone"] = ev["timezone"]
                 history.append(entry)
 
-            print(f"OK {c['name']} ({len(live)} src, {c['confidence']})")
+            print(f"OK {c['name']} ({depth}, {len(live)} src, {c['confidence']})")
 
         except Exception as e:
             print(f"FAIL {c['name']}: {e}")
@@ -398,6 +500,8 @@ def main():
     print(f"\n{ok}/{len(conflicts)} refreshed; "
           f"conflicts {'updated' if c_changed else 'unchanged'}, "
           f"history {'updated' if h_changed else 'unchanged'}")
+    print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
+          f"advanced days done: {usage['advanced_days_done']}")
 
 if __name__ == "__main__":
     main()
