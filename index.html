@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Where the world is at war</title>
+<style>
+  :root{
+    --paper:#F7F6F2;
+    --ink:#1C1B19;
+    --muted:#6B6862;
+    --line:#DEDBD2;
+    --card:#FFFFFF;
+    --land:#B9B6AC;
+    --war:#B23A2E;
+    --flash:#C97A3D;
+    --watch:#C9A227;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E;
+  }
+  html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:24px 18px 56px;}
+  h1{font-size:22px;font-weight:600;margin:0 0 6px;letter-spacing:-0.01em;}
+  .sub{font-size:13.5px;color:var(--muted);margin:0 0 6px;line-height:1.5;}
+  .updated{font-size:11.5px;color:var(--muted);margin:0 0 18px;}
+  .tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:18px;}
+  .tab-btn{
+    appearance:none;border:none;background:none;font:inherit;font-size:14px;font-weight:500;
+    color:var(--muted);padding:9px 4px;margin-bottom:-1px;border-bottom:2px solid transparent;
+    cursor:pointer;
+  }
+  .tab-btn + .tab-btn{margin-left:14px;}
+  .tab-btn.active{color:var(--ink);border-bottom-color:var(--ink);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;animation:fadein .2s ease;}
+  @keyframes fadein{from{opacity:0;}to{opacity:1;}}
+  @media (prefers-reduced-motion: reduce){ .tab-panel.active{animation:none;} }
+
+  .map-wrap{position:relative;}
+  #map{width:100%;touch-action:none;}
+  .zoom-controls{position:absolute;bottom:10px;right:10px;display:flex;flex-direction:column;gap:5px;}
+  .zoom-btn{
+    width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--card);
+    color:var(--ink);font-size:16px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 2px rgba(0,0,0,.08);
+  }
+  .zoom-btn:active{transform:scale(0.93);}
+  .zoom-btn.reset{font-size:11px;}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:13px 2px 0;font-size:12px;color:var(--muted);}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot-key{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none;}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:16px;min-height:56px;}
+  .placeholder{margin:0;font-size:13px;color:var(--muted);text-align:center;padding:6px 0;}
+  #content{opacity:1;}
+  .badge-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+  .badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;flex:none;}
+  .title{font-size:16.5px;font-weight:600;}
+  .current-state{font-size:14px;line-height:1.6;color:var(--ink);margin:0 0 16px;padding-bottom:16px;border-bottom:1px solid var(--line);}
+  .row{margin:0 0 12px;}
+  .row:last-child{margin-bottom:0;}
+  .label{margin:0 0 3px;font-size:11px;color:var(--muted);}
+  .value{margin:0;font-size:14px;line-height:1.55;}
+  .facts{margin-bottom:16px;padding-bottom:4px;}
+
+  .sources{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
+  .sources-label{font-size:11px;color:var(--muted);margin:0 0 6px;}
+  .sources ol{margin:0;padding-left:18px;}
+  .sources li{font-size:12.5px;line-height:1.6;margin-bottom:3px;}
+  .sources a{color:var(--ink);text-decoration-color:var(--line);}
+
+  .ask-wrap{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
+  .ask-btn{
+    appearance:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);
+    font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:8px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .ask-btn:disabled{opacity:.6;cursor:default;}
+  .ask-btn:not(:disabled):active{transform:scale(.97);}
+  .ask-result{
+    margin-top:10px;font-size:13.5px;line-height:1.6;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    display:none;white-space:pre-wrap;
+  }
+  .ask-note{font-size:11px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
+  .ask-note a{color:var(--ink);}
+  .key-row{display:flex;gap:8px;margin-top:8px;}
+  .key-input{
+    flex:1;min-width:0;font:inherit;font-size:13px;padding:8px 10px;border-radius:8px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);
+  }
+  .key-input:focus{outline:2px solid var(--ink);outline-offset:1px;}
+  .link-btn{
+    appearance:none;border:none;background:none;padding:0;font:inherit;font-size:11px;
+    color:var(--ink);text-decoration:underline;text-underline-offset:2px;cursor:pointer;
+  }
+
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .cal-nav-btn{
+    appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    width:30px;height:30px;border-radius:8px;font-size:15px;cursor:pointer;
+  }
+  #cal-label{font-size:15px;font-weight:600;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-dow{text-align:center;font-size:10.5px;color:var(--muted);font-weight:600;padding-bottom:4px;}
+  .cal-cell{
+    appearance:none;aspect-ratio:1;border:1px solid var(--line);border-radius:7px;background:var(--card);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    font:inherit;font-size:12px;color:var(--ink);cursor:pointer;padding:2px;
+  }
+  .cal-cell:not(:disabled):active{transform:scale(.94);}
+  .cal-cell.cal-empty{background:transparent;border-color:transparent;color:var(--muted);cursor:default;opacity:.55;}
+  .cal-cell.cal-pad{visibility:hidden;border:none;}
+  .cal-cell.cal-today{border-color:var(--ink);border-width:1.5px;font-weight:700;}
+  .cal-cell.cal-selected{background:var(--paper);border-color:var(--ink);}
+  .cal-dots{display:flex;gap:2px;}
+  .cal-dot{width:5px;height:5px;border-radius:50%;flex:none;}
+
+  .day-detail{display:none;margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;animation:fadein .2s ease;}
+  .day-detail-heading{font-size:13px;font-weight:600;margin:0 0 12px;}
+  .day-item{margin-bottom:14px;}
+  .day-item:last-child{margin-bottom:0;}
+  .day-item-badge{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;margin-bottom:6px;}
+  .day-item-title{margin:0 0 3px;font-size:13.5px;font-weight:600;}
+  .day-item-desc{margin:0;font-size:13px;line-height:1.55;color:var(--ink);}
+  .day-item-tag{margin:4px 0 0;font-size:10.5px;color:var(--muted);font-style:italic;}
+
+  .hint{margin-top:16px;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.6;}
+  .cal-empty-state{font-size:12.5px;color:var(--muted);text-align:center;padding:24px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Where the world is at war</h1>
+  <p class="sub">Fifteen active wars, high-tension flashpoints and watchlist conflicts, verified against current reporting.</p>
+  <p class="updated">Updated September 30, 2026</p>
+
+  <div class="tabs">
+    <button type="button" class="tab-btn active" data-tab="map">Map</button>
+    <button type="button" class="tab-btn" data-tab="history">History</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-map">
+    <div class="map-wrap">
+      <div id="map"></div>
+      <div class="zoom-controls">
+        <button type="button" class="zoom-btn" id="zoom-in" aria-label="Zoom in">+</button>
+        <button type="button" class="zoom-btn" id="zoom-out" aria-label="Zoom out">−</button>
+        <button type="button" class="zoom-btn reset" id="zoom-reset" aria-label="Reset zoom">⤾</button>
+      </div>
+    </div>
+    <div class="legend">
+      <span><span class="dot-key" style="background:var(--war)"></span>Active war</span>
+      <span><span class="dot-key" style="background:var(--flash)"></span>Flashpoint</span>
+      <span><span class="dot-key" style="background:var(--watch)"></span>Watchlist</span>
+    </div>
+    <div class="panel" id="panel">
+      <p class="placeholder" id="placeholder">Tap a marker on the map, or pinch / scroll / use the +/− buttons to zoom in first.</p>
+      <div id="content" style="display:none;">
+        <div class="badge-row">
+          <span class="badge" id="badge"></span>
+          <span class="title" id="title"></span>
+        </div>
+        <p class="current-state" id="current-state"></p>
+        <div class="facts">
+          <div class="row"><p class="label">Who</p><p class="value" id="who"></p></div>
+          <div class="row"><p class="label">What</p><p class="value" id="what"></p></div>
+          <div class="row"><p class="label">When</p><p class="value" id="when"></p></div>
+          <div class="row"><p class="label">How</p><p class="value" id="how"></p></div>
+        </div>
+        <div class="sources">
+          <p class="sources-label">Sources</p>
+          <ol id="sources-list"></ol>
+          <p class="label" id="provenance" style="margin-top:10px"></p>
+        </div>
+        <div class="ask-wrap">
+          <div id="gemini-key-setup" style="display:none;">
+            <p class="ask-note">Paste a free Gemini API key to enable live AI analysis — get one at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a> (no credit card needed). It's saved only in this browser.</p>
+            <div class="key-row">
+              <input type="password" id="gemini-key-input" class="key-input" placeholder="Paste your Gemini API key" autocomplete="off" spellcheck="false">
+              <button type="button" class="ask-btn" id="gemini-key-save">Save</button>
+            </div>
+          </div>
+          <button type="button" class="ask-btn" id="ask-btn" style="display:none;">Ask Gemini for analysis</button>
+          <div class="ask-result" id="ask-result"></div>
+          <p class="ask-note">Gemini searches the web and reasons over the briefing above, using your own free API key sent directly from your browser to Google — nothing passes through a server of mine. <button type="button" id="change-key-link" class="link-btn" style="display:none;">Change API key</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-history">
+    <div class="cal-nav">
+      <button type="button" class="cal-nav-btn" id="cal-prev" aria-label="Previous month">‹</button>
+      <span id="cal-label"></span>
+      <button type="button" class="cal-nav-btn" id="cal-next" aria-label="Next month">›</button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="day-detail" id="day-detail"></div>
+    <p class="hint" id="history-hint">Marked days have a recorded milestone. Tap one to see what happened. Using each conflict's "Ask Gemini for analysis" button also adds an entry here, dated today &mdash; saved locally in this browser only.</p>
+  </div>
+
+  <p class="hint">Sources: CFR's Preventive Priorities Survey 2026, ICG's 10 Conflicts to Watch 2026, and wire reporting (AP, Reuters, AFP and others) — full citations under each conflict on the map.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  // ---- Data populated by fetch on boot ----
+  var CONFLICTS = [];
+  var SEED_HISTORY = [];
+  var WORLD_TOPOLOGY = null;
+
+  var TIER_META = {
+    war:{label:'Active war', bg:'#B23A2E', text:'#FFFFFF'},
+    flash:{label:'Flashpoint', bg:'#C97A3D', text:'#FFFFFF'},
+    watch:{label:'Watchlist', bg:'#C9A227', text:'#3A2E05'}
+  };
+
+  // ---- UI state ----
+  var markerGroupsSel = null;
+  var currentConflictId = null;
+
+  // ---- Gemini state ----
+  var GEMINI_KEY_STORAGE = 'conflict-map-gemini-key';
+  var GEMINI_MODEL = 'gemini-2.5-flash';
+
+  // ---- History / calendar state ----
+  var GENERATED_HISTORY_STORAGE = 'conflict-map-generated-history';
+  var historyEntries = [];
+  var viewYear, viewMonth;
+  var MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  // ---------- Tabs ----------
+  function initTabs(){
+    var buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var target = btn.getAttribute('data-tab');
+        buttons.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+        document.getElementById('tab-' + target).classList.add('active');
+      });
+    });
+  }
+
+  // ---------- Map ----------
+  function initMap(){
+    var width = 600, height = 340;
+    var svg = d3.select('#map').append('svg')
+      .attr('viewBox', '0 0 ' + width + ' ' + height)
+      .attr('width', '100%')
+      .attr('role', 'img')
+      .style('display', 'block');
+    svg.append('title').text('Interactive world map of current wars and conflict flashpoints, September 2026');
+
+    var zoomLayer = svg.append('g').attr('class', 'zoom-layer');
+    var landLayer = zoomLayer.append('g');
+    var markerLayer = zoomLayer.append('g');
+
+    var projection = d3.geoNaturalEarth1();
+    var geoPath = d3.geoPath(projection);
+
+    var zoomBehavior = d3.zoom()
+      .scaleExtent([1, 8])
+      .on('zoom', function(event){
+        zoomLayer.attr('transform', event.transform);
+      });
+    svg.call(zoomBehavior);
+
+    try {
+      var world = WORLD_TOPOLOGY;
+      var all = topojsonFeatures(world, world.objects.countries);
+      var land = all.filter(function(d){ return d.properties && d.properties.name !== 'Antarctica'; });
+      var fc = {type:'FeatureCollection', features: land};
+      projection.fitExtent([[10,10],[width-10,height-10]], fc);
+
+      landLayer.selectAll('path').data(land).join('path')
+        .attr('d', geoPath)
+        .style('fill', 'var(--land)')
+        .style('fill-opacity', 0.55)
+        .style('stroke', 'var(--paper)')
+        .style('stroke-width', 0.6);
+
+      var groups = markerLayer.selectAll('g.marker').data(CONFLICTS).join('g')
+        .attr('class', 'marker')
+        .style('cursor', 'pointer')
+        .attr('transform', function(d){ var p = projection([d.lon, d.lat]); return 'translate(' + p[0] + ',' + p[1] + ')'; });
+
+      groups.append('circle').attr('class', 'hit').attr('r', 16).attr('fill', 'transparent');
+      groups.append('circle').attr('class', 'dot')
+        .attr('r', 7)
+        .attr('fill', function(d){ return TIER_META[d.tier].bg; })
+        .attr('stroke', '#FFFFFF')
+        .attr('stroke-width', 1.5);
+      groups.append('title').text(function(d){ return d.name; });
+      groups.on('click', function(event, d){ selectConflict(d.id); });
+
+      markerGroupsSel = groups;
+    } catch(e){
+      console.error('Map render error', e);
+    }
+
+    d3.select('#zoom-in').on('click', function(){ svg.transition().duration(300).call(zoomBehavior.scaleBy, 1.6); });
+    d3.select('#zoom-out').on('click', function(){ svg.transition().duration(300).call(zoomBehavior.scaleBy, 0.625); });
+    d3.select('#zoom-reset').on('click', function(){ svg.transition().duration(300).call(zoomBehavior.transform, d3.zoomIdentity); });
+  }
+
+  // Minimal topojson arc-to-geometry conversion (avoids needing the topojson-client
+  // script from a second external host).
+  function topojsonFeatures(topology, object){
+    var arcs = decodeArcs(topology);
+    function arcsToCoords(arcIdx){
+      var idx = arcIdx, reversed = false;
+      if (idx < 0){ idx = ~idx; reversed = true; }
+      var coords = arcs[idx].slice();
+      return reversed ? coords.slice().reverse() : coords;
+    }
+    function ringCoords(ring){
+      var out = [];
+      ring.forEach(function(arcIdx, i){
+        var seg = arcsToCoords(arcIdx);
+        if (i > 0) seg = seg.slice(1);
+        out = out.concat(seg);
+      });
+      return out;
+    }
+    function geometryToGeoJSON(geom){
+      if (geom.type === 'Polygon'){
+        return {type:'Polygon', coordinates: geom.arcs.map(ringCoords)};
+      }
+      if (geom.type === 'MultiPolygon'){
+        return {type:'MultiPolygon', coordinates: geom.arcs.map(function(poly){ return poly.map(ringCoords); })};
+      }
+      return null;
+    }
+    return object.geometries.map(function(geom){
+      return {
+        type:'Feature',
+        properties: geom.properties || {},
+        id: geom.id,
+        geometry: geometryToGeoJSON(geom)
+      };
+    }).filter(function(f){ return f.geometry; });
+  }
+
+  function decodeArcs(topology){
+    var scale = topology.transform ? topology.transform.scale : [1,1];
+    var translate = topology.transform ? topology.transform.translate : [0,0];
+    return topology.arcs.map(function(arc){
+      var x = 0, y = 0;
+      return arc.map(function(pt){
+        x += pt[0]; y += pt[1];
+        return [x * scale[0] + translate[0], y * scale[1] + translate[1]];
+      });
+    });
+  }
+
+  // ---------- Detail panel ----------
+  function selectConflict(id){
+    currentConflictId = id;
+    var conflict = CONFLICTS.filter(function(c){ return c.id === id; })[0];
+    if (!conflict) return;
+
+    if (markerGroupsSel){
+      markerGroupsSel.select('circle.dot').attr('r', 7).attr('stroke-width', 1.5);
+      markerGroupsSel.filter(function(d){ return d.id === id; }).select('circle.dot').attr('r', 10).attr('stroke-width', 2.5);
+    }
+
+    renderDetail(conflict);
+    var panel = document.getElementById('panel');
+    if (panel) panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  function renderDetail(conflict){
+    document.getElementById('placeholder').style.display = 'none';
+    var content = document.getElementById('content');
+    content.style.display = 'block';
+    content.style.opacity = '0';
+    content.style.transition = 'none';
+    requestAnimationFrame(function(){
+      content.style.transition = 'opacity .25s ease';
+      content.style.opacity = '1';
+    });
+
+    document.getElementById('title').textContent = conflict.name;
+    var badge = document.getElementById('badge');
+    var meta = TIER_META[conflict.tier];
+    badge.textContent = meta.label;
+    badge.style.background = meta.bg;
+    badge.style.color = meta.text;
+
+    document.getElementById('current-state').textContent = conflict.current;
+    document.getElementById('who').textContent = conflict.who;
+    document.getElementById('what').textContent = conflict.what;
+    document.getElementById('when').textContent = conflict.when;
+    document.getElementById('how').textContent = conflict.how;
+
+    var srcList = document.getElementById('sources-list');
+    srcList.innerHTML = '';
+    conflict.sources.forEach(function(s){
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = s.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = s.label;
+      li.appendChild(a);
+      srcList.appendChild(li);
+    });
+
+    // Provenance line — shows how and when this entry was last verified
+    var prov = document.getElementById('provenance');
+    if (prov){
+      if (conflict.verified_by && conflict.updated){
+        prov.textContent = 'Verified ' + new Date(conflict.updated).toLocaleString()
+          + ' \u00b7 ' + conflict.verified_by
+          + ' \u00b7 ' + (conflict.confidence || 'medium') + ' confidence';
+      } else {
+        prov.textContent = 'Manually curated';
+      }
+    }
+
+    var askResult = document.getElementById('ask-result');
+    askResult.style.display = 'none';
+    askResult.textContent = '';
+    var askBtn = document.getElementById('ask-btn');
+    askBtn.disabled = false;
+    askBtn.textContent = 'Ask Gemini for analysis';
+    updateAskAreaVisibility();
+  }
+
+  // ---------- Ask Gemini ----------
+  function getGeminiKey(){
+    try { return localStorage.getItem(GEMINI_KEY_STORAGE) || ''; } catch(e){ return ''; }
+  }
+  function setGeminiKey(k){
+    try { if (k) localStorage.setItem(GEMINI_KEY_STORAGE, k); else localStorage.removeItem(GEMINI_KEY_STORAGE); } catch(e){}
+  }
+
+  function updateAskAreaVisibility(){
+    var hasKey = !!getGeminiKey();
+    var setup = document.getElementById('gemini-key-setup');
+    var askBtn = document.getElementById('ask-btn');
+    var changeLink = document.getElementById('change-key-link');
+    if (!setup || !askBtn || !changeLink) return;
+    setup.style.display = hasKey ? 'none' : 'block';
+    askBtn.style.display = hasKey ? 'inline-flex' : 'none';
+    changeLink.style.display = hasKey ? 'inline-block' : 'none';
+  }
+
+  function handleSaveGeminiKey(){
+    var input = document.getElementById('gemini-key-input');
+    var val = (input.value || '').trim();
+    if (!val) return;
+    setGeminiKey(val);
+    input.value = '';
+    updateAskAreaVisibility();
+  }
+
+  function handleChangeGeminiKey(){
+    setGeminiKey('');
+    document.getElementById('ask-result').style.display = 'none';
+    updateAskAreaVisibility();
+  }
+
+  function handleAskGemini(){
+    var key = getGeminiKey();
+    if (!key || !currentConflictId) return;
+    var conflict = CONFLICTS.filter(function(c){ return c.id === currentConflictId; })[0];
+    if (!conflict) return;
+    var btn = document.getElementById('ask-btn');
+    var resultEl = document.getElementById('ask-result');
+    btn.disabled = true;
+    btn.textContent = 'Thinking...';
+    resultEl.style.display = 'block';
+    resultEl.textContent = '';
+
+    var prompt = 'You are a careful, even-handed geopolitical analyst. Here is a current briefing on the "' + conflict.name + '" conflict:\n' +
+      'Who: ' + conflict.who + '\n' +
+      'What: ' + conflict.what + '\n' +
+      'When: ' + conflict.when + '\n' +
+      'How: ' + conflict.how + '\n' +
+      'Current state: ' + conflict.current + '\n\n' +
+      'Search the web for what has happened with this conflict most recently, then in 3-5 sentences give an updated analysis: what is new since the briefing above, the likely near-term trajectory, and what to watch for next. Cite roughly when your information is from if you can tell. Plain prose, no headers or bullet points, no preamble.';
+
+    fetch('https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':generateContent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        tools: [{ google_search: {} }]
+      })
+    }).then(function(res){
+      if (!res.ok){
+        return res.text().then(function(t){
+          var msg = 'Gemini returned an error (HTTP ' + res.status + ').';
+          if (res.status === 400) msg = 'That API key looks invalid or malformed.';
+          if (res.status === 403) msg = 'That API key was rejected (check it\u2019s enabled for the Gemini API).';
+          if (res.status === 429) msg = 'Rate limit hit on the free tier \u2014 wait a bit and try again.';
+          throw new Error(msg);
+        });
+      }
+      return res.json();
+    }).then(function(data){
+      var cand = data.candidates && data.candidates[0];
+      var parts = cand && cand.content && cand.content.parts;
+      var text = parts ? parts.map(function(p){ return p.text || ''; }).join('') : '';
+      if (!text) throw new Error('Gemini returned an empty response \u2014 try again.');
+      resultEl.textContent = text;
+      btn.disabled = false;
+      btn.textContent = 'Ask again';
+      saveGeneratedHistoryEntry(conflict, text);
+    }).catch(function(err){
+      btn.disabled = false;
+      btn.textContent = 'Ask Gemini for analysis';
+      resultEl.textContent = (err && err.message) ? err.message : 'Something went wrong. Check your connection and try again.';
+    });
+  }
+
+  function pad2(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function saveGeneratedHistoryEntry(conflict, text){
+    try {
+      var raw = localStorage.getItem(GENERATED_HISTORY_STORAGE);
+      var arr = raw ? JSON.parse(raw) : [];
+      var now = new Date();
+      var dateStr = now.getFullYear() + '-' + pad2(now.getMonth()+1) + '-' + pad2(now.getDate());
+      arr.push({
+        date: dateStr,
+        conflict: conflict.name,
+        conflictId: conflict.id,
+        tier: conflict.tier,
+        title: 'Gemini analysis requested',
+        description: text,
+        source: 'gemini'
+      });
+      localStorage.setItem(GENERATED_HISTORY_STORAGE, JSON.stringify(arr));
+      loadHistoryEntries();
+      renderCalendar();
+    } catch(e){ /* localStorage unavailable or full - non-fatal */ }
+  }
+
+  // ---------- History / calendar ----------
+  function loadHistoryEntries(){
+    var extra = [];
+    try {
+      var raw = localStorage.getItem(GENERATED_HISTORY_STORAGE);
+      if (raw) extra = JSON.parse(raw) || [];
+    } catch(e){ extra = []; }
+    historyEntries = SEED_HISTORY.concat(extra);
+  }
+
+  function initCalendarNav(){
+    var now = new Date();
+    viewYear = now.getFullYear();
+    viewMonth = now.getMonth();
+    document.getElementById('cal-prev').addEventListener('click', function(){
+      viewMonth--; if (viewMonth < 0){ viewMonth = 11; viewYear--; }
+      renderCalendar();
+    });
+    document.getElementById('cal-next').addEventListener('click', function(){
+      viewMonth++; if (viewMonth > 11){ viewMonth = 0; viewYear++; }
+      renderCalendar();
+    });
+  }
+
+  function renderCalendar(){
+    document.getElementById('cal-label').textContent = MONTH_NAMES[viewMonth] + ' ' + viewYear;
+    var grid = document.getElementById('cal-grid');
+    grid.innerHTML = '';
+
+    ['S','M','T','W','T','F','S'].forEach(function(l){
+      var el = document.createElement('div');
+      el.className = 'cal-dow';
+      el.textContent = l;
+      grid.appendChild(el);
+    });
+
+    var firstDay = new Date(viewYear, viewMonth, 1);
+    var startOffset = firstDay.getDay();
+    var daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+
+    var byDate = {};
+    historyEntries.forEach(function(e){
+      if (!e || !e.date) return;
+      if (!byDate[e.date]) byDate[e.date] = [];
+      byDate[e.date].push(e);
+    });
+
+    for (var i=0; i<startOffset; i++){
+      var pad = document.createElement('div');
+      pad.className = 'cal-cell cal-pad';
+      grid.appendChild(pad);
+    }
+
+    var now = new Date();
+    var todayStr = now.getFullYear() + '-' + pad2(now.getMonth()+1) + '-' + pad2(now.getDate());
+
+    for (var day=1; day<=daysInMonth; day++){
+      var dateStr = viewYear + '-' + pad2(viewMonth+1) + '-' + pad2(day);
+      var cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'cal-cell';
+      if (dateStr === todayStr) cell.classList.add('cal-today');
+
+      var num = document.createElement('span');
+      num.textContent = day;
+      cell.appendChild(num);
+
+      var entries = byDate[dateStr];
+      if (entries && entries.length){
+        var dotsWrap = document.createElement('span');
+        dotsWrap.className = 'cal-dots';
+        var seenTiers = {};
+        entries.forEach(function(e){ seenTiers[e.tier] = true; });
+        Object.keys(seenTiers).forEach(function(t){
+          var dot = document.createElement('span');
+          dot.className = 'cal-dot';
+          dot.style.background = (TIER_META[t] || TIER_META.watch).bg;
+          dotsWrap.appendChild(dot);
+        });
+        cell.appendChild(dotsWrap);
+        cell.addEventListener('click', (function(dStr, ents){
+          return function(){ showDayDetail(dStr, ents); };
+        })(dateStr, entries));
+      } else {
+        cell.disabled = true;
+        cell.classList.add('cal-empty');
+      }
+
+      grid.appendChild(cell);
+    }
+  }
+
+  function showDayDetail(dateStr, entries){
+    var wrap = document.getElementById('day-detail');
+    wrap.style.display = 'block';
+    wrap.innerHTML = '';
+
+    var dateObj = new Date(dateStr + 'T00:00:00');
+    var heading = document.createElement('div');
+    heading.className = 'day-detail-heading';
+    heading.textContent = dateObj.toLocaleDateString(undefined, {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+    wrap.appendChild(heading);
+
+    entries.forEach(function(e){
+      var item = document.createElement('div');
+      item.className = 'day-item';
+      var badge = document.createElement('span');
+      badge.className = 'day-item-badge';
+      var meta = TIER_META[e.tier] || TIER_META.watch;
+      badge.style.background = meta.bg;
+      badge.style.color = meta.text;
+      badge.textContent = e.conflict || '';
+      item.appendChild(badge);
+      var title = document.createElement('p');
+      title.className = 'day-item-title';
+      title.textContent = e.title || '';
+      item.appendChild(title);
+      if (e.description){
+        var desc = document.createElement('p');
+        desc.className = 'day-item-desc';
+        desc.textContent = e.description;
+        item.appendChild(desc);
+      }
+      if (e.source === 'gemini' || e.source === 'auto'){
+        var tag = document.createElement('p');
+        tag.className = 'day-item-tag';
+        tag.textContent = e.source === 'gemini'
+          ? 'Generated on request via "Ask Gemini for analysis"'
+          : 'Auto-detected by the 12-hour refresh job';
+        item.appendChild(tag);
+      }
+      wrap.appendChild(item);
+    });
+
+    wrap.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  // ---------- Ask-area listeners ----------
+  function bindAskHandlers(){
+    document.getElementById('ask-btn').addEventListener('click', handleAskGemini);
+    document.getElementById('gemini-key-save').addEventListener('click', handleSaveGeminiKey);
+    document.getElementById('gemini-key-input').addEventListener('keydown', function(evt){
+      if (evt.key === 'Enter') handleSaveGeminiKey();
+    });
+    document.getElementById('change-key-link').addEventListener('click', handleChangeGeminiKey);
+  }
+
+  // ---------- Boot ----------
+  // All three fetches are resolved together, then everything initialises in order.
+  // This guarantees CONFLICTS, SEED_HISTORY, and WORLD_TOPOLOGY are all populated
+  // before any rendering function runs.
+  Promise.all([
+    fetch('data/conflicts.json').then(function(r){ return r.json(); }),
+    fetch('data/history.json').then(function(r){ return r.json(); }),
+    d3.json('./countries-110m.json')
+  ]).then(function(results){
+    CONFLICTS = results[0];
+    SEED_HISTORY = results[1];
+    WORLD_TOPOLOGY = results[2];
+
+    loadHistoryEntries();
+    initTabs();
+    initMap();
+    initCalendarNav();
+    renderCalendar();
+    updateAskAreaVisibility();
+    bindAskHandlers();
+  }).catch(function(err){
+    console.error('Init failed:', err);
+    var map = document.getElementById('map');
+    if (map){
+      map.innerHTML = '<p style="padding:24px;text-align:center;color:var(--muted);font-size:13px">'
+        + 'Failed to load page data. If you opened this file directly, serve it over HTTP '
+        + '(local server or GitHub Pages) so the JSON files can be fetched.</p>';
+    }
+  });
+
+})();
+</script>
+</body>
+</html>

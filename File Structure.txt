@@ -1,0 +1,11 @@
+your-repo/
+├── index.html
+├── countries-110m.json
+├── data/
+│   ├── conflicts.json
+│   └── history.json
+├── scripts/
+│   └── update.py
+└── .github/
+    └── workflows/
+        └── update.yml
