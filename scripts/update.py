@@ -55,31 +55,29 @@ def parse_json(text):
         raise
 
 # ---------- models ----------
-def groq(model, prompt, max_tokens=1200):
+def groq(model, prompt, max_tokens=800, json_mode=True):
+    payload = {
+        "model": model,
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.1,
+        "max_tokens": max_tokens,
+    }
+    if json_mode:
+        payload["response_format"] = {"type": "json_object"}
     r = requests.post(
         "https://api.groq.com/openai/v1/chat/completions",
         headers={"Authorization": f"Bearer {GROQ}", "Content-Type": "application/json"},
-        json={
-            "model": model,
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.1,
-            "max_tokens": max_tokens,
-            "response_format": {"type": "json_object"},
-        }, timeout=120,
+        json=payload, timeout=120,
     )
     if not r.ok:
         raise RuntimeError(f"Groq {model} HTTP {r.status_code}: {r.text[:200]}")
-    content = r.json()["choices"][0]["message"]["content"]
-    return parse_json(content)
+    return parse_json(r.json()["choices"][0]["message"]["content"])
 
 def cloudflare(model, prompt, max_tokens=1200):
     r = requests.post(
         f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCT}/ai/run/{model}",
         headers={"Authorization": f"Bearer {CF_TOKEN}", "Content-Type": "application/json"},
-        json={
-            "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": max_tokens,
-        },
+        json={"messages": [{"role": "user", "content": prompt}], "max_tokens": max_tokens},
         timeout=120,
     )
     if not r.ok:
@@ -116,7 +114,7 @@ Return ONLY valid JSON, no markdown, exactly this shape:
 
 Rules:
 - Every factual claim in "current" must be supported by a result above.
-- "sources": 3-5 items. Only URLs that appear verbatim in the results. Never invent URLs.
+- "sources": include AT LEAST 3 items, 3-5 total. Only URLs from the list above. Never invent URLs.
 - "events": 0-3 items. Only include developments dated within the last 7 days that
   appear in at least two results. Otherwise return an empty list.
 - Keep every string under 400 characters."""
@@ -127,27 +125,24 @@ def review_prompt(conflict, results, a, b, flags):
         for x in results
     )
     return f"""Today is {date.today().isoformat()}.
-You are the REVIEWER. Two models disagreed on the "{conflict['name']}" conflict.
+You are the REVIEWER for the "{conflict['name']}" conflict. Two models disagreed.
 
-Raw search results:
+Search results:
 {ctx}
 
-Model A output:
+Model A:
 {json.dumps(a, ensure_ascii=False)}
 
-Model B output:
+Model B:
 {json.dumps(b, ensure_ascii=False)}
 
 Disagreement flags: {', '.join(flags)}
 
-Decide which claims are actually supported by the search results above. Repair
-any unsupported claim. Return ONLY valid JSON in this exact shape:
+Decide which claims the search results actually support. Output ONLY the JSON
+object, with no prose before or after, in this exact shape:
 {SCHEMA}
 
-Rules:
-- Base your answer strictly on the search results, not on either model's prose.
-- Keep source URLs only if they appear verbatim in the results above.
-- If the results genuinely do not resolve the dispute, set confidence to "low"."""
+If the results do not resolve the dispute, set confidence to "low"."""
 
 # ---------- structural comparison ----------
 def compare(a, b):
@@ -158,19 +153,32 @@ def compare(a, b):
     db = {e.get("date","") for e in b.get("events", []) if isinstance(e, dict)}
     if da != db:
         flags.append("event-date mismatch")
-    # source-list mismatch is NOT a review trigger — both models legitimately
-    # pick different URLs from the same Tavily result set. url_alive() gates
-    # the sources independently.
     return flags
 
 # ---------- validation ----------
 def url_alive(url):
+    """GET with a small Range — far more reliable than HEAD, which many
+    news sites 403 unconditionally. 403 is accepted as 'live but bot-blocked'."""
     try:
-        h = requests.head(url, allow_redirects=True, timeout=3,
-                          headers={"User-Agent": "Mozilla/5.0"})
-        return h.status_code < 400
+        h = requests.get(url, allow_redirects=True, timeout=6, stream=True,
+                         headers={
+                           "User-Agent": "Mozilla/5.0 (compatible; ConflictMap/1.0)",
+                           "Accept": "text/html,application/xhtml+xml,*/*",
+                           "Range": "bytes=0-1024",
+                         })
+        h.close()
+        return h.status_code < 400 or h.status_code == 403
     except Exception:
         return False
+
+def url_valid(url, tavily_urls):
+    """Trust URLs that came verbatim from Tavily (Tavily only returns live URLs).
+    Only HTTP-check URLs the model introduced that weren't in the result set."""
+    base = url.split('?')[0].rstrip('/')
+    for tu in tavily_urls:
+        if tu.split('?')[0].rstrip('/') == base:
+            return True
+    return url_alive(url)
 
 def save_if_changed(path, data):
     text = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
@@ -201,6 +209,7 @@ def main():
                 print(f"SKIP {c['name']}: no search results")
                 continue
 
+            tavily_urls = [x['url'] for x in results if x.get('url')]
             prompt = research_prompt(c, results)
 
             a = None
@@ -212,10 +221,11 @@ def main():
 
             b = None
             try:
-                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=1200)
-                time.sleep(3.0)
+                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=800)
+                time.sleep(5.0)
             except Exception as e:
                 print(f"  groq failed for {c['name']}: {e}")
+                time.sleep(5.0)
 
             if a is None and b is None:
                 print(f"SKIP {c['name']}: both researchers failed")
@@ -232,8 +242,8 @@ def main():
                     try:
                         final = groq("openai/gpt-oss-120b",
                                      review_prompt(c, results, a, b, flags),
-                                     max_tokens=1200)
-                        time.sleep(3.0)
+                                     max_tokens=1500, json_mode=False)
+                        time.sleep(5.0)
                         verified = "cloudflare+groq+groq-review"
                     except Exception as e:
                         print(f"  reviewer failed for {c['name']}: {e}; using A")
@@ -246,13 +256,14 @@ def main():
                 continue
 
             live = [s for s in final.get("sources", [])
-                    if isinstance(s, dict) and s.get("url") and url_alive(s["url"])]
+                    if isinstance(s, dict) and s.get("url")
+                    and url_valid(s["url"], tavily_urls)]
             if len(live) < 2:
                 print(f"SKIP {c['name']}: fewer than 2 live sources")
                 continue
 
             c["current"]    = final["current"]
-            c["sources"]    = live[:3]
+            c["sources"]    = live[:4]
             c["confidence"] = final.get("confidence") or "medium"
             c["verified_by"] = verified
             c["updated"]    = datetime.now(timezone.utc).isoformat(timespec="seconds")
