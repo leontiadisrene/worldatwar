@@ -55,7 +55,7 @@ def parse_json(text):
         raise
 
 # ---------- models ----------
-def groq(model, prompt, max_tokens=700, json_mode=True, retries=1):
+def groq(model, prompt, max_tokens=700, json_mode=True, retries=3):
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
