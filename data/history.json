@@ -9,6 +9,15 @@
     "source": "auto"
   },
   {
+    "id": "0a552d895079",
+    "date": "2026-11-15",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "ASEAN leaders gather; code‑of‑conduct agreement seen as unlikely",
+    "description": "During an ASEAN summit, analysts noted that reaching a final South China Sea code of conduct will be a tall order given the heightened tensions between China and the Philippines.",
+    "source": "auto"
+  },
+  {
     "id": "0105e406db08",
     "date": "2026-11-14",
     "conflict": "Ukraine",
@@ -54,6 +63,24 @@
     "source": "auto"
   },
   {
+    "id": "922ed1102bc6",
+    "date": "2026-11-12",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Xi Jinping’s statement on reunification",
+    "description": "President Xi declared that Taiwan’s “complete reunification” with China will happen, reaffirming Beijing’s long‑term goal despite not explicitly mentioning the use of force.",
+    "source": "auto"
+  },
+  {
+    "id": "b3e07e2ff9f0",
+    "date": "2026-11-10",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Seoul summons Ukraine’s envoy over North Korean POW transfer",
+    "description": "South Korea protested the secret handover of two captured North Korean soldiers, accusing Kyiv of destabilising the peninsula.",
+    "source": "auto"
+  },
+  {
     "id": "0875f0d74063",
     "date": "2026-11-09",
     "conflict": "Iran",
@@ -63,12 +90,66 @@
     "source": "auto"
   },
   {
+    "id": "a8ba13744d21",
+    "date": "2026-11-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "US strikes Qeshm Island; Iran attacks tankers in Gulf and Strait of Hormuz",
+    "description": "The United States conducted an airstrike on Iran’s Qeshm Island, and Iranian forces responded by targeting commercial tankers navigating the Gulf and the Strait of Hormuz. President Trump reiterated U.S. readiness to strike Iran if needed while acknowledging diplomatic momentum, with Qatar mediating talks but no immediate cease‑fire agreement.",
+    "source": "auto"
+  },
+  {
     "id": "468b32206c7f",
     "date": "2026-11-06",
     "conflict": "E. DR Congo",
     "tier": "war",
     "title": "IS‑linked attack in Cantine, North Kivu",
     "description": "Burned vehicles and homes were reported after militants affiliated with the Islamic State attacked the town.",
+    "source": "auto"
+  },
+  {
+    "id": "d2915412569b",
+    "date": "2026-11-06",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "IS‑affiliated attack in Cantine, North Kivu",
+    "description": "Militants linked to the Islamic State set fire to vehicles and homes in Cantine, North Kivu, causing extensive damage.",
+    "source": "auto"
+  },
+  {
+    "id": "095cbfc94e77",
+    "date": "2026-10-27",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Land‑mine explosions injure three South Korean soldiers",
+    "description": "Explosions on the western edge of the DMZ wounded three troops, reigniting tensions over the 1953 armistice line.",
+    "source": "auto"
+  },
+  {
+    "id": "960a1f62b5c9",
+    "date": "2026-10-19",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea and U.S. conclude joint “Hoguk” military exercises",
+    "description": "The two‑week drill involved combined forces and multilateral “Keen Sword” exercises in Japan, underscoring allied readiness.",
+    "source": "auto"
+  },
+  {
+    "id": "be371467bb99",
+    "date": "2026-10-05",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "China warns against “provocative acts” after Philippine deployment",
+    "description": "Beijing issued a warning, labeling the Philippine Coast Guard’s actions as provocative and reiterating its claim to the contested waters.",
+    "source": "auto"
+  },
+  {
+    "id": "23d954f7b976",
+    "date": "2026-10-01",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "Philippine Coast Guard deploys largest vessel to challenge Chinese research ship near Batanes",
+    "description": "The Philippine Coast Guard sent its biggest vessel, supported by aircraft, to confront a Chinese research vessel operating near the northern province of Batanes; the Chinese vessel subsequently withdrew.",
     "source": "auto"
   },
   {
@@ -207,6 +288,24 @@
     "source": "archive"
   },
   {
+    "id": "c9446e5aa43c",
+    "date": "2025-12-14",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Thailand launches new offensive and blocks fuel supplies",
+    "description": "Thailand began a fresh military offensive, halted fuel shipments to Cambodia and, together with Cambodia’s closure of all border crossings, escalated the humanitarian crisis.",
+    "source": "auto"
+  },
+  {
+    "id": "ca2ab819b3b9",
+    "date": "2025-12-11",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Fighting enters fifth day and UN warns of civilian risk",
+    "description": "Renewed combat near historic temples marked the fifth day of clashes, with the UN rights chief warning that strikes were moving further into each side’s territory and endangering civilians.",
+    "source": "auto"
+  },
+  {
     "id": "2025-10-26-sudan-elfasher-falls",
     "date": "2025-10-26",
     "conflict": "Sudan",
@@ -250,6 +349,15 @@
     "title": "Armenia and Azerbaijan sign a peace framework",
     "description": "At the White House, both countries sign a preliminary deal including the US-run TRIPP transit corridor.",
     "source": "archive"
+  },
+  {
+    "id": "f9f471f4fdc7",
+    "date": "2025-08-01",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "U.S.–brokered summit and joint peace declaration",
+    "description": "Leaders of Armenia and Azerbaijan met in August 2025, issuing a joint peace declaration and initialing a peace agreement that outlines a transit corridor and steps toward normalising relations.",
+    "source": "auto"
   },
   {
     "id": "2025-07-28-thaicambodia-first-ceasefire",
@@ -312,6 +420,15 @@
     "tier": "watch",
     "title": "Azerbaijan’s September 2023 offensive",
     "description": "Azerbaijan launched a large‑scale offensive that dissolved the Nagorno‑Karabakh enclave and displaced over 100,000 Armenians.",
+    "source": "auto"
+  },
+  {
+    "id": "d14e9930fb01",
+    "date": "2023-09-01",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Azerbaijan’s September 2023 offensive",
+    "description": "Azerbaijani forces launched a large‑scale offensive that broke the stalemate, leading to the dissolution of the Nagorno‑Karabakh enclave and the displacement of more than 100,000 ethnic Armenians.",
     "source": "auto"
   },
   {
