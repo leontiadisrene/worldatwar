@@ -180,7 +180,7 @@
 <div class="wrap">
   <h1>Where the world is at war</h1>
   <p class="sub">Fifteen active wars, high-tension flashpoints and watchlist conflicts, verified against current reporting.</p>
-  <p class="updated">Updated September 30, 2026</p>
+  <p class="updated" id="updated-text">Loading…</p>
 
   <div class="tabs">
     <button type="button" class="tab-btn active" data-tab="map">Map</button>
@@ -281,6 +281,33 @@
   var selectedFilterConflict = null;
   var selectedDateStr = null;
 
+  // ---------- "Updated ..." line ----------
+  function updateUpdatedLine(){
+    var el = document.getElementById('updated-text');
+    if (!el) return;
+
+    var latest = null;
+    CONFLICTS.forEach(function(c){
+      if (!c || !c.updated) return;
+      var t = new Date(c.updated);
+      if (!isNaN(t.getTime()) && (!latest || t > latest)) latest = t;
+    });
+
+    if (!latest){
+      el.textContent = 'Manually curated';
+      el.removeAttribute('title');
+      return;
+    }
+
+    var dateStr = latest.toLocaleDateString('en-GB', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+    var hh = pad2(latest.getUTCHours());
+    var mm = pad2(latest.getUTCMinutes());
+    el.textContent = 'Updated ' + dateStr + ' at ' + hh + ':' + mm + ' GMT';
+    el.setAttribute('title', latest.toISOString());
+  }
+
   function initTabs(){
     var buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(function(btn){
@@ -301,7 +328,7 @@
       .attr('width', '100%')
       .attr('role', 'img')
       .style('display', 'block');
-    svg.append('title').text('Interactive world map of current wars and conflict flashpoints, September 2026');
+    svg.append('title').text('Interactive world map of current wars and conflict flashpoints');
 
     var zoomLayer = svg.append('g').attr('class', 'zoom-layer');
     var landLayer = zoomLayer.append('g');
@@ -891,6 +918,7 @@
     WORLD_TOPOLOGY = results[2];
 
     loadHistoryEntries();
+    updateUpdatedLine();
     renderConflictFilter();
     renderConflictHistory();
     initTabs();
@@ -912,4 +940,4 @@
 })();
 </script>
 </body>
-</html>
+  </html>
