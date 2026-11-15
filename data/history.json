@@ -1,28 +1,236 @@
 [
-  {"id":"2022-02-24-ukraine-invasion","date":"2022-02-24","conflict":"Ukraine","tier":"war","title":"Russia launches full-scale invasion","description":"Russian forces invade Ukraine on multiple fronts, beginning the largest war in Europe since 1945.","source":"archive"},
-  {"id":"2023-04-15-sudan-war-begins","date":"2023-04-15","conflict":"Sudan","tier":"war","title":"War erupts between SAF and RSF","description":"Fighting breaks out in Khartoum between the army and the Rapid Support Forces, beginning Sudan\u2019s civil war.","source":"archive"},
-  {"id":"2023-10-07-gaza-war-begins","date":"2023-10-07","conflict":"Gaza","tier":"war","title":"Hamas attack on Israel starts the Gaza war","description":"Hamas-led fighters attack southern Israel; Israel launches a sustained military campaign in Gaza in response.","source":"archive"},
-  {"id":"2025-04-22-kashmir-attack","date":"2025-04-22","conflict":"Kashmir","tier":"flash","title":"Attack on tourists in Pahalgam kills 26","description":"A militant attack on Hindu tourists in Indian-administered Kashmir triggers the worst India-Pakistan crisis in decades.","source":"archive"},
-  {"id":"2025-05-10-kashmir-ceasefire","date":"2025-05-10","conflict":"Kashmir","tier":"flash","title":"US-brokered ceasefire ends India-Pakistan fighting","description":"After days of missile, drone and artillery exchanges, Trump announces a ceasefire; both sides confirm it hours later.","source":"archive"},
-  {"id":"2025-06-13-iran-war","date":"2025-06-13","conflict":"Iran","tier":"war","title":"Israel and Iran fight a direct 12-day war","description":"Israel strikes Iranian nuclear and military sites; Iran retaliates with missile barrages before a ceasefire holds.","source":"archive"},
-  {"id":"2025-07-28-thaicambodia-first-ceasefire","date":"2025-07-28","conflict":"Thai\u2013Cambodia border","tier":"watch","title":"First ceasefire after a 5-day border clash","description":"Malaysia-brokered truce ends five days of fighting that killed dozens and displaced hundreds of thousands.","source":"archive"},
-  {"id":"2025-08-08-caucasus-framework","date":"2025-08-08","conflict":"Caucasus","tier":"watch","title":"Armenia and Azerbaijan sign a peace framework","description":"At the White House, both countries sign a preliminary deal including the US-run TRIPP transit corridor.","source":"archive"},
-  {"id":"2025-09-05-mali-blockade-begins","date":"2025-09-05","conflict":"Sahel (Mali)","tier":"war","title":"JNIM declares a fuel blockade of Bamako","description":"Al-Qaeda-linked militants begin systematically attacking fuel convoys headed for Mali\u2019s capital.","source":"archive"},
-  {"id":"2025-10-10-gaza-ceasefire","date":"2025-10-10","conflict":"Gaza","tier":"war","title":"Gaza ceasefire takes effect","description":"A US-brokered ceasefire built around Trump\u2019s 20-point plan begins, though violence continues intermittently.","source":"archive"},
-  {"id":"2025-10-26-sudan-elfasher-falls","date":"2025-10-26","conflict":"Sudan","tier":"war","title":"El-Fasher falls to the RSF","description":"RSF forces capture El-Fasher after a long siege, consolidating control over Darfur.","source":"archive"},
-  {"id":"2025-12-27-thaicambodia-ceasefire","date":"2025-12-27","conflict":"Thai\u2013Cambodia border","tier":"watch","title":"New ceasefire after the deadliest fighting in years","description":"Three weeks of artillery, tank and drone warfare killed 100+ people before a fresh truce took hold.","source":"archive"},
-  {"id":"2026-01-03-venezuela-raid","date":"2026-01-03","conflict":"Venezuela","tier":"war","title":"US raid captures Maduro","description":"US special forces seize Nicol\u00e1s Maduro and his wife, flying them to the US to face narco-terrorism charges.","source":"archive"},
-  {"id":"2026-01-04-nk-missile-test","date":"2026-01-04","conflict":"Korean peninsula","tier":"flash","title":"North Korea\u2019s first missile test of the year","description":"The launch comes hours after the US raid on Maduro \u2014 a scenario North Korea\u2019s leadership has long feared for itself.","source":"archive"},
-  {"id":"2026-02-20-horn-troops","date":"2026-02-20","conflict":"Horn of Africa","tier":"flash","title":"Ethiopia and Eritrea deploy troops to the border","description":"Both countries move military equipment toward their shared border amid fears of renewed war.","source":"archive"},
-  {"id":"2026-02-28-iran-epic-fury","date":"2026-02-28","conflict":"Iran","tier":"war","title":"US-Israeli strikes kill Iran\u2019s Supreme Leader","description":"A major air campaign, reported as \"Operation Epic Fury,\" kills Ali Khamenei and other senior officials, triggering a wider war.","source":"archive"},
-  {"id":"2026-03-09-iran-succession","date":"2026-03-09","conflict":"Iran","tier":"war","title":"Mojtaba Khamenei named Iran\u2019s new Supreme Leader","description":"The Assembly of Experts names Khamenei\u2019s son as his successor, the first hereditary transition in the Islamic Republic\u2019s history.","source":"archive"},
-  {"id":"2026-03-28-sudan-khartoum","date":"2026-03-28","conflict":"Sudan","tier":"war","title":"Sudan\u2019s army recaptures Khartoum","description":"SAF forces retake the capital, consolidating control over central and eastern Sudan.","source":"archive"},
-  {"id":"2026-04-03-myanmar-president","date":"2026-04-03","conflict":"Myanmar","tier":"war","title":"Min Aung Hlaing elected president","description":"Myanmar\u2019s junta chief wins a parliamentary vote 429-126, formalizing military rule behind a civilian title.","source":"archive"},
-  {"id":"2026-06-09-iran-renewed","date":"2026-06-09","conflict":"Iran","tier":"war","title":"Israel and Iran exchange fire again as ceasefire frays","description":"A fresh round of direct strikes breaks out, drawing in US forces before another pause is announced.","source":"archive"},
-  {"id":"2026-06-24-venezuela-earthquakes","date":"2026-06-24","conflict":"Venezuela","tier":"war","title":"Twin earthquakes strike Venezuela","description":"A major double earthquake compounds the humanitarian crisis and becomes a political flashpoint during the transition.","source":"archive"},
-  {"id":"2026-07-24-scs-watercannon","date":"2026-07-24","conflict":"South China Sea","tier":"flash","title":"China fires water cannon at Philippine vessels","description":"Chinese coast guard ships target Philippine boats near Scarborough Shoal for a second straight day.","source":"archive"},
-  {"id":"2026-09-01-sudan-parallel-govt","date":"2026-09-01","conflict":"Sudan","tier":"war","title":"Hemedti sworn in to head a rival government in Nyala","description":"RSF commander \"Hemedti\" is formally sworn in as head of the parallel \"Tasis\" administration, edging Sudan toward partition.","source":"archive"},
-  {"id":"2026-09-06-ukraine-talks","date":"2026-09-06","conflict":"Ukraine","tier":"war","title":"US envoys shuttle between Moscow and Kyiv","description":"Witkoff and Kushner hold talks in both capitals; a brief pause ends with renewed strikes on Kyiv.","source":"archive"},
-  {"id":"2026-09-22-venezuela-unga","date":"2026-09-22","conflict":"Venezuela","tier":"war","title":"Trump meets Rodr\u00edguez as Machado again fails to return","description":"Their first face-to-face meeting since the raid coincides with Machado\u2019s seventh set of failed attempts to re-enter Venezuela.","source":"archive"},
-  {"id":"2026-09-23-iran-unga","date":"2026-09-23","conflict":"Iran","tier":"war","title":"Diplomats meet at the UN General Assembly sidelines","description":"Iranian and US-aligned officials hold talks in New York, without a breakthrough on the frozen ceasefire.","source":"archive"}
+  {
+    "id": "2026-09-23-iran-unga",
+    "date": "2026-09-23",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Diplomats meet at the UN General Assembly sidelines",
+    "description": "Iranian and US-aligned officials hold talks in New York, without a breakthrough on the frozen ceasefire.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-09-22-venezuela-unga",
+    "date": "2026-09-22",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Trump meets Rodríguez as Machado again fails to return",
+    "description": "Their first face-to-face meeting since the raid coincides with Machado’s seventh set of failed attempts to re-enter Venezuela.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-09-06-ukraine-talks",
+    "date": "2026-09-06",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "US envoys shuttle between Moscow and Kyiv",
+    "description": "Witkoff and Kushner hold talks in both capitals; a brief pause ends with renewed strikes on Kyiv.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-09-01-sudan-parallel-govt",
+    "date": "2026-09-01",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Hemedti sworn in to head a rival government in Nyala",
+    "description": "RSF commander \"Hemedti\" is formally sworn in as head of the parallel \"Tasis\" administration, edging Sudan toward partition.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-07-24-scs-watercannon",
+    "date": "2026-07-24",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "China fires water cannon at Philippine vessels",
+    "description": "Chinese coast guard ships target Philippine boats near Scarborough Shoal for a second straight day.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-06-24-venezuela-earthquakes",
+    "date": "2026-06-24",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Twin earthquakes strike Venezuela",
+    "description": "A major double earthquake compounds the humanitarian crisis and becomes a political flashpoint during the transition.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-06-09-iran-renewed",
+    "date": "2026-06-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Israel and Iran exchange fire again as ceasefire frays",
+    "description": "A fresh round of direct strikes breaks out, drawing in US forces before another pause is announced.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-04-03-myanmar-president",
+    "date": "2026-04-03",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Min Aung Hlaing elected president",
+    "description": "Myanmar’s junta chief wins a parliamentary vote 429-126, formalizing military rule behind a civilian title.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-03-28-sudan-khartoum",
+    "date": "2026-03-28",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Sudan’s army recaptures Khartoum",
+    "description": "SAF forces retake the capital, consolidating control over central and eastern Sudan.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-03-09-iran-succession",
+    "date": "2026-03-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Mojtaba Khamenei named Iran’s new Supreme Leader",
+    "description": "The Assembly of Experts names Khamenei’s son as his successor, the first hereditary transition in the Islamic Republic’s history.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-02-28-iran-epic-fury",
+    "date": "2026-02-28",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "US-Israeli strikes kill Iran’s Supreme Leader",
+    "description": "A major air campaign, reported as \"Operation Epic Fury,\" kills Ali Khamenei and other senior officials, triggering a wider war.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-02-20-horn-troops",
+    "date": "2026-02-20",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Ethiopia and Eritrea deploy troops to the border",
+    "description": "Both countries move military equipment toward their shared border amid fears of renewed war.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-01-04-nk-missile-test",
+    "date": "2026-01-04",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "North Korea’s first missile test of the year",
+    "description": "The launch comes hours after the US raid on Maduro — a scenario North Korea’s leadership has long feared for itself.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-01-03-venezuela-raid",
+    "date": "2026-01-03",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "US raid captures Maduro",
+    "description": "US special forces seize Nicolás Maduro and his wife, flying them to the US to face narco-terrorism charges.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-12-27-thaicambodia-ceasefire",
+    "date": "2025-12-27",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "New ceasefire after the deadliest fighting in years",
+    "description": "Three weeks of artillery, tank and drone warfare killed 100+ people before a fresh truce took hold.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-10-26-sudan-elfasher-falls",
+    "date": "2025-10-26",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "El-Fasher falls to the RSF",
+    "description": "RSF forces capture El-Fasher after a long siege, consolidating control over Darfur.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-10-10-gaza-ceasefire",
+    "date": "2025-10-10",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Gaza ceasefire takes effect",
+    "description": "A US-brokered ceasefire built around Trump’s 20-point plan begins, though violence continues intermittently.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-09-05-mali-blockade-begins",
+    "date": "2025-09-05",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "JNIM declares a fuel blockade of Bamako",
+    "description": "Al-Qaeda-linked militants begin systematically attacking fuel convoys headed for Mali’s capital.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-08-08-caucasus-framework",
+    "date": "2025-08-08",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Armenia and Azerbaijan sign a peace framework",
+    "description": "At the White House, both countries sign a preliminary deal including the US-run TRIPP transit corridor.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-07-28-thaicambodia-first-ceasefire",
+    "date": "2025-07-28",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "First ceasefire after a 5-day border clash",
+    "description": "Malaysia-brokered truce ends five days of fighting that killed dozens and displaced hundreds of thousands.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-06-13-iran-war",
+    "date": "2025-06-13",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Israel and Iran fight a direct 12-day war",
+    "description": "Israel strikes Iranian nuclear and military sites; Iran retaliates with missile barrages before a ceasefire holds.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-05-10-kashmir-ceasefire",
+    "date": "2025-05-10",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "US-brokered ceasefire ends India-Pakistan fighting",
+    "description": "After days of missile, drone and artillery exchanges, Trump announces a ceasefire; both sides confirm it hours later.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-04-22-kashmir-attack",
+    "date": "2025-04-22",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Attack on tourists in Pahalgam kills 26",
+    "description": "A militant attack on Hindu tourists in Indian-administered Kashmir triggers the worst India-Pakistan crisis in decades.",
+    "source": "archive"
+  },
+  {
+    "id": "2023-10-07-gaza-war-begins",
+    "date": "2023-10-07",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Hamas attack on Israel starts the Gaza war",
+    "description": "Hamas-led fighters attack southern Israel; Israel launches a sustained military campaign in Gaza in response.",
+    "source": "archive"
+  },
+  {
+    "id": "2023-04-15-sudan-war-begins",
+    "date": "2023-04-15",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "War erupts between SAF and RSF",
+    "description": "Fighting breaks out in Khartoum between the army and the Rapid Support Forces, beginning Sudan’s civil war.",
+    "source": "archive"
+  },
+  {
+    "id": "2022-02-24-ukraine-invasion",
+    "date": "2022-02-24",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russia launches full-scale invasion",
+    "description": "Russian forces invade Ukraine on multiple fronts, beginning the largest war in Europe since 1945.",
+    "source": "archive"
+  }
 ]
