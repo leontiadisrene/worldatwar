@@ -1,5 +1,68 @@
 [
   {
+    "id": "90c48b9d95af",
+    "date": "2026-11-15",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone attacks on power stations",
+    "description": "RSF drone strikes on power infrastructure left cities without electricity and caused civilian casualties.",
+    "source": "auto"
+  },
+  {
+    "id": "0105e406db08",
+    "date": "2026-11-14",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "US envoys meet Zelensky in Dublin",
+    "description": "US envoy Steve Witkoff met President Zelensky in Dublin after talks with Putin in Moscow; Putin agreed to allow European negotiators to join the next round of Ukraine talks.",
+    "source": "auto"
+  },
+  {
+    "id": "39b9753d40b7",
+    "date": "2026-11-14",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian hospital bombing injures 73",
+    "description": "A Russian airstrike hit a Ukrainian hospital, injuring at least 73 people.",
+    "source": "auto"
+  },
+  {
+    "id": "15034cdb798a",
+    "date": "2026-11-14",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "SAF successes in Kordofan",
+    "description": "UN identified Kordofan as the conflict’s epicentre as SAF gains ground against RSF.",
+    "source": "auto"
+  },
+  {
+    "id": "464a72c8beba",
+    "date": "2026-11-13",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Gulf allies urge pause; IRGC hits radar",
+    "description": "Saudi Arabia, Qatar and other Gulf states asked the U.S. to hold off large‑scale attacks; the IRGC retaliated by hitting a U.S. early‑warning radar in Bahrain.",
+    "source": "auto"
+  },
+  {
+    "id": "0875f0d74063",
+    "date": "2026-11-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Trump meets Qatar mediator",
+    "description": "Trump met Qatar’s mediator in Doha; officials said no imminent deal, while mutual attacks continued, including a U.S. strike on Qeshm Island and Iranian attacks on tankers.",
+    "source": "auto"
+  },
+  {
+    "id": "468b32206c7f",
+    "date": "2026-11-06",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "IS‑linked attack in Cantine, North Kivu",
+    "description": "Burned vehicles and homes were reported after militants affiliated with the Islamic State attacked the town.",
+    "source": "auto"
+  },
+  {
     "id": "2026-09-23-iran-unga",
     "date": "2026-09-23",
     "conflict": "Iran",
@@ -162,6 +225,15 @@
     "source": "archive"
   },
   {
+    "id": "9e6eb130ebe0",
+    "date": "2025-08-15",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "U.S.-brokered summit",
+    "description": "Leaders met in August 2025, issuing a joint peace declaration and initialing a peace agreement that envisages a transit corridor.",
+    "source": "auto"
+  },
+  {
     "id": "2025-08-08-caucasus-framework",
     "date": "2025-08-08",
     "conflict": "Caucasus",
@@ -207,6 +279,15 @@
     "source": "archive"
   },
   {
+    "id": "29660000ca5d",
+    "date": "2025-02-06",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "M23 soldiers gather in Goma",
+    "description": "M23 fighters were seen at the Stade de l’Unite’ in Goma for a public gathering.",
+    "source": "auto"
+  },
+  {
     "id": "2023-10-07-gaza-war-begins",
     "date": "2023-10-07",
     "conflict": "Gaza",
@@ -214,6 +295,15 @@
     "title": "Hamas attack on Israel starts the Gaza war",
     "description": "Hamas-led fighters attack southern Israel; Israel launches a sustained military campaign in Gaza in response.",
     "source": "archive"
+  },
+  {
+    "id": "330a151fc59b",
+    "date": "2023-09-01",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Azerbaijan’s September 2023 offensive",
+    "description": "Azerbaijan launched a large‑scale offensive that dissolved the Nagorno‑Karabakh enclave and displaced over 100,000 Armenians.",
+    "source": "auto"
   },
   {
     "id": "2023-04-15-sudan-war-begins",
@@ -232,5 +322,14 @@
     "title": "Russia launches full-scale invasion",
     "description": "Russian forces invade Ukraine on multiple fronts, beginning the largest war in Europe since 1945.",
     "source": "archive"
+  },
+  {
+    "id": "df6b411017dd",
+    "date": "2020-11-10",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Ceasefire ending 2020 war",
+    "description": "A Russia‑brokered ceasefire took effect in the early hours of 10 November 2020, ending the deadliest fighting.",
+    "source": "auto"
   }
 ]

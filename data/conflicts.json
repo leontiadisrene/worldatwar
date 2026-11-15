@@ -9,21 +9,24 @@
     "what": "Full-scale invasion, now a grinding war of attrition",
     "when": "Started Feb 24, 2022 — day 1,650+ and still going",
     "how": "Daily drone, missile and artillery strikes along a front over 1,100 km long",
-    "current": "Now in its fifth year with no sign of ending. Ukraine’s General Staff reported roughly 240 combat engagements a day in early September 2026. Trump envoys Steve Witkoff and Jared Kushner visited both Moscow and Kyiv in early September for direct talks, and Zelensky says he hopes for a trilateral US-Russia-Ukraine meeting \"this fall.\" A three-day pause meant to allow that US visit ended with renewed Russian missile and drone strikes on Kyiv. Zelensky says Putin may also order a fresh mobilization of 300,000 troops after Russia’s September elections. No ceasefire or territorial deal has been reached.",
+    "current": "Russia and Ukraine continue to exchange airstrikes, with a recent Russian strike on a Ukrainian hospital injuring at least 73 people. Ukraine has launched nearly 1,200 drones against Russian positions, while diplomatic talks progress as US envoys met Zelensky in Dublin and Putin agreed to let European negotiators join the next round of peace talks. Grain shipments in the Black Sea remain under threat, and Moscow continues to demand Ukrainian withdrawals and opposes NATO membership.",
     "sources": [
       {
-        "label": "Reuters: Russia says forces capture two settlements, Ukraine says fighting continues throughout front",
-        "url": "https://www.yahoo.com/news/russia-says-forces-capture-two-004627411.html"
+        "label": "Al Jazeera: At least 73 injured as Russia bombs Ukrainian hospital",
+        "url": "https://www.aljazeera.com/tag/ukraine-russia-crisis"
       },
       {
-        "label": "Thairath: Zelensky believes talks with Russia possible this month despite heavy shelling of Kyiv",
-        "url": "https://en.thairath.co.th/news/foreign/2958376"
+        "label": "BBC News: US envoys meet Zelensky in Dublin after talks with Putin in Moscow",
+        "url": "https://www.bbc.com/news/war-in-ukraine"
       },
       {
-        "label": "Ukraine General Staff operational update, Sept 4, 2026 (via EMPR)",
-        "url": "https://empr.media/?p=142556"
+        "label": "Al Jazeera: Three killed in Russia as Ukraine claims US floated NATO membership option",
+        "url": "https://www.aljazeera.com/news/2026/11/14/three-killed-in-russia-as-ukraine-claims-us-floated-nato-membership-option"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T12:31:19+00:00"
   },
   {
     "id": "gaza",
@@ -35,21 +38,28 @@
     "what": "War technically under ceasefire, but violence continues",
     "when": "War since Oct 7, 2023; ceasefire since Oct 10, 2025",
     "how": "Over 1,300 people killed since the \"ceasefire\" began; disarmament and reconstruction stalled",
-    "current": "A US-brokered ceasefire took effect Oct 10, 2025, built around Trump’s 20-point plan, but \"ceasefire\" has been a loose description of the reality on the ground. Gaza’s health ministry puts the death toll since October 2023 at 73,651 as of early September 2026, with over 1,300 of those killed since the truce began — including a botched Israeli special-forces raid on September 1 that set off an exchange of fire and airstrikes killing several Palestinians in Gaza City. Hamas’s disarmament, deployment of an international stabilization force, and reconstruction have all stalled.",
+    "current": "Despite a ceasefire taking effect on October 11, 2025, Israeli military operations in Gaza continue, with at least 1,643 Palestinians killed and 5,964 injured since that date. Recent strikes have targeted critical infrastructure, including an attack on Nasser Hospital that killed at least six people. The overall death toll since the war began in October 2023 has reached at least 74,695, with nearly the entire population displaced.",
     "sources": [
       {
-        "label": "Gaza Unlocked: weekly summary of the war on Gaza, Sept 4, 2026",
-        "url": "https://gazaunlocked.org/posts/weekly-gaza-update-september-4"
+        "label": "Al Jazeera: Israeli air strike kills senior Hamas commander in Gaza",
+        "url": "https://www.aljazeera.com/news/2026/11/15/israeli-air-strike-kills-senior-hamas-commander-in-gaza"
       },
       {
-        "label": "Middle East Eye: Gaza death toll since October 2023 rises to 73,651",
-        "url": "https://live.libnanews.com/event/ev-1788662803378-5f49"
+        "label": "CFR: Israeli-Palestinian Conflict | Global Conflict Tracker",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict"
       },
       {
-        "label": "KUOW/NPR: Six months after ceasefire with Israel, people in Gaza say recovery hasn’t even begun",
-        "url": "https://www.kuow.org/stories/six-months-after-ceasefire-with-israel-people-in-gaza-say-recovery-hasn-t-even-begun"
+        "label": "Al Jazeera: Israel-Palestine conflict | Today's latest",
+        "url": "https://www.aljazeera.com/tag/israel-palestine-conflict"
+      },
+      {
+        "label": "BBC News: Israel Gaza war | Latest News & Updates",
+        "url": "https://www.bbc.com/news/topics/c2vdnvdg6xxt"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "groq-only",
+    "updated": "2026-11-15T12:31:36+00:00"
   },
   {
     "id": "iran",
@@ -61,25 +71,20 @@
     "what": "A leadership-shattering war, now in an uneasy pause",
     "when": "12-day war June 2025; \"Operation Epic Fury\" Feb 28, 2026",
     "how": "US-Israeli strikes killed Iran’s Supreme Leader; his son succeeded him; Hormuz still shut",
-    "current": "This escalated far beyond the original June 2025 war. On February 28, 2026, Israel and the US launched a major surprise air campaign on Iran — reported by multiple outlets as \"Operation Epic Fury\" — that killed Supreme Leader Ali Khamenei, 86, in Tehran, along with other senior officials. Iran’s Assembly of Experts named his son, Mojtaba Khamenei, as the new Supreme Leader on March 9, 2026, after a Pakistan-mediated ceasefire took hold in early April. That ceasefire has since frayed repeatedly, with Israel’s defense minister saying the military is ready to strike again \"with even greater force\" and Iran keeping the Strait of Hormuz effectively closed. Diplomats met at the UN General Assembly sidelines in late September 2026 without a breakthrough.",
+    "current": "The United States and Iran continue intermittent strikes, with the U.S. hitting Iran’s Qeshm Island and Iran targeting tankers in the Strait of Hormuz, while the IRGC struck a U.S. early‑warning radar in Bahrain. Diplomatic talks are ongoing – President Trump met Qatar’s mediator on Nov 9, but officials say no imminent settlement is expected.",
     "sources": [
       {
-        "label": "Gulf News: Mojtaba Khamenei emerges as leading contender to succeed Iran’s Supreme Leader",
-        "url": "https://gulfnews.com/world/mena/mojtaba-khamenei-emerges-as-leading-contender-to-succeed-irans-supreme-leader-1.500462994"
+        "label": "Al Jazeera: Iran war live – Gulf allies urge pause",
+        "url": "https://www.aljazeera.com/news/liveblog/2026/11/13/iran-war-live-riyadh-china-discuss-houthis-as-group-claims-aramco-attacks"
       },
       {
-        "label": "AFP via Standard Media: Mojtaba Khamenei, son and successor to Iran’s supreme leader",
-        "url": "https://standardmedia.co.ke/business/amp/world/article/2001542657/mojtaba-khamenei-son-and-successor-to-irans-supreme-leader"
-      },
-      {
-        "label": "Al Jazeera: live coverage archive, \"US-Israel war on Iran\"",
-        "url": "https://www.aljazeera.com/author/sherwanim"
-      },
-      {
-        "label": "Israel says ready to strike Iran again \"with even greater force\"",
-        "url": "https://english.aaj.tv/news/330462942/israel-says-ready-to-strike-iran-again-if-needed-vows-greater-force"
+        "label": "CFR: Conflict With Iran",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/confrontation-between-united-states-and-iran"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T12:31:51+00:00"
   },
   {
     "id": "sudan",
@@ -91,21 +96,28 @@
     "what": "Civil war hardening into a formal partition",
     "when": "Since April 15, 2023, now in its 4th year",
     "how": "RSF controls Darfur and the west; army holds the center, north and east",
-    "current": "The war has hardened into something close to a formal partition. RSF commander Mohamed Hamdan \"Hemedti\" Dagalo was formally sworn in around September 1, 2026, as head of a 31-member parallel \"Tasis\" government based in Nyala, with SPLM-N leader Abdel Aziz al-Hilu as his deputy and eight new regional governors installed. Meanwhile the army-backed government has retaken central and eastern Sudan and operates from Port Sudan. The siege of El-Fasher, Darfur’s historic capital, has now lasted more than 500 days; UNICEF says over 1,000 children have been killed or maimed by air, artillery and ground attacks. Drone warfare has intensified on both sides amid what aid groups call the world’s worst humanitarian crisis.",
+    "current": "The conflict between Sudan’s Armed Forces and the Rapid Support Forces continues, with the United Nations flagging Kordofan as the epicentre. Drone strikes on Khartoum and power stations have killed or wounded hundreds of civilians – 484 since February – and have plunged cities into darkness. More than 14 million people have been displaced since the war began in 2023, including about 4.5 million who have fled to neighbouring countries.",
     "sources": [
       {
-        "label": "AllAfrica: RSF commander sworn in as head of Sudan’s parallel government as war rages on",
-        "url": "https://allafrica.com/stories/202509050010.html"
+        "label": "Al Jazeera: Sudan war",
+        "url": "https://www.aljazeera.com/tag/sudan-war"
       },
       {
-        "label": "The New Arab: RSF’s Hemedti sworn in as head of parallel Sudanese government",
-        "url": "https://www.newarab.com/news/rsfs-hemedti-sworn-head-parallel-sudanese-government"
+        "label": "Al Jazeera: Sudan",
+        "url": "https://www.aljazeera.com/where/sudan"
       },
       {
-        "label": "Sudan Tribune: Hemetti forms security council and plans new army in parallel government move",
-        "url": "https://sudantribune.com/?p=314541"
+        "label": "Al Jazeera: How SAF successes in Sudan’s Kordofan could turn tide against the RSF",
+        "url": "https://www.aljazeera.com/news/2026/11/14/how-saf-successes-in-sudans-kordofan-could-turn-tide-against-the-rsf"
+      },
+      {
+        "label": "Al Jazeera: Drone attacks on power stations plunge Sudan’s cities into darkness",
+        "url": "https://www.aljazeera.com/features/2026/11/15/drone-strikes-on-power-stations-plunges-sudans-cities-into-darkness"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T12:32:03+00:00"
   },
   {
     "id": "mali",
@@ -117,17 +129,24 @@
     "what": "Jihadist fuel blockade and insurgency threatening the junta",
     "when": "Blockade of the capital began around September 2025",
     "how": "Fuel convoys attacked, schools and businesses paralyzed; blockade has since eased somewhat",
-    "current": "JNIM, al-Qaeda’s regional affiliate, imposed a fuel blockade on the capital Bamako beginning around September 2025 by attacking tanker convoys from Senegal and Ivory Coast — triggering months of fuel shortages, school closures and economic paralysis that analysts called the \"toughest crisis\" the junta has faced since seizing power in 2021. The blockade eased somewhat through 2026, but JNIM remains active within about 30 miles of the capital, and the broader insurgency continues to expand across the wider Sahel and into coastal West Africa.",
+    "current": "Mali is on the brink of civil war as Islamist groups and Tuareg rebels consolidate power in northern Mali. The increase in violence coincides with the withdrawal of UN peacekeepers. JNIM has taken advantage of the withdrawal to launch a renewed offensive.",
     "sources": [
       {
-        "label": "NPR: al-Qaeda-affiliated militants cripple fuel supplies to Mali’s capital",
-        "url": "https://www.wusf.org/2025-11-21/al-qaeda-affiliated-militants-cripple-fuel-supplies-to-malis-capital"
+        "label": "Global Conflict Tracker: Violent Extremism in the Sahel",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/violent-extremism-sahel"
       },
       {
-        "label": "Peace Insight: Blockade around Bamako eases after several months of fuel crisis",
-        "url": "https://www.peaceinsight.org/es/articles/mali-blockade-around-bamako-eases-after-several-months-of-fuel-crisis"
+        "label": "UN News: Mali: Guterres calls for international solutions",
+        "url": "https://news.un.org/en/story/2026/04/1167382"
+      },
+      {
+        "label": "Al Jazeera: How armed group alliances are reshaping Mali’s conflict",
+        "url": "https://www.aljazeera.com/news/2026/7/22/how-armed-group-alliances-are-reshaping-malis-conflict-and-the-wider-sahel"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:32:07+00:00"
   },
   {
     "id": "myanmar",
@@ -139,17 +158,24 @@
     "what": "Civil war following the 2021 coup, now with a civilian facade",
     "when": "Coup Feb 1, 2021; Min Aung Hlaing elected president April 3, 2026",
     "how": "Junta-backed party swept a sham election; war with resistance forces continues in the borderlands",
-    "current": "Junta chief Min Aung Hlaing was elected president by a military-stacked parliament on April 3, 2026 (429 votes to 126), formalizing five years of army rule behind a civilian facade. This followed elections in December 2025 and January 2026 that the UN and Western governments dismissed as a sham, since Aung San Suu Kyi’s party was dissolved and major opposition groups didn’t contest. The civil war between the military and an alliance of ethnic armed organizations and pro-democracy resistance forces continues across large parts of the country’s borderlands.",
+    "current": "Myanmar’s military has intensified its air campaign, using illicit Iranian jet fuel and urea, and has struck more than a thousand civilian locations over the past fifteen months. The civil war, which began after the February 2021 coup, has killed over 100,000 people, displaced 5.2 million, and is now in a stalemate, with resistance forces controlling about 42 % of the country while the junta holds roughly 21 %. Recent airstrikes have caused heavy civilian casualties, including an attack that killed at least 50 civilians. Meanwhile, about 1,500 migrants have arrived in Myanmar from Malaysia despite UN warnings about the ongoing conflict.",
     "sources": [
       {
-        "label": "Reuters via DZRH: Myanmar junta chief elected president by pro-military parliament",
-        "url": "https://www.dzrh.com.ph/post/myanmar-junta-chief-min-aung-hlaing-elected-president-by-pro-military-parliament"
+        "label": "CFR: Reuters investigation on Iranian fuel",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/rohingya-crisis-myanmar/alerts?page=2"
       },
       {
-        "label": "New Straits Times: Myanmar’s Min Aung Hlaing — general who made himself president",
-        "url": "https://www.nst.com.my/amp/opinion/columnists/2026/04/1409543/myanmars-min-aung-hlaing-general-who-made-himself-president"
+        "label": "CFR: Civil War in Myanmar overview",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/rohingya-crisis-myanmar"
+      },
+      {
+        "label": "Al Jazeera: Migrants arriving from Malaysia",
+        "url": "https://www.aljazeera.com/where/myanmar"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T12:32:25+00:00"
   },
   {
     "id": "venezuela",
@@ -161,21 +187,24 @@
     "what": "Maduro captured in a US raid, transition still in limbo",
     "when": "Raid on Jan 3, 2026; still no election date set",
     "how": "Acting president installed with US backing; opposition leader repeatedly blocked from returning",
-    "current": "US special forces captured Nicolás Maduro and his wife Cilia Flores on January 3, 2026, flying them to the US to face narco-terrorism charges. US-backed Delcy Rodríguez has served as acting president since, well past the 180-day constitutional limit for an acting government (which technically expired around July 3). Twin earthquakes on June 24, 2026 compounded the humanitarian situation and became a political flashpoint, with opposition leader María Corina Machado citing the disaster response to press her case to return. At the UN General Assembly on September 22, 2026, Trump met Rodríguez face to face for the first time since the raid — the same day Machado made three separate failed attempts, by sea and air, to re-enter Venezuela from Panama, the seventh set of failed attempts since she left the country.",
+    "current": "The US has seized a fifth oil tanker linked to Venezuela and launched large-scale military strikes on Caracas, capturing Venezuelan leader Nicolás Maduro. The US has a stake in Venezuela's oil reserves. Tensions between the US and Venezuela remain high.",
     "sources": [
       {
-        "label": "Reuters via Internazionale: Machado fails in return attempts as Rodriguez meets Trump",
-        "url": "https://www.internazionale.it/ultime-notizie-reuters/2026/09/23/venezuelan-opposition-leader-machado-fails-in-return-attempts-as-rodriguez-meets-trump"
+        "label": "BBC News: Venezuela crisis",
+        "url": "https://www.bbc.com/news/topics/cp3mvpm3933t"
       },
       {
-        "label": "AP via WTOP: Fallout from Venezuela’s earthquakes turns political as Machado seeks return",
-        "url": "https://wtop.com/world/2026/07/as-her-180-day-mandate-expires-venezuelas-acting-leader-defends-quake-response/"
+        "label": "Al Jazeera: US-Venezuela Tensions",
+        "url": "https://www.aljazeera.com/tag/us-venezuela-tensions"
       },
       {
-        "label": "NPR/WBUR: The latest from Venezuela (ICG analyst interview)",
-        "url": "https://www.apr.org/2026-08-18/the-latest-from-venezuela"
+        "label": "Global Conflict Tracker: Instability in Venezuela",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/instability-venezuela"
       }
-    ]
+    ],
+    "confidence": "medium",
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:32:32+00:00"
   },
   {
     "id": "drc",
@@ -187,13 +216,28 @@
     "what": "Peace deals signed, but M23 still controls the ground",
     "when": "Washington and Doha deals signed mid-2025; conflict decades old",
     "how": "M23 still controls Goma and Bukavu despite the agreements",
-    "current": "A US-brokered framework between DR Congo and Rwanda was signed in Washington in mid-2025, alongside a separate Doha ceasefire between Kinshasa and the M23 rebel group. But a year after M23 seized Goma, the Rwanda-backed rebels still control the city and much of North and South Kivu province. DRC’s government has accused Rwanda of enabling \"governance by crime\" in the areas M23 controls, while the rebel alliance says it’s fighting for reform, not acting as a proxy force.",
+    "current": "Violence in eastern DR Congo remains severe as M23 rebels, who seized Goma and Bukavu in early 2025, continue to control key towns and have displaced hundreds of thousands of people. The country is also grappling with a deadly Ebola outbreak that has killed more than 5,300 people, while attacks on health workers and the recent sentencing of dozens of soldiers to death for cowardice underscore the deteriorating security environment. Impact on the United States is assessed as low.",
     "sources": [
       {
-        "label": "AP via Africanews: DR Congo’s Goma, one year under M23 control",
-        "url": "https://www.africanews.com/amp/2026/01/23/dr-congos-goma-one-year-under-m23-control/"
+        "label": "Global Conflict Tracker: Conflict in the Democratic Republic of Congo",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo"
+      },
+      {
+        "label": "BBC: DR Congo conflict – soldiers sentenced to death for cowardice",
+        "url": "https://www.bbc.com/news/articles/cmreye1q3dnjo"
+      },
+      {
+        "label": "Al Jazeera: Ebola outbreak kills more than 5,300 people in DR Congo",
+        "url": "https://www.aljazeera.com/where/democratic-republic-of-the-congo"
+      },
+      {
+        "label": "UN News: DR Congo Ebola outbreak – armed groups unrest hold back response",
+        "url": "https://news.un.org/en/story/2026/11/1168797"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T12:32:46+00:00"
   },
   {
     "id": "taiwan",
@@ -231,21 +275,20 @@
     "what": "Nuclear and missile buildup, with no active dialogue",
     "when": "Continuous missile testing through 2026",
     "how": "Repeated launches; Pyongyang calls Seoul a \"hostile enemy state\"",
-    "current": "North Korea has kept up a steady cadence of missile tests through 2026, including a tactical-nuclear-capable short-range ballistic missile test in June that state media said could inflict \"fatal damage\" on South Korean airfields, ports and power stations. Its first launch of the year came hours after the US raid that captured Maduro in Venezuela — a \"decapitation\" scenario North Korean leadership has long feared for itself. Pyongyang continues to reject Seoul’s dialogue overtures, formally calling the South a \"hostile enemy state.\"",
+    "current": "Tensions between South and North Korea have escalated sharply, with both sides engaging in provocative actions. North Korea's launch of hundreds of weapons has contributed to the escalation.",
     "sources": [
       {
-        "label": "AFP via Ahram: North Korea fires ballistic missiles in first test of 2026",
-        "url": "https://english.ahram.org.eg/News/559824.aspx"
+        "label": "Al Jazeera: North Korea",
+        "url": "https://www.aljazeera.com/where/north-korea"
       },
       {
-        "label": "NK News: North Korea conducts missile tests two days in a row",
-        "url": "https://nknews.org/2026/04/north-korea-conducts-missile-tests-two-days-in-a-row-rok-military/"
-      },
-      {
-        "label": "CSIS Beyond Parallel: database of North Korean provocations",
-        "url": "https://beyondparallel.csis.org/database-north-korean-provocations/"
+        "label": "BBC News: North Korea–South Korea relations",
+        "url": "https://www.bbc.com/news/topics/cp78wz6vexet"
       }
-    ]
+    ],
+    "confidence": "medium",
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:33:01+00:00"
   },
   {
     "id": "scs",
@@ -257,17 +300,28 @@
     "what": "Maritime and territorial dispute over reefs and shoals",
     "when": "Ongoing, flaring repeatedly through 2026",
     "how": "Water-cannon incidents and blocked resupply runs near Scarborough Shoal",
-    "current": "Confrontations between China’s coast guard and Philippine vessels escalated through 2026, including water-cannon attacks near Scarborough Shoal on consecutive days in late July and a Filipino sailor injured by a baton strike at Second Thomas Shoal. US Secretary of State Marco Rubio called Beijing’s actions \"disturbing\" and reaffirmed defense-treaty support for Manila. Japan sent combat troops to the annual Balikatan exercises with the Philippines for the first time since 1945.",
+    "current": "Chinese forces have carried out readiness patrols around Scarborough Shoal and other areas of the South China Sea, prompting the Philippine Coast Guard to deploy its largest vessel and aircraft to challenge a Chinese research vessel near Batanes. The Philippines has also reported water‑cannon attacks by Chinese coast‑guard vessels, and analysts say a regional code‑of‑conduct agreement remains unlikely as ASEAN leaders meet.",
     "sources": [
       {
-        "label": "AP: China forces fire water cannon at Philippine ships in South China Sea",
-        "url": "https://abcnews.com/International/wireStory/china-forces-fire-water-cannon-philippine-ships-faceoff-135043764"
+        "label": "CFR: Territorial Disputes in the South China Sea",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/territorial-disputes-south-china-sea"
       },
       {
-        "label": "Reuters: Philippines accuses China of using water cannon for a second day",
-        "url": "https://www.internazionale.it/ultime-notizie-reuters/2026/07/24/philippines-accuses-china-of-using-water-cannon-on-its-vessels-for-a-second-day"
+        "label": "CFR: China’s Maritime Disputes",
+        "url": "https://www.cfr.org/articles/chinas-maritime-disputes"
+      },
+      {
+        "label": "Al Jazeera: Pact on South China Sea code of conduct unlikely",
+        "url": "https://www.aljazeera.com/economy/2026/11/15/pact-on-south-china-sea-code-of-conduct-unlikely-as-asean-leaders-gather"
+      },
+      {
+        "label": "Al Jazeera tag: South China Sea",
+        "url": "https://www.aljazeera.com/tag/south-china-sea"
       }
-    ]
+    ],
+    "confidence": "medium",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T12:33:16+00:00"
   },
   {
     "id": "kashmir",
@@ -279,17 +333,24 @@
     "what": "Their worst clash in decades, now a fragile truce",
     "when": "Crisis April–May 2025; ceasefire since May 10, 2025",
     "how": "Missile, drone and artillery exchange; US-mediated ceasefire holds, dispute unresolved",
-    "current": "A ceasefire has held, if unevenly, since May 10, 2025, when a US-brokered truce ended the worst fighting between the two nuclear-armed neighbors in decades. The crisis began with an April 2025 attack on tourists in Indian Kashmir that killed 26 people, which India blamed on Pakistan-linked militants; days of missile, drone and artillery exchanges followed before Trump announced the ceasefire. Trade suspensions, visa cancellations and the suspension of the Indus Waters Treaty have all remained in place since, and the underlying Kashmir dispute remains unresolved.",
+    "current": "Violence continues in Kashmir with attacks on Indian travelers and workers. Militants have opened fire on tourists, resulting in civilian deaths.",
     "sources": [
       {
-        "label": "Reuters via Fiji Times: India and Pakistan agree to ceasefire",
-        "url": "https://www.fijitimes.com.fj/?p=834534"
+        "label": "BBC News: Kashmir tensions",
+        "url": "https://www.bbc.com/news/topics/c6vlwj44k2mt"
       },
       {
-        "label": "AFP/Reuters via Oman Observer: India and Pakistan agree to ceasefire after attacks",
-        "url": "https://www.omanobserver.om/article/1170337/world/asia/india-and-pakistan-agree-to-ceasefire-after-attacks"
+        "label": "Al Jazeera: Kashmir",
+        "url": "https://www.aljazeera.com/where/kashmir"
+      },
+      {
+        "label": "Global Conflict Tracker: Conflict Between India and Pakistan",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/conflict-between-india-and-pakistan"
       }
-    ]
+    ],
+    "confidence": "medium",
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:33:22+00:00"
   },
   {
     "id": "caucasus",
@@ -301,17 +362,20 @@
     "what": "Preliminary peace signed, but a final treaty remains unsigned",
     "when": "Framework signed Aug 8, 2025; still unresolved in 2026",
     "how": "Azerbaijan wants an Armenian constitutional change before signing a final deal",
-    "current": "A preliminary peace framework, including the US-run TRIPP transit corridor linking Azerbaijan to its Nakhchivan exclave, was signed at the White House on August 8, 2025. But over a year later, a final peace treaty remains unsigned: Azerbaijan is insisting Armenia amend its constitution to explicitly recognize Baku’s sovereignty over Nagorno-Karabakh before it will sign, and there’s no indication a signing ceremony is imminent — even as both sides describe relations as \"real peace\" and TRIPP construction moves forward.",
+    "current": "Following Azerbaijan’s September 2023 offensive, the Nagorno‑Karabakh enclave was dissolved and more than 100,000 Armenians fled the area. An August 2025 U.S.–brokered summit produced a joint peace declaration and an initialed agreement that includes a planned transit corridor, while Russian peacekeepers continue to monitor the Moscow‑brokered ceasefire.",
     "sources": [
       {
-        "label": "Eurasianet: Assessing the Armenian-Azerbaijani peace deal, one year later",
-        "url": "https://eurasianet.org/assessing-armenian-azerbaijani-peace-deal-one-year-later"
+        "label": "Council on Foreign Relations: Nagorno‑Karabakh conflict tracker",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/nagorno-karabakh-conflict"
       },
       {
-        "label": "Reuters via The Sun: Azerbaijan seeks Armenia constitution change for peace deal",
-        "url": "https://thesun.my/news/world-news/azerbaijan-armenia-constitution-change/"
+        "label": "BBC News: Nagorno‑Karabakh profile",
+        "url": "https://www.bbc.com/news/world-europe-18270325"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T12:33:35+00:00"
   },
   {
     "id": "thaicambodia",
@@ -323,17 +387,28 @@
     "what": "Long-running border dispute that turned into open war twice in 2025",
     "when": "5-day clash July 2025; worse fighting Dec 7–27, 2025",
     "how": "Artillery, tanks, drones and jets; 100+ killed before the latest ceasefire",
-    "current": "What began as a five-day border clash in July 2025 reignited into the worst fighting between the two countries in years that December — three weeks of artillery, tank, drone and jet strikes that killed more than 100 people and displaced roughly a million civilians on both sides. A new ceasefire, with 16 de-escalation commitments, took hold on December 27, 2025, and has held since, though the underlying century-old border dispute remains unresolved.",
+    "current": "Thailand has launched a new offensive as Cambodia halts all border crossings, with strikes increasingly reported further from the border into each other's territories. Since fighting reignited on December 7, at least 25 soldiers and civilians have been killed, and over half a million people have been displaced on both sides. The escalation continues despite attempted mediation by U.S. President Donald Trump and calls for urgent action from ASEAN.",
     "sources": [
       {
-        "label": "AP via NPR: Thailand and Cambodia sign new ceasefire agreement to end border fighting",
-        "url": "https://www.npr.org/2025/12/27/g-s1-103785/thailand-cambodia-new-ceasefire-agreement"
+        "label": "Al Jazeera: Thailand launches new offensive as Cambodia halts all border crossings",
+        "url": "https://www.aljazeera.com/news/2025/12/14/thailand-launches-new-offensive-as-cambodia-halts-all-border-crossings"
       },
       {
-        "label": "Al Jazeera: Thailand and Cambodia agree on ceasefire",
-        "url": "https://www.aljazeera.com/news/2025/12/27/thailand-and-cambodia-agree-on-ceasefire-cambodia-defence-ministry-says"
+        "label": "UN News: Civilians at risk amid escalating Thailand-Cambodia conflict: UN rights chief",
+        "url": "https://news.un.org/en/story/2025/12/1166626"
+      },
+      {
+        "label": "Council on Foreign Relations: Cambodia-Thailand Conflict Continues to Escalate",
+        "url": "https://www.cfr.org/articles/cambodia-thailand-conflict-continues-escalate"
+      },
+      {
+        "label": "BBC: Thailand, Cambodia agree to talks in bid to end deadly conflict - minister",
+        "url": "https://www.bbc.com/news/articles/c5ydej888n9o"
       }
-    ]
+    ],
+    "confidence": "high",
+    "verified_by": "groq-only",
+    "updated": "2026-11-15T12:33:42+00:00"
   },
   {
     "id": "horn",
@@ -345,20 +420,19 @@
     "what": "Troop buildups and real border clashes amid fears of wider war",
     "when": "Tensions escalated sharply from early 2026; clashes in August",
     "how": "Ethiopian troops clashed with Tigrayan forces near the Eritrea-Sudan border triangle",
-    "current": "Ethiopia and Eritrea moved troops toward their shared border in early 2026 amid what the International Crisis Group called a regional \"powder keg,\" with Addis Ababa citing Red Sea port access as a \"matter of survival\" and each side accusing the other of arming rebel groups. Real fighting has already occurred: Ethiopian federal forces clashed with Tigrayan forces near the Ethiopia-Eritrea-Sudan border triangle in early August 2026, using artillery and drones. Still, a UN peacekeeping force commander said in late September there were no signs Eritrea itself was mobilizing for a new war, even as an exiled Eritrean opposition figure alleged otherwise — a reminder that the picture remains genuinely contested, not a settled march to war.",
+    "current": "Eritrea consolidates Horn of Africa peace. Severe floods affect displaced families in Ethiopia, Kenya, and Somalia.",
     "sources": [
       {
-        "label": "Semafor Africa: Ethiopia, Eritrea risk new war as tensions escalate",
-        "url": "https://www.semafor.com/article/02/23/2026/ethiopia-eritrea-risk-new-war-as-tensions-escalate"
+        "label": "Al Jazeera: Eritrea consolidates Horn of Africa peace",
+        "url": "https://www.aljazeera.com/news/2018/9/11/eritrea-consolidates-horn-of-africa-peace"
       },
       {
-        "label": "Sudan Tribune: Relative calm returns to Ethiopia-Sudan border after ENDF, TPLF clashes",
-        "url": "https://sudantribune.com/?p=317095"
-      },
-      {
-        "label": "Sudan Tribune: Eritrea not preparing for war, UN commander says",
-        "url": "https://sudantribune.com/article/6320"
+        "label": "UN News: Horn of Africa",
+        "url": "https://news.un.org/en/tags/horn-africa"
       }
-    ]
+    ],
+    "confidence": "low",
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:33:50+00:00"
   }
 ]
