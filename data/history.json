@@ -45,6 +45,15 @@
     "source": "auto"
   },
   {
+    "id": "d06bce3d9dd1",
+    "date": "2026-11-15",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "North Korea launches ICBM",
+    "description": "North Korea launched an intercontinental ballistic missile, posing a grave threat to regional stability.",
+    "source": "auto"
+  },
+  {
     "id": "0105e406db08",
     "date": "2026-11-14",
     "conflict": "Ukraine",
@@ -87,6 +96,15 @@
     "tier": "war",
     "title": "Myanmar junta airstrike",
     "description": "At least 50 people killed and 58 injured in a market in rebel territory",
+    "source": "auto"
+  },
+  {
+    "id": "544fa7ae6b73",
+    "date": "2026-11-13",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Airstrikes in Rakhine State",
+    "description": "Junta carries out double-tap airstrikes targeting civilians in Rakhine State",
     "source": "auto"
   },
   {
@@ -135,6 +153,24 @@
     "source": "auto"
   },
   {
+    "id": "48f41f5e13f0",
+    "date": "2026-11-12",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strike on Gaza's Nasser Hospital",
+    "description": "An Israeli strike on Nasser Hospital killed at least six people, including a surgeon.",
+    "source": "auto"
+  },
+  {
+    "id": "8e6ca39ec119",
+    "date": "2026-11-12",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Xi Jinping comments on Taiwan reunification",
+    "description": "Xi Jinping stated that Taiwan's 'complete reunification' with China will happen, without mentioning the use of force.",
+    "source": "auto"
+  },
+  {
     "id": "b3e07e2ff9f0",
     "date": "2026-11-10",
     "conflict": "Korean peninsula",
@@ -159,6 +195,15 @@
     "tier": "war",
     "title": "US strikes Qeshm Island; Iran attacks tankers in Gulf and Strait of Hormuz",
     "description": "The United States conducted an airstrike on Iran’s Qeshm Island, and Iranian forces responded by targeting commercial tankers navigating the Gulf and the Strait of Hormuz. President Trump reiterated U.S. readiness to strike Iran if needed while acknowledging diplomatic momentum, with Qatar mediating talks but no immediate cease‑fire agreement.",
+    "source": "auto"
+  },
+  {
+    "id": "6ba26b83f6c0",
+    "date": "2026-11-08",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "Chinese Forces Conduct Drills",
+    "description": "China announced readiness patrols around Scarborough Shoal",
     "source": "auto"
   },
   {
@@ -189,6 +234,15 @@
     "source": "auto"
   },
   {
+    "id": "98fd970a691b",
+    "date": "2026-11-06",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Militant attack in Cantine, North Kivu",
+    "description": "Militants affiliated with the Islamic State group attacked Cantine, North Kivu, burning vehicles and homes.",
+    "source": "auto"
+  },
+  {
     "id": "7eac73f9ce98",
     "date": "2026-11-05",
     "conflict": "Ukraine",
@@ -204,6 +258,15 @@
     "tier": "flash",
     "title": "China's military deployment around Taiwan",
     "description": "China deployed 100 ships and 49 aircraft around Taiwan.",
+    "source": "auto"
+  },
+  {
+    "id": "baa7c0505457",
+    "date": "2026-11-03",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "China deploys military forces around Taiwan",
+    "description": "China deployed 100 ships and 49 aircraft around Taiwan, according to Taiwan's Ministry of National Defence.",
     "source": "auto"
   },
   {
@@ -428,6 +491,15 @@
     "conflict": "Thai–Cambodia border",
     "tier": "watch",
     "title": "Fighting reignites",
+    "description": "Fighting reignited on the Cambodia-Thailand border",
+    "source": "auto"
+  },
+  {
+    "id": "cf75956a8dad",
+    "date": "2025-12-07",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Fighting reignited",
     "description": "Fighting reignited on the Cambodia-Thailand border",
     "source": "auto"
   },
