@@ -9,24 +9,20 @@
     "what": "Full-scale invasion, now a grinding war of attrition",
     "when": "Started Feb 24, 2022 — day 1,650+ and still going",
     "how": "Daily drone, missile and artillery strikes along a front over 1,100 km long",
-    "current": "Russia and Ukraine continue to exchange airstrikes, with a recent Russian strike on a Ukrainian hospital injuring at least 73 people. Ukraine has launched nearly 1,200 drones against Russian positions, while diplomatic talks progress as US envoys met Zelensky in Dublin and Putin agreed to let European negotiators join the next round of peace talks. Grain shipments in the Black Sea remain under threat, and Moscow continues to demand Ukrainian withdrawals and opposes NATO membership.",
+    "current": "Russia and Ukraine are exchanging airstrikes. US envoys met with Zelensky after talks with Putin. Russia's invasion of Ukraine continues.",
     "sources": [
       {
-        "label": "Al Jazeera: At least 73 injured as Russia bombs Ukrainian hospital",
+        "label": "Al Jazeera: Russia-Ukraine war",
         "url": "https://www.aljazeera.com/tag/ukraine-russia-crisis"
       },
       {
-        "label": "BBC News: US envoys meet Zelensky in Dublin after talks with Putin in Moscow",
+        "label": "BBC News: Ukraine War",
         "url": "https://www.bbc.com/news/war-in-ukraine"
-      },
-      {
-        "label": "Al Jazeera: Three killed in Russia as Ukraine claims US floated NATO membership option",
-        "url": "https://www.aljazeera.com/news/2026/11/14/three-killed-in-russia-as-ukraine-claims-us-floated-nato-membership-option"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T12:31:19+00:00"
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:59:09+00:00"
   },
   {
     "id": "gaza",
@@ -38,28 +34,24 @@
     "what": "War technically under ceasefire, but violence continues",
     "when": "War since Oct 7, 2023; ceasefire since Oct 10, 2025",
     "how": "Over 1,300 people killed since the \"ceasefire\" began; disarmament and reconstruction stalled",
-    "current": "Despite a ceasefire taking effect on October 11, 2025, Israeli military operations in Gaza continue, with at least 1,643 Palestinians killed and 5,964 injured since that date. Recent strikes have targeted critical infrastructure, including an attack on Nasser Hospital that killed at least six people. The overall death toll since the war began in October 2023 has reached at least 74,695, with nearly the entire population displaced.",
+    "current": "Israeli strikes in Gaza have killed many people, with at least six killed at Nasser Hospital. The conflict has displaced nearly the entire population of Gaza. Israeli strikes have killed about 600 people since a cease-fire began.",
     "sources": [
       {
-        "label": "Al Jazeera: Israeli air strike kills senior Hamas commander in Gaza",
-        "url": "https://www.aljazeera.com/news/2026/11/15/israeli-air-strike-kills-senior-hamas-commander-in-gaza"
-      },
-      {
-        "label": "CFR: Israeli-Palestinian Conflict | Global Conflict Tracker",
+        "label": "Global Conflict Tracker: Israeli-Palestinian Conflict",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict"
       },
       {
-        "label": "Al Jazeera: Israel-Palestine conflict | Today's latest",
+        "label": "Al Jazeera: Israel-Palestine conflict",
         "url": "https://www.aljazeera.com/tag/israel-palestine-conflict"
       },
       {
-        "label": "BBC News: Israel Gaza war | Latest News & Updates",
+        "label": "BBC News: Israel Gaza war",
         "url": "https://www.bbc.com/news/topics/c2vdnvdg6xxt"
       }
     ],
     "confidence": "high",
-    "verified_by": "groq-only",
-    "updated": "2026-11-15T12:31:36+00:00"
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:59:16+00:00"
   },
   {
     "id": "iran",
@@ -71,20 +63,20 @@
     "what": "A leadership-shattering war, now in an uneasy pause",
     "when": "12-day war June 2025; \"Operation Epic Fury\" Feb 28, 2026",
     "how": "US-Israeli strikes killed Iran’s Supreme Leader; his son succeeded him; Hormuz still shut",
-    "current": "The United States and Iran continue intermittent strikes, with the U.S. hitting Iran’s Qeshm Island and Iran targeting tankers in the Strait of Hormuz, while the IRGC struck a U.S. early‑warning radar in Bahrain. Diplomatic talks are ongoing – President Trump met Qatar’s mediator on Nov 9, but officials say no imminent settlement is expected.",
+    "current": "The US and Iran are engaged in a war with ongoing strikes and counter-strikes. The US has struck Iran's Qeshm island and an Iranian-affiliated vessel in the Gulf of Oman. Iran has attacked tankers in the Gulf and Strait of Hormuz.",
     "sources": [
-      {
-        "label": "Al Jazeera: Iran war live – Gulf allies urge pause",
-        "url": "https://www.aljazeera.com/news/liveblog/2026/11/13/iran-war-live-riyadh-china-discuss-houthis-as-group-claims-aramco-attacks"
-      },
       {
         "label": "CFR: Conflict With Iran",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/confrontation-between-united-states-and-iran"
+      },
+      {
+        "label": "Al Jazeera: Iran war live",
+        "url": "https://www.aljazeera.com/news/liveblog/2026/11/9/iran-war-live-trump-says-land-blockade-in-effect-drone-cuts-power-in-iraq"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T12:31:51+00:00"
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T12:59:24+00:00"
   },
   {
     "id": "sudan",
@@ -96,28 +88,20 @@
     "what": "Civil war hardening into a formal partition",
     "when": "Since April 15, 2023, now in its 4th year",
     "how": "RSF controls Darfur and the west; army holds the center, north and east",
-    "current": "The conflict between Sudan’s Armed Forces and the Rapid Support Forces continues, with the United Nations flagging Kordofan as the epicentre. Drone strikes on Khartoum and power stations have killed or wounded hundreds of civilians – 484 since February – and have plunged cities into darkness. More than 14 million people have been displaced since the war began in 2023, including about 4.5 million who have fled to neighbouring countries.",
+    "current": "The Sudan war has led to 4.5 million civilians fleeing to neighboring countries. Displaced people in North Darfur face new challenges. Drone attacks have killed or wounded 484 civilians since February.",
     "sources": [
       {
         "label": "Al Jazeera: Sudan war",
         "url": "https://www.aljazeera.com/tag/sudan-war"
       },
       {
-        "label": "Al Jazeera: Sudan",
-        "url": "https://www.aljazeera.com/where/sudan"
-      },
-      {
         "label": "Al Jazeera: How SAF successes in Sudan’s Kordofan could turn tide against the RSF",
         "url": "https://www.aljazeera.com/news/2026/11/14/how-saf-successes-in-sudans-kordofan-could-turn-tide-against-the-rsf"
-      },
-      {
-        "label": "Al Jazeera: Drone attacks on power stations plunge Sudan’s cities into darkness",
-        "url": "https://www.aljazeera.com/features/2026/11/15/drone-strikes-on-power-stations-plunges-sudans-cities-into-darkness"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T12:32:03+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T12:59:37+00:00"
   },
   {
     "id": "mali",
@@ -129,7 +113,7 @@
     "what": "Jihadist fuel blockade and insurgency threatening the junta",
     "when": "Blockade of the capital began around September 2025",
     "how": "Fuel convoys attacked, schools and businesses paralyzed; blockade has since eased somewhat",
-    "current": "Mali is on the brink of civil war as Islamist groups and Tuareg rebels consolidate power in northern Mali. The increase in violence coincides with the withdrawal of UN peacekeepers. JNIM has taken advantage of the withdrawal to launch a renewed offensive.",
+    "current": "Mali is on the brink of civil war as Islamist groups and Tuareg rebels consolidate power in northern Mali. The increase in violence coincides with the withdrawal of UN peacekeepers. Russian paramilitaries are fighting alongside Malian soldiers against armed groups linked to al-Qaeda and ISIL.",
     "sources": [
       {
         "label": "Global Conflict Tracker: Violent Extremism in the Sahel",
@@ -145,8 +129,8 @@
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare-only",
-    "updated": "2026-11-15T12:32:07+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T12:59:48+00:00"
   },
   {
     "id": "myanmar",
@@ -187,8 +171,12 @@
     "what": "Maduro captured in a US raid, transition still in limbo",
     "when": "Raid on Jan 3, 2026; still no election date set",
     "how": "Acting president installed with US backing; opposition leader repeatedly blocked from returning",
-    "current": "The US has seized a fifth oil tanker linked to Venezuela and launched large-scale military strikes on Caracas, capturing Venezuelan leader Nicolás Maduro. The US has a stake in Venezuela's oil reserves. Tensions between the US and Venezuela remain high.",
+    "current": "The US has seized a fifth oil tanker linked to Venezuela and launched military strikes on Caracas, capturing Venezuelan leader Nicolás Maduro. The US has a stake in Venezuela's oil reserves. Tensions between the US and Venezuela remain high.",
     "sources": [
+      {
+        "label": "Global Conflict Tracker: Instability in Venezuela",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/instability-venezuela"
+      },
       {
         "label": "BBC News: Venezuela crisis",
         "url": "https://www.bbc.com/news/topics/cp3mvpm3933t"
@@ -196,15 +184,11 @@
       {
         "label": "Al Jazeera: US-Venezuela Tensions",
         "url": "https://www.aljazeera.com/tag/us-venezuela-tensions"
-      },
-      {
-        "label": "Global Conflict Tracker: Instability in Venezuela",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/instability-venezuela"
       }
     ],
     "confidence": "medium",
-    "verified_by": "cloudflare-only",
-    "updated": "2026-11-15T12:32:32+00:00"
+    "verified_by": "cloudflare+groq (no review)",
+    "updated": "2026-11-15T13:00:12+00:00"
   },
   {
     "id": "drc",
@@ -216,28 +200,20 @@
     "what": "Peace deals signed, but M23 still controls the ground",
     "when": "Washington and Doha deals signed mid-2025; conflict decades old",
     "how": "M23 still controls Goma and Bukavu despite the agreements",
-    "current": "Violence in eastern DR Congo remains severe as M23 rebels, who seized Goma and Bukavu in early 2025, continue to control key towns and have displaced hundreds of thousands of people. The country is also grappling with a deadly Ebola outbreak that has killed more than 5,300 people, while attacks on health workers and the recent sentencing of dozens of soldiers to death for cowardice underscore the deteriorating security environment. Impact on the United States is assessed as low.",
+    "current": "Violence in eastern DR Congo has increased, with M23 rebels taking over key cities. The conflict has caused thousands of deaths and displacement. The government has sentenced soldiers to death for cowardice.",
     "sources": [
       {
         "label": "Global Conflict Tracker: Conflict in the Democratic Republic of Congo",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo"
       },
       {
-        "label": "BBC: DR Congo conflict – soldiers sentenced to death for cowardice",
+        "label": "BBC: DR Congo conflict",
         "url": "https://www.bbc.com/news/articles/cmreye1q3dnjo"
-      },
-      {
-        "label": "Al Jazeera: Ebola outbreak kills more than 5,300 people in DR Congo",
-        "url": "https://www.aljazeera.com/where/democratic-republic-of-the-congo"
-      },
-      {
-        "label": "UN News: DR Congo Ebola outbreak – armed groups unrest hold back response",
-        "url": "https://news.un.org/en/story/2026/11/1168797"
       }
     ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T12:32:46+00:00"
+    "confidence": "medium",
+    "verified_by": "cloudflare+groq (no review)",
+    "updated": "2026-11-15T13:00:38+00:00"
   },
   {
     "id": "taiwan",
@@ -300,28 +276,24 @@
     "what": "Maritime and territorial dispute over reefs and shoals",
     "when": "Ongoing, flaring repeatedly through 2026",
     "how": "Water-cannon incidents and blocked resupply runs near Scarborough Shoal",
-    "current": "Chinese forces have carried out readiness patrols around Scarborough Shoal and other areas of the South China Sea, prompting the Philippine Coast Guard to deploy its largest vessel and aircraft to challenge a Chinese research vessel near Batanes. The Philippines has also reported water‑cannon attacks by Chinese coast‑guard vessels, and analysts say a regional code‑of‑conduct agreement remains unlikely as ASEAN leaders meet.",
+    "current": "China's forces conducted drills in the South China Sea, citing a response to Philippine actions. Tensions remain high between Beijing and Manila. Chinese Navy shadowed a US warship conducting a freedom of navigation operation.",
     "sources": [
       {
-        "label": "CFR: Territorial Disputes in the South China Sea",
+        "label": "Reuters: Chinese Forces Conduct Drills",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/territorial-disputes-south-china-sea"
       },
       {
-        "label": "CFR: China’s Maritime Disputes",
-        "url": "https://www.cfr.org/articles/chinas-maritime-disputes"
-      },
-      {
-        "label": "Al Jazeera: Pact on South China Sea code of conduct unlikely",
-        "url": "https://www.aljazeera.com/economy/2026/11/15/pact-on-south-china-sea-code-of-conduct-unlikely-as-asean-leaders-gather"
-      },
-      {
-        "label": "Al Jazeera tag: South China Sea",
+        "label": "Al Jazeera: Philippines accuses China",
         "url": "https://www.aljazeera.com/tag/south-china-sea"
+      },
+      {
+        "label": "Council on Foreign Relations: China’s Maritime Disputes",
+        "url": "https://www.cfr.org/articles/chinas-maritime-disputes"
       }
     ],
     "confidence": "medium",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T12:33:16+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:01:36+00:00"
   },
   {
     "id": "kashmir",
@@ -333,24 +305,24 @@
     "what": "Their worst clash in decades, now a fragile truce",
     "when": "Crisis April–May 2025; ceasefire since May 10, 2025",
     "how": "Missile, drone and artillery exchange; US-mediated ceasefire holds, dispute unresolved",
-    "current": "Violence continues in Kashmir with attacks on Indian travelers and workers. Militants have opened fire on tourists, resulting in civilian deaths.",
+    "current": "Suspected rebels have killed civilians in Kashmir, with India and Pakistan exchanging war rhetoric. Tens of thousands have been killed in the conflict.",
     "sources": [
       {
-        "label": "BBC News: Kashmir tensions",
-        "url": "https://www.bbc.com/news/topics/c6vlwj44k2mt"
+        "label": "Al Jazeera: Suspected rebels kill three civilians in Kashmir",
+        "url": "https://www.aljazeera.com/news/2021/10/6/suspected-rebels-kill-three-civilians-in-kashmir"
       },
       {
-        "label": "Al Jazeera: Kashmir",
-        "url": "https://www.aljazeera.com/where/kashmir"
+        "label": "Al Jazeera: At least four killed after Indian military vehicle attacked in Kashmir",
+        "url": "https://www.aljazeera.com/news/2024/10/25/at-least-four-killed-in-ambush-on-military-vehicle-in-indias-kashmir"
       },
       {
-        "label": "Global Conflict Tracker: Conflict Between India and Pakistan",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/conflict-between-india-and-pakistan"
+        "label": "Al Jazeera: Pahalgam attack: A simple guide to the Kashmir conflict",
+        "url": "https://www.aljazeera.com/news/2025/5/2/pahalgam-attack-a-simple-guide-to-the-kashmir-conflict"
       }
     ],
     "confidence": "medium",
-    "verified_by": "cloudflare-only",
-    "updated": "2026-11-15T12:33:22+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:01:48+00:00"
   },
   {
     "id": "caucasus",
@@ -362,20 +334,20 @@
     "what": "Preliminary peace signed, but a final treaty remains unsigned",
     "when": "Framework signed Aug 8, 2025; still unresolved in 2026",
     "how": "Azerbaijan wants an Armenian constitutional change before signing a final deal",
-    "current": "Following Azerbaijan’s September 2023 offensive, the Nagorno‑Karabakh enclave was dissolved and more than 100,000 Armenians fled the area. An August 2025 U.S.–brokered summit produced a joint peace declaration and an initialed agreement that includes a planned transit corridor, while Russian peacekeepers continue to monitor the Moscow‑brokered ceasefire.",
+    "current": "The Nagorno-Karabakh conflict is ongoing. Tensions between Armenia and Azerbaijan remain. A U.S.-brokered summit in August 2025 produced a joint peace declaration.",
     "sources": [
       {
-        "label": "Council on Foreign Relations: Nagorno‑Karabakh conflict tracker",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/nagorno-karabakh-conflict"
+        "label": "Council on Foreign Relations: Nagorno-Karabakh",
+        "url": "https://www.cfr.org/backgrounders/nagorno-karabakh-crisis-caucasus"
       },
       {
-        "label": "BBC News: Nagorno‑Karabakh profile",
-        "url": "https://www.bbc.com/news/world-europe-18270325"
+        "label": "Global Conflict Tracker: Nagorno-Karabakh Conflict",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/nagorno-karabakh-conflict"
       }
     ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T12:33:35+00:00"
+    "confidence": "medium",
+    "verified_by": "cloudflare+groq (no review)",
+    "updated": "2026-11-15T13:02:02+00:00"
   },
   {
     "id": "thaicambodia",
@@ -387,28 +359,24 @@
     "what": "Long-running border dispute that turned into open war twice in 2025",
     "when": "5-day clash July 2025; worse fighting Dec 7–27, 2025",
     "how": "Artillery, tanks, drones and jets; 100+ killed before the latest ceasefire",
-    "current": "Thailand has launched a new offensive as Cambodia halts all border crossings, with strikes increasingly reported further from the border into each other's territories. Since fighting reignited on December 7, at least 25 soldiers and civilians have been killed, and over half a million people have been displaced on both sides. The escalation continues despite attempted mediation by U.S. President Donald Trump and calls for urgent action from ASEAN.",
+    "current": "The Thailand-Cambodia border conflict has resulted in at least 25 deaths and displaced over half a million people. The US has called for an end to hostilities. Clashes have entered their third day.",
     "sources": [
       {
-        "label": "Al Jazeera: Thailand launches new offensive as Cambodia halts all border crossings",
+        "label": "BBC: Thailand-Cambodia border conflict",
+        "url": "https://www.bbc.com/news/articles/cx2pn5dxd0go"
+      },
+      {
+        "label": "Al Jazeera: Thailand launches new offensive",
         "url": "https://www.aljazeera.com/news/2025/12/14/thailand-launches-new-offensive-as-cambodia-halts-all-border-crossings"
       },
       {
-        "label": "UN News: Civilians at risk amid escalating Thailand-Cambodia conflict: UN rights chief",
-        "url": "https://news.un.org/en/story/2025/12/1166626"
-      },
-      {
-        "label": "Council on Foreign Relations: Cambodia-Thailand Conflict Continues to Escalate",
-        "url": "https://www.cfr.org/articles/cambodia-thailand-conflict-continues-escalate"
-      },
-      {
-        "label": "BBC: Thailand, Cambodia agree to talks in bid to end deadly conflict - minister",
-        "url": "https://www.bbc.com/news/articles/c5ydej888n9o"
+        "label": "Al Jazeera: Thailand-Cambodia fighting enters 5th day",
+        "url": "https://www.aljazeera.com/news/2025/12/12/cambodia-thailand-fighting-enters-5th-day-thai-pm-confirms-trump-call"
       }
     ],
     "confidence": "high",
-    "verified_by": "groq-only",
-    "updated": "2026-11-15T12:33:42+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:02:38+00:00"
   },
   {
     "id": "horn",
