@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Refresh conflict briefings using:
-  - Tavily        (search, 1,000 credits/month free)
-  - Cloudflare AI (Primary A: llama-3.3-70b, 10k Neurons/day free)
-  - Groq          (Primary B: qwen3.8-27b, Reviewer: gpt-oss-120b, 1,000 RPD free)
+Refresh conflict briefings with per-event time verification.
 """
-import json, os, time, hashlib, requests
+import json, os, re, time, hashlib, requests
 from datetime import date, datetime, timezone
 
 TAVILY    = os.environ["TAVILY_API_KEY"]
@@ -54,8 +51,65 @@ def parse_json(text):
             return json.loads(s[:end])
         raise
 
+# ---------- time helpers ----------
+def parse_time_string(s):
+    if not s or not isinstance(s, str):
+        return None
+    s = s.strip().upper()
+    if s.count(':') == 2:
+        s = s.rsplit(':', 1)[0]
+    m = re.match(r'^(\d{1,2}):(\d{2})\s*(AM|PM)?$', s)
+    if not m:
+        return None
+    h, mi = int(m.group(1)), int(m.group(2))
+    ampm = m.group(3)
+    if ampm:
+        if ampm == 'PM' and h < 12: h += 12
+        if ampm == 'AM' and h == 12: h = 0
+    if h > 23 or mi > 59:
+        return None
+    return (h, mi)
+
+def normalize_event_time(ev):
+    if not isinstance(ev, dict):
+        return ev
+    raw_time = ev.get("time")
+    try:
+        count = int(ev.get("time_source_count") or 0)
+    except (ValueError, TypeError):
+        count = 0
+    try:
+        variance = int(ev.get("time_variance_minutes") or 999)
+    except (ValueError, TypeError):
+        variance = 999
+
+    parsed = parse_time_string(raw_time)
+    if not parsed:
+        ev["time"] = None
+        ev["time_verified"] = None
+        ev.pop("time_source_count", None)
+        ev.pop("time_variance_minutes", None)
+        return ev
+
+    h, mi = parsed
+    time_str = f"{h:02d}:{mi:02d}"
+
+    if count >= 2 and variance <= 25:
+        ev["time"] = time_str
+        ev["time_verified"] = "verified"
+    elif count >= 4 and variance <= 60:
+        ev["time"] = time_str
+        ev["time_verified"] = "approximate"
+    else:
+        ev["time"] = None
+        ev["time_verified"] = None
+
+    ev.pop("time_source_count", None)
+    ev.pop("time_variance_minutes", None)
+    return ev
+
 # ---------- models ----------
-def groq(model, prompt, max_tokens=700, json_mode=True, retries=3):
+def groq(model, prompt, max_tokens=900, json_mode=True, retries=2):
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
@@ -71,7 +125,7 @@ def groq(model, prompt, max_tokens=700, json_mode=True, retries=3):
             json=payload, timeout=120,
         )
         if r.status_code == 429 and attempt < retries:
-            print(f"  {model} 429 (used {r.text.split('Used ')[1].split(',')[0] if 'Used ' in r.text else '?'}), waiting 20s to retry")
+            print(f"  {model} 429, waiting 20s (attempt {attempt+1}/{retries})")
             time.sleep(20)
             continue
         if not r.ok:
@@ -99,9 +153,39 @@ def cloudflare(model, prompt, max_tokens=1200):
 SCHEMA = """{
   "current": "2-4 sentences on the present situation",
   "sources": [{"label": "Outlet: headline", "url": "https://..."}],
-  "events": [{"date": "YYYY-MM-DD", "title": "...", "description": "..."}],
+  "events": [
+    {
+      "date": "YYYY-MM-DD",
+      "time": "HH:MM or null",
+      "timezone": "UTC or zone abbreviation or local",
+      "time_source_count": 0,
+      "time_variance_minutes": 0,
+      "title": "...",
+      "description": "..."
+    }
+  ],
   "confidence": "high" | "medium" | "low"
 }"""
+
+TIME_RULES = """
+TIME-VERIFICATION RULES (strict — apply to every event):
+- Extract the time the EVENT itself happened (e.g. "the strike occurred
+  at 14:30 local time"), NEVER the article's publication time.
+- Collect every distinct hour:minute the search results state for when
+  the event occurred.
+- Cluster those times. If two or more sources report a time within
+  25 minutes of each other, that is a valid cluster.
+- Set "time" to the MEDIAN HH:MM of the largest cluster (24-hour format).
+  If no cluster of at least 2 exists, set "time" to null.
+- Set "time_source_count" to the number of sources in that largest cluster.
+- Set "time_variance_minutes" to (max - min) of the cluster, in minutes.
+  For a single-source reading, use 0. If no cluster, use 999.
+- Set "timezone" to the zone the time is reported in ("UTC", "EET", etc.,
+  or "local"). If sources disagree, use "local".
+- DO NOT fabricate times. If none of the results mention a specific time,
+  return "time": null, "time_source_count": 0, "time_variance_minutes": 999.
+- A missing time is always better than a wrong one.
+"""
 
 def research_prompt(conflict, results):
     ctx = "\n".join(
@@ -117,11 +201,13 @@ Verified search results from the last 10 days:
 Return ONLY valid JSON, no markdown, exactly this shape:
 {SCHEMA}
 
-Rules:
+{TIME_RULES}
+
+Other rules:
 - Every factual claim in "current" must be supported by a result above.
-- "sources": include AT LEAST 3 items, 3-5 total. Only URLs from the list above. Never invent URLs.
+- "sources": include AT LEAST 3 items, 3-5 total. Only URLs from the list above.
 - "events": 0-3 items. Only include developments dated within the last 7 days that
-  appear in at least two results. Otherwise return an empty list.
+  appear in at least two results.
 - Keep every string under 400 characters."""
 
 def review_prompt(conflict, results, a, b, flags):
@@ -143,9 +229,11 @@ Model B:
 
 Disagreement flags: {', '.join(flags)}
 
-Decide which claims the search results actually support. Output ONLY the JSON
-object, with no prose before or after, in this exact shape:
+Decide which claims the search results actually support. Apply the time rules
+below exactly. Output ONLY the JSON object, in this shape:
 {SCHEMA}
+
+{TIME_RULES}
 
 If the results do not resolve the dispute, set confidence to "low"."""
 
@@ -226,7 +314,7 @@ def main():
 
             b = None
             try:
-                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=700, retries=1)
+                b = groq("qwen/qwen3.8-27b", prompt, max_tokens=900)
                 time.sleep(5.0)
             except Exception as e:
                 print(f"  groq failed for {c['name']}: {e}")
@@ -247,7 +335,7 @@ def main():
                     try:
                         final = groq("openai/gpt-oss-120b",
                                      review_prompt(c, results, a, b, flags),
-                                     max_tokens=2000, json_mode=False, retries=1)
+                                     max_tokens=2000, json_mode=False)
                         time.sleep(5.0)
                         verified = "cloudflare+groq+groq-review"
                     except Exception as e:
@@ -277,18 +365,27 @@ def main():
             for ev in final.get("events", []):
                 if not isinstance(ev, dict): continue
                 if "date" not in ev or "title" not in ev: continue
+                if not re.match(r'^\d{4}-\d{2}-\d{2}$', str(ev.get("date", ""))):
+                    continue
+                ev = normalize_event_time(ev)
                 eid = hashlib.sha1(
                     f"{c['id']}|{ev['date']}|{ev['title']}".encode()
                 ).hexdigest()[:12]
                 if eid in seen:
                     continue
                 seen.add(eid)
-                history.append({
+                entry = {
                     "id": eid, "date": ev["date"],
                     "conflict": c["name"], "tier": c["tier"],
                     "title": ev["title"], "description": ev.get("description",""),
                     "source": "auto",
-                })
+                }
+                if ev.get("time") and ev.get("time_verified"):
+                    entry["time"] = ev["time"]
+                    entry["time_verified"] = ev["time_verified"]
+                    if ev.get("timezone"):
+                        entry["timezone"] = ev["timezone"]
+                history.append(entry)
 
             print(f"OK {c['name']} ({len(live)} src, {c['confidence']})")
 
