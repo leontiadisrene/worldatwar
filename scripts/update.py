@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """
-Balanced advanced/basic schedule + fuzzy event deduplication.
+Balanced advanced/basic schedule + smart duplicate handling.
 
-Dedup: prevents (and cleans up) near-duplicate history entries caused by
-different LLM runs describing the same event with slightly different wording.
+Layers of defense against duplicate history entries:
+1. Prompt injection — models are told what's already recorded.
+2. LLM merge — same-date near-duplicates are combined into one entry.
+3. Fuzzy prune — high-similarity cross-day repeats are dropped.
 """
-import json, os, re, time, hashlib, difflib, requests
+import json, os, re, time, hashlib, requests
+from collections import defaultdict
 from datetime import date, datetime, timezone, timedelta
 
 TAVILY    = os.environ["TAVILY_API_KEY"]
@@ -32,7 +35,7 @@ def tavily(query, depth="basic"):
     r.raise_for_status()
     return r.json().get("results", [])
 
-# ---------- fuzzy dedup helpers ----------
+# ---------- fuzzy helpers ----------
 def _tokens(s):
     if not s or not isinstance(s, str):
         return set()
@@ -45,7 +48,6 @@ def _jaccard(a, b):
     return len(a & b) / len(a | b)
 
 def _is_duplicate_pair(a, b):
-    """True if two entries describe the same event (same conflict required)."""
     if a.get('conflict') != b.get('conflict'):
         return False
     try:
@@ -55,17 +57,14 @@ def _is_duplicate_pair(a, b):
         return False
     if abs((da - db).days) > 2:
         return False
-
     ta = _tokens(a.get('title', ''))
     tb = _tokens(b.get('title', ''))
     if ta and tb and _jaccard(ta, tb) >= 0.65:
         return True
-
     da_toks = _tokens(a.get('description', ''))
     db_toks = _tokens(b.get('description', ''))
     if da_toks and db_toks and _jaccard(da_toks, db_toks) >= 0.70:
         return True
-
     return False
 
 def is_duplicate_event(new_ev, existing_history):
@@ -75,8 +74,6 @@ def is_duplicate_event(new_ev, existing_history):
     return False
 
 def prune_history_duplicates(history):
-    """Remove near-duplicates from the history array. Keeps the earliest-seen
-    entry (in date order) and discards later near-duplicates."""
     if len(history) < 2:
         return history, 0
     indexed = sorted(enumerate(history), key=lambda p: (p[1].get('date', ''), p[0]))
@@ -87,8 +84,141 @@ def prune_history_duplicates(history):
             kept.append(entry)
             kept_indices.add(orig_idx)
     removed = len(history) - len(kept)
-    # preserve original file order for stability
     return [e for i, e in enumerate(history) if i in kept_indices], removed
+
+# ---------- same-date merge ----------
+def find_same_day_groups(history, days_back=21):
+    """Groups of entries that share conflict+date and might be duplicates.
+    Excludes Ask-Gemini user-generated entries."""
+    cutoff = datetime.now(timezone.utc).date() - timedelta(days=days_back)
+    by_key = defaultdict(list)
+    for idx, e in enumerate(history):
+        if e.get('source') == 'gemini':
+            continue
+        try:
+            ed = date.fromisoformat(e.get('date', ''))
+        except (ValueError, TypeError):
+            continue
+        if ed < cutoff:
+            continue
+        key = (e.get('conflict', ''), e.get('date', ''))
+        by_key[key].append(idx)
+    return [indices for indices in by_key.values() if len(indices) >= 2]
+
+def merge_groups_with_llm(groups, history):
+    """One Groq call to identify and merge duplicate groups."""
+    if not groups:
+        return []
+    groups_data = []
+    for i, indices in enumerate(groups):
+        entries = [history[idx] for idx in indices]
+        groups_data.append({
+            "group": i,
+            "conflict": entries[0].get('conflict', ''),
+            "date": entries[0].get('date', ''),
+            "entries": [
+                {"title": e.get('title', ''), "description": e.get('description', '')}
+                for e in entries
+            ],
+        })
+
+    prompt = f"""You are consolidating a conflict-tracker's event log.
+Below are groups of events recorded on the SAME day for the SAME conflict.
+Some groups contain duplicates (multiple sources describing the SAME event);
+others contain genuinely distinct events that happened to occur on the same day.
+
+For each group:
+- If ALL entries describe the SAME event → output merge=true with a single
+  merged entry combining unique factual details from all of them.
+  Do NOT invent facts. Max 80 chars for title, 1-3 sentences for description.
+- If ANY entry describes a DISTINCT event (different cause, location, actors,
+  or impact) → output merge=false for the whole group.
+
+Return ONLY a JSON array in this exact shape:
+[
+  {{"group": 0, "merge": true, "title": "...", "description": "..."}},
+  {{"group": 1, "merge": false}}
+]
+
+Groups:
+{json.dumps(groups_data, indent=2, ensure_ascii=False)}
+"""
+
+    try:
+        result = groq("openai/gpt-oss-120b", prompt, max_tokens=2500, json_mode=False)
+    except Exception as e:
+        print(f"  merge LLM failed: {e}")
+        return []
+
+    if isinstance(result, dict):
+        for key in ("results", "merges", "groups"):
+            if key in result and isinstance(result[key], list):
+                result = result[key]
+                break
+    if not isinstance(result, list):
+        print(f"  merge LLM returned unexpected type: {type(result).__name__}")
+        return []
+
+    merges = []
+    for item in result:
+        if not isinstance(item, dict):
+            continue
+        if not item.get("merge"):
+            continue
+        gi = item.get("group")
+        if not isinstance(gi, int) or gi < 0 or gi >= len(groups):
+            continue
+        merges.append({
+            "group": gi,
+            "indices": groups[gi],
+            "title": (item.get("title") or "").strip(),
+            "description": (item.get("description") or "").strip(),
+        })
+    return merges
+
+def apply_merges(history, merges):
+    """Replace each merge group with a single merged entry."""
+    remove_indices = set()
+    for m in merges:
+        indices = m["indices"]
+        entries = [history[idx] for idx in indices]
+
+        def time_score(e):
+            v = e.get('time_verified')
+            tier = 2 if v == 'verified' else 1 if v == 'approximate' else 0
+            try:
+                cnt = int(e.get('time_source_count') or 0)
+            except (ValueError, TypeError):
+                cnt = 0
+            return (tier, cnt)
+
+        best = max(entries, key=time_score)
+        final_title = m["title"] or best.get('title', '')
+        final_desc = m["description"] or best.get('description', '')
+
+        merged = {
+            "id": hashlib.sha1(
+                f"{best.get('conflict','')}|{best.get('date','')}|{final_title}".encode()
+            ).hexdigest()[:12],
+            "date": best.get('date', ''),
+            "conflict": best.get('conflict', ''),
+            "tier": best.get('tier', 'war'),
+            "title": final_title,
+            "description": final_desc,
+            "source": "merged",
+        }
+        if best.get('time') and best.get('time_verified'):
+            merged["time"] = best["time"]
+            merged["time_verified"] = best["time_verified"]
+            if best.get('timezone'):
+                merged["timezone"] = best["timezone"]
+
+        print(f"  merged {len(indices)} entries → \"{final_title[:70]}\"")
+        history[indices[0]] = merged
+        for idx in indices[1:]:
+            remove_indices.add(idx)
+
+    return [e for i, e in enumerate(history) if i not in remove_indices]
 
 def recent_events_for_prompt(history, conflict_name, days=21):
     cutoff = datetime.now(timezone.utc).date() - timedelta(days=days)
@@ -134,39 +264,29 @@ def save_usage(usage):
 def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
     if not is_second_run:
         return 0, {"reason": "first run of day → mandatory all-basic"}
-
     month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     next_month = (month_start.replace(year=now.year + 1, month=1)
                   if now.month == 12
                   else month_start.replace(month=now.month + 1))
-
     seconds_in_month = (next_month - month_start).total_seconds()
     progress = (now - month_start).total_seconds() / seconds_in_month
-
     tomorrow = (now.replace(hour=0, minute=0, second=0, microsecond=0)
                 + timedelta(days=1))
     full_days_after = max(0, (next_month - tomorrow).days)
     runs_remaining = 1 + full_days_after * 2
-
     budget_left = usage["cycle_budget"] - SAFETY_BUFFER - usage["credits_used"]
     min_future_cost = runs_remaining * searches_per_run
     spare = max(0, budget_left - min_future_cost)
-
     max_possible = full_days_after + 1
     advanced_days_total = min(spare // searches_per_run, max_possible)
     advanced_done = usage.get("advanced_days_done", 0)
     last_adv_date = usage.get("last_advanced_date")
     today_str = now.date().isoformat()
-
     if advanced_done >= advanced_days_total:
-        return 0, {
-            "reason": f"all {advanced_days_total} advanced days already used",
-            "progress": progress, "spare": spare,
-            "advanced_days_total": advanced_days_total,
-        }
-
+        return 0, {"reason": f"all {advanced_days_total} advanced days already used",
+                   "progress": progress, "spare": spare,
+                   "advanced_days_total": advanced_days_total}
     next_threshold = (advanced_done + 1) / (advanced_days_total + 1)
-
     if progress >= next_threshold and last_adv_date != today_str:
         upgrades = min(searches_per_run, spare)
         usage["advanced_days_done"] = advanced_done + 1
@@ -177,7 +297,6 @@ def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
             "progress": progress, "spare": spare,
             "advanced_days_total": advanced_days_total,
         }
-
     return 0, {
         "reason": (f"basic day — next advanced at {next_threshold*100:.0f}% "
                    f"(now {progress*100:.0f}%)"),
@@ -310,28 +429,22 @@ SCHEMA = """{
   "current": "2-4 sentences on the present situation",
   "sources": [{"label": "Outlet: headline", "url": "https://..."}],
   "events": [
-    {
-      "date": "YYYY-MM-DD",
-      "time": "HH:MM or null",
-      "timezone": "UTC or zone abbreviation or local",
-      "time_source_count": 0,
-      "time_variance_minutes": 0,
-      "title": "...",
-      "description": "..."
-    }
+    {"date": "YYYY-MM-DD", "time": "HH:MM or null", "timezone": "UTC or zone or local",
+     "time_source_count": 0, "time_variance_minutes": 0,
+     "title": "...", "description": "..."}
   ],
   "confidence": "high" | "medium" | "low"
 }"""
 
 TIME_RULES = """
-TIME-VERIFICATION RULES (strict — apply to every event):
-- Extract the time the EVENT itself happened, NEVER the article's publication time.
-- Cluster hour:minute values; 2+ sources within 25 minutes = valid cluster.
-- "time" = MEDIAN HH:MM of the largest cluster. If none, null.
-- "time_source_count" = size of that cluster.
+TIME-VERIFICATION RULES (strict):
+- Extract the time the EVENT happened, not the publication time.
+- Cluster hour:minute values; 2+ sources within 25 min = valid cluster.
+- "time" = MEDIAN HH:MM of largest cluster. None → null.
+- "time_source_count" = size of cluster.
 - "time_variance_minutes" = (max-min). Single source = 0. No cluster = 999.
-- "timezone" = reported zone ("UTC", "EET", "local", etc.).
-- DO NOT fabricate times. Missing is better than wrong.
+- "timezone" = reported zone or "local".
+- Never fabricate times.
 """
 
 def research_prompt(conflict, results, recent_events):
@@ -346,7 +459,7 @@ Verified search results from the last 10 days:
 {ctx}
 
 Events ALREADY recorded for this conflict (do NOT re-report these;
-if new information refines an existing event, do NOT create a new event for it):
+if new information refines an existing event, do NOT create a new event):
 {recent_events}
 
 Return ONLY valid JSON, exactly this shape:
@@ -357,11 +470,9 @@ Return ONLY valid JSON, exactly this shape:
 Other rules:
 - Every claim in "current" must be supported by a result above.
 - "sources": AT LEAST 3, up to 5. Only URLs from the list above.
-- "events": 0-3 items, only developments from the last 7 days
-  appearing in at least two results AND not already recorded above.
-- Each event's title must be a short, unique label — never a paraphrase
-  of one already recorded.
-- Keep every string under 400 characters."""
+- "events": 0-3 items, last 7 days only, appearing in 2+ results,
+  not already recorded above. Each title must be a short unique label.
+- Every string under 400 characters."""
 
 def review_prompt(conflict, results, a, b, flags, recent_events):
     ctx = "\n".join(
@@ -369,7 +480,7 @@ def review_prompt(conflict, results, a, b, flags, recent_events):
         for x in results
     )
     return f"""Today is {date.today().isoformat()}.
-You are the REVIEWER for "{conflict['name']}". Two models disagreed.
+REVIEWER for "{conflict['name']}". Two models disagreed.
 
 Search results:
 {ctx}
@@ -382,16 +493,15 @@ Model B:
 
 Flags: {', '.join(flags)}
 
-Already-recorded events (do NOT re-report):
+Already recorded (do NOT re-report):
 {recent_events}
 
-Decide which claims the search results support. Output ONLY the JSON
-object in this shape:
+Output ONLY JSON in this shape:
 {SCHEMA}
 
 {TIME_RULES}
 
-If results don't resolve the dispute, set confidence to "low"."""
+If results don't resolve the dispute, confidence = "low"."""
 
 # ---------- structural comparison ----------
 def compare(a, b):
@@ -446,12 +556,24 @@ def main():
     conflicts = json.load(open("data/conflicts.json"))
     history   = json.load(open("data/history.json"))
 
-    # Prune existing duplicates from history BEFORE doing any work
+    # Step 1 — LLM merge of same-date near-duplicates
+    merge_groups = find_same_day_groups(history)
+    if merge_groups:
+        print(f"Found {len(merge_groups)} same-day group(s) to review for merging")
+        merges = merge_groups_with_llm(merge_groups, history)
+        if merges:
+            before = len(history)
+            history = apply_merges(history, merges)
+            print(f"Merged {before - len(history)} duplicate entr{'y' if before-len(history)==1 else 'ies'}")
+        else:
+            print("No mergeable duplicates found in same-day groups")
+    else:
+        print("No same-day duplicate groups to merge")
+
+    # Step 2 — Fuzzy prune for cross-day near-duplicates
     history, pruned = prune_history_duplicates(history)
     if pruned:
-        print(f"Pruned {pruned} duplicate histor{'y entry' if pruned==1 else 'y entries'} from prior runs")
-    else:
-        print("No duplicate history entries found")
+        print(f"Pruned {pruned} cross-day duplicate(s)")
 
     seen = {h["id"] for h in history}
     searches_per_run = len(conflicts)
@@ -459,13 +581,10 @@ def main():
     usage = load_usage()
     now = datetime.now(timezone.utc)
     is_second_run = (now.hour >= 12)
-
-    advanced_count, info = compute_advanced_this_run(
-        usage, now, is_second_run, searches_per_run
-    )
+    advanced_count, info = compute_advanced_this_run(usage, now, is_second_run, searches_per_run)
 
     print(f"Tavily cycle {usage['cycle']}: {usage['credits_used']}/{usage['cycle_budget']} used")
-    print(f"Run type: {'SECOND (12:00-23:59 UTC)' if is_second_run else 'FIRST (00:00-11:59 UTC)'}")
+    print(f"Run type: {'SECOND' if is_second_run else 'FIRST'}")
     print(f"Plan: {advanced_count} advanced + {searches_per_run - advanced_count} basic "
           f"= {advanced_count*2 + (searches_per_run - advanced_count)} credits")
     print(f"Reason: {info['reason']}")
@@ -572,7 +691,6 @@ def main():
                     if ev.get("timezone"):
                         candidate["timezone"] = ev["timezone"]
 
-                # Fuzzy dedup against existing history
                 if is_duplicate_event(candidate, history):
                     skipped_dupes += 1
                     print(f"  dup skipped for {c['name']}: {ev['title'][:60]}")
@@ -586,7 +704,6 @@ def main():
         except Exception as e:
             print(f"FAIL {c['name']}: {e}")
 
-    # Prune again in case new events happened to be near-duplicates of each other
     history, pruned2 = prune_history_duplicates(history)
     if pruned2:
         print(f"Post-run cleanup: pruned {pruned2} additional duplicate(s)")
