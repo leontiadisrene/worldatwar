@@ -15,17 +15,18 @@
     --war:#B23A2E;
     --flash:#C97A3D;
     --watch:#C9A227;
+    --select-bg:#BFDBFE;
     box-sizing:border-box;
     padding-top:env(safe-area-inset-top,0px);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E;
+      --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E; --select-bg:#1E3A5F;
     }
   }
   :root[data-theme="dark"]{
-    --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E;
+    --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E; --select-bg:#1E3A5F;
   }
   html{ scroll-padding-top:env(safe-area-inset-top,0px); }
   *{box-sizing:border-box;}
@@ -113,6 +114,20 @@
     color:var(--ink);text-decoration:underline;text-underline-offset:2px;cursor:pointer;
   }
 
+  .conflict-filter{
+    display:flex;gap:6px;overflow-x:auto;padding:2px 0 12px;margin-bottom:6px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .conflict-filter::-webkit-scrollbar{display:none;}
+  .chip{
+    appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    font:inherit;font-size:12.5px;font-weight:500;padding:8px 12px;border-radius:20px;
+    cursor:pointer;white-space:nowrap;flex:none;transition:transform 0.1s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .chip:active{transform:scale(0.96);}
+  .chip-active{border-color:transparent;}
+
   .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
   .cal-nav-btn{
     appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);
@@ -130,7 +145,7 @@
   .cal-cell.cal-empty{background:transparent;border-color:transparent;color:var(--muted);cursor:default;opacity:.55;}
   .cal-cell.cal-pad{visibility:hidden;border:none;}
   .cal-cell.cal-today{border-color:var(--ink);border-width:1.5px;font-weight:700;}
-  .cal-cell.cal-selected{background:var(--paper);border-color:var(--ink);}
+  .cal-cell.cal-selected{background:var(--select-bg);border-color:var(--ink);}
   .cal-dots{display:flex;gap:2px;}
   .cal-dot{width:5px;height:5px;border-radius:50%;flex:none;}
 
@@ -142,6 +157,15 @@
   .day-item-title{margin:0 0 3px;font-size:13.5px;font-weight:600;}
   .day-item-desc{margin:0;font-size:13px;line-height:1.55;color:var(--ink);}
   .day-item-tag{margin:4px 0 0;font-size:10.5px;color:var(--muted);font-style:italic;}
+
+  .conflict-history{display:none;margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+  .conflict-history-heading{font-size:13px;font-weight:600;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  .conflict-history-empty{font-size:13px;color:var(--muted);text-align:center;margin:12px 0;}
+  .conflict-history-item{padding:10px 0;border-bottom:1px solid var(--line);}
+  .conflict-history-item:last-child{border-bottom:none;padding-bottom:0;}
+  .conflict-history-date{display:inline-block;font-size:10.5px;font-weight:600;color:var(--muted);margin-bottom:4px;letter-spacing:0.02em;}
+  .conflict-history-title{margin:0 0 4px;font-size:13.5px;font-weight:600;}
+  .conflict-history-desc{margin:0;font-size:13px;line-height:1.55;color:var(--ink);}
 
   .hint{margin-top:16px;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.6;}
   .cal-empty-state{font-size:12.5px;color:var(--muted);text-align:center;padding:24px 0;}
@@ -208,6 +232,7 @@
   </div>
 
   <div class="tab-panel" id="tab-history">
+    <div class="conflict-filter" id="conflict-filter"></div>
     <div class="cal-nav">
       <button type="button" class="cal-nav-btn" id="cal-prev" aria-label="Previous month">‹</button>
       <span id="cal-label"></span>
@@ -215,7 +240,8 @@
     </div>
     <div class="cal-grid" id="cal-grid"></div>
     <div class="day-detail" id="day-detail"></div>
-    <p class="hint" id="history-hint">Marked days have a recorded milestone. Tap one to see what happened. Using each conflict's "Ask Gemini for analysis" button also adds an entry here, dated today &mdash; saved locally in this browser only.</p>
+    <div class="conflict-history" id="conflict-history"></div>
+    <p class="hint" id="history-hint">Pick a conflict above to see its full timeline below. Marked days have recorded milestones — tap one to see details.</p>
   </div>
 
   <p class="hint">Sources: CFR's Preventive Priorities Survey 2026, ICG's 10 Conflicts to Watch 2026, and wire reporting (AP, Reuters, AFP and others) — full citations under each conflict on the map.</p>
@@ -226,7 +252,6 @@
 (function(){
   'use strict';
 
-  // ---- Data populated by fetch on boot ----
   var CONFLICTS = [];
   var SEED_HISTORY = [];
   var WORLD_TOPOLOGY = null;
@@ -237,21 +262,20 @@
     watch:{label:'Watchlist', bg:'#C9A227', text:'#3A2E05'}
   };
 
-  // ---- UI state ----
   var markerGroupsSel = null;
   var currentConflictId = null;
 
-  // ---- Gemini state ----
   var GEMINI_KEY_STORAGE = 'conflict-map-gemini-key';
   var GEMINI_MODEL = 'gemini-2.5-flash';
 
-  // ---- History / calendar state ----
   var GENERATED_HISTORY_STORAGE = 'conflict-map-generated-history';
   var historyEntries = [];
   var viewYear, viewMonth;
   var MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-  // ---------- Tabs ----------
+  var selectedFilterConflict = null;
+  var selectedDateStr = null;
+
   function initTabs(){
     var buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(function(btn){
@@ -265,7 +289,6 @@
     });
   }
 
-  // ---------- Map ----------
   function initMap(){
     var width = 600, height = 340;
     var svg = d3.select('#map').append('svg')
@@ -327,8 +350,6 @@
     d3.select('#zoom-reset').on('click', function(){ svg.transition().duration(300).call(zoomBehavior.transform, d3.zoomIdentity); });
   }
 
-  // Minimal topojson arc-to-geometry conversion (avoids needing the topojson-client
-  // script from a second external host).
   function topojsonFeatures(topology, object){
     var arcs = decodeArcs(topology);
     function arcsToCoords(arcIdx){
@@ -377,7 +398,6 @@
     });
   }
 
-  // ---------- Detail panel ----------
   function selectConflict(id){
     currentConflictId = id;
     var conflict = CONFLICTS.filter(function(c){ return c.id === id; })[0];
@@ -430,7 +450,6 @@
       srcList.appendChild(li);
     });
 
-    // Provenance line — shows how and when this entry was last verified
     var prov = document.getElementById('provenance');
     if (prov){
       if (conflict.verified_by && conflict.updated){
@@ -451,7 +470,6 @@
     updateAskAreaVisibility();
   }
 
-  // ---------- Ask Gemini ----------
   function getGeminiKey(){
     try { return localStorage.getItem(GEMINI_KEY_STORAGE) || ''; } catch(e){ return ''; }
   }
@@ -559,10 +577,10 @@
       localStorage.setItem(GENERATED_HISTORY_STORAGE, JSON.stringify(arr));
       loadHistoryEntries();
       renderCalendar();
-    } catch(e){ /* localStorage unavailable or full - non-fatal */ }
+      renderConflictHistory();
+    } catch(e){ /* non-fatal */ }
   }
 
-  // ---------- History / calendar ----------
   function loadHistoryEntries(){
     var extra = [];
     try {
@@ -570,6 +588,123 @@
       if (raw) extra = JSON.parse(raw) || [];
     } catch(e){ extra = []; }
     historyEntries = SEED_HISTORY.concat(extra);
+  }
+
+  function getConflictNameById(id){
+    if (!id) return null;
+    var c = CONFLICTS.filter(function(x){ return x.id === id; })[0];
+    return c ? c.name : null;
+  }
+
+  function setFilter(newFilter){
+    selectedFilterConflict = newFilter;
+    selectedDateStr = null;
+    renderConflictFilter();
+    renderCalendar();
+    renderConflictHistory();
+    var detail = document.getElementById('day-detail');
+    if (detail){ detail.style.display = 'none'; detail.innerHTML = ''; }
+  }
+
+  function renderConflictFilter(){
+    var container = document.getElementById('conflict-filter');
+    if (!container) return;
+    container.innerHTML = '';
+
+    var allChip = document.createElement('button');
+    allChip.type = 'button';
+    var allActive = (selectedFilterConflict === null);
+    allChip.className = 'chip' + (allActive ? ' chip-active' : '');
+    if (allActive){
+      allChip.style.background = 'var(--ink)';
+      allChip.style.color = 'var(--paper)';
+    }
+    allChip.textContent = 'All conflicts';
+    allChip.addEventListener('click', function(){ setFilter(null); });
+    container.appendChild(allChip);
+
+    CONFLICTS.forEach(function(c){
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      var isActive = (selectedFilterConflict === c.id);
+      chip.className = 'chip' + (isActive ? ' chip-active' : '');
+      if (isActive){
+        chip.style.background = TIER_META[c.tier].bg;
+        chip.style.color = TIER_META[c.tier].text;
+      }
+      chip.textContent = c.name;
+      chip.addEventListener('click', function(){
+        setFilter(selectedFilterConflict === c.id ? null : c.id);
+      });
+      container.appendChild(chip);
+    });
+  }
+
+  function renderConflictHistory(){
+    var container = document.getElementById('conflict-history');
+    if (!container) return;
+
+    if (!selectedFilterConflict){
+      container.style.display = 'none';
+      return;
+    }
+
+    var conflict = CONFLICTS.filter(function(c){ return c.id === selectedFilterConflict; })[0];
+    if (!conflict){
+      container.style.display = 'none';
+      return;
+    }
+
+    var entries = historyEntries.filter(function(e){
+      return e.conflict === conflict.name;
+    }).sort(function(a, b){
+      return b.date.localeCompare(a.date);
+    });
+
+    container.style.display = 'block';
+    container.innerHTML = '';
+
+    var heading = document.createElement('div');
+    heading.className = 'conflict-history-heading';
+    heading.textContent = conflict.name + ' \u2014 ' + entries.length + ' recorded ' + (entries.length === 1 ? 'event' : 'events');
+    container.appendChild(heading);
+
+    if (entries.length === 0){
+      var empty = document.createElement('p');
+      empty.className = 'conflict-history-empty';
+      empty.textContent = 'No recorded events for this conflict yet.';
+      container.appendChild(empty);
+      return;
+    }
+
+    entries.forEach(function(e){
+      var item = document.createElement('div');
+      item.className = 'conflict-history-item';
+
+      var dateEl = document.createElement('span');
+      dateEl.className = 'conflict-history-date';
+      try {
+        var d = new Date(e.date + 'T00:00:00');
+        dateEl.textContent = d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      } catch (err){
+        dateEl.textContent = e.date;
+      }
+      item.appendChild(dateEl);
+
+      var titleEl = document.createElement('p');
+      titleEl.className = 'conflict-history-title';
+      titleEl.textContent = e.title || '';
+      item.appendChild(titleEl);
+
+      if (e.description){
+        var descEl = document.createElement('p');
+        descEl.className = 'conflict-history-desc';
+        descEl.textContent = e.description;
+        item.appendChild(descEl);
+      }
+
+      container.appendChild(item);
+    });
   }
 
   function initCalendarNav(){
@@ -617,6 +752,7 @@
 
     var now = new Date();
     var todayStr = now.getFullYear() + '-' + pad2(now.getMonth()+1) + '-' + pad2(now.getDate());
+    var filterName = selectedFilterConflict ? getConflictNameById(selectedFilterConflict) : null;
 
     for (var day=1; day<=daysInMonth; day++){
       var dateStr = viewYear + '-' + pad2(viewMonth+1) + '-' + pad2(day);
@@ -629,7 +765,11 @@
       num.textContent = day;
       cell.appendChild(num);
 
-      var entries = byDate[dateStr];
+      var allEntries = byDate[dateStr] || [];
+      var entries = filterName
+        ? allEntries.filter(function(e){ return e.conflict === filterName; })
+        : allEntries;
+
       if (entries && entries.length){
         var dotsWrap = document.createElement('span');
         dotsWrap.className = 'cal-dots';
@@ -642,8 +782,18 @@
           dotsWrap.appendChild(dot);
         });
         cell.appendChild(dotsWrap);
+
+        if (dateStr === selectedDateStr) cell.classList.add('cal-selected');
+
         cell.addEventListener('click', (function(dStr, ents){
-          return function(){ showDayDetail(dStr, ents); };
+          return function(){
+            document.querySelectorAll('.cal-cell.cal-selected').forEach(function(el){
+              el.classList.remove('cal-selected');
+            });
+            this.classList.add('cal-selected');
+            selectedDateStr = dStr;
+            showDayDetail(dStr, ents);
+          };
         })(dateStr, entries));
       } else {
         cell.disabled = true;
@@ -699,7 +849,6 @@
     wrap.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 
-  // ---------- Ask-area listeners ----------
   function bindAskHandlers(){
     document.getElementById('ask-btn').addEventListener('click', handleAskGemini);
     document.getElementById('gemini-key-save').addEventListener('click', handleSaveGeminiKey);
@@ -709,10 +858,6 @@
     document.getElementById('change-key-link').addEventListener('click', handleChangeGeminiKey);
   }
 
-  // ---------- Boot ----------
-  // All three fetches are resolved together, then everything initialises in order.
-  // This guarantees CONFLICTS, SEED_HISTORY, and WORLD_TOPOLOGY are all populated
-  // before any rendering function runs.
   Promise.all([
     fetch('data/conflicts.json').then(function(r){ return r.json(); }),
     fetch('data/history.json').then(function(r){ return r.json(); }),
@@ -723,6 +868,8 @@
     WORLD_TOPOLOGY = results[2];
 
     loadHistoryEntries();
+    renderConflictFilter();
+    renderConflictHistory();
     initTabs();
     initMap();
     initCalendarNav();
