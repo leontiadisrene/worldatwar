@@ -54,6 +54,24 @@
     "source": "auto"
   },
   {
+    "id": "2bf8105b6d1c",
+    "date": "2026-11-15",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli air strike kills senior Hamas commander",
+    "description": "Israeli air strike kills senior Hamas commander in Gaza",
+    "source": "auto"
+  },
+  {
+    "id": "089295d683f6",
+    "date": "2026-11-15",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone strikes on power stations",
+    "description": "Drone strikes hit power stations in southeast Sudan, causing disruptions to electricity supplies",
+    "source": "auto"
+  },
+  {
     "id": "0105e406db08",
     "date": "2026-11-14",
     "conflict": "Ukraine",
@@ -81,6 +99,15 @@
     "source": "auto"
   },
   {
+    "id": "3cdfe33373b4",
+    "date": "2026-11-14",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran views shift in US approach",
+    "description": "After JD Vance ordered away",
+    "source": "auto"
+  },
+  {
     "id": "464a72c8beba",
     "date": "2026-11-13",
     "conflict": "Iran",
@@ -105,6 +132,15 @@
     "tier": "war",
     "title": "Airstrikes in Rakhine State",
     "description": "Junta carries out double-tap airstrikes targeting civilians in Rakhine State",
+    "source": "auto"
+  },
+  {
+    "id": "3267212e1c7f",
+    "date": "2026-11-13",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Airstrike on India Market",
+    "description": "An airstrike on India Market in Kyauktaw, Rakhine State, Myanmar",
     "source": "auto"
   },
   {
@@ -171,6 +207,15 @@
     "source": "auto"
   },
   {
+    "id": "f9eaa494ab64",
+    "date": "2026-11-12",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli air strike on Nasser Hospital",
+    "description": "Israeli air strike on Nasser Hospital kills six Palestinians",
+    "source": "auto"
+  },
+  {
     "id": "b3e07e2ff9f0",
     "date": "2026-11-10",
     "conflict": "Korean peninsula",
@@ -198,12 +243,30 @@
     "source": "auto"
   },
   {
+    "id": "ccfff1782606",
+    "date": "2026-11-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Trump to meet Iran war mediator Qatar",
+    "description": "No imminent deal seen to end the war",
+    "source": "auto"
+  },
+  {
     "id": "6ba26b83f6c0",
     "date": "2026-11-08",
     "conflict": "South China Sea",
     "tier": "flash",
     "title": "Chinese Forces Conduct Drills",
     "description": "China announced readiness patrols around Scarborough Shoal",
+    "source": "auto"
+  },
+  {
+    "id": "80eee3c423bd",
+    "date": "2026-11-08",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea tests hypersonic missile",
+    "description": "South Korea tested its first domestically-developed hypersonic missile.",
     "source": "auto"
   },
   {
@@ -270,6 +333,15 @@
     "source": "auto"
   },
   {
+    "id": "02d949d3133b",
+    "date": "2026-11-03",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "China's military exercises around Taiwan",
+    "description": "China deployed significant military means, including 100 ships and 49 aircraft.",
+    "source": "auto"
+  },
+  {
     "id": "095cbfc94e77",
     "date": "2026-10-27",
     "conflict": "Korean peninsula",
@@ -294,6 +366,15 @@
     "tier": "war",
     "title": "IS Sahel attacks",
     "description": "Suspected IS Sahel attacks left scores of civilians dead in Ménaka region",
+    "source": "auto"
+  },
+  {
+    "id": "79df217117dc",
+    "date": "2026-10-18",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "IS‑Sahel attacks civilian encampments in Ménaka",
+    "description": "Armed assailants attacked civilian encampments in the Ménaka region, including Tinabow and Tagadayat, killing at least 48 civilians. The Idaksahak community attributed the attack to the Islamic State Sahel Province.",
     "source": "auto"
   },
   {

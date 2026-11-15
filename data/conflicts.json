@@ -9,7 +9,7 @@
     "what": "Full-scale invasion, now a grinding war of attrition",
     "when": "Started Feb 24, 2022 — day 1,650+ and still going",
     "how": "Daily drone, missile and artillery strikes along a front over 1,100 km long",
-    "current": "Russia and Ukraine are exchanging airstrikes, with the US describing renewed security talks as productive. At least 73 people were injured in a Russian bombing of a Ukrainian hospital. US envoys met with Zelensky in Dublin after talks with Putin in Moscow.",
+    "current": "The war in Ukraine continues with ongoing airstrikes and bombings. At least 73 people were injured in a Russian attack on a Ukrainian hospital. US envoys have met with Putin and Zelensky to discuss renewed security talks.",
     "sources": [
       {
         "label": "Al Jazeera: Grain under fire",
@@ -26,7 +26,7 @@
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:01:39+00:00"
+    "updated": "2026-11-15T15:42:30+00:00"
   },
   {
     "id": "gaza",
@@ -38,24 +38,24 @@
     "what": "War technically under ceasefire, but violence continues",
     "when": "War since Oct 7, 2023; ceasefire since Oct 10, 2025",
     "how": "Over 1,300 people killed since the \"ceasefire\" began; disarmament and reconstruction stalled",
-    "current": "The conflict in Gaza continues with Israeli air strikes killing civilians and destroying infrastructure. At least 1,643 Palestinians have been killed and 5,964 injured since the ceasefire in October 2025. The total death toll since the war began in October 2023 is at least 74,695.",
+    "current": "Israeli forces have launched strikes on Gaza, resulting in significant casualties and damage. A recent strike on Nasser Hospital killed six Palestinians. The conflict has caused widespread harm, with at least 74,695 people killed and 176,093 injured since October 2023.",
     "sources": [
+      {
+        "label": "BBC News: Israeli strike on Gaza hospital kills six Palestinians",
+        "url": "https://www.bbc.com/news/topics/c2vdnvdg6xxt"
+      },
       {
         "label": "Al Jazeera: Israeli air strike kills senior Hamas commander in Gaza",
         "url": "https://www.aljazeera.com/news/2026/11/15/israeli-air-strike-kills-senior-hamas-commander-in-gaza"
       },
       {
-        "label": "BBC News: Israeli strikes in Gaza kill eight including child, hospitals say",
-        "url": "https://www.bbc.com/news/topics/c2vdnvdg6xxt"
-      },
-      {
-        "label": "UN News: Israeli forces push Palestinians into ever-smaller areas of the Gaza Strip",
-        "url": "https://news.un.org/en/tags/gaza"
+        "label": "BBC News: Israel kills Hamas commander in strike on Gaza camp",
+        "url": "https://www.bbc.com/news/articles/cqrkg4r6mg7xo"
       }
     ],
     "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:02:12+00:00"
+    "updated": "2026-11-15T15:42:45+00:00"
   },
   {
     "id": "iran",
@@ -67,24 +67,24 @@
     "what": "A leadership-shattering war, now in an uneasy pause",
     "when": "12-day war June 2025; \"Operation Epic Fury\" Feb 28, 2026",
     "how": "US-Israeli strikes killed Iran’s Supreme Leader; his son succeeded him; Hormuz still shut",
-    "current": "The US and Iran are engaged in a war with ongoing attacks. Iran has launched drone attacks on Bahrain and a US military base. Peace talks appear to have stalled.",
+    "current": "The US and Iran are engaged in a war with ongoing strikes and attacks. The US struck Iran's Qeshm island, and Iran attacked tankers in the Gulf and Strait of Hormuz. The conflict continues despite diplomatic efforts.",
     "sources": [
       {
         "label": "Reuters: Trump to meet Iran war mediator Qatar",
         "url": "https://www.reuters.com/world/middle-east/trump-meet-iran-war-mediator-qatar-no-imminent-deal-seen-end-war-2026-11-09"
       },
       {
-        "label": "NY Times: Iran Attacks Bahrain for the Second Time in Days",
-        "url": "https://www.nytimes.com/2026/11/15/world/middleeast/bahrain-iran-israel.html"
+        "label": "BBC: Iran targets US military base in Bahrain with drone attack",
+        "url": "https://www.bbc.com/news/articles/cqn4e2py48kwo"
       },
       {
-        "label": "BBC News: Iran targets US military base in Bahrain with drone attack",
-        "url": "https://www.bbc.co.uk/news/articles/cqn4e2py48kwo"
+        "label": "Al Jazeera: Trump says US ready to strike Iran ‘anytime we want’",
+        "url": "https://www.aljazeera.com/where/iran"
       }
     ],
-    "confidence": "high",
+    "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:02:29+00:00"
+    "updated": "2026-11-15T15:43:00+00:00"
   },
   {
     "id": "sudan",
@@ -96,24 +96,24 @@
     "what": "Civil war hardening into a formal partition",
     "when": "Since April 15, 2023, now in its 4th year",
     "how": "RSF controls Darfur and the west; army holds the center, north and east",
-    "current": "The war in Sudan continues, with drone attacks killing or wounding 484 civilians since February. The conflict has displaced over 14 million civilians, including 4.5 million to neighboring countries. Fighting has spread to various parts of Sudan, including Darfur and Kordofan.",
+    "current": "Fighting in Sudan has escalated, with drone attacks targeting the country's power system, causing widespread disruptions to electricity supplies. The conflict between the Rapid Support Forces (RSF) and the Sudanese Armed Forces (SAF) has displaced over 14 million civilians since 2023. Drone strikes have hit power stations in southeast Sudan, plunging cities into darkness.",
     "sources": [
       {
-        "label": "Al Jazeera: Sudan war",
-        "url": "https://www.aljazeera.com/tag/sudan-war"
+        "label": "Al Jazeera: Drone attacks extend campaign targeting Sudan’s power system",
+        "url": "https://www.aljazeera.com/where/sudan"
       },
       {
-        "label": "Al Jazeera: Drone attacks on power stations",
+        "label": "Al Jazeera: Drone attacks on power stations plunge Sudan’s cities into darkness",
         "url": "https://www.aljazeera.com/features/2026/11/15/drone-strikes-on-power-stations-plunges-sudans-cities-into-darkness"
       },
       {
-        "label": "Global Conflict Tracker: Civil War in Sudan",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/power-struggle-sudan"
+        "label": "Reuters: Sudan News",
+        "url": "https://www.reuters.com/world/sudan"
       }
     ],
     "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:02:44+00:00"
+    "updated": "2026-11-15T15:43:35+00:00"
   },
   {
     "id": "mali",
@@ -125,24 +125,28 @@
     "what": "Jihadist fuel blockade and insurgency threatening the junta",
     "when": "Blockade of the capital began around September 2025",
     "how": "Fuel convoys attacked, schools and businesses paralyzed; blockade has since eased somewhat",
-    "current": "Mali is on the brink of civil war as Islamist groups and Tuareg rebels consolidate power in northern Mali. The increase in violence coincides with the withdrawal of UN peacekeepers. JNIM has taken advantage of the withdrawal to launch a renewed offensive.",
+    "current": "Mali is on the brink of civil war as Islamist groups such as JNIM and Tuareg rebel factions consolidate control in the north, with attacks more than doubling since the first phase of UN peacekeeper withdrawal in August 2026. Russian paramilitary forces are now fighting alongside Malian troops against al‑Qaeda and IS‑linked militants, while the military government claims a successful counter‑offensive that has killed hundreds of insurgents. Nevertheless, security conditions continue to deteriorate, highlighted by a deadly IS‑Sahel attack on civilian encampments in the Ménaka region that left dozens dead.",
     "sources": [
       {
-        "label": "Global Conflict Tracker: Violent Extremism in the Sahel",
+        "label": "CFR: Violent Extremism in the Sahel",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/violent-extremism-sahel"
       },
       {
-        "label": "UN News: Mali",
+        "label": "UN News: Mali: Guterres calls for international solutions",
         "url": "https://news.un.org/en/story/2026/04/1167382"
       },
       {
-        "label": "Al Jazeera: Mali",
-        "url": "https://www.aljazeera.com/news/2026/7/22/how-armed-group-alliances-are-reshaping-malis-conflict-and-the-wider-sahel"
+        "label": "Al Jazeera: Russian paramilitaries fight alongside Malian soldiers",
+        "url": "https://www.aljazeera.com/where/mali"
+      },
+      {
+        "label": "International Crisis Group: IS‑Sahel attacks in Ménaka",
+        "url": "https://www.crisisgroup.org/africa/sahel/mali"
       }
     ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:02:59+00:00"
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-15T15:44:00+00:00"
   },
   {
     "id": "myanmar",
@@ -154,24 +158,24 @@
     "what": "Civil war following the 2021 coup, now with a civilian facade",
     "when": "Coup Feb 1, 2021; Min Aung Hlaing elected president April 3, 2026",
     "how": "Junta-backed party swept a sham election; war with resistance forces continues in the borderlands",
-    "current": "Myanmar's civil war has killed over 100,000 people and displaced 5.2 million. The conflict has entered a stalemate with neither side holding a decisive advantage. The junta has carried out airstrikes targeting civilians, resulting in numerous casualties.",
+    "current": "Myanmar is experiencing a deepening crisis with escalating military airstrikes hitting civilians, acute food insecurity, and nearly 5.2 million people displaced. The military's airstrikes have targeted markets, monasteries, displacement camps, hospitals, and schools. Civilian casualties have been documented in Rakhine State amid a renewed military offensive.",
     "sources": [
       {
-        "label": "Global Conflict Tracker: Civil War in Myanmar",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/rohingya-crisis-myanmar"
+        "label": "UN News: Myanmar crisis deepens",
+        "url": "https://news.un.org/en/story/2026/01/1166866"
       },
       {
-        "label": "Myanmar: Junta carries out double-tap airstrikes targeting civilians - The Observers",
+        "label": "Council on Foreign Relations: How the Coup Turned Myanmar Into Asia’s Deadliest Conflict",
+        "url": "https://www.cfr.org/articles/how-the-coup-turned-myanmar-into-asias-deadliest-conflict-and-why-the-world-is-looking-away"
+      },
+      {
+        "label": "France 24: Myanmar junta carries out double-tap airstrikes targeting civilians",
         "url": "https://www.france24.com/en/tv-shows/the-observers/20261113-myanmar-junta-airstrikes-civilians"
-      },
-      {
-        "label": "Myanmar - The New York Times",
-        "url": "https://www.nytimes.com/topic/destination/myanmar?eafs_enabled=false"
       }
     ],
     "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:03:16+00:00"
+    "updated": "2026-11-15T15:44:35+00:00"
   },
   {
     "id": "venezuela",
@@ -183,12 +187,8 @@
     "what": "Maduro captured in a US raid, transition still in limbo",
     "when": "Raid on Jan 3, 2026; still no election date set",
     "how": "Acting president installed with US backing; opposition leader repeatedly blocked from returning",
-    "current": "Venezuela is currently in a state of war. The US launched military strikes on Caracas, capturing Venezuelan leader Nicolás Maduro and his wife, Cilia Flores. They were charged with narco-terrorism and cocaine importation conspiracy. The US has also seized oil tankers linked to Venezuela.",
+    "current": "The US has seized a fifth oil tanker linked to Venezuela and has a stake in Venezuela's oil reserves. Venezuela's leader, Nicolás Maduro, is in US detention and has asserted immunity in a US court. The US-Venezuela tensions remain high.",
     "sources": [
-      {
-        "label": "Global Conflict Tracker: Instability in Venezuela",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/instability-venezuela"
-      },
       {
         "label": "BBC News: Venezuela crisis",
         "url": "https://www.bbc.com/news/topics/cp3mvpm3933t"
@@ -196,11 +196,15 @@
       {
         "label": "Al Jazeera: US-Venezuela Tensions",
         "url": "https://www.aljazeera.com/tag/us-venezuela-tensions"
+      },
+      {
+        "label": "Council on Foreign Relations: Venezuela: The Rise and Fall of a Petrostate",
+        "url": "https://www.cfr.org/backgrounders/venezuela-crisis"
       }
     ],
     "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:03:50+00:00"
+    "updated": "2026-11-15T15:44:47+00:00"
   },
   {
     "id": "drc",
@@ -212,24 +216,24 @@
     "what": "Peace deals signed, but M23 still controls the ground",
     "when": "Washington and Doha deals signed mid-2025; conflict decades old",
     "how": "M23 still controls Goma and Bukavu despite the agreements",
-    "current": "The Democratic Republic of Congo is experiencing increased violence, with the Rwanda-backed M23 rebels expanding their control in the eastern region. Hundreds of thousands of civilians have been displaced, and the country is also facing an Ebola outbreak and a hunger crisis. At least 66 Congolese soldiers have been sentenced to death for cowardice.",
+    "current": "The Democratic Republic of Congo has been experiencing conflict over its mineral wealth and unresolved tensions from the 1994 Rwandan genocide. Violence in the eastern DR Congo has increased dramatically, with Rwanda-backed M23 rebels seizing significant territory. The situation continues to deteriorate despite peace deals.",
     "sources": [
+      {
+        "label": "Global Conflict Tracker: Conflict in the Democratic Republic of Congo",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo"
+      },
       {
         "label": "International Crisis Group: Democratic Republic of Congo",
         "url": "https://www.crisisgroup.org/africa/great-lakes/democratic-republic-congo"
       },
       {
-        "label": "BBC: DR Congo conflict",
-        "url": "https://www.bbc.com/news/articles/cmreye1q3dnjo"
-      },
-      {
-        "label": "Al Jazeera: Democratic Republic of the Congo",
-        "url": "https://www.aljazeera.com/where/democratic-republic-of-the-congo"
+        "label": "UN News: DR Congo: violence intensifies as UN mission pledges continued support",
+        "url": "https://news.un.org/en/story/2026/03/1167204"
       }
     ],
-    "confidence": "medium",
+    "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:04:24+00:00"
+    "updated": "2026-11-15T15:45:00+00:00"
   },
   {
     "id": "taiwan",
@@ -241,7 +245,7 @@
     "what": "Escalating military pressure just short of open conflict",
     "when": "Ongoing, intensified through 2026",
     "how": "Record Chinese aircraft and ship incursions into Taiwan’s air defense zone",
-    "current": "China is increasing pressure on Taiwan, with Beijing making statements and taking actions to reunify the island. The status quo in the Taiwan Strait is precarious, with Taipei experiencing political discord and Washington sending mixed signals. China has deployed significant military means, including 100 ships and 49 aircraft, around Taiwan.",
+    "current": "China is increasing pressure on Taiwan, with Beijing making statements and taking actions to reunify the island. Taiwan's defense ministry has detected Chinese military aircraft and naval vessels. The US has shown support for Taiwan, but China has condemned these actions.",
     "sources": [
       {
         "label": "International Crisis Group: The Three-body Problem in the Taiwan Strait",
@@ -256,9 +260,9 @@
         "url": "https://www.france24.com/en/asia-pacific/20261113-chinese-army-military-exercises-taiwan"
       }
     ],
-    "confidence": "medium",
+    "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:04:44+00:00"
+    "updated": "2026-11-15T15:45:15+00:00"
   },
   {
     "id": "korea",
@@ -270,24 +274,24 @@
     "what": "Nuclear and missile buildup, with no active dialogue",
     "when": "Continuous missile testing through 2026",
     "how": "Repeated launches; Pyongyang calls Seoul a \"hostile enemy state\"",
-    "current": "Tensions between North and South Korea have escalated, with North Korea launching an intercontinental ballistic missile, posing a grave threat to regional stability. South Korea and the US held joint military exercises. North Korea has restarted weapons testing.",
+    "current": "The Korean Peninsula is experiencing a crisis with North Korea reportedly moving new military units into 'firing positions' along the border. South Korea has tested a domestically-developed hypersonic missile and held exercises with the U.S. Tensions between South and North Korea have escalated.",
     "sources": [
       {
-        "label": "Al Jazeera: North Korea",
-        "url": "https://www.aljazeera.com/where/north-korea"
-      },
-      {
-        "label": "Crisis Group: Korean Peninsula",
+        "label": "CrisisWatch: Korean Peninsula October 2026",
         "url": "https://www.crisisgroup.org/asia-pacific/north-east-asia/korean-peninsula"
       },
       {
-        "label": "UN News: DPR Korea",
-        "url": "https://news.un.org/en/focus-topic/democratic-peoples-republic-korea"
+        "label": "Al Jazeera: South Korea",
+        "url": "https://www.aljazeera.com/where/south-korea"
+      },
+      {
+        "label": "Global Conflict Tracker: Confrontation With North Korea",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/north-korea-crisis"
       }
     ],
     "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:04:56+00:00"
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T15:46:08+00:00"
   },
   {
     "id": "scs",
@@ -299,24 +303,24 @@
     "what": "Maritime and territorial dispute over reefs and shoals",
     "when": "Ongoing, flaring repeatedly through 2026",
     "how": "Water-cannon incidents and blocked resupply runs near Scarborough Shoal",
-    "current": "Chinese forces have been conducting drills in the South China Sea, citing responses to Philippine actions. Tensions remain high between Beijing and Manila due to incidents in the region.",
+    "current": "Tensions are high in the South China Sea due to territorial disputes between China and the Philippines. Chinese forces have conducted drills around Scarborough Shoal, and there have been incidents of Chinese vessels clashing with Philippine coastguard vessels. The situation remains volatile, with both countries accusing each other of provocative acts.",
     "sources": [
       {
-        "label": "Reuters: Chinese Forces Conduct Drills",
+        "label": "Reuters: Chinese Forces Conduct Drills in the South China Sea",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/territorial-disputes-south-china-sea"
       },
       {
-        "label": "Al Jazeera: Philippines accuses China",
+        "label": "Al Jazeera: Philippines accuses China of using water cannon on vessels for second day",
         "url": "https://www.aljazeera.com/tag/south-china-sea"
       },
       {
-        "label": "International Crisis Group: South China Sea",
-        "url": "https://www.crisisgroup.org/asia-pacific/south-east-asia/south-china-sea"
+        "label": "Council on Foreign Relations: China’s Maritime Disputes",
+        "url": "https://www.cfr.org/articles/chinas-maritime-disputes"
       }
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:05:28+00:00"
+    "updated": "2026-11-15T15:46:27+00:00"
   },
   {
     "id": "kashmir",
@@ -328,15 +332,15 @@
     "what": "Their worst clash in decades, now a fragile truce",
     "when": "Crisis April–May 2025; ceasefire since May 10, 2025",
     "how": "Missile, drone and artillery exchange; US-mediated ceasefire holds, dispute unresolved",
-    "current": "Tensions remain high in Kashmir, with violence and militant attacks continuing in the region. At least 26 people were killed in April after militants opened fire on tourists. A ceasefire is in place between India and Pakistan, but diplomacy and trust remain frozen.",
+    "current": "Tensions remain high in Kashmir due to ongoing disputes between India and Pakistan. Militant activity has been reported in the region, with attacks targeting Indian travelers and workers. Families are still coping with the loss of loved ones from previous attacks.",
     "sources": [
+      {
+        "label": "CFR Education: Dispute in Kashmir",
+        "url": "https://www.cfr.org/education/teach/simulations/dispute-kashmir"
+      },
       {
         "label": "BBC News: Kashmir tensions",
         "url": "https://www.bbc.com/news/topics/c6vlwj44k2mt"
-      },
-      {
-        "label": "Al Jazeera: Kashmir",
-        "url": "https://www.aljazeera.com/where/kashmir"
       },
       {
         "label": "Global Conflict Tracker: Conflict Between India and Pakistan",
@@ -345,7 +349,7 @@
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:05:40+00:00"
+    "updated": "2026-11-15T15:46:41+00:00"
   },
   {
     "id": "caucasus",
@@ -357,24 +361,24 @@
     "what": "Preliminary peace signed, but a final treaty remains unsigned",
     "when": "Framework signed Aug 8, 2025; still unresolved in 2026",
     "how": "Azerbaijan wants an Armenian constitutional change before signing a final deal",
-    "current": "The North Caucasus region is experiencing ongoing conflict, with 574 deaths this year. Tensions between Armenia and Azerbaijan remain high after Azerbaijan's 2023 offensive ended the Nagorno-Karabakh conflict.",
+    "current": "Tensions between Armenia and Azerbaijan remain high, with clashes reported in the Nagorno-Karabakh region. Armenia accuses Turkey of military support for Azerbaijan. A U.S.-brokered summit in August 2025 produced a joint peace declaration, but issues remain unresolved.",
     "sources": [
       {
-        "label": "International Crisis Group: The North Caucasus",
-        "url": "https://www.crisisgroup.org/europe-central-asia/russia-internal/220-north-caucasus-challenges-integration-i-ethnicity-and-conflict"
+        "label": "Council on Foreign Relations: Nagorno-Karabakh",
+        "url": "https://www.cfr.org/backgrounders/nagorno-karabakh-crisis-caucasus"
       },
       {
-        "label": "Global Conflict Tracker: Tensions Between Armenia and Azerbaijan",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/nagorno-karabakh-conflict"
+        "label": "International Crisis Group: Nagorno-Karabakh Conflict",
+        "url": "https://www.crisisgroup.org/visual-explainers/nagorno-karabakh-conflict-visual-explainer"
       },
       {
-        "label": "France 24: Caucasus news and analysis",
+        "label": "France 24: Caucasus",
         "url": "https://www.france24.com/en/tag/caucasus"
       }
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:06:13+00:00"
+    "updated": "2026-11-15T15:46:54+00:00"
   },
   {
     "id": "thaicambodia",
@@ -386,24 +390,24 @@
     "what": "Long-running border dispute that turned into open war twice in 2025",
     "when": "5-day clash July 2025; worse fighting Dec 7–27, 2025",
     "how": "Artillery, tanks, drones and jets; 100+ killed before the latest ceasefire",
-    "current": "The conflict between Thailand and Cambodia has resulted in at least 25 deaths and over half a million displaced people. Fighting has escalated, with strikes reported further from the border. Cambodia has halted all border crossings.",
+    "current": "The conflict between Thailand and Cambodia continues to escalate, with dozens of people killed and over 500,000 displaced this month. Despite attempted mediation, the situation worsened after landmine incidents injured Thai soldiers. Civilians are at risk amid the escalating conflict.",
     "sources": [
       {
-        "label": "Al Jazeera: Thailand launches new offensive as Cambodia halts all border crossings",
-        "url": "https://www.aljazeera.com/news/2025/12/14/thailand-launches-new-offensive-as-cambodia-halts-all-border-crossings"
-      },
-      {
-        "label": "Al Jazeera: Thailand-Cambodia fighting enters 5th day, Thai PM confirms Trump call",
-        "url": "https://www.aljazeera.com/news/2025/12/12/cambodia-thailand-fighting-enters-5th-day-thai-pm-confirms-trump-call"
+        "label": "Council on Foreign Relations: Cambodia-Thailand Conflict Continues to Escalate",
+        "url": "https://www.cfr.org/articles/cambodia-thailand-conflict-continues-escalate"
       },
       {
         "label": "UN News: Civilians at risk amid escalating Thailand-Cambodia conflict",
         "url": "https://news.un.org/en/story/2025/12/1166626"
+      },
+      {
+        "label": "AP News: Renewed combat between Cambodia and Thailand forces thousands to flee",
+        "url": "https://apnews.com/article/thailand-cambodia-combat-border-dispute-142145d84a217ad6c6f208769c447615"
       }
     ],
-    "confidence": "high",
+    "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:06:27+00:00"
+    "updated": "2026-11-15T15:47:26+00:00"
   },
   {
     "id": "horn",
@@ -415,7 +419,7 @@
     "what": "Troop buildups and real border clashes amid fears of wider war",
     "when": "Tensions escalated sharply from early 2026; clashes in August",
     "how": "Ethiopian troops clashed with Tigrayan forces near the Eritrea-Sudan border triangle",
-    "current": "The Horn of Africa is experiencing a tumultuous period with armed conflict in Ethiopia's Tigray region and a political impasse in Sudan. Outside powers have long meddled in the region, fueling the conflict. Tensions are escalating between Ethiopia and Somalia.",
+    "current": "The Horn of Africa is experiencing a tumultuous period with armed conflict in Ethiopia's Tigray region and a political impasse in Sudan. Outside powers have meddled in the region, fueling the conflict. Tensions are escalating between Ethiopia and Somalia.",
     "sources": [
       {
         "label": "Crisis Group: Horn of Africa Nears Boiling Point",
@@ -432,6 +436,6 @@
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T15:06:59+00:00"
+    "updated": "2026-11-15T15:47:40+00:00"
   }
 ]
