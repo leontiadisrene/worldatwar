@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Balanced schedule: every day has a mandatory all-basic run (00:17 UTC)
-and a second run (12:17 UTC) that becomes all-advanced on evenly-spaced
-"advanced days" spread across the month. Budget is recomputed each run
-from live credits_used so it never overspends the free tier.
+Balanced advanced/basic schedule + fuzzy event deduplication.
+
+Dedup: prevents (and cleans up) near-duplicate history entries caused by
+different LLM runs describing the same event with slightly different wording.
 """
-import json, os, re, time, hashlib, requests
+import json, os, re, time, hashlib, difflib, requests
 from datetime import date, datetime, timezone, timedelta
 
 TAVILY    = os.environ["TAVILY_API_KEY"]
@@ -31,6 +31,78 @@ def tavily(query, depth="basic"):
     }, timeout=60)
     r.raise_for_status()
     return r.json().get("results", [])
+
+# ---------- fuzzy dedup helpers ----------
+def _tokens(s):
+    if not s or not isinstance(s, str):
+        return set()
+    s = re.sub(r'[^\w\s]', ' ', s.lower())
+    return set(s.split())
+
+def _jaccard(a, b):
+    if not a or not b:
+        return 0.0
+    return len(a & b) / len(a | b)
+
+def _is_duplicate_pair(a, b):
+    """True if two entries describe the same event (same conflict required)."""
+    if a.get('conflict') != b.get('conflict'):
+        return False
+    try:
+        da = date.fromisoformat(a.get('date', ''))
+        db = date.fromisoformat(b.get('date', ''))
+    except (ValueError, TypeError):
+        return False
+    if abs((da - db).days) > 2:
+        return False
+
+    ta = _tokens(a.get('title', ''))
+    tb = _tokens(b.get('title', ''))
+    if ta and tb and _jaccard(ta, tb) >= 0.65:
+        return True
+
+    da_toks = _tokens(a.get('description', ''))
+    db_toks = _tokens(b.get('description', ''))
+    if da_toks and db_toks and _jaccard(da_toks, db_toks) >= 0.70:
+        return True
+
+    return False
+
+def is_duplicate_event(new_ev, existing_history):
+    for ex in existing_history:
+        if _is_duplicate_pair(new_ev, ex):
+            return True
+    return False
+
+def prune_history_duplicates(history):
+    """Remove near-duplicates from the history array. Keeps the earliest-seen
+    entry (in date order) and discards later near-duplicates."""
+    if len(history) < 2:
+        return history, 0
+    indexed = sorted(enumerate(history), key=lambda p: (p[1].get('date', ''), p[0]))
+    kept = []
+    kept_indices = set()
+    for orig_idx, entry in indexed:
+        if not any(_is_duplicate_pair(entry, k) for k in kept):
+            kept.append(entry)
+            kept_indices.add(orig_idx)
+    removed = len(history) - len(kept)
+    # preserve original file order for stability
+    return [e for i, e in enumerate(history) if i in kept_indices], removed
+
+def recent_events_for_prompt(history, conflict_name, days=21):
+    cutoff = datetime.now(timezone.utc).date() - timedelta(days=days)
+    rows = []
+    for h in history:
+        if h.get('conflict') != conflict_name:
+            continue
+        try:
+            hd = date.fromisoformat(h.get('date', ''))
+        except (ValueError, TypeError):
+            continue
+        if hd >= cutoff:
+            rows.append(f"- {h['date']}: {h.get('title', '')}")
+    return "\n".join(rows) if rows else "(none recorded recently)"
 
 # ---------- usage tracking ----------
 def load_usage():
@@ -60,11 +132,6 @@ def save_usage(usage):
         json.dump(usage, f, indent=2)
 
 def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
-    """
-    Returns (advanced_count, info).
-    - First run of day: 0 advanced, 100% basic.
-    - Second run: 0 or all-advanced based on evenly-spaced day thresholds.
-    """
     if not is_second_run:
         return 0, {"reason": "first run of day → mandatory all-basic"}
 
@@ -85,7 +152,7 @@ def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
     min_future_cost = runs_remaining * searches_per_run
     spare = max(0, budget_left - min_future_cost)
 
-    max_possible = full_days_after + 1   # this run + future second-runs
+    max_possible = full_days_after + 1
     advanced_days_total = min(spare // searches_per_run, max_possible)
     advanced_done = usage.get("advanced_days_done", 0)
     last_adv_date = usage.get("last_advanced_date")
@@ -94,8 +161,7 @@ def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
     if advanced_done >= advanced_days_total:
         return 0, {
             "reason": f"all {advanced_days_total} advanced days already used",
-            "progress": progress,
-            "spare": spare,
+            "progress": progress, "spare": spare,
             "advanced_days_total": advanced_days_total,
         }
 
@@ -108,16 +174,14 @@ def compute_advanced_this_run(usage, now, is_second_run, searches_per_run):
         return upgrades, {
             "reason": f"ADVANCED DAY #{advanced_done + 1} of {advanced_days_total} "
                       f"(threshold {next_threshold*100:.0f}%, progress {progress*100:.0f}%)",
-            "progress": progress,
-            "spare": spare,
+            "progress": progress, "spare": spare,
             "advanced_days_total": advanced_days_total,
         }
 
     return 0, {
         "reason": (f"basic day — next advanced at {next_threshold*100:.0f}% "
                    f"(now {progress*100:.0f}%)"),
-        "progress": progress,
-        "spare": spare,
+        "progress": progress, "spare": spare,
         "advanced_days_total": advanced_days_total,
     }
 
@@ -262,15 +326,15 @@ SCHEMA = """{
 TIME_RULES = """
 TIME-VERIFICATION RULES (strict — apply to every event):
 - Extract the time the EVENT itself happened, NEVER the article's publication time.
-- Cluster the hour:minute values across sources; 2+ sources within 25 minutes = valid cluster.
-- "time" = MEDIAN HH:MM of the largest cluster. If none, use null.
-- "time_source_count" = number of sources in that cluster.
-- "time_variance_minutes" = (max - min) of cluster. Single source = 0. No cluster = 999.
-- "timezone" = zone reported ("UTC", "EET", "local", etc.).
+- Cluster hour:minute values; 2+ sources within 25 minutes = valid cluster.
+- "time" = MEDIAN HH:MM of the largest cluster. If none, null.
+- "time_source_count" = size of that cluster.
+- "time_variance_minutes" = (max-min). Single source = 0. No cluster = 999.
+- "timezone" = reported zone ("UTC", "EET", "local", etc.).
 - DO NOT fabricate times. Missing is better than wrong.
 """
 
-def research_prompt(conflict, results):
+def research_prompt(conflict, results, recent_events):
     ctx = "\n".join(
         f"- {x['title']} — {x.get('content','')[:350]} ({x['url']})"
         for x in results
@@ -281,6 +345,10 @@ Conflict: {conflict['name']} (tier: {conflict['tier']}).
 Verified search results from the last 10 days:
 {ctx}
 
+Events ALREADY recorded for this conflict (do NOT re-report these;
+if new information refines an existing event, do NOT create a new event for it):
+{recent_events}
+
 Return ONLY valid JSON, exactly this shape:
 {SCHEMA}
 
@@ -289,11 +357,13 @@ Return ONLY valid JSON, exactly this shape:
 Other rules:
 - Every claim in "current" must be supported by a result above.
 - "sources": AT LEAST 3, up to 5. Only URLs from the list above.
-- "events": 0-3 items, only developments dated within the last 7 days
-  that appear in at least two results.
+- "events": 0-3 items, only developments from the last 7 days
+  appearing in at least two results AND not already recorded above.
+- Each event's title must be a short, unique label — never a paraphrase
+  of one already recorded.
 - Keep every string under 400 characters."""
 
-def review_prompt(conflict, results, a, b, flags):
+def review_prompt(conflict, results, a, b, flags, recent_events):
     ctx = "\n".join(
         f"- {x['title']} — {x.get('content','')[:350]} ({x['url']})"
         for x in results
@@ -312,8 +382,11 @@ Model B:
 
 Flags: {', '.join(flags)}
 
-Decide which claims the search results actually support. Output ONLY the
-JSON object in this shape:
+Already-recorded events (do NOT re-report):
+{recent_events}
+
+Decide which claims the search results support. Output ONLY the JSON
+object in this shape:
 {SCHEMA}
 
 {TIME_RULES}
@@ -372,7 +445,15 @@ def save_if_changed(path, data):
 def main():
     conflicts = json.load(open("data/conflicts.json"))
     history   = json.load(open("data/history.json"))
-    seen      = {h["id"] for h in history}
+
+    # Prune existing duplicates from history BEFORE doing any work
+    history, pruned = prune_history_duplicates(history)
+    if pruned:
+        print(f"Pruned {pruned} duplicate histor{'y entry' if pruned==1 else 'y entries'} from prior runs")
+    else:
+        print("No duplicate history entries found")
+
+    seen = {h["id"] for h in history}
     searches_per_run = len(conflicts)
 
     usage = load_usage()
@@ -393,6 +474,7 @@ def main():
     save_usage(usage)
 
     ok = 0
+    skipped_dupes = 0
     for i, c in enumerate(conflicts):
         use_adv = (i < advanced_count)
         depth = "advanced" if use_adv else "basic"
@@ -406,7 +488,8 @@ def main():
                 continue
 
             tavily_urls = [x['url'] for x in results if x.get('url')]
-            prompt = research_prompt(c, results)
+            recent = recent_events_for_prompt(history, c['name'])
+            prompt = research_prompt(c, results, recent)
 
             a = None
             try:
@@ -437,7 +520,7 @@ def main():
                     print(f"  review {c['name']}: {flags}")
                     try:
                         final = groq("openai/gpt-oss-120b",
-                                     review_prompt(c, results, a, b, flags),
+                                     review_prompt(c, results, a, b, flags, recent),
                                      max_tokens=2000, json_mode=False)
                         time.sleep(5.0)
                         verified = "cloudflare+groq+groq-review"
@@ -475,25 +558,38 @@ def main():
                     f"{c['id']}|{ev['date']}|{ev['title']}".encode()
                 ).hexdigest()[:12]
                 if eid in seen:
+                    skipped_dupes += 1
                     continue
-                seen.add(eid)
-                entry = {
+                candidate = {
                     "id": eid, "date": ev["date"],
                     "conflict": c["name"], "tier": c["tier"],
                     "title": ev["title"], "description": ev.get("description",""),
                     "source": "auto",
                 }
                 if ev.get("time") and ev.get("time_verified"):
-                    entry["time"] = ev["time"]
-                    entry["time_verified"] = ev["time_verified"]
+                    candidate["time"] = ev["time"]
+                    candidate["time_verified"] = ev["time_verified"]
                     if ev.get("timezone"):
-                        entry["timezone"] = ev["timezone"]
-                history.append(entry)
+                        candidate["timezone"] = ev["timezone"]
+
+                # Fuzzy dedup against existing history
+                if is_duplicate_event(candidate, history):
+                    skipped_dupes += 1
+                    print(f"  dup skipped for {c['name']}: {ev['title'][:60]}")
+                    continue
+
+                seen.add(eid)
+                history.append(candidate)
 
             print(f"OK {c['name']} ({depth}, {len(live)} src, {c['confidence']})")
 
         except Exception as e:
             print(f"FAIL {c['name']}: {e}")
+
+    # Prune again in case new events happened to be near-duplicates of each other
+    history, pruned2 = prune_history_duplicates(history)
+    if pruned2:
+        print(f"Post-run cleanup: pruned {pruned2} additional duplicate(s)")
 
     history.sort(key=lambda h: h["date"], reverse=True)
     c_changed = save_if_changed("data/conflicts.json", conflicts)
@@ -501,6 +597,7 @@ def main():
     print(f"\n{ok}/{len(conflicts)} refreshed; "
           f"conflicts {'updated' if c_changed else 'unchanged'}, "
           f"history {'updated' if h_changed else 'unchanged'}")
+    print(f"Fuzzy-dedup skips: {skipped_dupes} new event(s) rejected as duplicates")
     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
           f"advanced days done: {usage['advanced_days_done']}")
 
