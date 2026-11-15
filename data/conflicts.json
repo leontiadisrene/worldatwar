@@ -9,7 +9,7 @@
     "what": "Full-scale invasion, now a grinding war of attrition",
     "when": "Started Feb 24, 2022 — day 1,650+ and still going",
     "how": "Daily drone, missile and artillery strikes along a front over 1,100 km long",
-    "current": "Russia and Ukraine are exchanging airstrikes. At least 73 were injured in a Russian bombing of a Ukrainian hospital. US envoys met with Zelensky and Putin to discuss the conflict.",
+    "current": "Russia and Ukraine are exchanging airstrikes. At least 73 people were injured in a Russian bombing of a Ukrainian hospital. US envoys met with Zelensky after talks with Putin.",
     "sources": [
       {
         "label": "Al Jazeera: Grain under fire",
@@ -26,7 +26,7 @@
     ],
     "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T13:08:50+00:00"
+    "updated": "2026-11-15T13:26:55+00:00"
   },
   {
     "id": "gaza",
@@ -38,10 +38,10 @@
     "what": "War technically under ceasefire, but violence continues",
     "when": "War since Oct 7, 2023; ceasefire since Oct 10, 2025",
     "how": "Over 1,300 people killed since the \"ceasefire\" began; disarmament and reconstruction stalled",
-    "current": "Israeli airstrikes continue in Gaza despite the October 2025 cease‑fire, with the latest attack on Nasser Hospital’s intensive‑care unit on 12 Nov 2026 killing at least six people. The conflict has claimed over 70,000 Palestinian civilians and fighters since the Oct 7 2023 Hamas assault, and health officials report roughly 600 additional deaths since the cease‑fire began. The humanitarian situation remains dire, with most of Gaza’s population displaced in tent camps and massive rubble covering the territory.",
+    "current": "Israeli strikes in Gaza have killed many people, with at least six killed at Nasser Hospital. Over 70,000 Palestinian civilians and fighters have been killed since October 2023. Israeli strikes have continued despite a ceasefire.",
     "sources": [
       {
-        "label": "CFR Global Conflict Tracker: Israeli-Palestinian Conflict",
+        "label": "Global Conflict Tracker: Israeli-Palestinian Conflict",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict"
       },
       {
@@ -51,15 +51,11 @@
       {
         "label": "BBC News: Israeli strike on Gaza’s Nasser Hospital kills",
         "url": "https://www.bbc.com/news/topics/c2vdnvdg6xxt"
-      },
-      {
-        "label": "The New York Times: In Devastated Gaza, Grandiose Peace Plans Clash With Reality",
-        "url": "https://www.nytimes.com/news-event/israel-hamas-gaza"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:09:09+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:27:06+00:00"
   },
   {
     "id": "iran",
@@ -71,20 +67,24 @@
     "what": "A leadership-shattering war, now in an uneasy pause",
     "when": "12-day war June 2025; \"Operation Epic Fury\" Feb 28, 2026",
     "how": "US-Israeli strikes killed Iran’s Supreme Leader; his son succeeded him; Hormuz still shut",
-    "current": "The United States and Iran continue to exchange strikes. On 2026-11-09 the U.S. hit Iran’s Qeshm Island while Iranian forces attacked commercial tankers in the Gulf and the Strait of Hormuz. President Trump said the U.S. is ready to strike Iran if necessary, but also noted a positive momentum toward ending the conflict, with Qatar acting as a mediator though no imminent deal is expected.",
+    "current": "The US and Iran are engaged in a war with ongoing mutual attacks. The US struck Iran's Qeshm island and Iran attacked tankers in the Gulf and Strait of Hormuz. Trump said the US is ready to strike Iran 'if necessary'.",
     "sources": [
       {
-        "label": "Reuters: Trump to meet Iran war mediator Qatar, no imminent deal seen to end war",
+        "label": "Reuters: Trump to meet Iran war mediator Qatar",
         "url": "https://www.reuters.com/world/middle-east/trump-meet-iran-war-mediator-qatar-no-imminent-deal-seen-end-war-2026-11-09"
       },
       {
-        "label": "Al Jazeera: Iran war live – Trump says US ready to strike Iran ‘if necessary’",
+        "label": "Al Jazeera: Iran war live",
         "url": "https://www.aljazeera.com/news/liveblog/2026/11/9/iran-war-live-trump-says-land-blockade-in-effect-drone-cuts-power-in-iraq"
+      },
+      {
+        "label": "CFR: Conflict With Iran",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/confrontation-between-united-states-and-iran"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:09:27+00:00"
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T13:27:16+00:00"
   },
   {
     "id": "sudan",
@@ -96,7 +96,7 @@
     "what": "Civil war hardening into a formal partition",
     "when": "Since April 15, 2023, now in its 4th year",
     "how": "RSF controls Darfur and the west; army holds the center, north and east",
-    "current": "Sudan is experiencing a war with drone attacks killing civilians. The Rapid Support Forces have launched drone strikes on Khartoum and other areas. Displaced people face new challenges in war-battered Khartoum.",
+    "current": "Sudan is experiencing a war with displaced people facing new challenges. The Rapid Support Forces have launched drone attacks on government-held towns. Civilians are paying a high price in the war.",
     "sources": [
       {
         "label": "Al Jazeera: Sudan war",
@@ -107,13 +107,13 @@
         "url": "https://www.reuters.com/world/sudan"
       },
       {
-        "label": "Al Jazeera: How SAF successes in Sudan’s Kordofan",
+        "label": "Al Jazeera: SAF successes in Sudan’s Kordofan",
         "url": "https://www.aljazeera.com/news/2026/11/14/how-saf-successes-in-sudans-kordofan-could-turn-tide-against-the-rsf"
       }
     ],
     "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T13:09:37+00:00"
+    "updated": "2026-11-15T13:27:28+00:00"
   },
   {
     "id": "mali",
@@ -142,7 +142,7 @@
     ],
     "confidence": "high",
     "verified_by": "cloudflare-only",
-    "updated": "2026-11-15T13:09:47+00:00"
+    "updated": "2026-11-15T13:27:37+00:00"
   },
   {
     "id": "myanmar",
@@ -167,11 +167,15 @@
       {
         "label": "The New York Times: Dozens Killed in Myanmar Military Airstrike",
         "url": "https://www.nytimes.com/topic/destination/myanmar"
+      },
+      {
+        "label": "BBC News: Myanmar coup",
+        "url": "https://www.bbc.com/news/topics/c22ylwnm5zgt"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare-only",
-    "updated": "2026-11-15T13:09:56+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:27:49+00:00"
   },
   {
     "id": "venezuela",
@@ -183,12 +187,8 @@
     "what": "Maduro captured in a US raid, transition still in limbo",
     "when": "Raid on Jan 3, 2026; still no election date set",
     "how": "Acting president installed with US backing; opposition leader repeatedly blocked from returning",
-    "current": "The US has launched military strikes on Venezuela and captured leader Nicolás Maduro. The US has also seized oil tankers linked to Venezuela. Tensions between the US and Venezuela remain high.",
+    "current": "The US has seized a fifth oil tanker linked to Venezuela and launched military strikes on Caracas, capturing Venezuelan leader Nicolás Maduro. The US has a stake in Venezuela's oil reserves. Tensions between the US and Venezuela remain high.",
     "sources": [
-      {
-        "label": "Global Conflict Tracker: Instability in Venezuela",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/instability-venezuela"
-      },
       {
         "label": "BBC News: Venezuela crisis",
         "url": "https://www.bbc.com/news/topics/cp3mvpm3933t"
@@ -196,11 +196,15 @@
       {
         "label": "Al Jazeera: US-Venezuela Tensions",
         "url": "https://www.aljazeera.com/tag/us-venezuela-tensions"
+      },
+      {
+        "label": "Council on Foreign Relations: Venezuela",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/instability-venezuela"
       }
     ],
     "confidence": "medium",
-    "verified_by": "cloudflare+groq (no review)",
-    "updated": "2026-11-15T13:10:09+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:28:00+00:00"
   },
   {
     "id": "drc",
@@ -212,7 +216,7 @@
     "what": "Peace deals signed, but M23 still controls the ground",
     "when": "Washington and Doha deals signed mid-2025; conflict decades old",
     "how": "M23 still controls Goma and Bukavu despite the agreements",
-    "current": "Violence in eastern DR Congo remains severe and is worsening. Rwanda‑backed M23 rebels control key cities such as Goma and Bukavu after their 2025 offensive, while an Ebola outbreak has killed more than 5,300 people and is hampered by attacks on health workers. The government has also sentenced dozens of soldiers to death for cowardice during clashes with rebels.",
+    "current": "Violence in eastern DR Congo has increased, with M23 rebels taking over key cities. The conflict has led to thousands of deaths and displacement. At least 66 Congolese soldiers were sentenced to death for cowardice.",
     "sources": [
       {
         "label": "International Crisis Group: DR Congo",
@@ -223,17 +227,13 @@
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/violence-democratic-republic-congo"
       },
       {
-        "label": "BBC: DR Congo conflict – soldiers sentenced to death",
+        "label": "BBC: DR Congo conflict",
         "url": "https://www.bbc.com/news/articles/cmreye1q3dnjo"
-      },
-      {
-        "label": "Al Jazeera: Ebola outbreak kills >5,300 in DR Congo",
-        "url": "https://www.aljazeera.com/where/democratic-republic-of-the-congo"
       }
     ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:10:27+00:00"
+    "confidence": "medium",
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T13:28:09+00:00"
   },
   {
     "id": "taiwan",
@@ -245,24 +245,24 @@
     "what": "Escalating military pressure just short of open conflict",
     "when": "Ongoing, intensified through 2026",
     "how": "Record Chinese aircraft and ship incursions into Taiwan’s air defense zone",
-    "current": "China has stepped up pressure on Taiwan, deploying around 100 ships and 49 aircraft in the western Pacific since early November and conducting large‑scale military drills. President Xi Jinping reiterated that Taiwan’s “complete reunification” with China will happen, while Washington’s policy signals remain mixed, leaving the status quo in the Taiwan Strait increasingly precarious.",
+    "current": "China is increasing pressure on Taiwan with military drills and exercises. Beijing's goal is to 'reunify' the island with the mainland. The status quo in the Taiwan Strait is precarious.",
     "sources": [
       {
-        "label": "International Crisis Group: The Three-body Problem in the Taiwan Strait",
+        "label": "International Crisis Group: The Three-body Problem",
         "url": "https://www.crisisgroup.org/cmt/asia-pacific/taiwan-strait-china-united-states/three-body-problem-taiwan-strait"
       },
       {
-        "label": "France 24: What we know about China's military exercises around Taiwan",
-        "url": "https://www.france24.com/en/asia-pacific/20261113-chinese-army-military-exercises-taiwan"
+        "label": "Global Conflict Tracker: Confrontation Over Taiwan",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/confrontation-over-taiwan"
       },
       {
-        "label": "Al Jazeera: Xi Jinping says Taiwan’s ‘complete reunification’ with China will happen",
-        "url": "https://www.aljazeera.com/news/2026/11/12/xi-jinping-says-taiwans-complete-reunification-with-china-will-happen"
+        "label": "France 24: China's military exercises around Taiwan",
+        "url": "https://www.france24.com/en/asia-pacific/20261113-chinese-army-military-exercises-taiwan"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:10:53+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:28:20+00:00"
   },
   {
     "id": "korea",
@@ -274,28 +274,28 @@
     "what": "Nuclear and missile buildup, with no active dialogue",
     "when": "Continuous missile testing through 2026",
     "how": "Repeated launches; Pyongyang calls Seoul a \"hostile enemy state\"",
-    "current": "Tensions on the Korean Peninsula have risen after land‑mine explosions on the western DMZ injured three South Korean soldiers, reviving a decades‑old border dispute. Seoul has also summoned Ukraine’s envoy over the secret transfer of two captured North Korean prisoners, with President Lee Jae Myung accusing Kyiv of trying to drag the region into war. Meanwhile, South Korea and the United States concluded joint “Hoguk” drills in late October, and analysts warn that any conflict could cost trillions given Seoul’s semiconductor dominance.",
+    "current": "Tensions between North and South Korea remain high due to a decades-old border dispute. Recent land mine explosions injured South Korean soldiers. The two countries have not officially ended the Korean War.",
     "sources": [
       {
-        "label": "Crisis Group: Korean Peninsula — South Korea held exercises with U.S. amid lingering discord",
+        "label": "Crisis Group: Korean Peninsula",
         "url": "https://www.crisisgroup.org/asia-pacific/north-east-asia/korean-peninsula"
       },
       {
-        "label": "NY Times: Tensions Between North and South Korea Stem From Decade‑Old Border Dispute",
+        "label": "NY Times: Korea Tensions",
         "url": "https://www.nytimes.com/2026/10/27/world/asia/korea-tensions-border-dmz-mdl.html"
       },
       {
-        "label": "BBC News: Seoul summons Ukraine envoy over North Korean prisoner‑of‑war row",
+        "label": "BBC News: North Korea–South Korea relations",
         "url": "https://www.bbc.com/news/topics/cp78wz6vexet"
       },
       {
-        "label": "Washington Post Opinion: A war on the Korean Peninsula could cost trillions",
+        "label": "Washington Post: War on Korean Peninsula",
         "url": "https://www.washingtonpost.com/opinions/2026/10/27/war-korean-peninsula-could-cost-trillions"
       }
     ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:11:10+00:00"
+    "confidence": "medium",
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:28:35+00:00"
   },
   {
     "id": "scs",
@@ -307,24 +307,24 @@
     "what": "Maritime and territorial dispute over reefs and shoals",
     "when": "Ongoing, flaring repeatedly through 2026",
     "how": "Water-cannon incidents and blocked resupply runs near Scarborough Shoal",
-    "current": "Tensions in the South China Sea remain high as Chinese forces conduct readiness patrols around Scarborough Shoal in response to Philippine actions. The Philippine Coast Guard recently deployed its largest vessel, together with aircraft, to challenge a Chinese research vessel near the Batanes province, prompting the Chinese vessel to leave. Analysts say that finalising a code‑of‑conduct agreement is unlikely as ASEAN leaders gather amid the ongoing disputes.",
+    "current": "China's forces conducted drills in the South China Sea, citing a response to Philippine actions. Tensions remain high between Beijing and Manila.",
     "sources": [
       {
-        "label": "CFR: Global Conflict Tracker – Territorial Disputes in the South China Sea",
+        "label": "Reuters: Chinese Forces Conduct Drills",
         "url": "https://www.cfr.org/global-conflict-tracker/conflict/territorial-disputes-south-china-sea"
       },
       {
-        "label": "International Crisis Group – South China Sea incidents between Beijing and Manila",
-        "url": "https://www.crisisgroup.org/asia-pacific/south-pacific/south-china-sea"
+        "label": "Al Jazeera: China, Philippine coastguard vessels clash",
+        "url": "https://www.aljazeera.com/tag/south-china-sea"
       },
       {
-        "label": "Al Jazeera – Pact on South China Sea code of conduct unlikely as ASEAN leaders gather",
-        "url": "https://www.aljazeera.com/economy/2026/11/15/pact-on-south-china-sea-code-of-conduct-unlikely-as-asean-leaders-gather"
+        "label": "Council on Foreign Relations: China’s Maritime Disputes",
+        "url": "https://www.cfr.org/articles/chinas-maritime-disputes"
       }
     ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:11:27+00:00"
+    "confidence": "medium",
+    "verified_by": "cloudflare-only",
+    "updated": "2026-11-15T13:28:45+00:00"
   },
   {
     "id": "kashmir",
@@ -336,7 +336,7 @@
     "what": "Their worst clash in decades, now a fragile truce",
     "when": "Crisis April–May 2025; ceasefire since May 10, 2025",
     "how": "Missile, drone and artillery exchange; US-mediated ceasefire holds, dispute unresolved",
-    "current": "Suspected rebels kill civilians in Kashmir, India insists it's Pakistan-sponsored terrorism, but Pakistan denies the charge.",
+    "current": "Suspected rebels have killed civilians in Kashmir, with India and Pakistan exchanging war rhetoric. Tens of thousands have been killed in the conflict. Since January, 23 civilian killings have taken place.",
     "sources": [
       {
         "label": "Al Jazeera: Suspected rebels kill three civilians in Kashmir",
@@ -353,7 +353,7 @@
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-15T13:11:38+00:00"
+    "updated": "2026-11-15T13:28:59+00:00"
   },
   {
     "id": "caucasus",
@@ -365,20 +365,24 @@
     "what": "Preliminary peace signed, but a final treaty remains unsigned",
     "when": "Framework signed Aug 8, 2025; still unresolved in 2026",
     "how": "Azerbaijan wants an Armenian constitutional change before signing a final deal",
-    "current": "Azerbaijan’s September 2023 offensive effectively ended the decades‑long Nagorno‑Karabakh war, dissolving the enclave and displacing over 100,000 Armenians. A U.S.–brokered summit in August 2025 produced a joint peace declaration and an initialed peace agreement that includes a planned transit corridor, but the situation remains under close international watch as final borders and displacement solutions are still pending.",
+    "current": "The Nagorno-Karabakh conflict has seen recent tensions between Armenia and Azerbaijan. A US-brokered summit in August 2025 produced a joint peace declaration. Nearly one-seventh of Azerbaijan is under Armenian occupation.",
     "sources": [
       {
-        "label": "Council on Foreign Relations: Global Conflict Tracker – Nagorno‑Karabakh Conflict (updated Sep 1 2026)",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/nagorno-karabakh-conflict"
+        "label": "International Crisis Group: The Nagorno-Karabakh Conflict",
+        "url": "https://www.crisisgroup.org/visual-explainers/nagorno-karabakh-conflict-visual-explainer"
       },
       {
-        "label": "International Crisis Group: The Nagorno‑Karabakh Conflict – Visual Explainer",
-        "url": "https://www.crisisgroup.org/visual-explainers/nagorno-karabakh-conflict-visual-explainer"
+        "label": "Council on Foreign Relations: Nagorno-Karabakh",
+        "url": "https://www.cfr.org/backgrounders/nagorno-karabakh-crisis-caucasus"
+      },
+      {
+        "label": "Global Conflict Tracker: Nagorno-Karabakh Conflict",
+        "url": "https://www.cfr.org/global-conflict-tracker/conflict/nagorno-karabakh-conflict"
       }
     ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:11:55+00:00"
+    "confidence": "medium",
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:29:09+00:00"
   },
   {
     "id": "thaicambodia",
@@ -390,28 +394,24 @@
     "what": "Long-running border dispute that turned into open war twice in 2025",
     "when": "5-day clash July 2025; worse fighting Dec 7–27, 2025",
     "how": "Artillery, tanks, drones and jets; 100+ killed before the latest ceasefire",
-    "current": "The Thailand‑Cambodia border clash has intensified, with fighting entering its fifth day and casualties rising to at least 25 deaths. More than 500,000 people have been displaced as Thailand launched a new offensive, blocked fuel shipments to Cambodia and Phnom Penh halted all border crossings, while a US‑mediated call by President Trump sought to end the hostilities.",
+    "current": "The Thailand-Cambodia border conflict has entered its third day with a death toll of 10. Clashes have left at least 25 soldiers and civilians dead, and displaced over half a million people. The conflict stems from a long-running dispute over the colonial-era demarcation of their shared border.",
     "sources": [
       {
-        "label": "Al Jazeera: Thailand launches new offensive as Cambodia halts all border crossings",
+        "label": "BBC: Thailand-Cambodia border conflict",
+        "url": "https://www.bbc.com/news/articles/cx2pn5dxd0go"
+      },
+      {
+        "label": "Al Jazeera: Thailand launches new offensive",
         "url": "https://www.aljazeera.com/news/2025/12/14/thailand-launches-new-offensive-as-cambodia-halts-all-border-crossings"
       },
       {
-        "label": "Al Jazeera: Thailand‑Cambodia fighting enters 5th day, Thai PM confirms Trump call",
+        "label": "Al Jazeera: Thailand-Cambodia fighting enters 5th day",
         "url": "https://www.aljazeera.com/news/2025/12/12/cambodia-thailand-fighting-enters-5th-day-thai-pm-confirms-trump-call"
-      },
-      {
-        "label": "Council on Foreign Relations: Cambodia‑Thailand Conflict Continues to Escalate",
-        "url": "https://www.cfr.org/articles/cambodia-thailand-conflict-continues-escalate"
-      },
-      {
-        "label": "UN News: Civilians at risk amid escalating Thailand‑Cambodia conflict",
-        "url": "https://news.un.org/en/story/2025/12/1166626"
       }
     ],
     "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-15T13:12:14+00:00"
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-15T13:29:24+00:00"
   },
   {
     "id": "horn",
@@ -440,6 +440,6 @@
     ],
     "confidence": "medium",
     "verified_by": "cloudflare-only",
-    "updated": "2026-11-15T13:12:23+00:00"
+    "updated": "2026-11-15T13:29:33+00:00"
   }
 ]
