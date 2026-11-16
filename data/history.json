@@ -9,6 +9,24 @@
     "source": "auto"
   },
   {
+    "id": "94c860e4bafc",
+    "date": "2026-11-16",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Trump cites positive momentum",
+    "description": "President Trump stated that the resumption of large-scale strikes on Iran is unlikely, citing positive momentum towards ending the war and urging a pause by Gulf allies.",
+    "source": "auto"
+  },
+  {
+    "id": "8390f2a11c2a",
+    "date": "2026-11-16",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Ethiopia-Sudan mutual accusations",
+    "description": "Ethiopia and Sudan accused each other of supporting armed groups waging war within their borders, undermining peace efforts and raising fears of a wider regional conflict.",
+    "source": "auto"
+  },
+  {
     "id": "4ca1be925428",
     "date": "2026-11-15",
     "conflict": "Sudan",
@@ -63,6 +81,33 @@
     "source": "auto"
   },
   {
+    "id": "8f3f670eea57",
+    "date": "2026-11-15",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Zaporizhzhia infrastructure strikes",
+    "description": "Russian attacks on Zaporizhzhia injured 22 people, including children, and forced the closure of the DniproHES dam.",
+    "source": "auto"
+  },
+  {
+    "id": "b85e11fa6e89",
+    "date": "2026-11-15",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea probes soldier death",
+    "description": "South Korean authorities are investigating the death of a frontline soldier near the North Korean border, an incident occurring amidst heightened tensions.",
+    "source": "auto"
+  },
+  {
+    "id": "841a55b09bc2",
+    "date": "2026-11-15",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Thailand blocks fuel to Cambodia",
+    "description": "Thailand moved to block fuel from reaching Cambodia as the border conflict continues to escalate, according to the Council on Foreign Relations.",
+    "source": "auto"
+  },
+  {
     "id": "0105e406db08",
     "date": "2026-11-14",
     "conflict": "Ukraine",
@@ -96,6 +141,42 @@
     "tier": "war",
     "title": "Iran views shift in US approach",
     "description": "After JD Vance ordered away",
+    "source": "auto"
+  },
+  {
+    "id": "81a0f3f57828",
+    "date": "2026-11-14",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "US floats Donbas cession for NATO",
+    "description": "Ukraine claims the US suggested ceding parts of Donbas to Russia in exchange for NATO membership, a proposal that has sparked diplomatic tension.",
+    "source": "auto"
+  },
+  {
+    "id": "3a0851cde51a",
+    "date": "2026-11-14",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "IS-linked attack in Ituri",
+    "description": "Gunmen linked to the Islamic State group killed at least 44 civilians in northeastern Ituri province.",
+    "source": "auto"
+  },
+  {
+    "id": "f12f9d4ff8aa",
+    "date": "2026-11-14",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "North Korea tests cluster warhead",
+    "description": "Pyongyang announced it tested a new cluster warhead for strategic cruise missiles, claiming it could destroy an area of 5 to 6 hectares with high-density power.",
+    "source": "auto"
+  },
+  {
+    "id": "311db654ca91",
+    "date": "2026-11-14",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Accusations of drone-related ceasefire breach",
+    "description": "Thailand accused Cambodia of breaking the ceasefire over an incident involving drones seen by both sides along the border line, hours after international praise for the 'hard-won' agreement.",
     "source": "auto"
   },
   {
@@ -135,12 +216,39 @@
     "source": "merged"
   },
   {
+    "id": "0d0c6d0f515e",
+    "date": "2026-11-12",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Xi asserts inevitability of reunification",
+    "description": "Xi Jinping stated that Taiwan's complete reunification with China will happen, a declaration made one week before the APEC summit in Shenzhen.",
+    "source": "auto"
+  },
+  {
     "id": "b3e07e2ff9f0",
     "date": "2026-11-10",
     "conflict": "Korean peninsula",
     "tier": "flash",
     "title": "Seoul summons Ukraine’s envoy over North Korean POW transfer",
     "description": "South Korea protested the secret handover of two captured North Korean soldiers, accusing Kyiv of destabilising the peninsula.",
+    "source": "auto"
+  },
+  {
+    "id": "45e0de01c1f8",
+    "date": "2026-11-10",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Hegseth impeachment proceedings",
+    "description": "Impeachment articles accuse US Secretary of Defense Hegseth of committing an act of war by abducting Maduro without Congressional approval.",
+    "source": "auto"
+  },
+  {
+    "id": "f79a06dbfb38",
+    "date": "2026-11-10",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Soldiers sentenced to death",
+    "description": "At least 66 Congolese soldiers were sentenced to death for cowardice and fleeing the frontline during rebel clashes.",
     "source": "auto"
   },
   {
