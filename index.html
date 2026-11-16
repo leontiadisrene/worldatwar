@@ -500,16 +500,16 @@
 
     document.getElementById('current-state').textContent = conflict.current;
 
-    // --- "Last update" line ---
+    // --- "Last update" line (only shown when Tavily returned a source publish time) ---
     var lastUpdateEl = document.getElementById('last-update');
     if (lastUpdateEl){
-      var luISO = conflict.latest_source_time || conflict.updated;
+      var luISO = conflict.latest_source_time;
       var lu = luISO ? new Date(luISO) : null;
       if (lu && !isNaN(lu.getTime())){
         var luDate = lu.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
         var luHH = pad2(lu.getUTCHours());
         var luMM = pad2(lu.getUTCMinutes());
-        var isDateOnly = (conflict.latest_source_time && luHH === '00' && luMM === '00');
+        var isDateOnly = (luHH === '00' && luMM === '00');
         var line;
         if (isDateOnly){
           line = 'Last update: ' + luDate;
@@ -554,13 +554,13 @@
       escNote.style.display = 'none';
     }
 
-    // --- Facts (Who / What / When / How) ---
+    // --- Facts ---
     document.getElementById('who').textContent = conflict.who;
     document.getElementById('what').textContent = conflict.what;
     document.getElementById('when').textContent = conflict.when;
     document.getElementById('how').textContent = conflict.how;
 
-    // --- Perspective block (now above Sources) ---
+    // --- Perspective block (above Sources) ---
     var pBlock = document.getElementById('perspective-block');
     if (conflict.perspective && conflict.perspective.dominant_frame){
       pBlock.style.display = 'block';
