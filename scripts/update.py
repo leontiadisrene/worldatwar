@@ -108,7 +108,7 @@ def tavily(query, depth="basic"):
     r = requests.post("https://api.tavily.com/search", json={
         "api_key": TAVILY, "query": query, "search_depth": depth,
         "max_results": 10,
-        "days": 11, "include_domains": ALLOWED,
+        "days": 9, "include_domains": ALLOWED,
     }, timeout=60)
     r.raise_for_status()
     return r.json().get("results", [])
