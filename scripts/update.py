@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
 """
-Balanced advanced/basic schedule + smart duplicate handling.
+Balanced advanced/basic schedule + fuzzy/LLM duplicate handling
++ tier-aware source weighting.
 
-Layers of defense against duplicate history entries:
-1. Prompt injection — models are told what's already recorded.
-2. LLM merge — same-date near-duplicates are combined into one entry.
-3. Fuzzy prune — high-similarity cross-day repeats are dropped.
+Duplicate handling layers:
+  1. Prompt injection — models see what's already recorded.
+  2. LLM merge — same-date near-duplicates are combined into one entry.
+  3. Fuzzy prune — high-similarity cross-day repeats are dropped.
+
+Tier-aware trust layers (Options 1+2):
+  1. Prompt injection — SOURCE_TIERS + SOURCE_WEIGHTING_RULES tell the
+     model how to weight sources when they disagree.
+  2. Post-processing — adjust_confidence() enforces a confidence floor:
+     no `high` without a Tier 1 source; no `medium` if only Tier 3 cited.
 """
 import json, os, re, time, hashlib, requests
 from collections import defaultdict
 from datetime import date, datetime, timezone, timedelta
+from urllib.parse import urlparse
 
 TAVILY    = os.environ["TAVILY_API_KEY"]
 GROQ      = os.environ["GROQ_API_KEY"]
@@ -20,17 +28,24 @@ USAGE_FILE    = "data/tavily_usage.json"
 CYCLE_BUDGET  = 1000
 SAFETY_BUFFER = 50
 
-ALLOWED = [
-    # Tier 1 — wire services, major broadcasters, and newspapers of record
+# ---------- tiered allowlist ----------
+TIER_1_DOMAINS = [
+    # Wire services, major broadcasters, newspapers of record
     "reuters.com", "apnews.com", "afp.com", "bbc.com", "bbc.co.uk",
     "theguardian.com", "nytimes.com", "washingtonpost.com", "welt.de",
     "ctvnews.ca", "thestar.com",
-    # Tier 2 — institutional, think tank, human rights, and analysis
+]
+
+TIER_2_DOMAINS = [
+    # Institutional, think tank, human rights, and strategic analysis
     "crisisgroup.org", "un.org", "unhcr.org", "cfr.org", "who.int",
     "icrc.org", "hrw.org", "amnesty.org",
     "theamericanconservative.com", "longwarjournal.org", "nationalinterest.org",
     "warontherocks.com", "henryjacksonsociety.org", "worldview.stratfor.com",
-    # Tier 3 — regional & conflict specialists
+]
+
+TIER_3_DOMAINS = [
+    # Regional & conflict specialists
     "kyivindependent.com", "kyivpost.com", "haaretz.com", "timesofisrael.com",
     "middleeasteye.net", "sudantribune.com", "thehindu.com", "dawn.com",
     "scmp.com", "arabnews.com", "gulfnews.com", "radiosvoboda.org",
@@ -39,11 +54,64 @@ ALLOWED = [
     "aljazeera.com", "france24.com", "rfi.fr", "dw.com", "channelnewsasia.com",
 ]
 
+ALLOWED = TIER_1_DOMAINS + TIER_2_DOMAINS + TIER_3_DOMAINS
+
+SOURCE_TIERS = {}
+for _d in TIER_1_DOMAINS: SOURCE_TIERS[_d] = 1
+for _d in TIER_2_DOMAINS: SOURCE_TIERS[_d] = 2
+for _d in TIER_3_DOMAINS: SOURCE_TIERS[_d] = 3
+
+def tier_of(url):
+    """Return 1, 2, or 3 for a URL's domain, or None if unknown."""
+    if not url or not isinstance(url, str):
+        return None
+    try:
+        host = urlparse(url).hostname or ''
+    except Exception:
+        return None
+    host = host.lower()
+    if host.startswith('www.'):
+        host = host[4:]
+    for d, t in SOURCE_TIERS.items():
+        if host == d or host.endswith('.' + d):
+            return t
+    return None
+
+def domain_in_tier(url, tier):
+    return tier_of(url) == tier
+
+def adjust_confidence(confidence, sources):
+    """Option 2 — enforce confidence floor based on cited tiers.
+    Returns (adjusted_confidence, reason_or_None)."""
+    counts = {1: 0, 2: 0, 3: 0, 'unknown': 0}
+    for s in sources:
+        t = tier_of(s.get('url'))
+        if t in (1, 2, 3):
+            counts[t] += 1
+        else:
+            counts['unknown'] += 1
+
+    conf = confidence or 'medium'
+    tier1 = counts[1]
+    tier2 = counts[2]
+    tier3_or_unknown = counts[3] + counts['unknown']
+
+    if tier1 == 0 and tier2 == 0:
+        if conf != 'low':
+            return 'low', f'no Tier 1/2 sources (Tier 3: {counts[3]}, unknown: {counts["unknown"]})'
+        return conf, None
+
+    if tier1 == 0 and conf == 'high':
+        return 'medium', f'no Tier 1 source (Tier 2: {tier2}, Tier 3: {counts[3]})'
+
+    return conf, None
+
 # ---------- search ----------
 def tavily(query, depth="basic"):
     r = requests.post("https://api.tavily.com/search", json={
         "api_key": TAVILY, "query": query, "search_depth": depth,
-        "max_results": 10, "days": 11, "include_domains": ALLOWED,
+        "max_results": 10,
+        "days": 11, "include_domains": ALLOWED,
     }, timeout=60)
     r.raise_for_status()
     return r.json().get("results", [])
@@ -101,8 +169,6 @@ def prune_history_duplicates(history):
 
 # ---------- same-date merge ----------
 def find_same_day_groups(history, days_back=21):
-    """Groups of entries that share conflict+date and might be duplicates.
-    Excludes Ask-Gemini user-generated entries."""
     cutoff = datetime.now(timezone.utc).date() - timedelta(days=days_back)
     by_key = defaultdict(list)
     for idx, e in enumerate(history):
@@ -119,7 +185,6 @@ def find_same_day_groups(history, days_back=21):
     return [indices for indices in by_key.values() if len(indices) >= 2]
 
 def merge_groups_with_llm(groups, history):
-    """One Groq call to identify and merge duplicate groups."""
     if not groups:
         return []
     groups_data = []
@@ -190,7 +255,6 @@ Groups:
     return merges
 
 def apply_merges(history, merges):
-    """Replace each merge group with a single merged entry."""
     remove_indices = set()
     for m in merges:
         indices = m["indices"]
@@ -460,6 +524,31 @@ TIME-VERIFICATION RULES (strict):
 - Never fabricate times.
 """
 
+SOURCE_TIERS_PROMPT = (
+    "SOURCE TIERS (editorial framework — apply the weighting rules below):\n"
+    "Tier 1 (authoritative baseline — prefer for factual claims):\n"
+    "  " + ", ".join(TIER_1_DOMAINS) + "\n"
+    "Tier 2 (institutional / analysis — use for figures, context, legal framing):\n"
+    "  " + ", ".join(TIER_2_DOMAINS) + "\n"
+    "Tier 3 (regional specialists — use for perspective and on-the-ground detail):\n"
+    "  " + ", ".join(TIER_3_DOMAINS) + "\n"
+)
+
+SOURCE_WEIGHTING_RULES = """
+SOURCE-WEIGHTING RULES (strict — apply when the results disagree):
+- Factual claims about what happened (actions, actors, dates, casualties)
+  should be anchored in a Tier 1 source whenever one is available.
+- For casualty and displacement figures, prefer Tier 1 or Tier 2 sources.
+- Tier 3 sources are valuable for regional perspective and on-the-ground
+  detail. When a Tier 3 source makes a factual claim that no Tier 1 source
+  confirms, do not state it as fact — attribute it ("according to X") and
+  lower your overall confidence by one level.
+- If only Tier 3 sources support the entire "current" paragraph, set
+  confidence to "low".
+- Never average or blend conflicting figures from different tiers — cite
+  the range and attribute each end to its source.
+"""
+
 def research_prompt(conflict, results, recent_events):
     ctx = "\n".join(
         f"- {x['title']} — {x.get('content','')[:350]} ({x['url']})"
@@ -479,6 +568,10 @@ Return ONLY valid JSON, exactly this shape:
 {SCHEMA}
 
 {TIME_RULES}
+
+{SOURCE_TIERS_PROMPT}
+
+{SOURCE_WEIGHTING_RULES}
 
 Other rules:
 - Every claim in "current" must be supported by a result above.
@@ -508,6 +601,10 @@ Flags: {', '.join(flags)}
 
 Already recorded (do NOT re-report):
 {recent_events}
+
+{SOURCE_TIERS_PROMPT}
+
+{SOURCE_WEIGHTING_RULES}
 
 Output ONLY JSON in this shape:
 {SCHEMA}
@@ -598,6 +695,7 @@ def main():
 
     print(f"Tavily cycle {usage['cycle']}: {usage['credits_used']}/{usage['cycle_budget']} used")
     print(f"Run type: {'SECOND' if is_second_run else 'FIRST'}")
+    print(f"Source tiers: {len(TIER_1_DOMAINS)} Tier 1 / {len(TIER_2_DOMAINS)} Tier 2 / {len(TIER_3_DOMAINS)} Tier 3")
     print(f"Plan: {advanced_count} advanced + {searches_per_run - advanced_count} basic "
           f"= {advanced_count*2 + (searches_per_run - advanced_count)} credits")
     print(f"Reason: {info['reason']}")
@@ -607,6 +705,7 @@ def main():
 
     ok = 0
     skipped_dupes = 0
+    confidence_adjustments = 0
     for i, c in enumerate(conflicts):
         use_adv = (i < advanced_count)
         depth = "advanced" if use_adv else "basic"
@@ -673,9 +772,17 @@ def main():
                 print(f"SKIP {c['name']}: fewer than 2 live sources")
                 continue
 
+            # Option 2 — enforce confidence floor from tier composition
+            raw_confidence = final.get("confidence") or "medium"
+            adjusted_conf, adjust_reason = adjust_confidence(raw_confidence, live)
+            if adjust_reason:
+                confidence_adjustments += 1
+                print(f"  confidence adjusted for {c['name']}: "
+                      f"{raw_confidence} → {adjusted_conf} ({adjust_reason})")
+
             c["current"]    = final["current"]
             c["sources"]    = live[:4]
-            c["confidence"] = final.get("confidence") or "medium"
+            c["confidence"] = adjusted_conf
             c["verified_by"] = verified
             c["updated"]    = datetime.now(timezone.utc).isoformat(timespec="seconds")
             ok += 1
@@ -728,6 +835,7 @@ def main():
           f"conflicts {'updated' if c_changed else 'unchanged'}, "
           f"history {'updated' if h_changed else 'unchanged'}")
     print(f"Fuzzy-dedup skips: {skipped_dupes} new event(s) rejected as duplicates")
+    print(f"Confidence adjustments: {confidence_adjustments} conflict(s) re-graded by tier floor")
     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
           f"advanced days done: {usage['advanced_days_done']}")
 
