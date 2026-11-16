@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Balanced advanced/basic schedule + fuzzy/LLM duplicate handling
-+ tier-aware source weighting.
++ tier-aware source weighting + perspective and escalation fields.
 
 Duplicate handling layers:
   1. Prompt injection — models see what's already recorded.
@@ -13,6 +13,10 @@ Tier-aware trust layers (Options 1+2):
      model how to weight sources when they disagree.
   2. Post-processing — adjust_confidence() enforces a confidence floor:
      no `high` without a Tier 1 source; no `medium` if only Tier 3 cited.
+
+Perspective + Escalation:
+  - perspective: descriptive (framing divergence Tier 1 vs Tier 3), no smoothing
+  - escalation: EWMA + ±12 cap + confidence dampener (smooth_escalation)
 """
 import json, os, re, time, hashlib, requests
 from collections import defaultdict
@@ -30,14 +34,12 @@ SAFETY_BUFFER = 50
 
 # ---------- tiered allowlist ----------
 TIER_1_DOMAINS = [
-    # Wire services, major broadcasters, newspapers of record
     "reuters.com", "apnews.com", "afp.com", "bbc.com", "bbc.co.uk",
     "theguardian.com", "nytimes.com", "washingtonpost.com", "welt.de",
     "ctvnews.ca", "thestar.com",
 ]
 
 TIER_2_DOMAINS = [
-    # Institutional, think tank, human rights, and strategic analysis
     "crisisgroup.org", "un.org", "unhcr.org", "cfr.org", "who.int",
     "icrc.org", "hrw.org", "amnesty.org",
     "theamericanconservative.com", "longwarjournal.org", "nationalinterest.org",
@@ -45,7 +47,6 @@ TIER_2_DOMAINS = [
 ]
 
 TIER_3_DOMAINS = [
-    # Regional & conflict specialists
     "kyivindependent.com", "kyivpost.com", "haaretz.com", "timesofisrael.com",
     "middleeasteye.net", "sudantribune.com", "thehindu.com", "dawn.com",
     "scmp.com", "arabnews.com", "gulfnews.com", "radiosvoboda.org",
@@ -62,7 +63,6 @@ for _d in TIER_2_DOMAINS: SOURCE_TIERS[_d] = 2
 for _d in TIER_3_DOMAINS: SOURCE_TIERS[_d] = 3
 
 def tier_of(url):
-    """Return 1, 2, or 3 for a URL's domain, or None if unknown."""
     if not url or not isinstance(url, str):
         return None
     try:
@@ -81,8 +81,6 @@ def domain_in_tier(url, tier):
     return tier_of(url) == tier
 
 def adjust_confidence(confidence, sources):
-    """Option 2 — enforce confidence floor based on cited tiers.
-    Returns (adjusted_confidence, reason_or_None)."""
     counts = {1: 0, 2: 0, 3: 0, 'unknown': 0}
     for s in sources:
         t = tier_of(s.get('url'))
@@ -94,7 +92,6 @@ def adjust_confidence(confidence, sources):
     conf = confidence or 'medium'
     tier1 = counts[1]
     tier2 = counts[2]
-    tier3_or_unknown = counts[3] + counts['unknown']
 
     if tier1 == 0 and tier2 == 0:
         if conf != 'low':
@@ -460,6 +457,35 @@ def normalize_event_time(ev):
     ev.pop("time_variance_minutes", None)
     return ev
 
+# ---------- escalation smoothing ----------
+def smooth_escalation(raw_score, prev_score, confidence, source_count):
+    """Stabilise the escalation score across runs.
+    - EWMA: 50/50 blend with previous score (when prev exists)
+    - Hard cap: ±12 per run
+    - Confidence dampener: low → 0.5×, medium → 0.75×
+    - Thin-source dampener: <3 sources → 0.7×
+    """
+    try:
+        raw = int(raw_score)
+    except (ValueError, TypeError):
+        return None
+    raw = max(0, min(100, raw))
+
+    # First run for this conflict — seed with the raw score
+    if prev_score is None:
+        return raw
+
+    delta = raw - prev_score
+    delta = max(-12, min(12, delta))
+    if confidence == 'low':
+        delta = round(delta * 0.5)
+    elif confidence == 'medium':
+        delta = round(delta * 0.75)
+    if source_count < 3:
+        delta = round(delta * 0.7)
+
+    return max(0, min(100, prev_score + delta))
+
 # ---------- models ----------
 def groq(model, prompt, max_tokens=900, json_mode=True, retries=2):
     payload = {
@@ -510,6 +536,14 @@ SCHEMA = """{
      "time_source_count": 0, "time_variance_minutes": 0,
      "title": "...", "description": "..."}
   ],
+  "perspective": {
+    "dominant_frame": "2-3 sentences or null",
+    "divergence": "low" | "moderate" | "high" | null
+  },
+  "escalation": {
+    "score": 0,
+    "note": "one short sentence of evidence"
+  },
   "confidence": "high" | "medium" | "low"
 }"""
 
@@ -549,7 +583,51 @@ SOURCE-WEIGHTING RULES (strict — apply when the results disagree):
   the range and attribute each end to its source.
 """
 
-def research_prompt(conflict, results, recent_events):
+PERSPECTIVE_RULES = """
+PERSPECTIVE (2-3 sentences — describe framing, do NOT editorialise):
+- "dominant_frame": 2-3 sentences describing how the sources in the results
+  above are framing this conflict RIGHT NOW. Mention Tier 1 (Western wire /
+  broadcaster) framing and Tier 3 (regional specialist) framing if both are
+  present. If they agree, say so. If they diverge on what to emphasise or on
+  who is responsible, describe both.
+- "divergence": one of "low", "moderate", "high" — how much Tier 1 and Tier 3
+  sources disagree on framing. Use "low" if all sources tell the same story,
+  "moderate" if they emphasise different facts, "high" if they contradict
+  each other on material points.
+- Base this ONLY on the search results above. Do NOT add your own view of
+  the conflict. Do NOT pick a side. Describe what is being said, not what
+  is true.
+- If the search results are too thin to compare framings, set "dominant_frame"
+  to null and "divergence" to null.
+"""
+
+ESCALATION_RULES = """
+ESCALATION SCORE (0-100 integer — be CONSERVATIVE and STABLE):
+Assess how escalated this conflict is RIGHT NOW, relative to its own baseline.
+Anchor the score to observable evidence, not rhetoric:
+
+  0-20    De-escalated / frozen: ceasefire holding, active talks, no new violence
+  21-40   Simmering: sporadic incidents, negotiations stalled but ongoing
+  41-60   Elevated: recurring violence, failed talks, rising rhetoric
+  61-80   High: sustained offensives, mass displacement, diplomacy collapsed
+  81-100  Critical: full-scale war, regime collapse risk, mass-casualty events
+
+STABILITY RULES (critical — this is the most important part):
+- If the current situation is substantively UNCHANGED from the previous run,
+  return the SAME score as the previous run provided below.
+- Do NOT adjust the score because minor stories appeared in the news.
+- Do NOT adjust the score based on your own analytical view. Anchor only
+  to what the search results show about concrete events (attacks, talks,
+  casualties, territorial changes, official statements).
+- If the search results are thin or ambiguous, prefer the PREVIOUS SCORE
+  over your own guess.
+- Cite ONE short sentence of evidence in "note" — the specific event or
+  fact driving the score. Keep it under 120 characters.
+- The system will smooth your answer against the previous score before
+  publishing, so do not try to compensate for past runs.
+"""
+
+def research_prompt(conflict, results, recent_events, previous_escalation):
     ctx = "\n".join(
         f"- {x['title']} — {x.get('content','')[:350]} ({x['url']})"
         for x in results
@@ -573,6 +651,12 @@ Return ONLY valid JSON, exactly this shape:
 
 {SOURCE_WEIGHTING_RULES}
 
+{PERSPECTIVE_RULES}
+
+{ESCALATION_RULES}
+
+Previous escalation score (from last run): {previous_escalation if previous_escalation is not None else "none — first run for this conflict"}
+
 Other rules:
 - Every claim in "current" must be supported by a result above.
 - "sources": AT LEAST 3, up to 5. Only URLs from the list above.
@@ -580,7 +664,7 @@ Other rules:
   not already recorded above. Each title must be a short unique label.
 - Every string under 400 characters."""
 
-def review_prompt(conflict, results, a, b, flags, recent_events):
+def review_prompt(conflict, results, a, b, flags, recent_events, previous_escalation):
     ctx = "\n".join(
         f"- {x['title']} — {x.get('content','')[:350]} ({x['url']})"
         for x in results
@@ -605,6 +689,12 @@ Already recorded (do NOT re-report):
 {SOURCE_TIERS_PROMPT}
 
 {SOURCE_WEIGHTING_RULES}
+
+{PERSPECTIVE_RULES}
+
+{ESCALATION_RULES}
+
+Previous escalation score (from last run): {previous_escalation if previous_escalation is not None else "none"}
 
 Output ONLY JSON in this shape:
 {SCHEMA}
@@ -666,7 +756,6 @@ def main():
     conflicts = json.load(open("data/conflicts.json"))
     history   = json.load(open("data/history.json"))
 
-    # Step 1 — LLM merge of same-date near-duplicates
     merge_groups = find_same_day_groups(history)
     if merge_groups:
         print(f"Found {len(merge_groups)} same-day group(s) to review for merging")
@@ -680,7 +769,6 @@ def main():
     else:
         print("No same-day duplicate groups to merge")
 
-    # Step 2 — Fuzzy prune for cross-day near-duplicates
     history, pruned = prune_history_duplicates(history)
     if pruned:
         print(f"Pruned {pruned} cross-day duplicate(s)")
@@ -710,6 +798,14 @@ def main():
         use_adv = (i < advanced_count)
         depth = "advanced" if use_adv else "basic"
         try:
+            # Load previous escalation score (for stability anchoring)
+            prev_escalation = None
+            if isinstance(c.get('escalation'), dict):
+                try:
+                    prev_escalation = int(c['escalation'].get('score'))
+                except (ValueError, TypeError):
+                    prev_escalation = None
+
             results = tavily(f"{c['name']} conflict latest news", depth=depth)
             usage["credits_used"] += (2 if use_adv else 1)
             save_usage(usage)
@@ -720,7 +816,7 @@ def main():
 
             tavily_urls = [x['url'] for x in results if x.get('url')]
             recent = recent_events_for_prompt(history, c['name'])
-            prompt = research_prompt(c, results, recent)
+            prompt = research_prompt(c, results, recent, prev_escalation)
 
             a = None
             try:
@@ -751,7 +847,7 @@ def main():
                     print(f"  review {c['name']}: {flags}")
                     try:
                         final = groq("openai/gpt-oss-120b",
-                                     review_prompt(c, results, a, b, flags, recent),
+                                     review_prompt(c, results, a, b, flags, recent, prev_escalation),
                                      max_tokens=2000, json_mode=False)
                         time.sleep(5.0)
                         verified = "cloudflare+groq+groq-review"
@@ -772,7 +868,6 @@ def main():
                 print(f"SKIP {c['name']}: fewer than 2 live sources")
                 continue
 
-            # Option 2 — enforce confidence floor from tier composition
             raw_confidence = final.get("confidence") or "medium"
             adjusted_conf, adjust_reason = adjust_confidence(raw_confidence, live)
             if adjust_reason:
@@ -785,6 +880,39 @@ def main():
             c["confidence"] = adjusted_conf
             c["verified_by"] = verified
             c["updated"]    = datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+            # --- Perspective (no smoothing, save as-is if model returned it) ---
+            persp = final.get("perspective")
+            if isinstance(persp, dict) and persp.get("dominant_frame"):
+                c["perspective"] = {
+                    "dominant_frame": str(persp["dominant_frame"])[:600],
+                    "divergence": persp.get("divergence") or "low",
+                }
+
+            # --- Escalation (smooth against previous score) ---
+            esc = final.get("escalation")
+            raw_esc = None
+            if isinstance(esc, dict):
+                try:
+                    raw_esc = int(esc.get("score"))
+                except (ValueError, TypeError):
+                    raw_esc = None
+            if raw_esc is not None:
+                smoothed = smooth_escalation(raw_esc, prev_escalation,
+                                             adjusted_conf, len(live))
+                if smoothed is not None:
+                    delta_str = ""
+                    if prev_escalation is not None:
+                        delta = smoothed - prev_escalation
+                        delta_str = f", Δ{delta:+d}"
+                    print(f"  escalation for {c['name']}: {smoothed} "
+                          f"(raw {raw_esc}, prev {prev_escalation if prev_escalation is not None else 'new'}{delta_str})")
+                    c["escalation"] = {
+                        "score": smoothed,
+                        "note": (esc.get("note") or "")[:200],
+                        "updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                    }
+
             ok += 1
 
             for ev in final.get("events", []):
