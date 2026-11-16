@@ -308,6 +308,35 @@ def recent_events_for_prompt(history, conflict_name, days=21):
             rows.append(f"- {h['date']}: {h.get('title', '')}")
     return "\n".join(rows) if rows else "(none recorded recently)"
 
+def latest_source_time_from_results(results):
+    """Extract the most recent published_date from Tavily results.
+    Returns (datetime_utc_or_None, source_metadata_or_None)."""
+    latest = None
+    latest_meta = None
+    for r in results:
+        pd = r.get('published_date') or r.get('published') or ''
+        if not pd or not isinstance(pd, str):
+            continue
+        try:
+            dt = datetime.fromisoformat(pd.replace('Z', '+00:00'))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            elif dt.tzinfo != timezone.utc:
+                dt = dt.astimezone(timezone.utc)
+        except (ValueError, TypeError):
+            try:
+                d = date.fromisoformat(pd[:10])
+                dt = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
+            except (ValueError, TypeError):
+                continue
+        if latest is None or dt > latest:
+            latest = dt
+            latest_meta = {
+                "url": r.get('url', ''),
+                "title": (r.get('title') or '')[:100],
+            }
+    return latest, latest_meta
+
 # ---------- usage tracking ----------
 def load_usage():
     now = datetime.now(timezone.utc)
@@ -815,6 +844,21 @@ def main():
                 continue
 
             tavily_urls = [x['url'] for x in results if x.get('url')]
+
+            # Capture the most recent source publish time (for "Last update" display)
+            src_time, src_meta = latest_source_time_from_results(results)
+            if src_time:
+                c["latest_source_time"] = src_time.isoformat(timespec="seconds")
+                if src_meta:
+                    try:
+                        host = urlparse(src_meta.get('url', '')).hostname or ''
+                        if host.startswith('www.'):
+                            host = host[4:]
+                        if host:
+                            c["latest_source_domain"] = host
+                    except Exception:
+                        pass
+
             recent = recent_events_for_prompt(history, c['name'])
             prompt = research_prompt(c, results, recent, prev_escalation)
 
