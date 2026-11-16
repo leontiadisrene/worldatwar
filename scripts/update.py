@@ -21,10 +21,10 @@ CYCLE_BUDGET  = 1000
 SAFETY_BUFFER = 50
 
 ALLOWED = [
-    # Tier 1 — wire services, major broadcasters, and major newspapers of record
-    "reuters.com", "apnews.com", "afp.com", "bbc.com", "bbc.co.uk", "thestar.com", "ctvnews.ca",
-    "aljazeera.com", "theguardian.com", "nytimes.com", "washingtonpost.com",
-    "france24.com", "dw.com", "rfi.fr", "channelnewsasia.com", "welt.de",
+    # Tier 1 — wire services, major broadcasters, and newspapers of record
+    "reuters.com", "apnews.com", "afp.com", "bbc.com", "bbc.co.uk",
+    "theguardian.com", "nytimes.com", "washingtonpost.com", "welt.de",
+    "ctvnews.ca", "thestar.com",
     # Tier 2 — institutional, think tank, human rights, and analysis
     "crisisgroup.org", "un.org", "unhcr.org", "cfr.org", "who.int",
     "icrc.org", "hrw.org", "amnesty.org",
@@ -36,6 +36,7 @@ ALLOWED = [
     "scmp.com", "arabnews.com", "gulfnews.com", "radiosvoboda.org",
     "africanews.com", "allafrica.com", "al-monitor.com", "jpost.com",
     "thediplomat.com", "asiatimes.com", "japantimes.co.jp", "the-japan-news.com",
+    "aljazeera.com", "france24.com", "rfi.fr", "dw.com", "channelnewsasia.com",
 ]
 
 # ---------- search ----------
