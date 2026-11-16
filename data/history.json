@@ -27,6 +27,42 @@
     "source": "auto"
   },
   {
+    "id": "e92b50c6621c",
+    "date": "2026-11-16",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian drone strike in Hlukhiv",
+    "description": "A Russian drone struck a small house in the northern Ukrainian town of Hlukhiv, burying a nine-year-old boy and his grandmother under the debris.",
+    "source": "auto"
+  },
+  {
+    "id": "28ab6c460a0a",
+    "date": "2026-11-16",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian attack on Dnipro's train station",
+    "description": "A Russian drone strike killed at least 14 people at Dnipro's train station.",
+    "source": "auto"
+  },
+  {
+    "id": "191fa570ccb1",
+    "date": "2026-11-16",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian glide bomb attack on school",
+    "description": "A Russian glide bomb attack killed at least 31 Ukrainians at a school distributing medicine and food in the Zaporizhzhia region.",
+    "source": "auto"
+  },
+  {
+    "id": "4c51ec6c6d9f",
+    "date": "2026-11-16",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran Threatens Preemptive Strike",
+    "description": "Iran threatens to retaliate against any US attack",
+    "source": "auto"
+  },
+  {
     "id": "4ca1be925428",
     "date": "2026-11-15",
     "conflict": "Sudan",
@@ -207,22 +243,13 @@
     "source": "merged"
   },
   {
-    "id": "984884cc7e89",
+    "id": "5d34d589b535",
     "date": "2026-11-12",
     "conflict": "Taiwan Strait",
     "tier": "flash",
-    "title": "Xi Jinping says Taiwan’s complete reunification will happen",
-    "description": "President Xi Jinping declared that Taiwan’s “complete reunification” with China is inevitable, reaffirming Beijing’s long‑term goal without explicitly mentioning the use of force.",
+    "title": "Xi Jinping declares Taiwan’s complete reunification inevitable",
+    "description": "President Xi Jinping declared that Taiwan’s complete reunification with China is inevitable, reaffirming Beijing’s long‑term goal and noting the remark came a week before the APEC summit in Shenzhen, without explicitly mentioning the use of force.",
     "source": "merged"
-  },
-  {
-    "id": "0d0c6d0f515e",
-    "date": "2026-11-12",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "Xi asserts inevitability of reunification",
-    "description": "Xi Jinping stated that Taiwan's complete reunification with China will happen, a declaration made one week before the APEC summit in Shenzhen.",
-    "source": "auto"
   },
   {
     "id": "b3e07e2ff9f0",
@@ -249,6 +276,15 @@
     "tier": "war",
     "title": "Soldiers sentenced to death",
     "description": "At least 66 Congolese soldiers were sentenced to death for cowardice and fleeing the frontline during rebel clashes.",
+    "source": "auto"
+  },
+  {
+    "id": "57aed4d76996",
+    "date": "2026-11-10",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Airstrike on Rakhine market",
+    "description": "A military jet dropped two bombs on a market in rebel‑held Rakhine state, killing at least 50 people and injuring 58.",
     "source": "auto"
   },
   {
