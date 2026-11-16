@@ -478,9 +478,9 @@ def smooth_escalation(raw_score, prev_score, confidence, source_count):
     delta = raw - prev_score
     delta = max(-12, min(12, delta))
     if confidence == 'low':
-        delta = round(delta * 0.5)
+        delta = round(delta * 0.35)
     elif confidence == 'medium':
-        delta = round(delta * 0.75)
+        delta = round(delta * 0.7)
     if source_count < 3:
         delta = round(delta * 0.7)
 
