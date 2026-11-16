@@ -15,6 +15,7 @@
     --war:#B23A2E;
     --flash:#C97A3D;
     --watch:#C9A227;
+    --good:#2E7D32;
     --select-bg:#BFDBFE;
     box-sizing:border-box;
     padding-top:env(safe-area-inset-top,0px);
@@ -22,11 +23,11 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E; --select-bg:#1E3A5F;
+      --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E; --good:#66BB6A; --select-bg:#1E3A5F;
     }
   }
   :root[data-theme="dark"]{
-    --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E; --select-bg:#1E3A5F;
+    --paper:#171614; --ink:#F1EFE9; --muted:#9C988E; --line:#332F29; --card:#221F1B; --land:#4A463E; --good:#66BB6A; --select-bg:#1E3A5F;
   }
   html{ scroll-padding-top:env(safe-area-inset-top,0px); }
   *{box-sizing:border-box;}
@@ -90,6 +91,7 @@
   .escalation-bar-fill{height:100%;transition:width .4s ease;border-radius:4px;}
   .escalation-num{flex:none;font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink);}
   .escalation-note{font-size:11px;color:var(--muted);margin:0 0 14px;font-style:italic;line-height:1.5;}
+
   .perspective-block{margin:0 0 16px;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;}
   .perspective-head{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;font-weight:600;}
   .perspective-div{display:inline-block;width:7px;height:7px;border-radius:50%;}
@@ -233,6 +235,13 @@
         </div>
         <p class="escalation-note" id="escalation-note" style="display:none;"></p>
 
+        <div class="facts">
+          <div class="row"><p class="label">Who</p><p class="value" id="who"></p></div>
+          <div class="row"><p class="label">What</p><p class="value" id="what"></p></div>
+          <div class="row"><p class="label">When</p><p class="value" id="when"></p></div>
+          <div class="row"><p class="label">How</p><p class="value" id="how"></p></div>
+        </div>
+
         <div class="perspective-block" id="perspective-block" style="display:none;">
           <div class="perspective-head">
             Perspective
@@ -243,12 +252,6 @@
           <p class="perspective-text" id="perspective-text"></p>
         </div>
 
-        <div class="facts">
-          <div class="row"><p class="label">Who</p><p class="value" id="who"></p></div>
-          <div class="row"><p class="label">What</p><p class="value" id="what"></p></div>
-          <div class="row"><p class="label">When</p><p class="value" id="when"></p></div>
-          <div class="row"><p class="label">How</p><p class="value" id="how"></p></div>
-        </div>
         <div class="sources">
           <p class="sources-label">Sources</p>
           <ol id="sources-list"></ol>
@@ -268,6 +271,7 @@
         </div>
       </div>
     </div>
+    <div class="conflict-history" id="map-conflict-history"></div>
   </div>
 
   <div class="tab-panel" id="tab-history">
@@ -471,6 +475,7 @@
     }
 
     renderDetail(conflict);
+    renderConflictTimeline('map-conflict-history', conflict.name);
     var panel = document.getElementById('panel');
     if (panel) panel.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
@@ -549,7 +554,13 @@
       escNote.style.display = 'none';
     }
 
-    // --- Perspective block ---
+    // --- Facts (Who / What / When / How) ---
+    document.getElementById('who').textContent = conflict.who;
+    document.getElementById('what').textContent = conflict.what;
+    document.getElementById('when').textContent = conflict.when;
+    document.getElementById('how').textContent = conflict.how;
+
+    // --- Perspective block (now above Sources) ---
     var pBlock = document.getElementById('perspective-block');
     if (conflict.perspective && conflict.perspective.dominant_frame){
       pBlock.style.display = 'block';
@@ -569,7 +580,7 @@
         divLabel.textContent = 'moderate divergence';
         subtitle.textContent = 'Sources emphasise different facts from the same events.';
       } else {
-        divDot.style.background = 'var(--watch)';
+        divDot.style.background = 'var(--good)';
         divLabel.textContent = 'low divergence';
         subtitle.textContent = 'All sources tell the same story.';
       }
@@ -577,11 +588,7 @@
       pBlock.style.display = 'none';
     }
 
-    document.getElementById('who').textContent = conflict.who;
-    document.getElementById('what').textContent = conflict.what;
-    document.getElementById('when').textContent = conflict.when;
-    document.getElementById('how').textContent = conflict.how;
-
+    // --- Sources ---
     var srcList = document.getElementById('sources-list');
     srcList.innerHTML = '';
     conflict.sources.forEach(function(s){
@@ -723,6 +730,10 @@
       loadHistoryEntries();
       renderCalendar();
       renderConflictHistory();
+      if (currentConflictId){
+        var cur = CONFLICTS.filter(function(c){ return c.id === currentConflictId; })[0];
+        if (cur) renderConflictTimeline('map-conflict-history', cur.name);
+      }
     } catch(e){ /* non-fatal */ }
   }
 
@@ -785,23 +796,17 @@
     });
   }
 
-  function renderConflictHistory(){
-    var container = document.getElementById('conflict-history');
+  function renderConflictTimeline(containerId, conflictName){
+    var container = document.getElementById(containerId);
     if (!container) return;
 
-    if (!selectedFilterConflict){
-      container.style.display = 'none';
-      return;
-    }
-
-    var conflict = CONFLICTS.filter(function(c){ return c.id === selectedFilterConflict; })[0];
-    if (!conflict){
+    if (!conflictName){
       container.style.display = 'none';
       return;
     }
 
     var entries = historyEntries.filter(function(e){
-      return e.conflict === conflict.name;
+      return e.conflict === conflictName;
     }).sort(function(a, b){
       return b.date.localeCompare(a.date);
     });
@@ -811,7 +816,7 @@
 
     var heading = document.createElement('div');
     heading.className = 'conflict-history-heading';
-    heading.textContent = conflict.name + ' \u2014 ' + entries.length + ' recorded ' + (entries.length === 1 ? 'event' : 'events');
+    heading.textContent = conflictName + ' \u2014 ' + entries.length + ' recorded ' + (entries.length === 1 ? 'event' : 'events');
     container.appendChild(heading);
 
     if (entries.length === 0){
@@ -857,6 +862,16 @@
 
       container.appendChild(item);
     });
+  }
+
+  function renderConflictHistory(){
+    if (!selectedFilterConflict){
+      var c = document.getElementById('conflict-history');
+      if (c) c.style.display = 'none';
+      return;
+    }
+    var name = getConflictNameById(selectedFilterConflict);
+    renderConflictTimeline('conflict-history', name);
   }
 
   function initCalendarNav(){
