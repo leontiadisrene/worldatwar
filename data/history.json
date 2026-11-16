@@ -1,48 +1,39 @@
 [
   {
-    "id": "90c48b9d95af",
+    "id": "4b0f7a80d659",
+    "date": "2026-11-16",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Tehran warns of preemptive strike",
+    "description": "Iran’s deputy foreign minister warned that Tehran will not wait for the US to attack first, suggesting Washington is buying time to prepare for another strike.",
+    "source": "auto"
+  },
+  {
+    "id": "4ca1be925428",
     "date": "2026-11-15",
     "conflict": "Sudan",
     "tier": "war",
-    "title": "Drone attacks on power stations",
-    "description": "RSF drone strikes on power infrastructure left cities without electricity and caused civilian casualties.",
-    "source": "auto"
+    "title": "RSF drone attacks on Sudan power stations",
+    "description": "RSF drone strikes hit power stations in southeast Sudan, knocking out electricity and causing civilian casualties, leaving cities without power.",
+    "source": "merged"
   },
   {
-    "id": "0a552d895079",
+    "id": "8139976963b4",
     "date": "2026-11-15",
     "conflict": "South China Sea",
     "tier": "flash",
-    "title": "ASEAN leaders gather; code‑of‑conduct agreement seen as unlikely",
-    "description": "During an ASEAN summit, analysts noted that reaching a final South China Sea code of conduct will be a tall order given the heightened tensions between China and the Philippines.",
-    "source": "auto"
+    "title": "ASEAN summit discusses tough South China Sea code‑of‑conduct",
+    "description": "At an ASEAN summit, leaders gathered as analysts warned that reaching a final South China Sea code of conduct will be a tall order amid heightened China‑Philippines tensions.",
+    "source": "merged"
   },
   {
-    "id": "e8cd71502aab",
+    "id": "35b7c9ab25aa",
     "date": "2026-11-15",
     "conflict": "Iran",
     "tier": "war",
-    "title": "Iran Attacks Bahrain",
-    "description": "Drone attack on Bahrain for the second time in days",
-    "source": "auto"
-  },
-  {
-    "id": "59be4b180268",
-    "date": "2026-11-15",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "Iran launches drone attack on Bahrain",
-    "description": "Iran launched a drone attack on Bahrain for the second time in days.",
-    "source": "auto"
-  },
-  {
-    "id": "977429e3e6d5",
-    "date": "2026-11-15",
-    "conflict": "South China Sea",
-    "tier": "flash",
-    "title": "ASEAN leaders gather amid South China Sea tensions",
-    "description": "Analysts say finishing negotiations for disputed South China Sea agreement will be a ‘tall order’",
-    "source": "auto"
+    "title": "Iran launches second drone attack on Bahrain",
+    "description": "Iran carried out a drone strike on Bahrain, marking the second such attack within days.",
+    "source": "merged"
   },
   {
     "id": "d06bce3d9dd1",
@@ -63,12 +54,12 @@
     "source": "auto"
   },
   {
-    "id": "089295d683f6",
+    "id": "46807bfcb8a9",
     "date": "2026-11-15",
-    "conflict": "Sudan",
+    "conflict": "Iran",
     "tier": "war",
-    "title": "Drone strikes on power stations",
-    "description": "Drone strikes hit power stations in southeast Sudan, causing disruptions to electricity supplies",
+    "title": "Yemen repositions Red Sea troops",
+    "description": "Yemen’s army announced it is repositioning troops from the Red Sea amid the ongoing regional conflict.",
     "source": "auto"
   },
   {
@@ -117,103 +108,31 @@
     "source": "auto"
   },
   {
-    "id": "6b0d587a74fe",
+    "id": "6819226b1893",
     "date": "2026-11-13",
     "conflict": "Myanmar",
     "tier": "war",
-    "title": "Myanmar junta airstrike",
-    "description": "At least 50 people killed and 58 injured in a market in rebel territory",
-    "source": "auto"
+    "title": "Junta double‑tap airstrike on India Market in Kyauktaw, Rakhine",
+    "description": "The Myanmar junta carried out double‑tap airstrikes on the India Market in Kyauktaw, Rakhine State, killing at least 50 people and wounding 58 civilians.",
+    "source": "merged"
   },
   {
-    "id": "544fa7ae6b73",
-    "date": "2026-11-13",
-    "conflict": "Myanmar",
-    "tier": "war",
-    "title": "Airstrikes in Rakhine State",
-    "description": "Junta carries out double-tap airstrikes targeting civilians in Rakhine State",
-    "source": "auto"
-  },
-  {
-    "id": "3267212e1c7f",
-    "date": "2026-11-13",
-    "conflict": "Myanmar",
-    "tier": "war",
-    "title": "Airstrike on India Market",
-    "description": "An airstrike on India Market in Kyauktaw, Rakhine State, Myanmar",
-    "source": "auto"
-  },
-  {
-    "id": "1434c57e9321",
+    "id": "747b4af63e0e",
     "date": "2026-11-12",
     "conflict": "Gaza",
     "tier": "war",
-    "title": "Israeli strike on Nasser Hospital",
-    "description": "Killed at least six people",
-    "source": "auto"
+    "title": "Israeli strike kills six at Gaza’s Nasser Hospital",
+    "description": "An Israeli airstrike hit Nasser Hospital in Gaza, killing at least six Palestinians, including a surgeon.",
+    "source": "merged"
   },
   {
-    "id": "922ed1102bc6",
+    "id": "984884cc7e89",
     "date": "2026-11-12",
     "conflict": "Taiwan Strait",
     "tier": "flash",
-    "title": "Xi Jinping’s statement on reunification",
-    "description": "President Xi declared that Taiwan’s “complete reunification” with China will happen, reaffirming Beijing’s long‑term goal despite not explicitly mentioning the use of force.",
-    "source": "auto"
-  },
-  {
-    "id": "22b2ac3948a7",
-    "date": "2026-11-12",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "Xi Jinping's reunification statement",
-    "description": "Xi Jinping stated Taiwan's 'complete reunification' with China will happen",
-    "source": "auto"
-  },
-  {
-    "id": "2489d2cad04b",
-    "date": "2026-11-12",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "Xi Jinping's statement",
-    "description": "Xi Jinping says Taiwan's 'complete reunification' with China will happen",
-    "source": "auto"
-  },
-  {
-    "id": "6ce78db1e48b",
-    "date": "2026-11-12",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "Xi Jinping's statement on Taiwan reunification",
-    "description": "Xi Jinping stated that Taiwan's 'complete reunification' with China will happen.",
-    "source": "auto"
-  },
-  {
-    "id": "48f41f5e13f0",
-    "date": "2026-11-12",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Israeli strike on Gaza's Nasser Hospital",
-    "description": "An Israeli strike on Nasser Hospital killed at least six people, including a surgeon.",
-    "source": "auto"
-  },
-  {
-    "id": "8e6ca39ec119",
-    "date": "2026-11-12",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "Xi Jinping comments on Taiwan reunification",
-    "description": "Xi Jinping stated that Taiwan's 'complete reunification' with China will happen, without mentioning the use of force.",
-    "source": "auto"
-  },
-  {
-    "id": "f9eaa494ab64",
-    "date": "2026-11-12",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Israeli air strike on Nasser Hospital",
-    "description": "Israeli air strike on Nasser Hospital kills six Palestinians",
-    "source": "auto"
+    "title": "Xi Jinping says Taiwan’s complete reunification will happen",
+    "description": "President Xi Jinping declared that Taiwan’s “complete reunification” with China is inevitable, reaffirming Beijing’s long‑term goal without explicitly mentioning the use of force.",
+    "source": "merged"
   },
   {
     "id": "b3e07e2ff9f0",
@@ -225,31 +144,13 @@
     "source": "auto"
   },
   {
-    "id": "0875f0d74063",
+    "id": "08301e6afac7",
     "date": "2026-11-09",
     "conflict": "Iran",
     "tier": "war",
-    "title": "Trump meets Qatar mediator",
-    "description": "Trump met Qatar’s mediator in Doha; officials said no imminent deal, while mutual attacks continued, including a U.S. strike on Qeshm Island and Iranian attacks on tankers.",
-    "source": "auto"
-  },
-  {
-    "id": "a8ba13744d21",
-    "date": "2026-11-09",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "US strikes Qeshm Island; Iran attacks tankers in Gulf and Strait of Hormuz",
-    "description": "The United States conducted an airstrike on Iran’s Qeshm Island, and Iranian forces responded by targeting commercial tankers navigating the Gulf and the Strait of Hormuz. President Trump reiterated U.S. readiness to strike Iran if needed while acknowledging diplomatic momentum, with Qatar mediating talks but no immediate cease‑fire agreement.",
-    "source": "auto"
-  },
-  {
-    "id": "ccfff1782606",
-    "date": "2026-11-09",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "Trump to meet Iran war mediator Qatar",
-    "description": "No imminent deal seen to end the war",
-    "source": "auto"
+    "title": "Trump meets Qatar mediator as US strikes Qeshm Island, Iran hits tankers",
+    "description": "President Trump met Qatar’s mediator in Doha while the United States air‑struck Iran’s Qeshm Island, prompting Iranian forces to attack commercial tankers in the Gulf and Strait of Hormuz; officials said no immediate cease‑fire deal was forthcoming.",
+    "source": "merged"
   },
   {
     "id": "6ba26b83f6c0",
@@ -270,40 +171,22 @@
     "source": "auto"
   },
   {
-    "id": "468b32206c7f",
-    "date": "2026-11-06",
-    "conflict": "E. DR Congo",
-    "tier": "war",
-    "title": "IS‑linked attack in Cantine, North Kivu",
-    "description": "Burned vehicles and homes were reported after militants affiliated with the Islamic State attacked the town.",
+    "id": "8a905cf46a27",
+    "date": "2026-11-08",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Reduced Chinese military activity near Taiwan",
+    "description": "Taiwanese Ministry of National Defence reported only one Chinese aircraft north of Taiwan and eight ships near the island during the 24-hour period between November 8 and 9, a sharp drop from previous counts.",
     "source": "auto"
   },
   {
-    "id": "d2915412569b",
+    "id": "612668852762",
     "date": "2026-11-06",
     "conflict": "E. DR Congo",
     "tier": "war",
-    "title": "IS‑affiliated attack in Cantine, North Kivu",
-    "description": "Militants linked to the Islamic State set fire to vehicles and homes in Cantine, North Kivu, causing extensive damage.",
-    "source": "auto"
-  },
-  {
-    "id": "5181fec5b028",
-    "date": "2026-11-06",
-    "conflict": "E. DR Congo",
-    "tier": "war",
-    "title": "Militant attack in Cantine",
-    "description": "Militants affiliated with the Islamic State group attacked Cantine, North Kivu, Congo.",
-    "source": "auto"
-  },
-  {
-    "id": "98fd970a691b",
-    "date": "2026-11-06",
-    "conflict": "E. DR Congo",
-    "tier": "war",
-    "title": "Militant attack in Cantine, North Kivu",
-    "description": "Militants affiliated with the Islamic State group attacked Cantine, North Kivu, burning vehicles and homes.",
-    "source": "auto"
+    "title": "IS‑linked militants burn vehicles and homes in Cantine, North Kivu",
+    "description": "Militants affiliated with the Islamic State attacked Cantine in North Kivu, setting fire to vehicles and homes and causing extensive damage.",
+    "source": "merged"
   },
   {
     "id": "7eac73f9ce98",
@@ -315,31 +198,13 @@
     "source": "auto"
   },
   {
-    "id": "d8261acdf367",
+    "id": "8dba55316f34",
     "date": "2026-11-03",
     "conflict": "Taiwan Strait",
     "tier": "flash",
-    "title": "China's military deployment around Taiwan",
-    "description": "China deployed 100 ships and 49 aircraft around Taiwan.",
-    "source": "auto"
-  },
-  {
-    "id": "baa7c0505457",
-    "date": "2026-11-03",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "China deploys military forces around Taiwan",
-    "description": "China deployed 100 ships and 49 aircraft around Taiwan, according to Taiwan's Ministry of National Defence.",
-    "source": "auto"
-  },
-  {
-    "id": "02d949d3133b",
-    "date": "2026-11-03",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "China's military exercises around Taiwan",
-    "description": "China deployed significant military means, including 100 ships and 49 aircraft.",
-    "source": "auto"
+    "title": "China deploys 100 ships and 49 aircraft around Taiwan",
+    "description": "China sent a fleet of 100 warships and 49 aircraft to operate around Taiwan, according to Taiwan’s Ministry of National Defence.",
+    "source": "merged"
   },
   {
     "id": "095cbfc94e77",
@@ -549,6 +414,15 @@
     "source": "auto"
   },
   {
+    "id": "4312f3e4343b",
+    "date": "2025-12-14",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Thai offensive and fuel block",
+    "description": "Thailand launched a new military offensive while Cambodia halted all border crossings. Thailand also moved to block fuel from reaching Cambodia as the conflict escalated.",
+    "source": "auto"
+  },
+  {
     "id": "ca2ab819b3b9",
     "date": "2025-12-11",
     "conflict": "Thai–Cambodia border",
@@ -567,20 +441,20 @@
     "source": "auto"
   },
   {
+    "id": "181e8fb727f4",
+    "date": "2025-12-11",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Fighting enters 5th day",
+    "description": "Renewed fighting raged at the border on December 11, with combat heard near temples. The Thai PM confirmed a phone call from US President Trump regarding the conflict.",
+    "source": "auto"
+  },
+  {
     "id": "7cc6d182b50e",
     "date": "2025-12-07",
     "conflict": "Thai–Cambodia border",
     "tier": "watch",
     "title": "Fighting reignites",
-    "description": "Fighting reignited on the Cambodia-Thailand border",
-    "source": "auto"
-  },
-  {
-    "id": "cf75956a8dad",
-    "date": "2025-12-07",
-    "conflict": "Thai–Cambodia border",
-    "tier": "watch",
-    "title": "Fighting reignited",
     "description": "Fighting reignited on the Cambodia-Thailand border",
     "source": "auto"
   },
@@ -699,15 +573,6 @@
     "tier": "watch",
     "title": "Azerbaijan’s September 2023 offensive",
     "description": "Azerbaijan launched a large‑scale offensive that dissolved the Nagorno‑Karabakh enclave and displaced over 100,000 Armenians.",
-    "source": "auto"
-  },
-  {
-    "id": "d14e9930fb01",
-    "date": "2023-09-01",
-    "conflict": "Caucasus",
-    "tier": "watch",
-    "title": "Azerbaijan’s September 2023 offensive",
-    "description": "Azerbaijani forces launched a large‑scale offensive that broke the stalemate, leading to the dissolution of the Nagorno‑Karabakh enclave and the displacement of more than 100,000 ethnic Armenians.",
     "source": "auto"
   },
   {
