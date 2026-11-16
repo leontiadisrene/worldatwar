@@ -22,7 +22,7 @@ SAFETY_BUFFER = 50
 
 ALLOWED = [
     # Tier 1 — wire services, major broadcasters, and major newspapers of record
-    "reuters.com", "apnews.com", "afp.com", "bbc.com", "bbc.co.uk",
+    "reuters.com", "apnews.com", "afp.com", "bbc.com", "bbc.co.uk", "thestar.com", "ctvnews.ca",
     "aljazeera.com", "theguardian.com", "nytimes.com", "washingtonpost.com",
     "france24.com", "dw.com", "rfi.fr", "channelnewsasia.com", "welt.de",
     # Tier 2 — institutional, think tank, human rights, and analysis
