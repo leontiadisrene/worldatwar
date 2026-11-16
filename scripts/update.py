@@ -21,16 +21,28 @@ CYCLE_BUDGET  = 1000
 SAFETY_BUFFER = 50
 
 ALLOWED = [
-    "reuters.com","apnews.com","afp.com","bbc.com","bbc.co.uk","aljazeera.com",
-    "theguardian.com","nytimes.com","washingtonpost.com","france24.com",
-    "crisisgroup.org","un.org","unhcr.org","cfr.org","who.int","icrc.org",
+    # Tier 1 — wire services, major broadcasters, and major newspapers of record
+    "reuters.com", "apnews.com", "afp.com", "bbc.com", "bbc.co.uk",
+    "aljazeera.com", "theguardian.com", "nytimes.com", "washingtonpost.com",
+    "france24.com", "dw.com", "rfi.fr", "channelnewsasia.com", "welt.de",
+    # Tier 2 — institutional, think tank, human rights, and analysis
+    "crisisgroup.org", "un.org", "unhcr.org", "cfr.org", "who.int",
+    "icrc.org", "hrw.org", "amnesty.org",
+    "theamericanconservative.com", "longwarjournal.org", "nationalinterest.org",
+    "warontherocks.com", "henryjacksonsociety.org", "worldview.stratfor.com",
+    # Tier 3 — regional & conflict specialists
+    "kyivindependent.com", "kyivpost.com", "haaretz.com", "timesofisrael.com",
+    "middleeasteye.net", "sudantribune.com", "thehindu.com", "dawn.com",
+    "scmp.com", "arabnews.com", "gulfnews.com", "radiosvoboda.org",
+    "africanews.com", "allafrica.com", "al-monitor.com", "jpost.com",
+    "thediplomat.com", "asiatimes.com", "japantimes.co.jp", "the-japan-news.com",
 ]
 
 # ---------- search ----------
 def tavily(query, depth="basic"):
     r = requests.post("https://api.tavily.com/search", json={
         "api_key": TAVILY, "query": query, "search_depth": depth,
-        "max_results": 6, "days": 10, "include_domains": ALLOWED,
+        "max_results": 10, "days": 12, "include_domains": ALLOWED,
     }, timeout=60)
     r.raise_for_status()
     return r.json().get("results", [])
