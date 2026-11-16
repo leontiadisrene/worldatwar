@@ -82,6 +82,18 @@
   .value{margin:0;font-size:14px;line-height:1.55;}
   .facts{margin-bottom:16px;padding-bottom:4px;}
 
+  .escalation-row{display:flex;align-items:center;gap:10px;margin:0 0 4px;font-size:12px;color:var(--muted);}
+  .escalation-row .esc-label{flex:none;min-width:78px;}
+  .escalation-bar{flex:1;height:8px;border-radius:4px;background:var(--line);overflow:hidden;position:relative;}
+  .escalation-bar-fill{height:100%;transition:width .4s ease;border-radius:4px;}
+  .escalation-num{flex:none;font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink);}
+  .escalation-note{font-size:11px;color:var(--muted);margin:0 0 14px;font-style:italic;line-height:1.5;}
+  .perspective-block{margin:0 0 16px;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;}
+  .perspective-head{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;font-weight:600;}
+  .perspective-div{display:inline-block;width:7px;height:7px;border-radius:50%;}
+  .perspective-subtitle{font-size:11.5px;color:var(--muted);margin:0 0 8px;font-style:italic;}
+  .perspective-text{font-size:13px;line-height:1.55;color:var(--ink);margin:0;}
+
   .sources{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
   .sources-label{font-size:11px;color:var(--muted);margin:0 0 6px;}
   .sources ol{margin:0;padding-left:18px;}
@@ -209,6 +221,24 @@
           <span class="title" id="title"></span>
         </div>
         <p class="current-state" id="current-state"></p>
+
+        <div class="escalation-row" id="escalation-row" style="display:none;">
+          <span class="esc-label">Escalation</span>
+          <div class="escalation-bar"><div class="escalation-bar-fill" id="escalation-fill"></div></div>
+          <span class="escalation-num" id="escalation-num">0</span>
+        </div>
+        <p class="escalation-note" id="escalation-note" style="display:none;"></p>
+
+        <div class="perspective-block" id="perspective-block" style="display:none;">
+          <div class="perspective-head">
+            Perspective
+            <span class="perspective-div" id="perspective-div"></span>
+            <span id="perspective-div-label"></span>
+          </div>
+          <p class="perspective-subtitle" id="perspective-subtitle"></p>
+          <p class="perspective-text" id="perspective-text"></p>
+        </div>
+
         <div class="facts">
           <div class="row"><p class="label">Who</p><p class="value" id="who"></p></div>
           <div class="row"><p class="label">What</p><p class="value" id="what"></p></div>
@@ -281,24 +311,20 @@
   var selectedFilterConflict = null;
   var selectedDateStr = null;
 
-  // ---------- "Updated ..." line ----------
   function updateUpdatedLine(){
     var el = document.getElementById('updated-text');
     if (!el) return;
-
     var latest = null;
     CONFLICTS.forEach(function(c){
       if (!c || !c.updated) return;
       var t = new Date(c.updated);
       if (!isNaN(t.getTime()) && (!latest || t > latest)) latest = t;
     });
-
     if (!latest){
       el.textContent = 'Manually curated';
       el.removeAttribute('title');
       return;
     }
-
     var dateStr = latest.toLocaleDateString('en-GB', {
       year: 'numeric', month: 'long', day: 'numeric'
     });
@@ -464,6 +490,56 @@
     badge.style.color = meta.text;
 
     document.getElementById('current-state').textContent = conflict.current;
+
+    // --- Escalation bar ---
+    var escRow = document.getElementById('escalation-row');
+    var escNote = document.getElementById('escalation-note');
+    if (conflict.escalation && typeof conflict.escalation.score === 'number'){
+      var s = Math.max(0, Math.min(100, conflict.escalation.score));
+      escRow.style.display = 'flex';
+      var fill = document.getElementById('escalation-fill');
+      fill.style.width = s + '%';
+      fill.style.background = s >= 61 ? 'var(--war)' : s >= 31 ? 'var(--flash)' : 'var(--watch)';
+      document.getElementById('escalation-num').textContent = s;
+      if (conflict.escalation.note){
+        escNote.style.display = 'block';
+        escNote.textContent = conflict.escalation.note;
+      } else {
+        escNote.style.display = 'none';
+      }
+    } else {
+      escRow.style.display = 'none';
+      escNote.style.display = 'none';
+    }
+
+    // --- Perspective block ---
+    var pBlock = document.getElementById('perspective-block');
+    if (conflict.perspective && conflict.perspective.dominant_frame){
+      pBlock.style.display = 'block';
+      document.getElementById('perspective-text').textContent = conflict.perspective.dominant_frame;
+
+      var div = conflict.perspective.divergence || 'low';
+      var divDot = document.getElementById('perspective-div');
+      var divLabel = document.getElementById('perspective-div-label');
+      var subtitle = document.getElementById('perspective-subtitle');
+
+      if (div === 'high'){
+        divDot.style.background = 'var(--war)';
+        divLabel.textContent = 'high divergence';
+        subtitle.textContent = 'Sources contradict each other on key points.';
+      } else if (div === 'moderate'){
+        divDot.style.background = 'var(--flash)';
+        divLabel.textContent = 'moderate divergence';
+        subtitle.textContent = 'Sources emphasise different facts from the same events.';
+      } else {
+        divDot.style.background = 'var(--watch)';
+        divLabel.textContent = 'low divergence';
+        subtitle.textContent = 'All sources tell the same story.';
+      }
+    } else {
+      pBlock.style.display = 'none';
+    }
+
     document.getElementById('who').textContent = conflict.who;
     document.getElementById('what').textContent = conflict.what;
     document.getElementById('when').textContent = conflict.when;
@@ -940,4 +1016,4 @@
 })();
 </script>
 </body>
-  </html>
+</html>
