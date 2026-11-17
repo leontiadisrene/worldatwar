@@ -9,6 +9,33 @@
     "source": "auto"
   },
   {
+    "id": "2f305abcb346",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine strikes Crimea Bridge and southern oil refinery",
+    "description": "Ukraine launched a large drone attack hitting the Crimea Bridge and a key oil refinery in southern Russia, causing two deaths in Crimea.",
+    "source": "auto"
+  },
+  {
+    "id": "a45d622ca4bf",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian missile strike damages Kyiv Dnipro bridges",
+    "description": "Russian ballistic missiles hit Kyiv’s northern and southern Dnipro bridges, damaging the subway system and partially cutting water and power supplies.",
+    "source": "auto"
+  },
+  {
+    "id": "b11f9ea04a3f",
+    "date": "2026-11-17",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran warns of preemptive strike",
+    "description": "Iran warns it may strike first before another US attack",
+    "source": "auto"
+  },
+  {
     "id": "71a939dc8392",
     "date": "2026-11-16",
     "conflict": "Iran",
@@ -51,6 +78,15 @@
     "tier": "war",
     "title": "Russian glide bomb attack on school",
     "description": "A Russian glide bomb attack killed at least 31 Ukrainians at a school distributing medicine and food in the Zaporizhzhia region.",
+    "source": "auto"
+  },
+  {
+    "id": "bee38a60e378",
+    "date": "2026-11-16",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Fujian aircraft carrier sails through Taiwan Strait",
+    "description": "China's newest aircraft carrier, Fujian, sailed through the Taiwan Strait, prompting a response from Taiwan's defense ministry",
     "source": "auto"
   },
   {
@@ -132,6 +168,15 @@
     "tier": "watch",
     "title": "Thailand blocks fuel to Cambodia",
     "description": "Thailand moved to block fuel from reaching Cambodia as the border conflict continues to escalate, according to the Council on Foreign Relations.",
+    "source": "auto"
+  },
+  {
+    "id": "4ba3e8b7aa23",
+    "date": "2026-11-15",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Nagorno-Karabakh Fighting",
+    "description": "Dozens killed in fighting between Armenia and Azerbaijan in Nagorno-Karabakh",
     "source": "auto"
   },
   {
