@@ -473,10 +473,10 @@ def normalize_event_time(ev):
         return ev
     h, mi = parsed
     time_str = f"{h:02d}:{mi:02d}"
-    if count >= 2 and variance <= 25:
+    if count >= 2 and variance <= 60:
         ev["time"] = time_str
         ev["time_verified"] = "verified"
-    elif count >= 4 and variance <= 60:
+    elif count >= 3 and variance <= 60:
         ev["time"] = time_str
         ev["time_verified"] = "approximate"
     else:
