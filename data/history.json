@@ -1,21 +1,21 @@
 [
   {
-    "id": "4b0f7a80d659",
-    "date": "2026-11-16",
-    "conflict": "Iran",
+    "id": "b3f99b43405d",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
     "tier": "war",
-    "title": "Tehran warns of preemptive strike",
-    "description": "Iran’s deputy foreign minister warned that Tehran will not wait for the US to attack first, suggesting Washington is buying time to prepare for another strike.",
+    "title": "Ukraine drone attack on Russia",
+    "description": "Ukraine struck a key bridge and targeted oil refineries in a major drone attack on Russia",
     "source": "auto"
   },
   {
-    "id": "94c860e4bafc",
+    "id": "71a939dc8392",
     "date": "2026-11-16",
     "conflict": "Iran",
     "tier": "war",
-    "title": "Trump cites positive momentum",
-    "description": "President Trump stated that the resumption of large-scale strikes on Iran is unlikely, citing positive momentum towards ending the war and urging a pause by Gulf allies.",
-    "source": "auto"
+    "title": "Iran warns of preemptive strike against U.S.",
+    "description": "Iran’s deputy foreign minister warned that Tehran will not wait for a U.S. attack, saying Washington is buying time to prepare for a strike. Iran also threatened retaliation against any U.S. aggression.",
+    "source": "merged"
   },
   {
     "id": "8390f2a11c2a",
@@ -51,15 +51,6 @@
     "tier": "war",
     "title": "Russian glide bomb attack on school",
     "description": "A Russian glide bomb attack killed at least 31 Ukrainians at a school distributing medicine and food in the Zaporizhzhia region.",
-    "source": "auto"
-  },
-  {
-    "id": "4c51ec6c6d9f",
-    "date": "2026-11-16",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "Iran Threatens Preemptive Strike",
-    "description": "Iran threatens to retaliate against any US attack",
     "source": "auto"
   },
   {
@@ -213,6 +204,15 @@
     "tier": "watch",
     "title": "Accusations of drone-related ceasefire breach",
     "description": "Thailand accused Cambodia of breaking the ceasefire over an incident involving drones seen by both sides along the border line, hours after international praise for the 'hard-won' agreement.",
+    "source": "auto"
+  },
+  {
+    "id": "c97918703bec",
+    "date": "2026-11-14",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Death of Hamas Rafah brigade commander",
+    "description": "Hamas confirmed the death of Rafah brigade commander Samir Abu Younis in an Israeli strike on Khan Younis.",
     "source": "auto"
   },
   {
