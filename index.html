@@ -979,7 +979,7 @@
     var dateObj = new Date(dateStr + 'T00:00:00');
     var heading = document.createElement('div');
     heading.className = 'day-detail-heading';
-    heading.textContent = dateObj.toLocaleDateString(undefined, {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+    heading.textContent = dateObj.toLocaleDateString('en-GB', {weekday:'long', year:'numeric', month:'long', day:'numeric'}).replace(/[,\s]+/g, ' ').trim();
     wrap.appendChild(heading);
 
     entries.forEach(function(e){
