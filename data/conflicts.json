@@ -1,584 +1,875 @@
 [
   {
-    "id": "ukraine",
-    "name": "Ukraine",
-    "lat": 49,
-    "lon": 32,
+    "id": "d98d863ebd6f",
+    "date": "2026-11-19",
+    "conflict": "Sudan",
     "tier": "war",
-    "who": "Russia vs Ukraine, with the US mediating talks",
-    "what": "Full-scale invasion, now a grinding war of attrition",
-    "when": "Started Feb 24, 2022 — day 1,650+ and still going",
-    "how": "Daily drone, missile and artillery strikes along a front over 1,100 km long",
-    "current": "Ukraine launched a large‑scale drone strike that hit the Kerch (Crimean) Bridge, while Russia responded by striking two major bridges in Kyiv. Peace talks involving US envoys continue but have stalled, and a six‑day localized cease‑fire in the Kherson region has ended, leaving fighting active across multiple fronts.",
-    "sources": [
-      {
-        "label": "BBC: Two major Kyiv bridges hit in Russian attack, mayor says",
-        "url": "https://www.bbc.com/news/articles/cw772jk4rvmxo"
-      },
-      {
-        "label": "Al Jazeera: Ukraine holds peace talks with US, Europe as conflict escalates",
-        "url": "https://www.aljazeera.com/news/2026/11/17/ukraine-holds-peace-talks-with-us-europe-as-conflict-escalates"
-      },
-      {
-        "label": "Al Jazeera: Kherson braces for return of war as localised Russia‑Ukraine truce ends",
-        "url": "https://www.aljazeera.com/tag/ukraine-russia-crisis"
-      },
-      {
-        "label": "Kyiv Independent: Ukraine war latest: Entire section of Crimean Bridge collapses",
-        "url": "https://kyivindependent.com"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-18T01:30:41+00:00",
-    "perspective": {
-      "dominant_frame": "Tier 1 outlets (BBC) emphasize the reciprocal escalation of infrastructure strikes, highlighting Russian attacks on Kyiv bridges. Tier 3 outlets (Al Jazeera, Kyiv Independent) focus on Ukraine’s successful drone strike on the Crimean Bridge, the end of the Kherson cease‑fire, and ongoing diplomatic efforts, framing the conflict as a mix of high‑intensity attacks and stalled peace talks.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 70,
-      "note": "Simultaneous strikes on Kyiv bridges and the Crimean Bridge, plus cease‑fire ending",
-      "updated": "2026-11-18T01:30:41+00:00"
-    }
+    "title": "Drone strike kills over 300",
+    "description": "Sudan army drones hit mourners and a fuel market, killing more than 300 people.",
+    "source": "auto"
   },
   {
-    "id": "gaza",
-    "name": "Gaza",
-    "lat": 31.5,
-    "lon": 34.4,
+    "id": "c4200532ee06",
+    "date": "2026-11-18",
+    "conflict": "Gaza",
     "tier": "war",
-    "who": "Israel vs Hamas",
-    "what": "War technically under ceasefire, but violence continues",
-    "when": "War since Oct 7, 2023; ceasefire since Oct 10, 2025",
-    "how": "Over 1,300 people killed since the \"ceasefire\" began; disarmament and reconstruction stalled",
-    "current": "Israeli airstrikes continue in Gaza despite the October 2025 ceasefire, hitting residential areas and causing civilian deaths. The BBC reports eight people killed, including a child, while France 24 reports at least 13 fatalities. Humanitarian conditions remain dire as negotiations over Hamas disarmament and Israeli troop withdrawal stall.",
-    "sources": [
-      {
-        "label": "BBC News: Israeli strikes in Gaza kill eight including child, hospitals say",
-        "url": "https://www.bbc.com/news/topics/c2vdnvdg6xxt"
-      },
-      {
-        "label": "France 24: Israeli strikes on residential buildings kill at least 13 in Gaza",
-        "url": "https://www.france24.com/en/tag/war-in-gaza"
-      },
-      {
-        "label": "DW: Humanitarian woes worsen in Gaza as Israel and Hamas argue",
-        "url": "https://www.dw.com/en/humanitarian-situation-in-gaza-worsens-amid-political-deadlock/a-79931403"
-      },
-      {
-        "label": "CFR: Israeli-Palestinian Conflict | Global Conflict Tracker — Overview",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/israeli-palestinian-conflict"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-18T01:31:10+00:00",
-    "perspective": {
-      "dominant_frame": "Tier 1 outlets such as the BBC frame the situation as ongoing Israeli strikes causing civilian casualties despite the ceasefire, emphasizing specific casualty figures. Tier 3 outlets like France 24 highlight higher death tolls and stress the worsening humanitarian impact, but both agree violence persists and negotiations are stalled.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 85,
-      "note": "Continued Israeli airstrikes killing civilians (8‑13) despite ceasefire",
-      "updated": "2026-11-18T01:31:10+00:00"
-    }
+    "title": "Israeli strike on residential building",
+    "description": "Airstrike on a residential building in Gaza killed at least eight people (BBC) and reportedly up to 13 (France 24).",
+    "source": "auto"
   },
   {
-    "id": "iran",
-    "name": "Iran",
-    "lat": 32,
-    "lon": 53,
+    "id": "40df007dd5c0",
+    "date": "2026-11-18",
+    "conflict": "Iran",
     "tier": "war",
-    "who": "Israel and the US vs Iran",
-    "what": "A leadership-shattering war, now in an uneasy pause",
-    "when": "12-day war June 2025; \"Operation Epic Fury\" Feb 28, 2026",
-    "how": "US-Israeli strikes killed Iran’s Supreme Leader; his son succeeded him; Hormuz still shut",
-    "current": "Iran launched a drone attack on a U.S. military base in Bahrain on 2026-11-18, marking the third strike on American targets after a two‑month lull. The attack comes amid ongoing tensions over the Strait of Hormuz, and Qatar warned that such actions jeopardize peace‑talks aimed at ending the war.",
-    "sources": [
-      {
-        "label": "AP News: Iranian drone attack targets US radar facility in Bahrain",
-        "url": "https://apnews.com/article/iran-trump-israel-bahrain-attacks-582e0b5d51be06f0ed630fac24f39b72"
-      },
-      {
-        "label": "BBC News: Iran targets US military base in Bahrain with drone attack",
-        "url": "https://www.bbc.co.uk/news/articles/cqn4e2py48kwo"
-      },
-      {
-        "label": "Arab News: Qatar warns Iran’s attack on US base in Bahrain threatens peace talks",
-        "url": "https://www.arabnews.com/middle-east/qatar-warns-irans-attack-on-us-base-in-bahrain-threatens-peace-talks-3012408"
-      }
-    ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-18T01:31:43+00:00",
-    "perspective": {
-      "dominant_frame": "Tier 1 outlets (AP, BBC) frame the incident as a continuation of the US‑Iran military confrontation, emphasizing the drone strike and its impact on the Strait of Hormuz. Tier 3 outlet (Arab News) highlights the diplomatic fallout, noting Qatar’s warning that the attacks threaten ongoing peace talks.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 70,
-      "note": "Iran launched drone attack on US base in Bahrain on 2026-11-18",
-      "updated": "2026-11-18T01:31:43+00:00"
-    }
+    "title": "Iranian drone attack on US base in Bahrain",
+    "description": "Iran launched drones against a U.S. military installation in Bahrain, the third such strike in recent days.",
+    "source": "auto"
   },
   {
-    "id": "sudan",
-    "name": "Sudan",
-    "lat": 15,
-    "lon": 30,
+    "id": "b3f99b43405d",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
     "tier": "war",
-    "who": "Army (SAF) vs the paramilitary Rapid Support Forces",
-    "what": "Civil war hardening into a formal partition",
-    "when": "Since April 15, 2023, now in its 4th year",
-    "how": "RSF controls Darfur and the west; army holds the center, north and east",
-    "current": "The conflict between Sudan's Armed Forces and the Rapid Support Forces remains marked by intense drone warfare, with a recent strike killing over 300 civilians. A UN report released earlier this month says 1,390 civilians have been killed by drones between January and June 2026, accounting for more than 80% of civilian deaths.",
-    "sources": [
-      {
-        "label": "AP News: Sudan-Ethiopia tensions rise as they trade accusations of supporting armed groups",
-        "url": "https://apnews.com/article/sudan-rsf-ethiopia-tigray-war-649640494d674bfffcdc4418205b7485"
-      },
-      {
-        "label": "BBC News: Sudan army drones hit mourners and fuel market killing more than 300 people",
-        "url": "https://www.bbc.com/news/topics/cq23pdgvgm8t"
-      },
-      {
-        "label": "allAfrica.com: Sudan: UN Report Details Deadly Civilian Impact of Surge in Drone Strikes",
-        "url": "https://allafrica.com/stories/202611170440.html"
-      }
-    ],
-    "confidence": "high",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-18T01:32:09+00:00",
-    "perspective": {
-      "dominant_frame": "Tier 1 outlets (AP, BBC) stress the acute humanitarian impact of a recent drone strike that killed over 300 people, while Tier 3 coverage highlights the broader pattern, noting a UN report that attributes 1,390 civilian deaths in the first half of 2026 to drone attacks. Both frames portray the conflict as a severe civilian crisis driven by drone warfare.",
-      "divergence": "low"
-    },
-    "escalation": {
-      "score": 85,
-      "note": "mass‑casualty drone strike on 19 Nov 2026",
-      "updated": "2026-11-18T01:32:09+00:00"
-    }
+    "title": "Ukraine drone attack on Russia",
+    "description": "Ukraine struck a key bridge and targeted oil refineries in a major drone attack on Russia",
+    "source": "auto"
   },
   {
-    "id": "mali",
-    "name": "Sahel (Mali)",
-    "lat": 17,
-    "lon": -4,
+    "id": "2f305abcb346",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
     "tier": "war",
-    "who": "Al-Qaeda-linked JNIM and allied fighters vs the military government",
-    "what": "Jihadist fuel blockade and insurgency threatening the junta",
-    "when": "Blockade of the capital began around September 2025",
-    "how": "Fuel convoys attacked, schools and businesses paralyzed; blockade has since eased somewhat",
-    "current": "The conflict in Mali continues to escalate with increased violence and militant attacks. Fatalities from militant attacks have risen by 35% in the first seven months of this year compared to the same period in 2024. Armed group alliances are reshaping the conflict in the Sahel region, with JNIM being the most potent and deadly group.",
-    "sources": [
-      {
-        "label": "Al Jazeera: How armed group alliances are reshaping Mali’s conflict and the wider Sahel",
-        "url": "https://www.aljazeera.com/news/2026/7/22/how-armed-group-alliances-are-reshaping-malis-conflict-and-the-wider-sahel"
-      },
-      {
-        "label": "AP News: What to know about the conflict in Mali",
-        "url": "https://apnews.com/article/mali-conflict-qaida-jnim-fla-what-to-know-95c8bd22d84e270e5d0d83546b414190"
-      },
-      {
-        "label": "BBC: Sahel conflict: Two French soldiers killed in Mali",
-        "url": "https://www.bbc.com/news/world-africa-55522236"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:32:45+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict in Mali is framed as a complex and escalating crisis, with multiple armed groups involved and a significant increase in militant attacks. Both Western and regional sources agree on the severity of the situation, but may differ in their emphasis on specific factors, such as climate change or external intervention.",
-      "divergence": "low"
-    },
-    "escalation": {
-      "score": 75,
-      "note": "Fatalities up 35%.",
-      "updated": "2026-11-18T01:32:45+00:00"
-    }
+    "title": "Ukraine strikes Crimea Bridge and southern oil refinery",
+    "description": "Ukraine launched a large drone attack hitting the Crimea Bridge and a key oil refinery in southern Russia, causing two deaths in Crimea.",
+    "source": "auto"
   },
   {
-    "id": "myanmar",
-    "name": "Myanmar",
-    "lat": 21,
-    "lon": 96,
+    "id": "a45d622ca4bf",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
     "tier": "war",
-    "who": "Military junta vs resistance fighters and ethnic armed groups",
-    "what": "Civil war following the 2021 coup, now with a civilian facade",
-    "when": "Coup Feb 1, 2021; Min Aung Hlaing elected president April 3, 2026",
-    "how": "Junta-backed party swept a sham election; war with resistance forces continues in the borderlands",
-    "current": "Myanmar's conflict death toll has surpassed 100,000, with the military intensifying attacks on civilians. The military has seized key resistance headquarters and bases, and airstrikes have killed dozens of people, including children. The situation remains dire, with over 16 million people requiring humanitarian assistance.",
-    "sources": [
-      {
-        "label": "UN Meetings Coverage and Press Releases: Myanmar’s Conflict Death Toll Surpasses 100,000",
-        "url": "https://press.un.org/en/2026/ga/shc4451.doc.htm"
-      },
-      {
-        "label": "The Washington Post: Myanmar army seizes key resistance headquarters and 10 bases held by opposition",
-        "url": "https://www.washingtonpost.com/world/2026/11/10/myanmar-army-civil-war-nug-pdf-knu/4dbc5df2-dce4-11f1-912c-4fbb80d73f7f_story.html"
-      },
-      {
-        "label": "Al Jazeera: Myanmar airstrike kills 12 at displacement camp in Rakhine state",
-        "url": "https://www.aljazeera.com/video/newsfeed/2026/11/14/myanmar-airstrike-displacement-camp-rakhine"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:33:22+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict in Myanmar is being framed as a humanitarian crisis, with the military's attacks on civilians and the resulting displacement and casualties being highlighted. Both Western and regional sources are emphasizing the severity of the situation.",
-      "divergence": "low"
-    },
-    "escalation": {
-      "score": 75,
-      "note": "Airstrikes kill dozens",
-      "updated": "2026-11-18T01:33:22+00:00"
-    }
+    "title": "Russian missile strike damages Kyiv Dnipro bridges",
+    "description": "Russian ballistic missiles hit Kyiv’s northern and southern Dnipro bridges, damaging the subway system and partially cutting water and power supplies.",
+    "source": "auto"
   },
   {
-    "id": "venezuela",
-    "name": "Venezuela",
-    "lat": 8,
-    "lon": -66,
+    "id": "b11f9ea04a3f",
+    "date": "2026-11-17",
+    "conflict": "Iran",
     "tier": "war",
-    "who": "US military vs Maduro; now a US-backed government vs the opposition",
-    "what": "Maduro captured in a US raid, transition still in limbo",
-    "when": "Raid on Jan 3, 2026; still no election date set",
-    "how": "Acting president installed with US backing; opposition leader repeatedly blocked from returning",
-    "current": "The US-Venezuela conflict continues to escalate, with the US hitting Venezuela's Maduro and his wife with torture charges. The UN Security Council is divided over the crisis, and the situation remains tense. Protests have intensified in Venezuela, with demonstrators demanding the release of ousted President Nicolas Maduro and his wife Cilia Flores.",
-    "sources": [
-      {
-        "label": "South China Morning Post: US hits Venezuela’s Maduro and wife with torture charges",
-        "url": "https://www.scmp.com/topics/us-venezuela-conflict"
-      },
-      {
-        "label": "UN News: Maduro seized, norms tested: Security Council divided as Venezuela crisis deepens",
-        "url": "https://news.un.org/en/story/2026/01/1166706"
-      },
-      {
-        "label": "The Washington Post: Venezuelan protests of blackouts intensify under U.S.-backed leader",
-        "url": "https://www.washingtonpost.com/world/2026/11/12/venezuelan-protests-blackouts-intensify-under-us-backed-leader"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:33:41+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is framed as a US-Venezuela crisis, with the US taking a strong stance against Maduro and his wife. The UN Security Council is divided, and the situation is tense. Regional specialists, such as the South China Morning Post, emphasize the protests and the humanitarian situation, while Western broadcasters, such as the BBC, focus on the US actions and the UN response.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 75,
-      "note": "Protests intensify",
-      "updated": "2026-11-18T01:33:41+00:00"
-    }
+    "title": "Iran warns of preemptive strike",
+    "description": "Iran warns it may strike first before another US attack",
+    "source": "auto"
   },
   {
-    "id": "drc",
-    "name": "E. DR Congo",
-    "lat": -2,
-    "lon": 28.8,
+    "id": "bb3a2e715b5b",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
     "tier": "war",
-    "who": "Rwanda-backed M23 vs the Congolese government",
-    "what": "Peace deals signed, but M23 still controls the ground",
-    "when": "Washington and Doha deals signed mid-2025; conflict decades old",
-    "how": "M23 still controls Goma and Bukavu despite the agreements",
-    "current": "The conflict in the Democratic Republic of Congo continues to escalate, with clashes between Government forces and M23 rebels in the east, despite peace agreements. The Ebola outbreak has also worsened the crisis, with armed groups unrest holding back the response. At least 44 civilians were killed in an attack by Islamic State-linked gunmen in the northeastern part of the country.",
-    "sources": [
-      {
-        "label": "UN News: Security Council LIVE",
-        "url": "https://news.un.org/en/story/2026/09/1168482"
-      },
-      {
-        "label": "Al Jazeera: DR Congo’s rival peace efforts fail to halt violence in the east",
-        "url": "https://www.aljazeera.com/news/2026/11/18/dr-congos-rival-peace-efforts-fail-to-halt-violence-in-the-east"
-      },
-      {
-        "label": "Africanews: DR Congo: At least 44 dead in attack by Islamic State-linked gunmen",
-        "url": "https://www.africanews.com/2026/11/14/dr-congo-at-least-44-dead-in-attack-by-islamic-state-linked-gunmen"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:34:38+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict in the DRC is framed as a complex crisis with multiple factors, including clashes between Government forces and M23 rebels, Ebola outbreak, and armed groups unrest. Tier 1 sources, such as UN News, focus on the peace agreements and ceasefire monitoring, while Tier 3 sources, such as Al Jazeera, emphasize the humanitarian crisis and the impact on civilians.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 75,
-      "note": "Clashes continue despite peace agreements.",
-      "updated": "2026-11-18T01:34:38+00:00"
-    }
+    "title": "Ukrainian drone strike hits Crimean (Kerch) Bridge",
+    "description": "Ukraine launched a large overnight drone attack that struck the Kerch Bridge linking Russia to annexed Crimea.",
+    "source": "auto"
   },
   {
-    "id": "taiwan",
-    "name": "Taiwan Strait",
-    "lat": 24,
-    "lon": 121,
+    "id": "ef42aa97d1f5",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian missiles hit two Kyiv bridges",
+    "description": "Russia struck the Northern and Southern bridges in Kyiv, causing partial damage to water and power supplies.",
+    "source": "auto"
+  },
+  {
+    "id": "fe38deb1f86e",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Kherson localized cease‑fire ends",
+    "description": "A six‑day cease‑fire in the Kherson region concluded, with no reported violations during the truce but renewed risk of fighting.",
+    "source": "auto"
+  },
+  {
+    "id": "66a8e5b32135",
+    "date": "2026-11-17",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "UN report on drone casualties",
+    "description": "UN report says at least 1,390 civilians were killed Jan‑Jun 2026, over 80% from drone strikes.",
+    "source": "auto"
+  },
+  {
+    "id": "71a939dc8392",
+    "date": "2026-11-16",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran warns of preemptive strike against U.S.",
+    "description": "Iran’s deputy foreign minister warned that Tehran will not wait for a U.S. attack, saying Washington is buying time to prepare for a strike. Iran also threatened retaliation against any U.S. aggression.",
+    "source": "merged"
+  },
+  {
+    "id": "8390f2a11c2a",
+    "date": "2026-11-16",
+    "conflict": "Horn of Africa",
     "tier": "flash",
-    "who": "China (PLA) vs Taiwan, with the US and Japan backing Taipei",
-    "what": "Escalating military pressure just short of open conflict",
-    "when": "Ongoing, intensified through 2026",
-    "how": "Record Chinese aircraft and ship incursions into Taiwan’s air defense zone",
-    "current": "China has intensified its military operations around Taiwan, with Chinese fighter jets and drones carrying out a 'joint combat readiness patrol' alongside Chinese warships. The G7 foreign ministers have stated that China's actions east of Taiwan threaten stability, freedom of navigation, and the safety of international shipping. Taiwan's defence ministry has detected 29 Chinese military aircraft, including J-16 fighter jets and drones, around Taiwan.",
-    "sources": [
-      {
-        "label": "DW: China's Xi renews calls for 'reunification' with Taiwan",
-        "url": "https://www.dw.com/en/china-taiwan-xi-jinping-reunification/a-79929738"
-      },
-      {
-        "label": "The Jerusalem Post: G7 foreign ministers say China's actions east of Taiwan threaten stability",
-        "url": "https://www.jpost.com/international/article-914642"
-      },
-      {
-        "label": "The Hindu: G7 Foreign Ministers say China's actions east of Taiwan threaten stability",
-        "url": "https://www.thehindu.com/news/international/g7-foreign-ministers-say-chinas-actions-east-of-taiwan-threaten-stability/article71692205.ece"
-      },
-      {
-        "label": "Al Jazeera: Xi Jinping says Taiwan’s ‘complete reunification’ with China will happen",
-        "url": "https://www.aljazeera.com/news/2026/11/12/xi-jinping-says-taiwans-complete-reunification-with-china-will-happen"
-      }
-    ],
-    "confidence": "low",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:35:20+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is being framed as a threat to stability and freedom of navigation, with China's actions being seen as aggressive and provocative. Tier 1 sources such as The Hindu and The Jerusalem Post are emphasizing the G7 foreign ministers' statement, while Tier 3 sources such as Al Jazeera and Asia Times are focusing on China's military operations and Xi Jinping's statements.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 50,
-      "note": "China's joint combat readiness patrol",
-      "updated": "2026-11-18T01:35:20+00:00"
-    }
+    "title": "Ethiopia-Sudan mutual accusations",
+    "description": "Ethiopia and Sudan accused each other of supporting armed groups waging war within their borders, undermining peace efforts and raising fears of a wider regional conflict.",
+    "source": "auto"
   },
   {
-    "id": "korea",
-    "name": "Korean peninsula",
-    "lat": 39,
-    "lon": 127,
+    "id": "e92b50c6621c",
+    "date": "2026-11-16",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian drone strike in Hlukhiv",
+    "description": "A Russian drone struck a small house in the northern Ukrainian town of Hlukhiv, burying a nine-year-old boy and his grandmother under the debris.",
+    "source": "auto"
+  },
+  {
+    "id": "28ab6c460a0a",
+    "date": "2026-11-16",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian attack on Dnipro's train station",
+    "description": "A Russian drone strike killed at least 14 people at Dnipro's train station.",
+    "source": "auto"
+  },
+  {
+    "id": "191fa570ccb1",
+    "date": "2026-11-16",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian glide bomb attack on school",
+    "description": "A Russian glide bomb attack killed at least 31 Ukrainians at a school distributing medicine and food in the Zaporizhzhia region.",
+    "source": "auto"
+  },
+  {
+    "id": "bee38a60e378",
+    "date": "2026-11-16",
+    "conflict": "Taiwan Strait",
     "tier": "flash",
-    "who": "North Korea vs South Korea, the US and Japan",
-    "what": "Nuclear and missile buildup, with no active dialogue",
-    "when": "Continuous missile testing through 2026",
-    "how": "Repeated launches; Pyongyang calls Seoul a \"hostile enemy state\"",
-    "current": "Tensions are escalating on the Korean Peninsula, with the UN's top political affairs official expressing grave concern over rising tensions. North Korea has been developing a diversified missile force, including short-range ballistic missiles. The US and South Korea have been holding joint military exercises, while North Korea has been testing cluster warheads and launching ICBMs.",
-    "sources": [
-      {
-        "label": "UN News: Tensions escalating over DPR Korea",
-        "url": "https://news.un.org/en/focus-topic/democratic-peoples-republic-korea"
-      },
-      {
-        "label": "Crisis Group: Korean Peninsula",
-        "url": "https://www.crisisgroup.org/asia-pacific/north-east-asia/korean-peninsula"
-      },
-      {
-        "label": "Asia Times: Even after midterms, Trump's still a problem for Seoul and Tokyo",
-        "url": "https://asiatimes.com/2026/11/even-after-midterms-trumps-still-a-problem-for-seoul-and-tokyo"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:35:55+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is being framed as a rising tension between North and South Korea, with the US playing a key role in the region. Tier 1 sources, such as the UN, are emphasizing the need for diplomacy, while Tier 3 sources, such as Asia Times, are highlighting the military buildup and potential for conflict.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 57,
-      "note": "ICBM launch",
-      "updated": "2026-11-18T01:35:55+00:00"
-    }
+    "title": "Fujian aircraft carrier sails through Taiwan Strait",
+    "description": "China's newest aircraft carrier, Fujian, sailed through the Taiwan Strait, prompting a response from Taiwan's defense ministry",
+    "source": "auto"
   },
   {
-    "id": "scs",
-    "name": "South China Sea",
-    "lat": 13,
-    "lon": 117,
+    "id": "4ca1be925428",
+    "date": "2026-11-15",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "RSF drone attacks on Sudan power stations",
+    "description": "RSF drone strikes hit power stations in southeast Sudan, knocking out electricity and causing civilian casualties, leaving cities without power.",
+    "source": "merged"
+  },
+  {
+    "id": "8139976963b4",
+    "date": "2026-11-15",
+    "conflict": "South China Sea",
     "tier": "flash",
-    "who": "China vs the Philippines, backed by the US, Japan and Australia",
-    "what": "Maritime and territorial dispute over reefs and shoals",
-    "when": "Ongoing, flaring repeatedly through 2026",
-    "how": "Water-cannon incidents and blocked resupply runs near Scarborough Shoal",
-    "current": "China and the Philippines have clashed in the South China Sea, with China using water cannons on Philippine vessels. The two countries have been in dispute over territorial claims, and tensions have escalated in recent months. ASEAN and China have been negotiating a code of conduct for the South China Sea, but an agreement has yet to be reached.",
-    "sources": [
-      {
-        "label": "Al Jazeera: China, Philippine coastguard vessels clash in South China Sea",
-        "url": "https://www.aljazeera.com/tag/south-china-sea"
-      },
-      {
-        "label": "AP News: China and ASEAN are closer to a South China Sea pact",
-        "url": "https://apnews.com/article/south-china-sea-code-of-conduct-southeast-asia-8ef757e6ed486a5632e4c2299ee00064"
-      },
-      {
-        "label": "Global Conflict Tracker: Territorial Disputes in the South China Sea",
-        "url": "https://www.cfr.org/global-conflict-tracker/conflict/territorial-disputes-south-china-sea"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:36:33+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is being framed as a territorial dispute between China and the Philippines, with ASEAN playing a role in negotiations. Tier 1 sources such as AP News and Tier 3 sources such as Al Jazeera agree on the facts, but Tier 3 sources provide more regional perspective.",
-      "divergence": "low"
-    },
-    "escalation": {
-      "score": 45,
-      "note": "Clashes between China and Philippines continue.",
-      "updated": "2026-11-18T01:36:33+00:00"
-    }
+    "title": "ASEAN summit discusses tough South China Sea code‑of‑conduct",
+    "description": "At an ASEAN summit, leaders gathered as analysts warned that reaching a final South China Sea code of conduct will be a tall order amid heightened China‑Philippines tensions.",
+    "source": "merged"
   },
   {
-    "id": "kashmir",
-    "name": "Kashmir",
-    "lat": 34,
-    "lon": 76,
+    "id": "35b7c9ab25aa",
+    "date": "2026-11-15",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran launches second drone attack on Bahrain",
+    "description": "Iran carried out a drone strike on Bahrain, marking the second such attack within days.",
+    "source": "merged"
+  },
+  {
+    "id": "d06bce3d9dd1",
+    "date": "2026-11-15",
+    "conflict": "Korean peninsula",
     "tier": "flash",
-    "who": "India vs Pakistan, both nuclear-armed",
-    "what": "Their worst clash in decades, now a fragile truce",
-    "when": "Crisis April–May 2025; ceasefire since May 10, 2025",
-    "how": "Missile, drone and artillery exchange; US-mediated ceasefire holds, dispute unresolved",
-    "current": "The conflict in Kashmir remains tense, with India and Pakistan maintaining their respective positions on the disputed region. India has accused Pakistan of supporting militant groups, while Pakistan denies these claims. Recent statements from Indian and Pakistani officials suggest that the situation is unlikely to improve soon.",
-    "sources": [
-      {
-        "label": "BBC News: India-Pakistan relations",
-        "url": "https://www.bbc.co.uk/news/topics/cx3ezqn30pmt"
-      },
-      {
-        "label": "The Hindu: BJP asks Pakistan to hand over PoK",
-        "url": "https://www.thehindu.com/news/national/jammu-and-kashmir/bjp-asks-pakistan-to-hand-over-pok-says-kashmir-integral-part-of-india/article71697637.ece"
-      },
-      {
-        "label": "The New York Times: Kashmir",
-        "url": "https://www.nytimes.com/topic/destination/kashmir"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:37:09+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is framed as a longstanding dispute between India and Pakistan, with both countries maintaining their claims on the region. Tier 1 sources, such as BBC News, focus on the diplomatic efforts and official statements, while Tier 3 sources, such as The Hindu, provide more regional perspective and insight into the local situation.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 35,
-      "note": "Tensions remain high",
-      "updated": "2026-11-18T01:37:09+00:00"
-    }
+    "title": "North Korea launches ICBM",
+    "description": "North Korea launched an intercontinental ballistic missile, posing a grave threat to regional stability.",
+    "source": "auto"
   },
   {
-    "id": "caucasus",
-    "name": "Caucasus",
-    "lat": 40.5,
-    "lon": 45,
+    "id": "2bf8105b6d1c",
+    "date": "2026-11-15",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli air strike kills senior Hamas commander",
+    "description": "Israeli air strike kills senior Hamas commander in Gaza",
+    "source": "auto"
+  },
+  {
+    "id": "46807bfcb8a9",
+    "date": "2026-11-15",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Yemen repositions Red Sea troops",
+    "description": "Yemen’s army announced it is repositioning troops from the Red Sea amid the ongoing regional conflict.",
+    "source": "auto"
+  },
+  {
+    "id": "8f3f670eea57",
+    "date": "2026-11-15",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Zaporizhzhia infrastructure strikes",
+    "description": "Russian attacks on Zaporizhzhia injured 22 people, including children, and forced the closure of the DniproHES dam.",
+    "source": "auto"
+  },
+  {
+    "id": "b85e11fa6e89",
+    "date": "2026-11-15",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea probes soldier death",
+    "description": "South Korean authorities are investigating the death of a frontline soldier near the North Korean border, an incident occurring amidst heightened tensions.",
+    "source": "auto"
+  },
+  {
+    "id": "841a55b09bc2",
+    "date": "2026-11-15",
+    "conflict": "Thai–Cambodia border",
     "tier": "watch",
-    "who": "Armenia vs Azerbaijan",
-    "what": "Preliminary peace signed, but a final treaty remains unsigned",
-    "when": "Framework signed Aug 8, 2025; still unresolved in 2026",
-    "how": "Azerbaijan wants an Armenian constitutional change before signing a final deal",
-    "current": "The conflict in the Caucasus region remains at a simmer, with tensions between Armenia and Azerbaijan still present. A U.S.-brokered summit in August 2025 produced a joint peace declaration and an initialed peace agreement, but the situation remains fragile. Iran's foreign policy is centered on the region, and its influence is still felt.",
-    "sources": [
-      {
-        "label": "CFR: Europe and Eurasia",
-        "url": "https://www.cfr.org/global-conflict-tracker/region/europe-and-eurasia"
-      },
-      {
-        "label": "Al Jazeera: New terror threat in the Caucasus",
-        "url": "https://www.aljazeera.com/author/richard_giragosian_201462912333513614"
-      },
-      {
-        "label": "Arab News: How Iran war may impact Turkiye-South Caucasus ties",
-        "url": "https://www.arabnews.com/opinion/how-iran-war-may-impact-turkiye-south-caucasus-ties-2636288"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:37:24+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is framed as a fragile peace with ongoing tensions between Armenia and Azerbaijan, with Iran's influence still present in the region. Tier 1 sources focus on the U.S.-brokered summit, while Tier 3 sources emphasize the regional perspective and Iran's role.",
-      "divergence": "low"
-    },
-    "escalation": {
-      "score": 33,
-      "note": "Tensions remain.",
-      "updated": "2026-11-18T01:37:24+00:00"
-    }
+    "title": "Thailand blocks fuel to Cambodia",
+    "description": "Thailand moved to block fuel from reaching Cambodia as the border conflict continues to escalate, according to the Council on Foreign Relations.",
+    "source": "auto"
   },
   {
-    "id": "thaicambodia",
-    "name": "Thai–Cambodia border",
-    "lat": 13,
-    "lon": 103.5,
+    "id": "4ba3e8b7aa23",
+    "date": "2026-11-15",
+    "conflict": "Caucasus",
     "tier": "watch",
-    "who": "Thailand vs Cambodia",
-    "what": "Long-running border dispute that turned into open war twice in 2025",
-    "when": "5-day clash July 2025; worse fighting Dec 7–27, 2025",
-    "how": "Artillery, tanks, drones and jets; 100+ killed before the latest ceasefire",
-    "current": "The conflict between Thailand and Cambodia continues to escalate, with dozens of people killed and over 500,000 displaced this month. Despite attempted mediation by US President Donald Trump, the fighting has intensified, with Thailand blocking fuel from reaching Cambodia. Tens of thousands of people have fled the border areas due to the renewed combat.",
-    "sources": [
-      {
-        "label": "AP News: Renewed combat between Cambodia and Thailand forces thousands to flee",
-        "url": "https://apnews.com/article/thailand-cambodia-combat-border-dispute-142145d84a217ad6c6f208769c447615"
-      },
-      {
-        "label": "Council on Foreign Relations: Cambodia-Thailand Conflict Continues to Escalate",
-        "url": "https://www.cfr.org/articles/cambodia-thailand-conflict-continues-escalate"
-      },
-      {
-        "label": "BBC: Thailand and Cambodia: Why can't they end their border conflict?",
-        "url": "https://www.bbc.com/news/articles/c39p7jkp27lo"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:37:59+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is framed as a longstanding dispute between Thailand and Cambodia, with both sides blaming each other for the escalation. Tier 1 sources emphasize the humanitarian crisis, while Tier 3 sources provide more context on the historical and political roots of the conflict.",
-      "divergence": "moderate"
-    },
-    "escalation": {
-      "score": 79,
-      "note": "Intensified fighting",
-      "updated": "2026-11-18T01:37:59+00:00"
-    }
+    "title": "Nagorno-Karabakh Fighting",
+    "description": "Dozens killed in fighting between Armenia and Azerbaijan in Nagorno-Karabakh",
+    "source": "auto"
   },
   {
-    "id": "horn",
-    "name": "Horn of Africa",
-    "lat": 9,
-    "lon": 41,
+    "id": "0105e406db08",
+    "date": "2026-11-14",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "US envoys meet Zelensky in Dublin",
+    "description": "US envoy Steve Witkoff met President Zelensky in Dublin after talks with Putin in Moscow; Putin agreed to allow European negotiators to join the next round of Ukraine talks.",
+    "source": "auto"
+  },
+  {
+    "id": "39b9753d40b7",
+    "date": "2026-11-14",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian hospital bombing injures 73",
+    "description": "A Russian airstrike hit a Ukrainian hospital, injuring at least 73 people.",
+    "source": "auto"
+  },
+  {
+    "id": "15034cdb798a",
+    "date": "2026-11-14",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "SAF successes in Kordofan",
+    "description": "UN identified Kordofan as the conflict’s epicentre as SAF gains ground against RSF.",
+    "source": "auto"
+  },
+  {
+    "id": "3cdfe33373b4",
+    "date": "2026-11-14",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran views shift in US approach",
+    "description": "After JD Vance ordered away",
+    "source": "auto"
+  },
+  {
+    "id": "81a0f3f57828",
+    "date": "2026-11-14",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "US floats Donbas cession for NATO",
+    "description": "Ukraine claims the US suggested ceding parts of Donbas to Russia in exchange for NATO membership, a proposal that has sparked diplomatic tension.",
+    "source": "auto"
+  },
+  {
+    "id": "3a0851cde51a",
+    "date": "2026-11-14",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "IS-linked attack in Ituri",
+    "description": "Gunmen linked to the Islamic State group killed at least 44 civilians in northeastern Ituri province.",
+    "source": "auto"
+  },
+  {
+    "id": "f12f9d4ff8aa",
+    "date": "2026-11-14",
+    "conflict": "Korean peninsula",
     "tier": "flash",
-    "who": "Ethiopia vs Eritrea",
-    "what": "Troop buildups and real border clashes amid fears of wider war",
-    "when": "Tensions escalated sharply from early 2026; clashes in August",
-    "how": "Ethiopian troops clashed with Tigrayan forces near the Eritrea-Sudan border triangle",
-    "current": "Tensions in the Horn of Africa are high due to clashes between Ethiopia and Eritrea, with fears of a full-scale war. Diplomatic relations between Ethiopia and Sudan have also hit new lows. The US has called for de-escalation and peace talks to resolve the conflict.",
-    "sources": [
-      {
-        "label": "DW: Ethiopia-Eritrea conflict: New clashes risk full-scale war",
-        "url": "https://www.dw.com/en/ethiopia-eritrea-border-clashes-raise-fears-of-regional-war/a-79970353"
-      },
-      {
-        "label": "AP News: Marco Rubio urges peace talks to de-escalate Horn of Africa tensions",
-        "url": "https://apnews.com/article/ethiopia-tigray-eritrea-rubio-6d136d4280931d2d213d7d6cafd670ab"
-      },
-      {
-        "label": "Middle East Eye: Horn of Africa - Latest news, videos and opinion",
-        "url": "https://www.middleeasteye.net/topics/horn-africa"
-      }
-    ],
-    "confidence": "medium",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-18T01:38:56+00:00",
-    "perspective": {
-      "dominant_frame": "The conflict is framed as a regional issue with potential for full-scale war, with the US calling for de-escalation and peace talks. Tier 1 sources like AP News and DW emphasize the need for diplomatic resolution, while Tier 3 sources like Middle East Eye provide regional context.",
-      "divergence": "low"
-    },
-    "escalation": {
-      "score": 55,
-      "note": "Clashes between Ethiopia and Eritrea continue.",
-      "updated": "2026-11-18T01:38:56+00:00"
-    }
+    "title": "North Korea tests cluster warhead",
+    "description": "Pyongyang announced it tested a new cluster warhead for strategic cruise missiles, claiming it could destroy an area of 5 to 6 hectares with high-density power.",
+    "source": "auto"
+  },
+  {
+    "id": "311db654ca91",
+    "date": "2026-11-14",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Accusations of drone-related ceasefire breach",
+    "description": "Thailand accused Cambodia of breaking the ceasefire over an incident involving drones seen by both sides along the border line, hours after international praise for the 'hard-won' agreement.",
+    "source": "auto"
+  },
+  {
+    "id": "c97918703bec",
+    "date": "2026-11-14",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Death of Hamas Rafah brigade commander",
+    "description": "Hamas confirmed the death of Rafah brigade commander Samir Abu Younis in an Israeli strike on Khan Younis.",
+    "source": "auto"
+  },
+  {
+    "id": "c19b19110315",
+    "date": "2026-11-14",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Myanmar airstrike on displacement camp",
+    "description": "Airstrike kills 12 people, including a child, and wounds 18 others at a displacement camp in Rakhine state",
+    "source": "auto"
+  },
+  {
+    "id": "464a72c8beba",
+    "date": "2026-11-13",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Gulf allies urge pause; IRGC hits radar",
+    "description": "Saudi Arabia, Qatar and other Gulf states asked the U.S. to hold off large‑scale attacks; the IRGC retaliated by hitting a U.S. early‑warning radar in Bahrain.",
+    "source": "auto"
+  },
+  {
+    "id": "6819226b1893",
+    "date": "2026-11-13",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Junta double‑tap airstrike on India Market in Kyauktaw, Rakhine",
+    "description": "The Myanmar junta carried out double‑tap airstrikes on the India Market in Kyauktaw, Rakhine State, killing at least 50 people and wounding 58 civilians.",
+    "source": "merged"
+  },
+  {
+    "id": "9b59b42d9245",
+    "date": "2026-11-13",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "China conducts joint combat readiness patrol",
+    "description": "Chinese fighter jets and drones carried out a joint combat readiness patrol alongside Chinese warships",
+    "source": "auto"
+  },
+  {
+    "id": "747b4af63e0e",
+    "date": "2026-11-12",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strike kills six at Gaza’s Nasser Hospital",
+    "description": "An Israeli airstrike hit Nasser Hospital in Gaza, killing at least six Palestinians, including a surgeon.",
+    "source": "merged"
+  },
+  {
+    "id": "5d34d589b535",
+    "date": "2026-11-12",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Xi Jinping declares Taiwan’s complete reunification inevitable",
+    "description": "President Xi Jinping declared that Taiwan’s complete reunification with China is inevitable, reaffirming Beijing’s long‑term goal and noting the remark came a week before the APEC summit in Shenzhen, without explicitly mentioning the use of force.",
+    "source": "merged"
+  },
+  {
+    "id": "b3e07e2ff9f0",
+    "date": "2026-11-10",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Seoul summons Ukraine’s envoy over North Korean POW transfer",
+    "description": "South Korea protested the secret handover of two captured North Korean soldiers, accusing Kyiv of destabilising the peninsula.",
+    "source": "auto"
+  },
+  {
+    "id": "45e0de01c1f8",
+    "date": "2026-11-10",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Hegseth impeachment proceedings",
+    "description": "Impeachment articles accuse US Secretary of Defense Hegseth of committing an act of war by abducting Maduro without Congressional approval.",
+    "source": "auto"
+  },
+  {
+    "id": "f79a06dbfb38",
+    "date": "2026-11-10",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Soldiers sentenced to death",
+    "description": "At least 66 Congolese soldiers were sentenced to death for cowardice and fleeing the frontline during rebel clashes.",
+    "source": "auto"
+  },
+  {
+    "id": "57aed4d76996",
+    "date": "2026-11-10",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Airstrike on Rakhine market",
+    "description": "A military jet dropped two bombs on a market in rebel‑held Rakhine state, killing at least 50 people and injuring 58.",
+    "source": "auto"
+  },
+  {
+    "id": "08301e6afac7",
+    "date": "2026-11-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Trump meets Qatar mediator as US strikes Qeshm Island, Iran hits tankers",
+    "description": "President Trump met Qatar’s mediator in Doha while the United States air‑struck Iran’s Qeshm Island, prompting Iranian forces to attack commercial tankers in the Gulf and Strait of Hormuz; officials said no immediate cease‑fire deal was forthcoming.",
+    "source": "merged"
+  },
+  {
+    "id": "6ba26b83f6c0",
+    "date": "2026-11-08",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "Chinese Forces Conduct Drills",
+    "description": "China announced readiness patrols around Scarborough Shoal",
+    "source": "auto"
+  },
+  {
+    "id": "80eee3c423bd",
+    "date": "2026-11-08",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea tests hypersonic missile",
+    "description": "South Korea tested its first domestically-developed hypersonic missile.",
+    "source": "auto"
+  },
+  {
+    "id": "8a905cf46a27",
+    "date": "2026-11-08",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Reduced Chinese military activity near Taiwan",
+    "description": "Taiwanese Ministry of National Defence reported only one Chinese aircraft north of Taiwan and eight ships near the island during the 24-hour period between November 8 and 9, a sharp drop from previous counts.",
+    "source": "auto"
+  },
+  {
+    "id": "612668852762",
+    "date": "2026-11-06",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "IS‑linked militants burn vehicles and homes in Cantine, North Kivu",
+    "description": "Militants affiliated with the Islamic State attacked Cantine in North Kivu, setting fire to vehicles and homes and causing extensive damage.",
+    "source": "merged"
+  },
+  {
+    "id": "7eac73f9ce98",
+    "date": "2026-11-05",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russia and Ukraine exchange airstrikes",
+    "description": "Renewed security talks described as productive",
+    "source": "auto"
+  },
+  {
+    "id": "8dba55316f34",
+    "date": "2026-11-03",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "China deploys 100 ships and 49 aircraft around Taiwan",
+    "description": "China sent a fleet of 100 warships and 49 aircraft to operate around Taiwan, according to Taiwan’s Ministry of National Defence.",
+    "source": "merged"
+  },
+  {
+    "id": "095cbfc94e77",
+    "date": "2026-10-27",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Land‑mine explosions injure three South Korean soldiers",
+    "description": "Explosions on the western edge of the DMZ wounded three troops, reigniting tensions over the 1953 armistice line.",
+    "source": "auto"
+  },
+  {
+    "id": "960a1f62b5c9",
+    "date": "2026-10-19",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea and U.S. conclude joint “Hoguk” military exercises",
+    "description": "The two‑week drill involved combined forces and multilateral “Keen Sword” exercises in Japan, underscoring allied readiness.",
+    "source": "auto"
+  },
+  {
+    "id": "cd0e53a68e36",
+    "date": "2026-10-18",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "IS Sahel attacks",
+    "description": "Suspected IS Sahel attacks left scores of civilians dead in Ménaka region",
+    "source": "auto"
+  },
+  {
+    "id": "79df217117dc",
+    "date": "2026-10-18",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "IS‑Sahel attacks civilian encampments in Ménaka",
+    "description": "Armed assailants attacked civilian encampments in the Ménaka region, including Tinabow and Tagadayat, killing at least 48 civilians. The Idaksahak community attributed the attack to the Islamic State Sahel Province.",
+    "source": "auto"
+  },
+  {
+    "id": "be371467bb99",
+    "date": "2026-10-05",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "China warns against “provocative acts” after Philippine deployment",
+    "description": "Beijing issued a warning, labeling the Philippine Coast Guard’s actions as provocative and reiterating its claim to the contested waters.",
+    "source": "auto"
+  },
+  {
+    "id": "23d954f7b976",
+    "date": "2026-10-01",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "Philippine Coast Guard deploys largest vessel to challenge Chinese research ship near Batanes",
+    "description": "The Philippine Coast Guard sent its biggest vessel, supported by aircraft, to confront a Chinese research vessel operating near the northern province of Batanes; the Chinese vessel subsequently withdrew.",
+    "source": "auto"
+  },
+  {
+    "id": "2026-09-23-iran-unga",
+    "date": "2026-09-23",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Diplomats meet at the UN General Assembly sidelines",
+    "description": "Iranian and US-aligned officials hold talks in New York, without a breakthrough on the frozen ceasefire.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-09-22-venezuela-unga",
+    "date": "2026-09-22",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Trump meets Rodríguez as Machado again fails to return",
+    "description": "Their first face-to-face meeting since the raid coincides with Machado’s seventh set of failed attempts to re-enter Venezuela.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-09-06-ukraine-talks",
+    "date": "2026-09-06",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "US envoys shuttle between Moscow and Kyiv",
+    "description": "Witkoff and Kushner hold talks in both capitals; a brief pause ends with renewed strikes on Kyiv.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-09-01-sudan-parallel-govt",
+    "date": "2026-09-01",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Hemedti sworn in to head a rival government in Nyala",
+    "description": "RSF commander \"Hemedti\" is formally sworn in as head of the parallel \"Tasis\" administration, edging Sudan toward partition.",
+    "source": "archive"
+  },
+  {
+    "id": "7a61b0ab17dc",
+    "date": "2026-08-29",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "US announces deal for stake in Venezuela's oil reserves",
+    "description": "President Donald Trump announced a deal giving the US a stake in Venezuela's oil reserves.",
+    "source": "auto"
+  },
+  {
+    "id": "2026-07-24-scs-watercannon",
+    "date": "2026-07-24",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "China fires water cannon at Philippine vessels",
+    "description": "Chinese coast guard ships target Philippine boats near Scarborough Shoal for a second straight day.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-06-24-venezuela-earthquakes",
+    "date": "2026-06-24",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Twin earthquakes strike Venezuela",
+    "description": "A major double earthquake compounds the humanitarian crisis and becomes a political flashpoint during the transition.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-06-09-iran-renewed",
+    "date": "2026-06-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Israel and Iran exchange fire again as ceasefire frays",
+    "description": "A fresh round of direct strikes breaks out, drawing in US forces before another pause is announced.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-04-03-myanmar-president",
+    "date": "2026-04-03",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Min Aung Hlaing elected president",
+    "description": "Myanmar’s junta chief wins a parliamentary vote 429-126, formalizing military rule behind a civilian title.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-03-28-sudan-khartoum",
+    "date": "2026-03-28",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Sudan’s army recaptures Khartoum",
+    "description": "SAF forces retake the capital, consolidating control over central and eastern Sudan.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-03-09-iran-succession",
+    "date": "2026-03-09",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Mojtaba Khamenei named Iran’s new Supreme Leader",
+    "description": "The Assembly of Experts names Khamenei’s son as his successor, the first hereditary transition in the Islamic Republic’s history.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-02-28-iran-epic-fury",
+    "date": "2026-02-28",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "US-Israeli strikes kill Iran’s Supreme Leader",
+    "description": "A major air campaign, reported as \"Operation Epic Fury,\" kills Ali Khamenei and other senior officials, triggering a wider war.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-02-20-horn-troops",
+    "date": "2026-02-20",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Ethiopia and Eritrea deploy troops to the border",
+    "description": "Both countries move military equipment toward their shared border amid fears of renewed war.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-01-04-nk-missile-test",
+    "date": "2026-01-04",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "North Korea’s first missile test of the year",
+    "description": "The launch comes hours after the US raid on Maduro — a scenario North Korea’s leadership has long feared for itself.",
+    "source": "archive"
+  },
+  {
+    "id": "2026-01-03-venezuela-raid",
+    "date": "2026-01-03",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "US raid captures Maduro",
+    "description": "US special forces seize Nicolás Maduro and his wife, flying them to the US to face narco-terrorism charges.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-12-27-thaicambodia-ceasefire",
+    "date": "2025-12-27",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "New ceasefire after the deadliest fighting in years",
+    "description": "Three weeks of artillery, tank and drone warfare killed 100+ people before a fresh truce took hold.",
+    "source": "archive"
+  },
+  {
+    "id": "c9446e5aa43c",
+    "date": "2025-12-14",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Thailand launches new offensive and blocks fuel supplies",
+    "description": "Thailand began a fresh military offensive, halted fuel shipments to Cambodia and, together with Cambodia’s closure of all border crossings, escalated the humanitarian crisis.",
+    "source": "auto"
+  },
+  {
+    "id": "4312f3e4343b",
+    "date": "2025-12-14",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Thai offensive and fuel block",
+    "description": "Thailand launched a new military offensive while Cambodia halted all border crossings. Thailand also moved to block fuel from reaching Cambodia as the conflict escalated.",
+    "source": "auto"
+  },
+  {
+    "id": "ca2ab819b3b9",
+    "date": "2025-12-11",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Fighting enters fifth day and UN warns of civilian risk",
+    "description": "Renewed combat near historic temples marked the fifth day of clashes, with the UN rights chief warning that strikes were moving further into each side’s territory and endangering civilians.",
+    "source": "auto"
+  },
+  {
+    "id": "dbab689494f5",
+    "date": "2025-12-11",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Renewed fighting",
+    "description": "Fighting raged at the border of Cambodia and Thailand, with combat heard near centuries-old temples",
+    "source": "auto"
+  },
+  {
+    "id": "181e8fb727f4",
+    "date": "2025-12-11",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Fighting enters 5th day",
+    "description": "Renewed fighting raged at the border on December 11, with combat heard near temples. The Thai PM confirmed a phone call from US President Trump regarding the conflict.",
+    "source": "auto"
+  },
+  {
+    "id": "7cc6d182b50e",
+    "date": "2025-12-07",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Fighting reignites",
+    "description": "Fighting reignited on the Cambodia-Thailand border",
+    "source": "auto"
+  },
+  {
+    "id": "2025-10-26-sudan-elfasher-falls",
+    "date": "2025-10-26",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "El-Fasher falls to the RSF",
+    "description": "RSF forces capture El-Fasher after a long siege, consolidating control over Darfur.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-10-10-gaza-ceasefire",
+    "date": "2025-10-10",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Gaza ceasefire takes effect",
+    "description": "A US-brokered ceasefire built around Trump’s 20-point plan begins, though violence continues intermittently.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-09-05-mali-blockade-begins",
+    "date": "2025-09-05",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "JNIM declares a fuel blockade of Bamako",
+    "description": "Al-Qaeda-linked militants begin systematically attacking fuel convoys headed for Mali’s capital.",
+    "source": "archive"
+  },
+  {
+    "id": "9e6eb130ebe0",
+    "date": "2025-08-15",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "U.S.-brokered summit",
+    "description": "Leaders met in August 2025, issuing a joint peace declaration and initialing a peace agreement that envisages a transit corridor.",
+    "source": "auto"
+  },
+  {
+    "id": "2025-08-08-caucasus-framework",
+    "date": "2025-08-08",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Armenia and Azerbaijan sign a peace framework",
+    "description": "At the White House, both countries sign a preliminary deal including the US-run TRIPP transit corridor.",
+    "source": "archive"
+  },
+  {
+    "id": "f9f471f4fdc7",
+    "date": "2025-08-01",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "U.S.–brokered summit and joint peace declaration",
+    "description": "Leaders of Armenia and Azerbaijan met in August 2025, issuing a joint peace declaration and initialing a peace agreement that outlines a transit corridor and steps toward normalising relations.",
+    "source": "auto"
+  },
+  {
+    "id": "2025-07-28-thaicambodia-first-ceasefire",
+    "date": "2025-07-28",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "First ceasefire after a 5-day border clash",
+    "description": "Malaysia-brokered truce ends five days of fighting that killed dozens and displaced hundreds of thousands.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-06-13-iran-war",
+    "date": "2025-06-13",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Israel and Iran fight a direct 12-day war",
+    "description": "Israel strikes Iranian nuclear and military sites; Iran retaliates with missile barrages before a ceasefire holds.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-05-10-kashmir-ceasefire",
+    "date": "2025-05-10",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "US-brokered ceasefire ends India-Pakistan fighting",
+    "description": "After days of missile, drone and artillery exchanges, Trump announces a ceasefire; both sides confirm it hours later.",
+    "source": "archive"
+  },
+  {
+    "id": "2025-04-22-kashmir-attack",
+    "date": "2025-04-22",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Attack on tourists in Pahalgam kills 26",
+    "description": "A militant attack on Hindu tourists in Indian-administered Kashmir triggers the worst India-Pakistan crisis in decades.",
+    "source": "archive"
+  },
+  {
+    "id": "29660000ca5d",
+    "date": "2025-02-06",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "M23 soldiers gather in Goma",
+    "description": "M23 fighters were seen at the Stade de l’Unite’ in Goma for a public gathering.",
+    "source": "auto"
+  },
+  {
+    "id": "2023-10-07-gaza-war-begins",
+    "date": "2023-10-07",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Hamas attack on Israel starts the Gaza war",
+    "description": "Hamas-led fighters attack southern Israel; Israel launches a sustained military campaign in Gaza in response.",
+    "source": "archive"
+  },
+  {
+    "id": "330a151fc59b",
+    "date": "2023-09-01",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Azerbaijan’s September 2023 offensive",
+    "description": "Azerbaijan launched a large‑scale offensive that dissolved the Nagorno‑Karabakh enclave and displaced over 100,000 Armenians.",
+    "source": "auto"
+  },
+  {
+    "id": "2023-04-15-sudan-war-begins",
+    "date": "2023-04-15",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "War erupts between SAF and RSF",
+    "description": "Fighting breaks out in Khartoum between the army and the Rapid Support Forces, beginning Sudan’s civil war.",
+    "source": "archive"
+  },
+  {
+    "id": "2022-02-24-ukraine-invasion",
+    "date": "2022-02-24",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russia launches full-scale invasion",
+    "description": "Russian forces invade Ukraine on multiple fronts, beginning the largest war in Europe since 1945.",
+    "source": "archive"
+  },
+  {
+    "id": "df6b411017dd",
+    "date": "2020-11-10",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Ceasefire ending 2020 war",
+    "description": "A Russia‑brokered ceasefire took effect in the early hours of 10 November 2020, ending the deadliest fighting.",
+    "source": "auto"
   }
 ]
