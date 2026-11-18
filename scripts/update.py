@@ -17,6 +17,13 @@ Tier-aware trust layers (Options 1+2):
 Perspective + Escalation:
   - perspective: descriptive (framing divergence Tier 1 vs Tier 3), no smoothing
   - escalation: EWMA + ±12 cap + confidence dampener (smooth_escalation)
+
+Date guards (event insertion):
+  - Guard 1: reject events more than +1 day in the future (allows timezone slips)
+  - Guard 2: reject events where the source article was published BEFORE the
+    claimed event date (impossible — can't report on something that hasn't
+    happened). Tolerates ±1 day for timezone differences.
+  - Guard 3: reject stale events older than 14 days (backstop for wrong-month errors)
 """
 import json, os, re, time, hashlib, requests
 from collections import defaultdict
@@ -823,6 +830,7 @@ def main():
     ok = 0
     skipped_dupes = 0
     confidence_adjustments = 0
+    date_rejections = 0
     for i, c in enumerate(conflicts):
         use_adv = (i < advanced_count)
         depth = "advanced" if use_adv else "basic"
@@ -964,6 +972,39 @@ def main():
                 if "date" not in ev or "title" not in ev: continue
                 if not re.match(r'^\d{4}-\d{2}-\d{2}$', str(ev.get("date", ""))):
                     continue
+
+                # --- Date guards (Guard 1 + 2 + 3) ---
+                try:
+                    ev_d = date.fromisoformat(ev["date"])
+                except (ValueError, TypeError):
+                    continue
+                run_date = datetime.now(timezone.utc).date()
+
+                # Guard 1: reject anything more than +1 day in the future
+                # (allows legitimate timezone slips for Asia-Pacific timezones)
+                if ev_d > run_date + timedelta(days=1):
+                    date_rejections += 1
+                    print(f"  rejected far-future event for {c['name']}: "
+                          f"{ev['title'][:50]} ({ev['date']})")
+                    continue
+
+                # Guard 2: reject if the source article was published BEFORE the
+                # claimed event date (impossible — can't report on something that
+                # hasn't happened). Tolerates ±1 day for timezone differences.
+                if src_time and src_time.date() < (ev_d - timedelta(days=1)):
+                    date_rejections += 1
+                    print(f"  rejected impossible-date event for {c['name']}: "
+                          f"{ev['title'][:50]} (event {ev['date']}, "
+                          f"article published {src_time.date()})")
+                    continue
+
+                # Guard 3: reject stale events older than 14 days
+                if (run_date - ev_d).days > 14:
+                    date_rejections += 1
+                    print(f"  rejected stale event for {c['name']}: "
+                          f"{ev['title'][:50]} ({ev['date']})")
+                    continue
+
                 ev = normalize_event_time(ev)
                 eid = hashlib.sha1(
                     f"{c['id']}|{ev['date']}|{ev['title']}".encode()
@@ -1007,6 +1048,7 @@ def main():
           f"conflicts {'updated' if c_changed else 'unchanged'}, "
           f"history {'updated' if h_changed else 'unchanged'}")
     print(f"Fuzzy-dedup skips: {skipped_dupes} new event(s) rejected as duplicates")
+    print(f"Date-guard rejections: {date_rejections} event(s) rejected (future/impossible/stale)")
     print(f"Confidence adjustments: {confidence_adjustments} conflict(s) re-graded by tier floor")
     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
           f"advanced days done: {usage['advanced_days_done']}")
