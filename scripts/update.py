@@ -319,11 +319,12 @@ def recent_events_for_prompt(history, conflict_name, days=21):
             rows.append(f"- {h['date']}: {h.get('title', '')}")
     return "\n".join(rows) if rows else "(none recorded recently)"
 
-def latest_source_time_from_results(results):
-    """Extract the most recent published_date from Tavily results.
+def earliest_source_time_from_results(results):
+    """Extract the earliest published_date from Tavily results 
+    to find when the story actually broke.
     Returns (datetime_utc_or_None, source_metadata_or_None)."""
-    latest = None
-    latest_meta = None
+    earliest = None
+    earliest_meta = None
     for r in results:
         pd = r.get('published_date') or r.get('published') or ''
         if not pd or not isinstance(pd, str):
@@ -340,13 +341,25 @@ def latest_source_time_from_results(results):
                 dt = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
             except (ValueError, TypeError):
                 continue
-        if latest is None or dt > latest:
-            latest = dt
-            latest_meta = {
+        if earliest is None or dt < earliest:
+            earliest = dt
+            earliest_meta = {
                 "url": r.get('url', ''),
                 "title": (r.get('title') or '')[:100],
             }
-    return latest, latest_meta
+    return earliest, earliest_meta
+
+def extract_date_from_url(url):
+    """Extract YYYY-MM-DD from news URL paths (e.g. /2026-11-16/)."""
+    if not url or not isinstance(url, str):
+        return None
+    m = re.search(r'/(\d{4})-(\d{2})-(\d{2})/', url)
+    if m:
+        try:
+            return date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            pass
+    return None
 
 # ---------- usage tracking ----------
 def load_usage():
@@ -589,7 +602,8 @@ SCHEMA = """{
 
 TIME_RULES = """
 TIME-VERIFICATION RULES (strict):
-- Extract the time the EVENT happened, not the publication time.
+- Extract the exact date and time the EVENT actually happened, NOT the date the article was published or updated.
+- CRITICAL: If an article published today is reporting on a major event that occurred days ago, the event date MUST be the actual date of the event, NOT today's search date. Never default an event date to today just because the search result is new.
 - Cluster hour:minute values; 2+ sources within 25 min = valid cluster.
 - "time" = MEDIAN HH:MM of largest cluster. None → null.
 - "time_source_count" = size of cluster.
@@ -857,8 +871,25 @@ def main():
 
             tavily_urls = [x['url'] for x in results if x.get('url')]
 
-            # Capture the most recent source publish time (for "Last update" display)
-            src_time, src_meta = latest_source_time_from_results(results)
+            # --- Build map of URL -> publication date from Tavily metadata ---
+            url_to_pub_date = {}
+            for r in results:
+                u = r.get('url')
+                pd = r.get('published_date') or r.get('published') or ''
+                if u and pd:
+                    try:
+                        dt = datetime.fromisoformat(pd.replace('Z', '+00:00'))
+                        if dt.tzinfo is None:
+                            dt = dt.replace(tzinfo=timezone.utc)
+                        url_to_pub_date[u.split('?')[0].rstrip('/')] = dt.date()
+                    except (ValueError, TypeError):
+                        try:
+                            url_to_pub_date[u.split('?')[0].rstrip('/')] = date.fromisoformat(pd[:10])
+                        except (ValueError, TypeError):
+                            pass
+
+            # Capture the earliest source publish time (when the story broke)
+            src_time, src_meta = earliest_source_time_from_results(results)
             if src_time:
                 c["latest_source_time"] = src_time.isoformat(timespec="seconds")
                 if src_meta:
@@ -977,12 +1008,32 @@ def main():
                 if not re.match(r'^\d{4}-\d{2}-\d{2}$', str(ev.get("date", ""))):
                     continue
 
+                run_date = datetime.now(timezone.utc).date()
+
+                # --- URL / Metadata Date Override (Guards against LLM recency bias) ---
+                source_pub_date = None
+                for s in live:
+                    clean_url = s.get("url", "").split('?')[0].rstrip('/')
+                    if clean_url in url_to_pub_date:
+                        d_meta = url_to_pub_date[clean_url]
+                        if 0 <= (run_date - d_meta).days <= 14:
+                            source_pub_date = d_meta
+                            break
+                    d_extracted = extract_date_from_url(s.get("url"))
+                    if d_extracted:
+                        if 0 <= (run_date - d_extracted).days <= 14:
+                            source_pub_date = d_extracted
+                            break
+
+                if ev["date"] == run_date.isoformat() and source_pub_date and source_pub_date.isoformat() != ev["date"]:
+                    print(f"  correcting event date via metadata/URL for {c['name']}: {ev['date']} → {source_pub_date.isoformat()}")
+                    ev["date"] = source_pub_date.isoformat()
+
                 # --- Date guards (Guard 1 + 2 + 3) ---
                 try:
                     ev_d = date.fromisoformat(ev["date"])
                 except (ValueError, TypeError):
                     continue
-                run_date = datetime.now(timezone.utc).date()
 
                 # Guard 1: reject anything more than +1 day in the future
                 # (allows legitimate timezone slips for Asia-Pacific timezones)
