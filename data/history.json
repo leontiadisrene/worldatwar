@@ -18,6 +18,42 @@
     "source": "auto"
   },
   {
+    "id": "f616f5a88fb0",
+    "date": "2026-11-18",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian air defenses intercept Ukrainian drones",
+    "description": "Russian air defenses intercepted 1,336 Ukrainian drones in a major attack",
+    "source": "auto"
+  },
+  {
+    "id": "2142e517d634",
+    "date": "2026-11-18",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran attacks U.S. base in Kuwait and radar in Bahrain",
+    "description": "Iran fired on a U.S. air base in Kuwait and launched drone attacks on a radar facility in Bahrain, widening the conflict.",
+    "source": "auto"
+  },
+  {
+    "id": "d90ee221b43c",
+    "date": "2026-11-18",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "SAF airstrike in West Kordofan",
+    "description": "Sudanese army airstrike in Abu Qalb area kills at least 13 civilians, including women and children.",
+    "source": "auto"
+  },
+  {
+    "id": "933e24453cba",
+    "date": "2026-11-18",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Militant killed in Kashmir",
+    "description": "Indian troops kill a militant commander in Indian-controlled Kashmir",
+    "source": "auto"
+  },
+  {
     "id": "b3f99b43405d",
     "date": "2026-11-17",
     "conflict": "Ukraine",
@@ -90,6 +126,33 @@
     "source": "auto"
   },
   {
+    "id": "c26adfd430fc",
+    "date": "2026-11-17",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli forces kill six in Gaza",
+    "description": "Israeli forces killed six people across the Gaza Strip, including a six-year-old boy.",
+    "source": "auto"
+  },
+  {
+    "id": "bc527cfc49f3",
+    "date": "2026-11-17",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "U.S. strikes IRGC missile launch site on Qeshm Island",
+    "description": "U.S. precision munitions hit an IRGC missile launch site on Qeshm Island, prompting Iranian retaliation.",
+    "source": "auto"
+  },
+  {
+    "id": "6456417317a4",
+    "date": "2026-11-17",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea scrambles fighter jets",
+    "description": "After Russian military aircraft enter air defense zone",
+    "source": "auto"
+  },
+  {
     "id": "71a939dc8392",
     "date": "2026-11-16",
     "conflict": "Iran",
@@ -141,6 +204,15 @@
     "tier": "flash",
     "title": "Fujian aircraft carrier sails through Taiwan Strait",
     "description": "China's newest aircraft carrier, Fujian, sailed through the Taiwan Strait, prompting a response from Taiwan's defense ministry",
+    "source": "auto"
+  },
+  {
+    "id": "ddd21291d103",
+    "date": "2026-11-16",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Sudan‑Ethiopia diplomatic tensions",
+    "description": "Sudan and Ethiopia exchange accusations of supporting armed groups within each other's borders.",
     "source": "auto"
   },
   {
@@ -324,6 +396,15 @@
     "source": "auto"
   },
   {
+    "id": "8bbef7e526ea",
+    "date": "2026-11-14",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "ASEAN Summit condemns Myanmar violence",
+    "description": "ASEAN leaders opened their annual summit in the Philippines, formally denouncing the violence in Myanmar and extending the ban on junta leader Min Aung Hlaing.",
+    "source": "auto"
+  },
+  {
     "id": "464a72c8beba",
     "date": "2026-11-13",
     "conflict": "Iran",
@@ -348,6 +429,15 @@
     "tier": "flash",
     "title": "China conducts joint combat readiness patrol",
     "description": "Chinese fighter jets and drones carried out a joint combat readiness patrol alongside Chinese warships",
+    "source": "auto"
+  },
+  {
+    "id": "bf7a33d6c030",
+    "date": "2026-11-13",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Airstrike on Byar La displaced‑persons camp",
+    "description": "Myanmar military airstrike on the Byar La camp in Rakhine State killed at least 12 civilians.",
     "source": "auto"
   },
   {
