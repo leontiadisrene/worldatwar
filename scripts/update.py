@@ -113,13 +113,17 @@ def adjust_confidence(confidence, sources):
 # ---------- search ----------
 def tavily(query, depth="basic"):
     r = requests.post("https://api.tavily.com/search", json={
-        "api_key": TAVILY, "query": query, "search_depth": depth,
+        "api_key": TAVILY,
+        "query": query,
+        "search_depth": depth,
         "max_results": 10,
-        "days": 9, "include_domains": ALLOWED,
+        "time_range": "week",
+        "include_domains": ALLOWED,
+        "include_published_date": True
     }, timeout=60)
     r.raise_for_status()
     return r.json().get("results", [])
-
+  
 # ---------- fuzzy helpers ----------
 def _tokens(s):
     if not s or not isinstance(s, str):
