@@ -1010,24 +1010,31 @@ def main():
 
                 run_date = datetime.now(timezone.utc).date()
 
-                # --- URL / Metadata Date Override (Guards against LLM recency bias) ---
+                                # --- Future-Proof Date Override Logic ---
                 source_pub_date = None
                 for s in live:
-                    clean_url = s.get("url", "").split('?')[0].rstrip('/')
+                    url_str = s.get("url", "")
+                    
+                    # 1. ALWAYS check the URL path first (most reliable for true article date)
+                    d_extracted = extract_date_from_url(url_str)
+                    if d_extracted:
+                        if 0 <= (run_date - d_extracted).days <= 14:
+                            source_pub_date = d_extracted
+                            break
+                    
+                    # 2. Fallback to Tavily metadata only if URL has no date
+                    clean_url = url_str.split('?')[0].rstrip('/')
                     if clean_url in url_to_pub_date:
                         d_meta = url_to_pub_date[clean_url]
                         if 0 <= (run_date - d_meta).days <= 14:
                             source_pub_date = d_meta
                             break
-                    d_extracted = extract_date_from_url(s.get("url"))
-                    if d_extracted:
-                        if 0 <= (run_date - d_extracted).days <= 14:
-                            source_pub_date = d_extracted
-                            break
 
+                # If LLM fell into recency bias (defaulting to today), correct it using the trusted source date
                 if ev["date"] == run_date.isoformat() and source_pub_date and source_pub_date.isoformat() != ev["date"]:
-                    print(f"  correcting event date via metadata/URL for {c['name']}: {ev['date']} → {source_pub_date.isoformat()}")
+                    print(f"  correcting event date via URL/metadata for {c['name']}: {ev['date']} → {source_pub_date.isoformat()}")
                     ev["date"] = source_pub_date.isoformat()
+
 
                 # --- Date guards (Guard 1 + 2 + 3) ---
                 try:
