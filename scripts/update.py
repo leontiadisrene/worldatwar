@@ -603,7 +603,7 @@ SCHEMA = """{
 TIME_RULES = """
 TIME-VERIFICATION RULES (strict):
 - Extract the exact date and time the EVENT actually happened, NOT the date the article was published or updated.
-- CRITICAL: If an article published today is reporting on a major event that occurred days ago, the event date MUST be the actual date of the event, NOT today's search date. Never default an event date to today just because the search result is new.
+- RETROSPECTIVE / WRAP-UP RULE: If a recent article (e.g., published on Nov 16) discusses an event that occurred earlier (e.g., "two weeks after the Nov 2 strike" or referencing a past date), you MUST extract the original date the event happened (e.g., 2026-11-02). Never assign a recent report or summary date to an event that happened days or weeks prior.
 - Cluster hour:minute values; 2+ sources within 25 min = valid cluster.
 - "time" = MEDIAN HH:MM of largest cluster. None → null.
 - "time_source_count" = size of cluster.
