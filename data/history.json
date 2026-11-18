@@ -54,6 +54,24 @@
     "source": "auto"
   },
   {
+    "id": "8c09d6c50156",
+    "date": "2026-11-18",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Western allies clash over deep strikes",
+    "description": "US representative Elbridge Colby criticized Kyiv's use of deep strikes against Russian targets, but Germany's defense minister said the US's criticism was misguided.",
+    "source": "auto"
+  },
+  {
+    "id": "532493767ac9",
+    "date": "2026-11-18",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strike on Nasser Hospital",
+    "description": "An Israeli strike on Nasser Hospital in southern Gaza has killed at least six people and left dozens wounded.",
+    "source": "auto"
+  },
+  {
     "id": "b3f99b43405d",
     "date": "2026-11-17",
     "conflict": "Ukraine",
@@ -150,6 +168,15 @@
     "tier": "flash",
     "title": "South Korea scrambles fighter jets",
     "description": "After Russian military aircraft enter air defense zone",
+    "source": "auto"
+  },
+  {
+    "id": "9dbcce8a86f4",
+    "date": "2026-11-17",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "Chinese vessel rams Philippine ship",
+    "description": "A Chinese vessel reportedly rammed a Philippine ship in the South China Sea, prompting Manila to accuse Beijing of harassment.",
     "source": "auto"
   },
   {
@@ -457,6 +484,15 @@
     "title": "Xi Jinping declares Taiwan’s complete reunification inevitable",
     "description": "President Xi Jinping declared that Taiwan’s complete reunification with China is inevitable, reaffirming Beijing’s long‑term goal and noting the remark came a week before the APEC summit in Shenzhen, without explicitly mentioning the use of force.",
     "source": "merged"
+  },
+  {
+    "id": "ee579bf62e01",
+    "date": "2026-11-12",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "Armed men kill civilians in Niger",
+    "description": "At least 37 civilians were killed by armed men in western Niger",
+    "source": "auto"
   },
   {
     "id": "b3e07e2ff9f0",
