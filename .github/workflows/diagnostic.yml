@@ -20,7 +20,3 @@ jobs:
       - name: Run scan_mismatches.py
         working-directory: scripts
         run: python scan_mismatches.py
-    <ElicitationsGroup message="If you want to run this automatically on a schedule or after every update:">
-      <Elicitation label="Run after update.py" query="How can I chain this diagnostic script to run automatically right after update.py finishes in GitHub Actions?" />
-      <Elicitation label="Fail workflow on error" query="How do I make the GitHub Action fail and alert me if date mismatches are detected?" />
-    </ElicitationsGroup>
