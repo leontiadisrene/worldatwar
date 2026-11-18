@@ -1,5 +1,32 @@
 [
   {
+    "id": "d98d863ebd6f",
+    "date": "2026-11-19",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone strike kills over 300",
+    "description": "Sudan army drones hit mourners and a fuel market, killing more than 300 people.",
+    "source": "auto"
+  },
+  {
+    "id": "c4200532ee06",
+    "date": "2026-11-18",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strike on residential building",
+    "description": "Airstrike on a residential building in Gaza killed at least eight people (BBC) and reportedly up to 13 (France 24).",
+    "source": "auto"
+  },
+  {
+    "id": "40df007dd5c0",
+    "date": "2026-11-18",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iranian drone attack on US base in Bahrain",
+    "description": "Iran launched drones against a U.S. military installation in Bahrain, the third such strike in recent days.",
+    "source": "auto"
+  },
+  {
     "id": "b3f99b43405d",
     "date": "2026-11-17",
     "conflict": "Ukraine",
@@ -33,6 +60,42 @@
     "tier": "war",
     "title": "Iran warns of preemptive strike",
     "description": "Iran warns it may strike first before another US attack",
+    "source": "auto"
+  },
+  {
+    "id": "bb3a2e715b5b",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukrainian drone strike hits Crimean (Kerch) Bridge",
+    "description": "Ukraine launched a large overnight drone attack that struck the Kerch Bridge linking Russia to annexed Crimea.",
+    "source": "auto"
+  },
+  {
+    "id": "ef42aa97d1f5",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian missiles hit two Kyiv bridges",
+    "description": "Russia struck the Northern and Southern bridges in Kyiv, causing partial damage to water and power supplies.",
+    "source": "auto"
+  },
+  {
+    "id": "fe38deb1f86e",
+    "date": "2026-11-17",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Kherson localized cease‑fire ends",
+    "description": "A six‑day cease‑fire in the Kherson region concluded, with no reported violations during the truce but renewed risk of fighting.",
+    "source": "auto"
+  },
+  {
+    "id": "66a8e5b32135",
+    "date": "2026-11-17",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "UN report on drone casualties",
+    "description": "UN report says at least 1,390 civilians were killed Jan‑Jun 2026, over 80% from drone strikes.",
     "source": "auto"
   },
   {
@@ -261,6 +324,15 @@
     "source": "auto"
   },
   {
+    "id": "c19b19110315",
+    "date": "2026-11-14",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Myanmar airstrike on displacement camp",
+    "description": "Airstrike kills 12 people, including a child, and wounds 18 others at a displacement camp in Rakhine state",
+    "source": "auto"
+  },
+  {
     "id": "464a72c8beba",
     "date": "2026-11-13",
     "conflict": "Iran",
@@ -277,6 +349,15 @@
     "title": "Junta double‑tap airstrike on India Market in Kyauktaw, Rakhine",
     "description": "The Myanmar junta carried out double‑tap airstrikes on the India Market in Kyauktaw, Rakhine State, killing at least 50 people and wounding 58 civilians.",
     "source": "merged"
+  },
+  {
+    "id": "9b59b42d9245",
+    "date": "2026-11-13",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "China conducts joint combat readiness patrol",
+    "description": "Chinese fighter jets and drones carried out a joint combat readiness patrol alongside Chinese warships",
+    "source": "auto"
   },
   {
     "id": "747b4af63e0e",
