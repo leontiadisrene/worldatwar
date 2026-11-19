@@ -1,5 +1,14 @@
 [
   {
+    "id": "3ffba1248ede",
+    "date": "2026-11-19",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Russia delivers fighter jets to Ethiopia",
+    "description": "Ethiopian officials confirmed that Russia delivered 12 fighter jets and plans to send air defense systems, increasing fears of renewed conflict in the region.",
+    "source": "auto"
+  },
+  {
     "id": "c4200532ee06",
     "date": "2026-11-18",
     "conflict": "Gaza",
@@ -63,12 +72,39 @@
     "source": "auto"
   },
   {
-    "id": "532493767ac9",
-    "date": "2026-11-12",
-    "conflict": "Gaza",
+    "id": "d2a5b89a7378",
+    "date": "2026-11-18",
+    "conflict": "Ukraine",
     "tier": "war",
-    "title": "Israeli strike on Nasser Hospital",
-    "description": "An Israeli strike on Nasser Hospital in southern Gaza has killed at least six people and left dozens wounded.",
+    "title": "Trump-Xi-Putin Trilateral Meeting",
+    "description": "US President Trump, Chinese President Xi, and Russian President Putin held their first-ever joint talks in Shenzhen, focusing on nuclear arms control and resolving the wars in Ukraine and Iran.",
+    "source": "auto"
+  },
+  {
+    "id": "966a42d16d9c",
+    "date": "2026-11-18",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian Strike on Odesa",
+    "description": "Russia repeatedly struck central Odesa, killing four people and injuring nine, according to Ukrainian officials who stated the enemy does not stop.",
+    "source": "auto"
+  },
+  {
+    "id": "c67be9443958",
+    "date": "2026-11-18",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Rescue of civilians during Kulgam siege",
+    "description": "Security forces rescued 25 girls and two teachers from a Darul Uloom institute adjacent to the mosque where LeT commander Mohammad Lateef Bhat was hiding, immediately prior to the final assault that killed him.",
+    "source": "auto"
+  },
+  {
+    "id": "047cadb6b7da",
+    "date": "2026-11-18",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "German FM visits South Caucasus",
+    "description": "German Foreign Minister Wadephul visited Armenia and Azerbaijan to discuss the peace process and counter Russian influence.",
     "source": "auto"
   },
   {
@@ -177,6 +213,24 @@
     "tier": "flash",
     "title": "Chinese vessel rams Philippine ship",
     "description": "A Chinese vessel reportedly rammed a Philippine ship in the South China Sea, prompting Manila to accuse Beijing of harassment.",
+    "source": "auto"
+  },
+  {
+    "id": "057a08e22bf7",
+    "date": "2026-11-17",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "WHO IHR Emergency Committee meets on Ebola",
+    "description": "The WHO Director-General addressed the third IHR Emergency Committee meeting regarding the Bundibugyo virus epidemic, highlighting insecurity as a major obstacle to the response.",
+    "source": "auto"
+  },
+  {
+    "id": "f4f76dba8452",
+    "date": "2026-11-17",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "IS militants killed near Chechnya",
+    "description": "Russian forces killed eight IS militants near Chechnya who were part of the Caucases Emirates group.",
     "source": "auto"
   },
   {
@@ -333,6 +387,15 @@
     "source": "auto"
   },
   {
+    "id": "a8aeac42e99f",
+    "date": "2026-11-15",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Cambodia criticizes Thailand at Francophonie Summit",
+    "description": "Prime Minister Hun Manet used his opening remarks at the Francophonie summit in Phnom Penh to criticize Thailand, stating that Cambodia did not start the 2025 border fighting.",
+    "source": "auto"
+  },
+  {
     "id": "0105e406db08",
     "date": "2026-11-14",
     "conflict": "Ukraine",
@@ -468,12 +531,30 @@
     "source": "auto"
   },
   {
-    "id": "747b4af63e0e",
+    "id": "3a15ef06cd79",
+    "date": "2026-11-13",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Tanker explosions in Strait of Hormuz",
+    "description": "Iranian military claimed four oil tankers were hit by explosions in the Strait of Hormuz, attributing the incidents to naval mines after vessels ignored warnings.",
+    "source": "auto"
+  },
+  {
+    "id": "70568e844243",
+    "date": "2026-11-13",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Trump rejects need for Iran deal",
+    "description": "President Trump stated that Washington no longer needed an agreement with Tehran, directing Vice President Vance to focus on domestic issues while considering diplomatic options.",
+    "source": "auto"
+  },
+  {
+    "id": "d0fc4d40633b",
     "date": "2026-11-12",
     "conflict": "Gaza",
     "tier": "war",
-    "title": "Israeli strike kills six at Gaza’s Nasser Hospital",
-    "description": "An Israeli airstrike hit Nasser Hospital in Gaza, killing at least six Palestinians, including a surgeon.",
+    "title": "Israeli airstrike on Gaza’s Nasser Hospital kills six, wounds dozens",
+    "description": "An Israeli airstrike hit Nasser Hospital in southern Gaza, killing at least six people, including a surgeon, and wounding dozens more. The strike was reported by multiple sources.",
     "source": "merged"
   },
   {
@@ -564,6 +645,15 @@
     "tier": "flash",
     "title": "Reduced Chinese military activity near Taiwan",
     "description": "Taiwanese Ministry of National Defence reported only one Chinese aircraft north of Taiwan and eight ships near the island during the 24-hour period between November 8 and 9, a sharp drop from previous counts.",
+    "source": "auto"
+  },
+  {
+    "id": "e271a3db8b0e",
+    "date": "2026-11-08",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "Mali PM visits Kouremale border",
+    "description": "Mali's Prime Minister Major General Abdoulaye Maiga traveled to Kouremale on the border with Guinea to address the return of deported Malians, describing the situation as a humanitarian catastrophe.",
     "source": "auto"
   },
   {
