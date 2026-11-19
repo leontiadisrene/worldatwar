@@ -9,6 +9,51 @@
     "source": "auto"
   },
   {
+    "id": "d504bf0a1b96",
+    "date": "2026-11-19",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukrainian drone attack on Russian oil refineries",
+    "description": "Ukraine launched a drone attack on Russian oil refineries, targeting key infrastructure.",
+    "source": "auto"
+  },
+  {
+    "id": "15ff2badd396",
+    "date": "2026-11-19",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Saudi-led coalition strikes Yemen",
+    "description": "The Saudi-led coalition fighting Yemen’s Houthis says its forces destroyed a ballistic missile platform in Saada, Yemen",
+    "source": "auto"
+  },
+  {
+    "id": "a2febd6817a8",
+    "date": "2026-11-19",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Ships on fire in Hormuz",
+    "description": "Iran claims three ships hit mines in the Strait of Hormuz",
+    "source": "auto"
+  },
+  {
+    "id": "823e6e52003a",
+    "date": "2026-11-19",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "ICJ Genocide Ruling",
+    "description": "The International Court of Justice rules that Myanmar committed genocide against the Rohingya",
+    "source": "auto"
+  },
+  {
+    "id": "4bd3d4e57853",
+    "date": "2026-11-19",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "North Korea expands uranium enrichment facility",
+    "description": "North Korea is expanding a nuclear facility for enriching uranium, according to the UN nuclear watchdog",
+    "source": "auto"
+  },
+  {
     "id": "c4200532ee06",
     "date": "2026-11-18",
     "conflict": "Gaza",
@@ -54,13 +99,13 @@
     "source": "auto"
   },
   {
-    "id": "933e24453cba",
+    "id": "2ef5cf94b511",
     "date": "2026-11-18",
     "conflict": "Kashmir",
     "tier": "flash",
-    "title": "Militant killed in Kashmir",
-    "description": "Indian troops kill a militant commander in Indian-controlled Kashmir",
-    "source": "auto"
+    "title": "Indian forces kill LeT commander Mohammad Lateef Bhat, rescue 27 civilians",
+    "description": "Indian troops eliminated LeT commander Mohammad Lateef Bhat in Kulgam. Security forces rescued 25 girls and two teachers from a nearby Darul Uloom institute just before the final assault that killed him.",
+    "source": "merged"
   },
   {
     "id": "8c09d6c50156",
@@ -90,21 +135,39 @@
     "source": "auto"
   },
   {
-    "id": "c67be9443958",
-    "date": "2026-11-18",
-    "conflict": "Kashmir",
-    "tier": "flash",
-    "title": "Rescue of civilians during Kulgam siege",
-    "description": "Security forces rescued 25 girls and two teachers from a Darul Uloom institute adjacent to the mosque where LeT commander Mohammad Lateef Bhat was hiding, immediately prior to the final assault that killed him.",
-    "source": "auto"
-  },
-  {
     "id": "047cadb6b7da",
     "date": "2026-11-18",
     "conflict": "Caucasus",
     "tier": "watch",
     "title": "German FM visits South Caucasus",
     "description": "German Foreign Minister Wadephul visited Armenia and Azerbaijan to discuss the peace process and counter Russian influence.",
+    "source": "auto"
+  },
+  {
+    "id": "061060452109",
+    "date": "2026-11-18",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian defense intercepts Ukrainian drones",
+    "description": "Russian defenses intercepted numerous Ukrainian drones, highlighting the ongoing conflict.",
+    "source": "auto"
+  },
+  {
+    "id": "03ddf3d8f86e",
+    "date": "2026-11-18",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "US-Venezuela Military Partnership Announcement",
+    "description": "US Defense Secretary Pete Hegseth announced a new military partnership agreement with Venezuela.",
+    "source": "auto"
+  },
+  {
+    "id": "e46e9828b13e",
+    "date": "2026-11-18",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Ethiopia-Eritrea border tensions escalate",
+    "description": "Ethiopia and Eritrea amass forces along their border, heightening war fears",
     "source": "auto"
   },
   {
@@ -231,6 +294,15 @@
     "tier": "watch",
     "title": "IS militants killed near Chechnya",
     "description": "Russian forces killed eight IS militants near Chechnya who were part of the Caucases Emirates group.",
+    "source": "auto"
+  },
+  {
+    "id": "22caa4ebf85b",
+    "date": "2026-11-17",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "Guinea jails 200 miners and administrators",
+    "description": "Guinea sentenced 22 former regional administrators and 202 others for involvement in illegal gold mining, following a crackdown that detained over 1,200 miners in Siguiri.",
     "source": "auto"
   },
   {
@@ -549,6 +621,15 @@
     "source": "auto"
   },
   {
+    "id": "aedca5ec4cf8",
+    "date": "2026-11-13",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Taiwan labels exercises as strike rehearsals",
+    "description": "A senior Taiwanese security official told Reuters that recent Chinese military exercises were described as rehearsals for attacks on the island.",
+    "source": "auto"
+  },
+  {
     "id": "d0fc4d40633b",
     "date": "2026-11-12",
     "conflict": "Gaza",
@@ -573,6 +654,15 @@
     "tier": "war",
     "title": "Armed men kill civilians in Niger",
     "description": "At least 37 civilians were killed by armed men in western Niger",
+    "source": "auto"
+  },
+  {
+    "id": "02f628c839f3",
+    "date": "2026-11-12",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "G7 condemns Chinese naval activity",
+    "description": "G7 foreign ministers issued a statement declaring that China's actions east of Taiwan threaten regional stability and freedom of navigation.",
     "source": "auto"
   },
   {
