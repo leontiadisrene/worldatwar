@@ -585,9 +585,10 @@ SCHEMA = """{
   "current": "2-4 sentences on the present situation",
   "sources": [{"label": "Outlet: headline", "url": "https://..."}],
   "events": [
-    {"date": "YYYY-MM-DD", "time": "HH:MM or null", "timezone": "UTC or zone or local",
-     "time_source_count": 0, "time_variance_minutes": 0,
-     "title": "...", "description": "..."}
+    {"date": "YYYY-MM-DD", "date_quote": "verbatim snippet from an article showing this date",
+ "time": "HH:MM or null", "timezone": "UTC or zone or local",
+ "time_source_count": 0, "time_variance_minutes": 0,
+ "title": "...", "description": "..."}
   ],
   "perspective": {
     "dominant_frame": "2-3 sentences or null",
