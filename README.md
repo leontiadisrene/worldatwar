@@ -4,7 +4,7 @@ An interactive map of fifteen active wars, high-tension flashpoints and
 watchlist conflicts — each entry backed by cited wire reporting and a
 visible confidence level.
 
-**Live site:** https://worldatwar.github.io/warmap/
+**Live site:** https://leontiadisrene.github.io/warmap/
 
 ---
 
