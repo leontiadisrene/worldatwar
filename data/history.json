@@ -54,6 +54,15 @@
     "source": "auto"
   },
   {
+    "id": "10dcd93e4690",
+    "date": "2026-11-19",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Somalia expels UAE ambassador",
+    "description": "Somalia has expelled the UAE ambassador, accusing Abu Dhabi of violating sovereignty",
+    "source": "auto"
+  },
+  {
     "id": "c4200532ee06",
     "date": "2026-11-18",
     "conflict": "Gaza",
@@ -168,6 +177,15 @@
     "tier": "flash",
     "title": "Ethiopia-Eritrea border tensions escalate",
     "description": "Ethiopia and Eritrea amass forces along their border, heightening war fears",
+    "source": "auto"
+  },
+  {
+    "id": "1c9b123da0c6",
+    "date": "2026-11-18",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Russian military planes fly through the region",
+    "description": "Russian military planes flew through the region, prompting Japan and South Korea to scramble jets in response, and drawing complaints from Taiwan.",
     "source": "auto"
   },
   {
@@ -567,6 +585,15 @@
     "source": "auto"
   },
   {
+    "id": "03d5dfd6a85b",
+    "date": "2026-11-14",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran reports three more vessels hitting mines",
+    "description": "Iran's military said four oil tankers had been hit by explosions in the Strait of Hormuz over Wednesday and Thursday, claiming the vessels had ignored warnings and entered restricted waters.",
+    "source": "auto"
+  },
+  {
     "id": "464a72c8beba",
     "date": "2026-11-13",
     "conflict": "Iran",
@@ -585,13 +612,13 @@
     "source": "merged"
   },
   {
-    "id": "9b59b42d9245",
+    "id": "b4c0ceb1587e",
     "date": "2026-11-13",
     "conflict": "Taiwan Strait",
     "tier": "flash",
-    "title": "China conducts joint combat readiness patrol",
-    "description": "Chinese fighter jets and drones carried out a joint combat readiness patrol alongside Chinese warships",
-    "source": "auto"
+    "title": "China conducts joint combat patrol; Taiwan says drills are strike rehearsals",
+    "description": "Chinese fighter jets, drones and warships performed a joint combat‑readiness patrol in the Taiwan Strait. Taiwan’s senior security official said the exercises amount to rehearsals for a possible strike on the island.",
+    "source": "merged"
   },
   {
     "id": "bf7a33d6c030",
@@ -621,12 +648,12 @@
     "source": "auto"
   },
   {
-    "id": "aedca5ec4cf8",
+    "id": "491590639f25",
     "date": "2026-11-13",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "Taiwan labels exercises as strike rehearsals",
-    "description": "A senior Taiwanese security official told Reuters that recent Chinese military exercises were described as rehearsals for attacks on the island.",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russia intercepts 1,198 Ukrainian drones",
+    "description": "Russia's defence ministry said it shot down 1,198 Ukrainian drones overnight across more than 15 regions.",
     "source": "auto"
   },
   {
@@ -663,6 +690,15 @@
     "tier": "flash",
     "title": "G7 condemns Chinese naval activity",
     "description": "G7 foreign ministers issued a statement declaring that China's actions east of Taiwan threaten regional stability and freedom of navigation.",
+    "source": "auto"
+  },
+  {
+    "id": "65bcaddc3b9c",
+    "date": "2026-11-11",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine rejects U.S. Donbas cession proposal",
+    "description": "Kyiv rejected a U.S. plan to redraw Donbas borders in exchange for NATO membership, calling it a symbolic victory for Moscow.",
     "source": "auto"
   },
   {
