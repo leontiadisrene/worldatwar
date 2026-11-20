@@ -1,5 +1,14 @@
 [
   {
+    "id": "762659ae7e07",
+    "date": "2026-11-20",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian Missile Attack on Kyiv",
+    "description": "Russian missiles targeted Kyiv, hitting bridges and resulting in deaths and damage.",
+    "source": "auto"
+  },
+  {
     "id": "3ffba1248ede",
     "date": "2026-11-19",
     "conflict": "Horn of Africa",
@@ -60,6 +69,33 @@
     "tier": "flash",
     "title": "Somalia expels UAE ambassador",
     "description": "Somalia has expelled the UAE ambassador, accusing Abu Dhabi of violating sovereignty",
+    "source": "auto"
+  },
+  {
+    "id": "0465e33d23bf",
+    "date": "2026-11-19",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Operation ends, residents return",
+    "description": "Weary Palestinians returned to check belongings and assess damage after the Israeli military said the ground operation was completed.",
+    "source": "auto"
+  },
+  {
+    "id": "8dd874a8ede9",
+    "date": "2026-11-19",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Trump delays decision on further Iran strikes",
+    "description": "President Trump announced the United States will wait until 2027 before deciding on additional strikes against Iran.",
+    "source": "auto"
+  },
+  {
+    "id": "30f769d36abb",
+    "date": "2026-11-19",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "RSF Leader Sentenced",
+    "description": "A Sudan court has handed RSF leader Hemedti a second death sentence over a $396 million scandal.",
     "source": "auto"
   },
   {
@@ -186,6 +222,24 @@
     "tier": "flash",
     "title": "Russian military planes fly through the region",
     "description": "Russian military planes flew through the region, prompting Japan and South Korea to scramble jets in response, and drawing complaints from Taiwan.",
+    "source": "auto"
+  },
+  {
+    "id": "997ff292ca86",
+    "date": "2026-11-18",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli ground offensive in central Gaza",
+    "description": "Israeli forces launched a ground operation, advancing tanks west of the Yellow Line and issuing evacuation orders.",
+    "source": "auto"
+  },
+  {
+    "id": "aaded574d61a",
+    "date": "2026-11-18",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Fighting in North and South Kivu",
+    "description": "Clashes between the Congolese army and the Front for the Refoundation of the Nation (FRN) continue in the eastern provinces.",
     "source": "auto"
   },
   {
@@ -321,6 +375,15 @@
     "tier": "war",
     "title": "Guinea jails 200 miners and administrators",
     "description": "Guinea sentenced 22 former regional administrators and 202 others for involvement in illegal gold mining, following a crackdown that detained over 1,200 miners in Siguiri.",
+    "source": "auto"
+  },
+  {
+    "id": "b646fb45115e",
+    "date": "2026-11-17",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "UN appeal for civilian protection and aid",
+    "description": "The United Nations urged protection of civilians and unhindered humanitarian access amid the Ebola outbreak.",
     "source": "auto"
   },
   {
@@ -483,6 +546,15 @@
     "tier": "watch",
     "title": "Cambodia criticizes Thailand at Francophonie Summit",
     "description": "Prime Minister Hun Manet used his opening remarks at the Francophonie summit in Phnom Penh to criticize Thailand, stating that Cambodia did not start the 2025 border fighting.",
+    "source": "auto"
+  },
+  {
+    "id": "5c04abc0f45b",
+    "date": "2026-11-15",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Diplomatic tension with Rwanda",
+    "description": "Kinshasa threatens to exit the Francophonie over accusations that Rwanda backs the M23 rebel group.",
     "source": "auto"
   },
   {
