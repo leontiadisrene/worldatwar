@@ -9,6 +9,15 @@
     "source": "auto"
   },
   {
+    "id": "b72cf856be50",
+    "date": "2026-11-20",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli shelling wounds Palestinians",
+    "description": "Five Palestinians were wounded in Israeli artillery targeting an area near the al-Maghazi refugee camp in central Gaza",
+    "source": "auto"
+  },
+  {
     "id": "3ffba1248ede",
     "date": "2026-11-19",
     "conflict": "Horn of Africa",
@@ -384,6 +393,15 @@
     "tier": "war",
     "title": "UN appeal for civilian protection and aid",
     "description": "The United Nations urged protection of civilians and unhindered humanitarian access amid the Ebola outbreak.",
+    "source": "auto"
+  },
+  {
+    "id": "902aa99f7c0e",
+    "date": "2026-11-17",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran attacks US base in Kuwait",
+    "description": "Iran launched an attack on a US air base in Kuwait, escalating tensions in the region",
     "source": "auto"
   },
   {
