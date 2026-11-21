@@ -1059,18 +1059,19 @@ def main():
                 # --- Guard 0 (post-override): queue for external verification ---
                 date_quote = str(ev.get("date_quote", "") or "").strip()
                 if not url_rescued and (not date_quote or len(date_quote) < 4):
-                # Do NOT reject — queue for Perplexity/NewsAPI verification.
-                pending_events.append({
-                "conflict": c["name"],
-                "tier": c["tier"],
-                "title": ev.get("title", ""),
-                "description": ev.get("description", ""),
-                "llm_date": ev["date"],
-                "llm_time": ev.get("time"),
-                "llm_timezone": ev.get("timezone"),
-                "queued_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                "status": "pending",
-                })
+                    # Do NOT reject — queue for free-API date verification
+                    # (scripts/verify_dates_free.py: DDG / GDELT / GNews).
+                    pending_events.append({
+                        "conflict": c["name"],
+                        "tier": c["tier"],
+                        "title": ev.get("title", ""),
+                        "description": ev.get("description", ""),
+                        "llm_date": ev["date"],
+                        "llm_time": ev.get("time"),
+                        "llm_timezone": ev.get("timezone"),
+                        "queued_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                        "status": "pending",
+                    })
                     print(f"  queued for date verification: {c['name']} — {ev['title'][:60]}")
                     continue
 
@@ -1145,15 +1146,29 @@ def main():
     c_changed = save_if_changed("data/conflicts.json", conflicts)
     h_changed = save_if_changed("data/history.json",   history)
     if pending_events:
-    pending_path = "data/pending_dates.json"
-    try:
-        existing = json.load(open(pending_path)) if os.path.exists(pending_path) else []
-    except (FileNotFoundError, json.JSONDecodeError):
-        existing = []
-    existing.extend(pending_events)
-    with open(pending_path, "w") as f:
-        json.dump(existing, f, indent=2, ensure_ascii=False)
-    print(f"Queued {len(pending_events)} event(s) to data/pending_dates.json for external verification.")
+        pending_path = "data/pending_dates.json"
+        try:
+            with open(pending_path) as f:
+                existing = json.load(f)
+            if not isinstance(existing, list):
+                existing = []
+        except (FileNotFoundError, json.JSONDecodeError):
+            existing = []
+        # Skip events already queued (same conflict + title + LLM date)
+        queued_keys = {
+            (e.get("conflict"), e.get("title"), e.get("llm_date"))
+            for e in existing if isinstance(e, dict)
+        }
+        new_pending = [
+            p for p in pending_events
+            if (p["conflict"], p["title"], p["llm_date"]) not in queued_keys
+        ]
+        existing.extend(new_pending)
+        with open(pending_path, "w") as f:
+            json.dump(existing, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+        print(f"Queued {len(new_pending)} new event(s) to data/pending_dates.json "
+              f"for external verification ({len(pending_events) - len(new_pending)} already queued).")
     print(f"\n{ok}/{len(conflicts)} refreshed; "
           f"conflicts {'updated' if c_changed else 'unchanged'}, "
           f"history {'updated' if h_changed else 'unchanged'}")
