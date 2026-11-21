@@ -14,7 +14,7 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
 
@@ -45,9 +45,11 @@ jobs:
       - name: Install date-verifier dependencies
         run: pip install ddgs requests
 
-      - name: Verify queued dates (free APIs only)
+      - name: Verify queued dates (article text + free APIs)
         env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}  # optional
+          # REQUIRE_ARTICLE_PROOF: '1'  # uncomment to accept ONLY article-proven dates
         run: python scripts/verify_dates_free.py
 
       - name: Commit verified dates
@@ -56,5 +58,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/pending_dates.json data/history.json
           git diff --staged --quiet || \
-            git commit -m "chore: resolve queued dates via free APIs (DDG/GDELT/GNews)"
+            git commit -m "chore: resolve queued dates (article text + free APIs)"
           git push
