@@ -18,7 +18,9 @@ Perspective + Escalation:
   - perspective: descriptive (framing divergence Tier 1 vs Tier 3), no smoothing
   - escalation: EWMA + ±12 cap + confidence dampener (smooth_escalation)
 
-Date guards (event insertion):
+Date guards (event insertion, applied in this order):
+  - URL override: correct dates using article URL paths or Tavily metadata
+  - Guard 0: require date_quote UNLESS the URL override successfully rescued the date
   - Guard 1: reject events more than +1 day in the future (allows timezone slips)
   - Guard 2: reject events where the source article was published BEFORE the
     claimed event date (impossible — can't report on something that hasn't
@@ -602,6 +604,19 @@ SCHEMA = """{
 }"""
 
 TIME_RULES = """
+DATE-QUOTE RULES (strict — apply to every event):
+- "date_quote" MUST be the exact phrase from the article that states WHEN
+  the event happened. Examples: "on Wednesday", "Thursday morning",
+  "on 17 November", "two weeks after the 2 November strike".
+- The date you write in "date" MUST be resolvable from that quote plus the
+  article's publication date. Do NOT use the article's publication date as
+  the event date unless the article explicitly says the event occurred on
+  the day of publication.
+- If no phrase in the article states when the event happened, OMIT the
+  event entirely. An omitted event is better than a misdated one.
+- DO NOT guess. If two sources give different event dates, use the date
+  that appears in at least two sources; note this in "description".
+
 TIME-VERIFICATION RULES (strict):
 - Extract the exact date and time the EVENT actually happened, NOT the date the article was published or updated.
 - RETROSPECTIVE / WRAP-UP RULE: If a recent article (e.g., published on Nov 16) discusses an event that occurred earlier (e.g., "two weeks after the Nov 2 strike" or referencing a past date), you MUST extract the original date the event happened (e.g., 2026-11-02). Never assign a recent report or summary date to an event that happened days or weeks prior.
@@ -849,6 +864,7 @@ def main():
     ok = 0
     skipped_dupes = 0
     confidence_adjustments = 0
+    pending_events = []
     date_rejections = 0
     for i, c in enumerate(conflicts):
         use_adv = (i < advanced_count)
@@ -1011,18 +1027,19 @@ def main():
 
                 run_date = datetime.now(timezone.utc).date()
 
-                                # --- Future-Proof Date Override Logic ---
+                # --- Future-Proof Date Override Logic (runs FIRST) ---
+                original_date = ev["date"]
                 source_pub_date = None
                 for s in live:
                     url_str = s.get("url", "")
-                    
+
                     # 1. ALWAYS check the URL path first (most reliable for true article date)
                     d_extracted = extract_date_from_url(url_str)
                     if d_extracted:
                         if 0 <= (run_date - d_extracted).days <= 14:
                             source_pub_date = d_extracted
                             break
-                    
+
                     # 2. Fallback to Tavily metadata only if URL has no date
                     clean_url = url_str.split('?')[0].rstrip('/')
                     if clean_url in url_to_pub_date:
@@ -1036,6 +1053,26 @@ def main():
                     print(f"  correcting event date via URL/metadata for {c['name']}: {ev['date']} → {source_pub_date.isoformat()}")
                     ev["date"] = source_pub_date.isoformat()
 
+                # Track whether the URL override actually rescued the date
+                url_rescued = (ev["date"] != original_date)
+
+                # --- Guard 0 (post-override): queue for external verification ---
+                date_quote = str(ev.get("date_quote", "") or "").strip()
+                if not url_rescued and (not date_quote or len(date_quote) < 4):
+                # Do NOT reject — queue for Perplexity/NewsAPI verification.
+                pending_events.append({
+                "conflict": c["name"],
+                "tier": c["tier"],
+                "title": ev.get("title", ""),
+                "description": ev.get("description", ""),
+                "llm_date": ev["date"],
+                "llm_time": ev.get("time"),
+                "llm_timezone": ev.get("timezone"),
+                "queued_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "status": "pending",
+                })
+                    print(f"  queued for date verification: {c['name']} — {ev['title'][:60]}")
+                    continue
 
                 # --- Date guards (Guard 1 + 2 + 3) ---
                 try:
@@ -1107,11 +1144,21 @@ def main():
     history.sort(key=lambda h: h["date"], reverse=True)
     c_changed = save_if_changed("data/conflicts.json", conflicts)
     h_changed = save_if_changed("data/history.json",   history)
+    if pending_events:
+    pending_path = "data/pending_dates.json"
+    try:
+        existing = json.load(open(pending_path)) if os.path.exists(pending_path) else []
+    except (FileNotFoundError, json.JSONDecodeError):
+        existing = []
+    existing.extend(pending_events)
+    with open(pending_path, "w") as f:
+        json.dump(existing, f, indent=2, ensure_ascii=False)
+    print(f"Queued {len(pending_events)} event(s) to data/pending_dates.json for external verification.")
     print(f"\n{ok}/{len(conflicts)} refreshed; "
           f"conflicts {'updated' if c_changed else 'unchanged'}, "
           f"history {'updated' if h_changed else 'unchanged'}")
     print(f"Fuzzy-dedup skips: {skipped_dupes} new event(s) rejected as duplicates")
-    print(f"Date-guard rejections: {date_rejections} event(s) rejected (future/impossible/stale)")
+    print(f"Date-guard rejections: {date_rejections} event(s) rejected (unquoted/future/impossible/stale)")
     print(f"Confidence adjustments: {confidence_adjustments} conflict(s) re-graded by tier floor")
     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
           f"advanced days done: {usage['advanced_days_done']}")
