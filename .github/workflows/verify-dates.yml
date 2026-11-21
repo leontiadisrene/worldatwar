@@ -1,0 +1,35 @@
+name: Verify queued dates
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests ddgs
+
+      - name: Verify queued dates
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+        run: python scripts/verify_dates_free.py
+
+      - name: Commit resolved dates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/pending_dates.json data/history.json
+          git diff --staged --quiet || \
+            git commit -m "chore: resolve queued dates (article text + free APIs)"
+          git push
