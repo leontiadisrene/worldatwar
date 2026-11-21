@@ -1,5 +1,23 @@
 [
   {
+    "id": "69109c6ee734",
+    "date": "2026-11-21",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli airstrike on Gaza City",
+    "description": "Three Palestinians were killed by an Israeli airstrike on a vehicle in Gaza City's Tel-al Hawa neighbourhood",
+    "source": "auto"
+  },
+  {
+    "id": "789ba79675f2",
+    "date": "2026-11-21",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran downs US drone over Hormuz",
+    "description": "Iran's IRGC downs US drone over Hormuz as efforts to end war remain stalled",
+    "source": "auto"
+  },
+  {
     "id": "762659ae7e07",
     "date": "2026-11-20",
     "conflict": "Ukraine",
@@ -15,6 +33,24 @@
     "tier": "war",
     "title": "Israeli shelling wounds Palestinians",
     "description": "Five Palestinians were wounded in Israeli artillery targeting an area near the al-Maghazi refugee camp in central Gaza",
+    "source": "auto"
+  },
+  {
+    "id": "4a527ef9d556",
+    "date": "2026-11-20",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian Aerial Assault on Kyiv",
+    "description": "Russia launched a massive aerial assault on Ukraine, striking three Kyiv bridges and killing at least 9 people.",
+    "source": "auto"
+  },
+  {
+    "id": "daff044e104e",
+    "date": "2026-11-20",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Ukraine attacks Crimean Bridge",
+    "description": "Ukraine struck a bridge connecting the annexed Crimean peninsula and the Russian mainland late Monday.",
     "source": "auto"
   },
   {
@@ -105,6 +141,24 @@
     "tier": "war",
     "title": "RSF Leader Sentenced",
     "description": "A Sudan court has handed RSF leader Hemedti a second death sentence over a $396 million scandal.",
+    "source": "auto"
+  },
+  {
+    "id": "7de9243f1906",
+    "date": "2026-11-19",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Lee Jae Myung calls for peace talks at APEC",
+    "description": "South Korean President Lee Jae Myung said reopening dialogue with North Korea could lead to ending the Korean War and lasting peace.",
+    "source": "auto"
+  },
+  {
+    "id": "743eeb5ef372",
+    "date": "2026-11-19",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Kim Jong Un visits factory sites",
+    "description": "North Korean leader toured factories and stressed maritime defence after a perceived Trump snub.",
     "source": "auto"
   },
   {
@@ -252,6 +306,15 @@
     "source": "auto"
   },
   {
+    "id": "993e7f120056",
+    "date": "2026-11-18",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Joint Force repels RSF attack",
+    "description": "Joint Force fighters repelled an RSF attack on Kornoi, North Darfur, on November 18, 2026.",
+    "source": "auto"
+  },
+  {
     "id": "b3f99b43405d",
     "date": "2026-11-17",
     "conflict": "Ukraine",
@@ -360,13 +423,13 @@
     "source": "auto"
   },
   {
-    "id": "057a08e22bf7",
+    "id": "dd727a689be1",
     "date": "2026-11-17",
     "conflict": "E. DR Congo",
     "tier": "war",
-    "title": "WHO IHR Emergency Committee meets on Ebola",
-    "description": "The WHO Director-General addressed the third IHR Emergency Committee meeting regarding the Bundibugyo virus epidemic, highlighting insecurity as a major obstacle to the response.",
-    "source": "auto"
+    "title": "WHO and UN coordinate response to DRC Ebola outbreak",
+    "description": "The WHO convened its third IHR Emergency Committee on the Bundibugyo virus epidemic in the DRC, while the UN called for protection of civilians and unhindered humanitarian access amid the outbreak.",
+    "source": "merged"
   },
   {
     "id": "f4f76dba8452",
@@ -384,15 +447,6 @@
     "tier": "war",
     "title": "Guinea jails 200 miners and administrators",
     "description": "Guinea sentenced 22 former regional administrators and 202 others for involvement in illegal gold mining, following a crackdown that detained over 1,200 miners in Siguiri.",
-    "source": "auto"
-  },
-  {
-    "id": "b646fb45115e",
-    "date": "2026-11-17",
-    "conflict": "E. DR Congo",
-    "tier": "war",
-    "title": "UN appeal for civilian protection and aid",
-    "description": "The United Nations urged protection of civilians and unhindered humanitarian access amid the Ebola outbreak.",
     "source": "auto"
   },
   {
@@ -540,13 +594,13 @@
     "source": "auto"
   },
   {
-    "id": "841a55b09bc2",
+    "id": "2111ff8d7642",
     "date": "2026-11-15",
     "conflict": "Thai–Cambodia border",
     "tier": "watch",
-    "title": "Thailand blocks fuel to Cambodia",
-    "description": "Thailand moved to block fuel from reaching Cambodia as the border conflict continues to escalate, according to the Council on Foreign Relations.",
-    "source": "auto"
+    "title": "Thailand‑Cambodia border dispute escalates with fuel blockade and diplomatic criticism",
+    "description": "Thailand moved to block fuel shipments to Cambodia, and Cambodia’s prime minister rebuked Thailand at the Francophonie summit, highlighting the deepening border dispute.",
+    "source": "merged"
   },
   {
     "id": "4ba3e8b7aa23",
@@ -555,15 +609,6 @@
     "tier": "watch",
     "title": "Nagorno-Karabakh Fighting",
     "description": "Dozens killed in fighting between Armenia and Azerbaijan in Nagorno-Karabakh",
-    "source": "auto"
-  },
-  {
-    "id": "a8aeac42e99f",
-    "date": "2026-11-15",
-    "conflict": "Thai–Cambodia border",
-    "tier": "watch",
-    "title": "Cambodia criticizes Thailand at Francophonie Summit",
-    "description": "Prime Minister Hun Manet used his opening remarks at the Francophonie summit in Phnom Penh to criticize Thailand, stating that Cambodia did not start the 2025 border fighting.",
     "source": "auto"
   },
   {
@@ -693,12 +738,12 @@
     "source": "auto"
   },
   {
-    "id": "6819226b1893",
+    "id": "db974e0b1026",
     "date": "2026-11-13",
     "conflict": "Myanmar",
     "tier": "war",
-    "title": "Junta double‑tap airstrike on India Market in Kyauktaw, Rakhine",
-    "description": "The Myanmar junta carried out double‑tap airstrikes on the India Market in Kyauktaw, Rakhine State, killing at least 50 people and wounding 58 civilians.",
+    "title": "Myanmar junta conducts multiple airstrikes on civilian sites in Rakhine",
+    "description": "The Myanmar junta carried out a double‑tap airstrike on the India Market in Kyauktaw and a separate strike on the Byar La displaced‑persons camp, killing dozens of civilians in Rakhine State.",
     "source": "merged"
   },
   {
@@ -709,15 +754,6 @@
     "title": "China conducts joint combat patrol; Taiwan says drills are strike rehearsals",
     "description": "Chinese fighter jets, drones and warships performed a joint combat‑readiness patrol in the Taiwan Strait. Taiwan’s senior security official said the exercises amount to rehearsals for a possible strike on the island.",
     "source": "merged"
-  },
-  {
-    "id": "bf7a33d6c030",
-    "date": "2026-11-13",
-    "conflict": "Myanmar",
-    "tier": "war",
-    "title": "Airstrike on Byar La displaced‑persons camp",
-    "description": "Myanmar military airstrike on the Byar La camp in Rakhine State killed at least 12 civilians.",
-    "source": "auto"
   },
   {
     "id": "3a15ef06cd79",
@@ -756,12 +792,12 @@
     "source": "merged"
   },
   {
-    "id": "5d34d589b535",
+    "id": "0b9e74474feb",
     "date": "2026-11-12",
     "conflict": "Taiwan Strait",
     "tier": "flash",
-    "title": "Xi Jinping declares Taiwan’s complete reunification inevitable",
-    "description": "President Xi Jinping declared that Taiwan’s complete reunification with China is inevitable, reaffirming Beijing’s long‑term goal and noting the remark came a week before the APEC summit in Shenzhen, without explicitly mentioning the use of force.",
+    "title": "Rising Taiwan Strait tensions as China vows reunification and G7 condemns naval activity",
+    "description": "President Xi declared Taiwan’s reunification inevitable, prompting the G7 to denounce China’s naval activities east of the island as a threat to regional stability.",
     "source": "merged"
   },
   {
@@ -771,15 +807,6 @@
     "tier": "war",
     "title": "Armed men kill civilians in Niger",
     "description": "At least 37 civilians were killed by armed men in western Niger",
-    "source": "auto"
-  },
-  {
-    "id": "02f628c839f3",
-    "date": "2026-11-12",
-    "conflict": "Taiwan Strait",
-    "tier": "flash",
-    "title": "G7 condemns Chinese naval activity",
-    "description": "G7 foreign ministers issued a statement declaring that China's actions east of Taiwan threaten regional stability and freedom of navigation.",
     "source": "auto"
   },
   {
@@ -825,6 +852,15 @@
     "tier": "war",
     "title": "Airstrike on Rakhine market",
     "description": "A military jet dropped two bombs on a market in rebel‑held Rakhine state, killing at least 50 people and injuring 58.",
+    "source": "auto"
+  },
+  {
+    "id": "f3ecf821d820",
+    "date": "2026-11-10",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "Malian authorities report influx of deported miners",
+    "description": "Malian authorities say that a total of around 160,000 people have flooded into the country after being deported from Guinea.",
     "source": "auto"
   },
   {
