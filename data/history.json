@@ -18,13 +18,22 @@
     "source": "auto"
   },
   {
-    "id": "762659ae7e07",
+    "id": "71043c0a7180",
+    "date": "2026-11-21",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian barrage on Ukraine",
+    "description": "Russia launched a massive overnight barrage of over 400 drones and 110 missiles across Ukraine, killing at least eight people, including six in Kyiv.",
+    "source": "auto"
+  },
+  {
+    "id": "9600c5951704",
     "date": "2026-11-20",
     "conflict": "Ukraine",
     "tier": "war",
-    "title": "Russian Missile Attack on Kyiv",
-    "description": "Russian missiles targeted Kyiv, hitting bridges and resulting in deaths and damage.",
-    "source": "auto"
+    "title": "Russian missile and aerial assault hits three Kyiv bridges",
+    "description": "Russian missiles and aircraft struck three bridges in Kyiv, killing at least nine people and causing extensive damage to the city's infrastructure.",
+    "source": "merged"
   },
   {
     "id": "b72cf856be50",
@@ -33,15 +42,6 @@
     "tier": "war",
     "title": "Israeli shelling wounds Palestinians",
     "description": "Five Palestinians were wounded in Israeli artillery targeting an area near the al-Maghazi refugee camp in central Gaza",
-    "source": "auto"
-  },
-  {
-    "id": "4a527ef9d556",
-    "date": "2026-11-20",
-    "conflict": "Ukraine",
-    "tier": "war",
-    "title": "Russian Aerial Assault on Kyiv",
-    "description": "Russia launched a massive aerial assault on Ukraine, striking three Kyiv bridges and killing at least 9 people.",
     "source": "auto"
   },
   {
@@ -159,6 +159,15 @@
     "tier": "flash",
     "title": "Kim Jong Un visits factory sites",
     "description": "North Korean leader toured factories and stressed maritime defence after a perceived Trump snub.",
+    "source": "auto"
+  },
+  {
+    "id": "508eb47c6e33",
+    "date": "2026-11-19",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Bureij airstrike kills four",
+    "description": "Israeli airstrike in the Bureij area of central Gaza killed four Palestinians; the IDF said it hit Hamas operatives, while Gaza civil‑defence reported victims included people in a tent sheltering displaced civilians.",
     "source": "auto"
   },
   {
