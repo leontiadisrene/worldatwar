@@ -1,5 +1,14 @@
 [
   {
+    "id": "98d9b0068bd6",
+    "date": "2026-11-22",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "US blockade of Iran reaches 130 days",
+    "description": "The US says its blockade of Iran has reached 130 consecutive days.",
+    "source": "auto"
+  },
+  {
     "id": "69109c6ee734",
     "date": "2026-11-21",
     "conflict": "Gaza",
@@ -24,6 +33,42 @@
     "tier": "war",
     "title": "Russian barrage on Ukraine",
     "description": "Russia launched a massive overnight barrage of over 400 drones and 110 missiles across Ukraine, killing at least eight people, including six in Kyiv.",
+    "source": "auto"
+  },
+  {
+    "id": "aef6c1343105",
+    "date": "2026-11-21",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian strike on Kryvyi Rih",
+    "description": "Russian ballistic missile strikes on Ukraine's southern city of Kryvyi Rih, President Volodymyr Zelenskyy's hometown, killed two people and wounded dozens of others.",
+    "source": "auto"
+  },
+  {
+    "id": "1685756b2563",
+    "date": "2026-11-21",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strike in Gaza City",
+    "description": "Israeli strike in Gaza City kills 3, witnesses say the vehicle was carrying aid",
+    "source": "auto"
+  },
+  {
+    "id": "dfdf929a43eb",
+    "date": "2026-11-21",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iranian attack on Bahrain",
+    "description": "Bahrain's Interior Ministry reported two people were injured in Iranian attacks on the country.",
+    "source": "auto"
+  },
+  {
+    "id": "fe50cd670cc2",
+    "date": "2026-11-21",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "IRGC claims US base attack",
+    "description": "The Islamic Revolutionary Guard Corps (IRGC) claimed to have targeted radars at a United States military base in Bahrain.",
     "source": "auto"
   },
   {
