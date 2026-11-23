@@ -1,5 +1,23 @@
 [
   {
+    "id": "a5f83bb40ae7",
+    "date": "2026-11-23",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine claims sinking of Russian corvette Merkury",
+    "description": "Zelenskyy confirmed Ukraine sank the Russian ship Merkury off the Libya coast using seven naval drones, describing it as an exemplary operation in response to Russia's war.",
+    "source": "auto"
+  },
+  {
+    "id": "d51cc3636cae",
+    "date": "2026-11-23",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian strikes kill at least 4 in Odesa",
+    "description": "At least four people were killed and thirteen injured after Russian strikes hit Odesa, which Zelenskyy described as brutal; Russia also struck a power substation in Dnipropetrovsk.",
+    "source": "auto"
+  },
+  {
     "id": "98d9b0068bd6",
     "date": "2026-11-22",
     "conflict": "Iran",
@@ -42,6 +60,15 @@
     "tier": "war",
     "title": "Israeli strikes kill nine",
     "description": "At least nine people were killed in Israeli strikes in the past 48 hours, according to Gaza's Ministry of Health.",
+    "source": "auto"
+  },
+  {
+    "id": "c45e8e7c2152",
+    "date": "2026-11-22",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone strikes hit UN building and residential areas in Khartoum",
+    "description": "Drone strikes damaged a UN building and nearby homes; the Sudanese army accused Ethiopia of permitting the attacks, which Ethiopia denied.",
     "source": "auto"
   },
   {
@@ -99,6 +126,15 @@
     "source": "auto"
   },
   {
+    "id": "e734c6cc62ed",
+    "date": "2026-11-21",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli attacks kill four Palestinians",
+    "description": "Gaza’s Health Ministry reported on Saturday that 1,671 people had been killed since the ceasefire came into effect in October 2025.",
+    "source": "auto"
+  },
+  {
     "id": "9600c5951704",
     "date": "2026-11-20",
     "conflict": "Ukraine",
@@ -141,6 +177,15 @@
     "tier": "war",
     "title": "UN report on drone casualties",
     "description": "The UN human rights office said on Tuesday it had confirmed 2,230 civilian deaths in Sudan’s civil war so far this year, with drone strikes accounting for nearly three-quarters of the deaths.",
+    "source": "auto"
+  },
+  {
+    "id": "59c99cf1e93e",
+    "date": "2026-11-20",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli drone attacks kill seven Palestinians",
+    "description": "Israeli attacks have killed at least seven Palestinians and wounded others in the central part of the Gaza Strip.",
     "source": "auto"
   },
   {
@@ -324,12 +369,12 @@
     "source": "auto"
   },
   {
-    "id": "2ef5cf94b511",
+    "id": "1d46c03ed4ab",
     "date": "2026-11-18",
     "conflict": "Kashmir",
     "tier": "flash",
-    "title": "Indian forces kill LeT commander Mohammad Lateef Bhat, rescue 27 civilians",
-    "description": "Indian troops eliminated LeT commander Mohammad Lateef Bhat in Kulgam. Security forces rescued 25 girls and two teachers from a nearby Darul Uloom institute just before the final assault that killed him.",
+    "title": "Indian forces kill LeT commander and rescue civilians in Kulgam",
+    "description": "Indian security forces eliminated LeT commander Mohammad Lateef Bhat in Kulgam, and, according to The Hindu and the Washington Post, rescued 25 girls and two teachers from a nearby Darul Uloom institute during the same operation.",
     "source": "merged"
   },
   {
@@ -441,12 +486,12 @@
     "source": "auto"
   },
   {
-    "id": "eb5aebed8f68",
+    "id": "7435fc7ab3a2",
     "date": "2026-11-18",
-    "conflict": "Kashmir",
-    "tier": "flash",
-    "title": "Kulgam encounter – commander killed and civilians rescued",
-    "description": "Indian security forces engaged militants in Kulgam, killing LeT commander Mohammad Lateef Bhat and rescuing 25 girls and two teachers from a nearby Darul Uloom, according to The Hindu. The Washington Post reported the killing of a militant commander in the same operation.",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Ebola cases double in DR Congo",
+    "description": "The current outbreak has resulted in 5,568 deaths out of 11,376 confirmed cases",
     "source": "auto"
   },
   {
@@ -591,6 +636,15 @@
     "tier": "war",
     "title": "Iran attacks US base in Kuwait",
     "description": "Iran launched an attack on a US air base in Kuwait, escalating tensions in the region",
+    "source": "auto"
+  },
+  {
+    "id": "2ccf1dda1932",
+    "date": "2026-11-17",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Fresh US‑Iran exchanges of fire",
+    "description": "Despite ongoing Qatar‑mediated contacts, US and Iranian forces exchanged fire on 17 November, marking a new round of hostilities.",
     "source": "auto"
   },
   {
