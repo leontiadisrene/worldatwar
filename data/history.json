@@ -9,13 +9,40 @@
     "source": "auto"
   },
   {
-    "id": "69109c6ee734",
+    "id": "378f874f36a2",
+    "date": "2026-11-22",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian strikes in Kyiv region",
+    "description": "Russian strikes killed at least 6 people in the Kyiv region",
+    "source": "auto"
+  },
+  {
+    "id": "9d9b199ac999",
+    "date": "2026-11-22",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran unveils dual-missile launcher",
+    "description": "Iran strengthens its missile and air-defence capabilities",
+    "source": "auto"
+  },
+  {
+    "id": "afb7f96ce7e2",
+    "date": "2026-11-22",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone strikes in Khartoum",
+    "description": "Drone strikes hit homes and a UN building in the capital, killing civilians and displacing more people.",
+    "source": "auto"
+  },
+  {
+    "id": "a00026c6f78d",
     "date": "2026-11-21",
     "conflict": "Gaza",
     "tier": "war",
-    "title": "Israeli airstrike on Gaza City",
-    "description": "Three Palestinians were killed by an Israeli airstrike on a vehicle in Gaza City's Tel-al Hawa neighbourhood",
-    "source": "auto"
+    "title": "Israeli airstrike on vehicle in Gaza City's Tel‑al Hawa kills three",
+    "description": "An Israeli airstrike hit a vehicle in Gaza City's Tel‑al Hawa neighbourhood, killing three Palestinians; witnesses said the vehicle was carrying aid.",
+    "source": "merged"
   },
   {
     "id": "789ba79675f2",
@@ -45,15 +72,6 @@
     "source": "auto"
   },
   {
-    "id": "1685756b2563",
-    "date": "2026-11-21",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Israeli strike in Gaza City",
-    "description": "Israeli strike in Gaza City kills 3, witnesses say the vehicle was carrying aid",
-    "source": "auto"
-  },
-  {
     "id": "dfdf929a43eb",
     "date": "2026-11-21",
     "conflict": "Iran",
@@ -69,6 +87,15 @@
     "tier": "war",
     "title": "IRGC claims US base attack",
     "description": "The Islamic Revolutionary Guard Corps (IRGC) claimed to have targeted radars at a United States military base in Bahrain.",
+    "source": "auto"
+  },
+  {
+    "id": "e7ed8aeb6d1f",
+    "date": "2026-11-21",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strike on aid vehicle",
+    "description": "Israeli strike kills three aid workers in Gaza",
     "source": "auto"
   },
   {
@@ -96,6 +123,15 @@
     "tier": "watch",
     "title": "Ukraine attacks Crimean Bridge",
     "description": "Ukraine struck a bridge connecting the annexed Crimean peninsula and the Russian mainland late Monday.",
+    "source": "auto"
+  },
+  {
+    "id": "a2424c169c0e",
+    "date": "2026-11-20",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine strikes Kerch Bridge",
+    "description": "Ukraine struck the Kerch Bridge in response to Russian aggression",
     "source": "auto"
   },
   {
@@ -369,6 +405,15 @@
     "source": "auto"
   },
   {
+    "id": "c044600cf074",
+    "date": "2026-11-18",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli ground operation",
+    "description": "Israeli forces launch ground operation in central Gaza",
+    "source": "auto"
+  },
+  {
     "id": "b3f99b43405d",
     "date": "2026-11-17",
     "conflict": "Ukraine",
@@ -573,6 +618,15 @@
     "tier": "war",
     "title": "Sudan‑Ethiopia diplomatic tensions",
     "description": "Sudan and Ethiopia exchange accusations of supporting armed groups within each other's borders.",
+    "source": "auto"
+  },
+  {
+    "id": "e72a9c032932",
+    "date": "2026-11-16",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Francophonie Summit Leadership Vote Postponed",
+    "description": "Election of the new Francophonie chief was delayed on Monday due to the DRC‑Rwanda dispute.",
     "source": "auto"
   },
   {
