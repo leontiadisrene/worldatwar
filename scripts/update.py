@@ -33,6 +33,8 @@ from collections import defaultdict
 from datetime import date, datetime, timezone, timedelta
 from urllib.parse import urlparse
 
+import ceasefire_indicator as cfi  # scripts/ceasefire_indicator.py (same folder)
+
 TAVILY    = os.environ["TAVILY_API_KEY"]
 GROQ      = os.environ["GROQ_API_KEY"]
 CF_ACCT   = os.environ["CF_ACCOUNT_ID"]
@@ -604,6 +606,10 @@ SCHEMA = """{
     "score": 0,
     "note": "one short sentence of evidence"
   },
+  "ceasefire": {
+    "status": "in_force" | "not_in_force" | "unclear" | "not_applicable",
+    "evidence_ids": ["E1"]
+  },
   "confidence": "high" | "medium" | "low"
 }"""
 
@@ -714,7 +720,7 @@ EVENT NEUTRALITY & SAME-INCIDENT RULES:
   rather than presenting contested assertions as unattributed fact.
 """
 
-def research_prompt(conflict, results, recent_events, previous_escalation):
+def research_prompt(conflict, results, recent_events, previous_escalation, cf_block=""):
     ctx = "\n".join(
         f"- {x['title']} — {x.get('content','')[:350]} ({x['url']})"
         for x in results
@@ -745,6 +751,8 @@ Return ONLY valid JSON, exactly this shape:
 {ESCALATION_RULES}
 
 Previous escalation score (from last run): {previous_escalation if previous_escalation is not None else "none — first run for this conflict"}
+
+{cf_block}
 
 Other rules:
 - Every claim in "current" must be supported by a result above.
@@ -941,7 +949,16 @@ def main():
                         pass
 
             recent = recent_events_for_prompt(history, c['name'])
-            prompt = research_prompt(c, results, recent, prev_escalation)
+
+            # --- Ceasefire indicator evidence: sentences copied by code from the results above
+            #     (+ optional free page downloads). No extra Tavily credits are used. ---
+            cf_on = c.get("id") not in cfi.EXCLUDED_CONFLICTS
+            cf_evid, cf_block = [], ""
+            if cf_on:
+                cf_texts = cfi.fetch_texts(results, tier_of) if os.environ.get("CEASEFIRE_FETCH", "1") == "1" else {}
+                cf_evid = cfi.extract_evidence(results, cf_texts, datetime.now(timezone.utc).date(), tier_of)
+                cf_block = cfi.prompt_block(cf_evid)
+            prompt = research_prompt(c, results, recent, prev_escalation, cf_block)
 
             a = None
             try:
@@ -1005,6 +1022,20 @@ def main():
             c["confidence"] = adjusted_conf
             c["verified_by"] = verified
             c["updated"]    = datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+            # --- Ceasefire indicator: green/red only when BOTH researchers agree and independent
+            #     sources confirm it (see scripts/ceasefire_indicator.py); otherwise grey. ---
+            if cf_on:
+                run_now = datetime.now(timezone.utc)
+                cf_a = a.get("ceasefire") if isinstance(a, dict) else None
+                cf_b = b.get("ceasefire") if isinstance(b, dict) else None
+                inds, cf_dec = cfi.build_indicator(c.get("indicators"), cf_a, cf_b, cf_evid,
+                                                   run_now.isoformat(timespec="seconds"), run_now.date())
+                c["indicators"] = inds
+                cfi.log_decision("data/indicator_log.json", c["id"], cf_dec, cf_a, cf_b,
+                                 run_now.isoformat(timespec="seconds"))
+                print(f"  ceasefire indicator for {c['name']}: {cf_dec.state} ({cf_dec.reason or 'n/a'}, "
+                      f"{len(cf_evid)} candidate sentences)")
 
             # --- Perspective (no smoothing, save as-is if model returned it) ---
             persp = final.get("perspective")
