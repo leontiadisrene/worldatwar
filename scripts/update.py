@@ -852,8 +852,10 @@ def save_if_changed(path, data):
 
 # ---------- main ----------
 def main():
-    conflicts = json.load(open("data/conflicts.json"))
-    history   = json.load(open("data/history.json"))
+    with open("data/conflicts.json") as f:
+        conflicts = json.load(f)
+    with open("data/history.json") as f:
+        history = json.load(f)
 
     merge_groups = find_same_day_groups(history)
     if merge_groups:
