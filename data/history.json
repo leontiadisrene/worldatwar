@@ -36,12 +36,21 @@
     "source": "auto"
   },
   {
-    "id": "a00026c6f78d",
+    "id": "a99dfbb933ec",
+    "date": "2026-11-22",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strikes kill nine",
+    "description": "At least nine people were killed in Israeli strikes in the past 48 hours, according to Gaza's Ministry of Health.",
+    "source": "auto"
+  },
+  {
+    "id": "186df4fa7116",
     "date": "2026-11-21",
     "conflict": "Gaza",
     "tier": "war",
-    "title": "Israeli airstrike on vehicle in Gaza City's Tel‑al Hawa kills three",
-    "description": "An Israeli airstrike hit a vehicle in Gaza City's Tel‑al Hawa neighbourhood, killing three Palestinians; witnesses said the vehicle was carrying aid.",
+    "title": "Israeli airstrike kills three aid workers in Gaza",
+    "description": "Israeli airstrikes hit a vehicle in Gaza City's Tel‑al Hawa neighbourhood, which witnesses said was carrying aid. The strike killed three aid workers. Israeli officials said the target was a legitimate military vehicle.",
     "source": "merged"
   },
   {
@@ -90,15 +99,6 @@
     "source": "auto"
   },
   {
-    "id": "e7ed8aeb6d1f",
-    "date": "2026-11-21",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Israeli strike on aid vehicle",
-    "description": "Israeli strike kills three aid workers in Gaza",
-    "source": "auto"
-  },
-  {
     "id": "9600c5951704",
     "date": "2026-11-20",
     "conflict": "Ukraine",
@@ -132,6 +132,15 @@
     "tier": "war",
     "title": "Ukraine strikes Kerch Bridge",
     "description": "Ukraine struck the Kerch Bridge in response to Russian aggression",
+    "source": "auto"
+  },
+  {
+    "id": "4ca10c3f0b6a",
+    "date": "2026-11-20",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "UN report on drone casualties",
+    "description": "The UN human rights office said on Tuesday it had confirmed 2,230 civilian deaths in Sudan’s civil war so far this year, with drone strikes accounting for nearly three-quarters of the deaths.",
     "source": "auto"
   },
   {
@@ -249,6 +258,24 @@
     "tier": "war",
     "title": "Bureij airstrike kills four",
     "description": "Israeli airstrike in the Bureij area of central Gaza killed four Palestinians; the IDF said it hit Hamas operatives, while Gaza civil‑defence reported victims included people in a tent sheltering displaced civilians.",
+    "source": "auto"
+  },
+  {
+    "id": "2b6e08c9139a",
+    "date": "2026-11-19",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Drone attacks on Kyiv",
+    "description": "Russia carried out drone attacks on Kyiv, targeting civilian and energy infrastructure, according to the UN.",
+    "source": "auto"
+  },
+  {
+    "id": "4c68cb9e0284",
+    "date": "2026-11-19",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "US-Rwanda tensions",
+    "description": "Rwandan Foreign Minister Olivier Nduhungirehe criticizes the US for its approach to the DR Congo peace deal",
     "source": "auto"
   },
   {
@@ -411,6 +438,15 @@
     "tier": "war",
     "title": "Israeli ground operation",
     "description": "Israeli forces launch ground operation in central Gaza",
+    "source": "auto"
+  },
+  {
+    "id": "eb5aebed8f68",
+    "date": "2026-11-18",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Kulgam encounter – commander killed and civilians rescued",
+    "description": "Indian security forces engaged militants in Kulgam, killing LeT commander Mohammad Lateef Bhat and rescuing 25 girls and two teachers from a nearby Darul Uloom, according to The Hindu. The Washington Post reported the killing of a militant commander in the same operation.",
     "source": "auto"
   },
   {

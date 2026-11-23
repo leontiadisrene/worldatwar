@@ -9,33 +9,46 @@
     "what": "Full-scale invasion, now a grinding war of attrition",
     "when": "Started Feb 24, 2022 — day 1,650+ and still going",
     "how": "Daily drone, missile and artillery strikes along a front over 1,100 km long",
-    "current": "Russian strikes have killed at least 6 people in the Kyiv region, with Ukrainian President Volodymyr Zelenskyy urging the US to approve the delivery of Patriot interceptor missiles. Russia has launched multiple attacks across Ukraine, including a drone strike on a Russian cargo ship in the eastern Baltic Sea. Ukraine has also struck the Kerch Bridge, with Zelenskyy calling it a 'fair response' to Russian aggression.",
+    "current": "Ukraine and Russia continue to exchange strikes, with Ukraine targeting a key bridge and oil refineries in Russia, and Russia launching missile and drone strikes on Ukraine. The conflict has escalated, with nearly 200 drones intercepted near Moscow. Peace talks between Ukraine, the US, and Europe are ongoing, but a ceasefire has not been agreed upon.",
     "sources": [
       {
-        "label": "Al Jazeera: Zelenskyy urges US to release Patriot missiles as Russia kills 3 in Ukraine",
-        "url": "https://www.aljazeera.com/news/2026/11/22/zelenskyy-urges-us-to-release-patriot-missiles"
+        "label": "Al Jazeera: Ukraine holds peace talks with US, Europe as conflict escalates",
+        "url": "https://www.aljazeera.com/news/2026/11/17/ukraine-holds-peace-talks-with-us-europe-as-conflict-escalates"
       },
       {
-        "label": "South China Morning Post: Russian strikes kill 6 in Kyiv region, Ukraine says",
-        "url": "https://www.scmp.com/news/world/europe/article/3375401/russian-strikes-kill-6-kyiv-region-ukraine-says"
+        "label": "UN: UNifeed",
+        "url": "https://media.un.org/unifeed/en/asset/d369/d3692230"
       },
       {
-        "label": "BBC News: Boy, 7, pulled from rubble hours after Russian strike in Ukraine, rescuers say",
-        "url": "https://www.bbc.co.uk/news/articles/cqdr15l32d3go"
+        "label": "Kyiv Post: War in Ukraine",
+        "url": "https://www.kyivpost.com/topic/war-in-ukraine?page=820"
       }
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:38:02+00:00",
+    "updated": "2026-11-23T08:42:31+00:00",
     "perspective": {
-      "dominant_frame": "The conflict is being framed as an escalating war between Russia and Ukraine, with both sides launching attacks and suffering casualties. Tier 1 sources such as Al Jazeera and the BBC are reporting on the violence and diplomatic efforts, while Tier 3 sources such as the South China Morning Post are providing regional perspective.",
+      "dominant_frame": "The conflict is being framed as an escalating war between Ukraine and Russia, with both sides exchanging strikes and no ceasefire in place. Tier 1 sources, such as Al Jazeera, are reporting on the ongoing violence, while Tier 3 sources, such as Kyiv Post, are providing on-the-ground perspective.",
       "divergence": "moderate"
     },
     "escalation": {
       "score": 80,
-      "note": "Russian strikes kill 6",
-      "updated": "2026-11-23T01:38:02+00:00"
-    }
+      "note": "nearly 200 drones intercepted",
+      "updated": "2026-11-23T08:42:31+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:42:31+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "Not enough recent, independently confirmed reporting to say."
+      }
+    ]
   },
   {
     "id": "gaza",
@@ -47,33 +60,46 @@
     "what": "War technically under ceasefire, but violence continues",
     "when": "War since Oct 7, 2023; ceasefire since Oct 10, 2025",
     "how": "Over 1,300 people killed since the \"ceasefire\" began; disarmament and reconstruction stalled",
-    "current": "Israeli strikes have continued in Gaza, with recent attacks killing three aid workers and six others, despite a ceasefire agreement in October 2025. The conflict has resulted in over 1,600 Palestinian deaths and five Israeli soldier deaths since the ceasefire. Israeli forces have also launched ground operations in Gaza, with tanks advancing across the ceasefire line.",
+    "current": "Israeli forces have continued demolishing buildings and homes in the Gaza Strip amid ongoing military operations, with at least nine people killed in the past 48 hours, taking the death toll since the October 2025 'ceasefire' to 1,661. Displaced Palestinians are facing worsening conditions, with thousands forced to abandon their makeshift shelters. Israeli strikes have killed more than 1,600 Palestinians in Gaza since the 'ceasefire' agreement.",
     "sources": [
       {
-        "label": "Arab News: Israeli strike kills three in vehicle distributing aid in Gaza, witnesses say",
-        "url": "https://www.arabnews.com/middle-east/israeli-strike-kills-three-in-vehicle-distributing-aid-in-gaza-witnesses-say-3013366"
+        "label": "Al Jazeera: Israeli drone attacks kill seven Palestinians in central Gaza",
+        "url": "https://www.aljazeera.com/news/2026/11/20/israeli-drone-attacks-kill-seven-palestinians-in-central-gaza"
       },
       {
-        "label": "AP News: Iran strikes tankers and Israeli hit on food truck in Gaza kills 3",
-        "url": "https://apnews.com/article/mideast-iran-gaza-israel-november-21-2026-29159a6f3365ff447c0ccbd1d7260f75"
+        "label": "Al Jazeera: Displaced Palestinians protest as Israeli air strikes continue in Gaza",
+        "url": "https://www.aljazeera.com/news/2026/11/22/displaced-palestinians-protest-as-israeli-air-strikes-continue-in-gaza"
       },
       {
-        "label": "The New York Times: Israeli Tanks Advance Across Gaza Cease-Fire Line in Rare Incursion",
-        "url": "https://www.nytimes.com/2026/11/18/world/middleeast/israel-gaza-war-ground-operation.html?eafs_enabled=false"
+        "label": "Al Jazeera: Gaza faces deadly strikes and health crisis",
+        "url": "https://www.aljazeera.com/video/newsfeed/2026/11/21/jerusalem-daily-gaza-faces-deadly-strikes-and-health-crisis"
       }
     ],
-    "confidence": "high",
+    "confidence": "low",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:38:21+00:00",
+    "updated": "2026-11-23T08:43:15+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in Gaza is framed as an ongoing and escalating crisis, with both Israeli and Palestinian sources reporting continued violence and casualties. Tier 1 sources, such as AP News and The New York Times, emphasize the humanitarian impact of the conflict, while Tier 3 sources, such as Arab News, focus on the political and military aspects.",
+      "dominant_frame": "The conflict is framed as an ongoing Israeli military operation in Gaza, with a focus on the humanitarian crisis and the impact on displaced Palestinians. Tier 1 sources, such as Al Jazeera, report on the ongoing violence and the violation of the 'ceasefire' agreement, while Tier 3 sources provide more context on the regional situation and the perspectives of different parties involved.",
       "divergence": "moderate"
     },
     "escalation": {
       "score": 85,
-      "note": "Israeli ground operation",
-      "updated": "2026-11-23T01:38:21+00:00"
-    }
+      "note": "Ongoing Israeli strikes and ground operations",
+      "updated": "2026-11-23T08:43:15+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:43:15+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "The automated checks disagreed, so nothing is shown as fact."
+      }
+    ]
   },
   {
     "id": "iran",
@@ -85,33 +111,42 @@
     "what": "A leadership-shattering war, now in an uneasy pause",
     "when": "12-day war June 2025; \"Operation Epic Fury\" Feb 28, 2026",
     "how": "US-Israeli strikes killed Iran’s Supreme Leader; his son succeeded him; Hormuz still shut",
-    "current": "Iran has intensified attacks in the Gulf, targeting US military positions and causing fires at industrial facilities in Bahrain. The Islamic Revolutionary Guard Corps (IRGC) claimed to have targeted radars at a United States military base in Bahrain. Iran's economy is under pressure from a US naval blockade, leading to rolling power cuts across the country.",
+    "current": "The US-Iran conflict continues with fresh exchanges of fire despite diplomatic contacts. Trump vows to end the conflict soon and seeks a durable nuclear deal. Iran has set seven conditions for a formal ceasefire, including lifting the US naval blockade and sanctions relief.",
     "sources": [
       {
-        "label": "Al Jazeera: Iran war live: Tankers set ablaze in Hormuz as IRGC warns of unrest threat",
-        "url": "https://www.aljazeera.com/news/liveblog/2026/11/22/iran-war-live-tankers-set-ablaze-in-hormuz-as-irgc-warns-of-unrest-threat"
+        "label": "Al Jazeera: Is the US-Israel war on Iran turning into a ‘frozen conflict’?",
+        "url": "https://www.aljazeera.com/news/2026/11/17/is-the-us-israel-war-on-iran-turning-into-a-frozen-conflict"
       },
       {
-        "label": "The Times of Israel: IDF said to warn Netanyahu an Israeli attack on Iran could spark multi-front war",
-        "url": "https://www.timesofisrael.com/idf-said-to-warn-netanyahu-an-israeli-attack-on-iran-could-spark-multi-front-war"
-      },
-      {
-        "label": "Al Jazeera: What’s behind Iran’s escalation of attacks in the Gulf?",
-        "url": "https://www.aljazeera.com/news/2026/11/22/whats-behind-irans-escalation-of-attacks-in-the-gulf"
+        "label": "Arab News: Trump says US will ‘see what happens’ in conflict with Iran after January 1",
+        "url": "https://www.arabnews.com/middle-east/trump-says-us-will-see-what-happens-in-conflict-with-iran-after-january-1-3012926"
       }
     ],
     "confidence": "low",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:38:39+00:00",
+    "verified_by": "cloudflare+groq (no review)",
+    "updated": "2026-11-23T08:44:02+00:00",
     "perspective": {
-      "dominant_frame": "The conflict is escalating, with Iran intensifying attacks in the Gulf and the US maintaining a naval blockade. Tier 1 sources, such as Al Jazeera, report on the attacks and their impact on the region, while Tier 3 sources, such as The Times of Israel, provide analysis on the potential consequences of an Israeli attack on Iran.",
+      "dominant_frame": "The conflict is framed as a complex and challenging situation, with both the US and Iran seeking to achieve their goals through diplomatic and military means. Tier 1 sources, such as Reuters, focus on the diplomatic efforts, while Tier 3 sources, such as Al Jazeera, provide more context on the regional implications.",
       "divergence": "moderate"
     },
     "escalation": {
       "score": 72,
-      "note": "Iran targets US base",
-      "updated": "2026-11-23T01:38:39+00:00"
-    }
+      "note": "Fresh exchanges of fire",
+      "updated": "2026-11-23T08:44:02+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:44:02+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "Not enough recent, independently confirmed reporting to say."
+      }
+    ]
   },
   {
     "id": "sudan",
@@ -123,33 +158,46 @@
     "what": "Civil war hardening into a formal partition",
     "when": "Since April 15, 2023, now in its 4th year",
     "how": "RSF controls Darfur and the west; army holds the center, north and east",
-    "current": "Drone strikes have intensified in Sudan, with recent attacks hitting homes and a UN building in the capital, killing civilians and displacing more people. The conflict between the Sudanese army and the Rapid Support Forces (RSF) has led to a humanitarian crisis, with over 200,000 people killed and 13 million displaced. The use of drones has raised concerns about the growing danger to civilians and aid workers.",
+    "current": "The Sudan conflict continues to escalate, with drone strikes accounting for nearly three-quarters of civilian deaths this year, according to the UN. The war has led to a humanitarian catastrophe, with at least 59,000 people killed and 14 million displaced. The US has proposed a ceasefire plan, but it has been met with skepticism, with some warning it could lead to a Libya-style partition.",
     "sources": [
       {
-        "label": "AL-MONITOR: Drone strikes hit homes, UN building in Sudan's capital",
-        "url": "https://www.al-monitor.com/originals/2026/11/drone-strikes-hit-homes-un-building-sudans-capital"
+        "label": "Arab News: UN chief ‘appalled’ by Sudan drone strikes on civilians",
+        "url": "https://www.arabnews.com/world/drones-behind-nearly-75-of-civilian-deaths-this-year-in-sudan-war-un-3012446"
       },
       {
-        "label": "Al Jazeera: Drone attacks kill four near Sudan’s capital, damage UN building",
-        "url": "https://www.aljazeera.com/news/2026/11/22/rsf-drones-kill-four-in-khartoum"
+        "label": "Al Jazeera: Traumas of Sudan war lead to wave of drug addiction",
+        "url": "https://www.aljazeera.com/features/2026/11/18/traumas-of-sudan-war-is-seeing-a-wave-of-drug-addiction"
       },
       {
-        "label": "DW: Sudan: Drones hit UN building, residential area in Khartoum",
-        "url": "https://amp.dw.com/en/sudan-khartoum-drone-strike-un-building/a-80015122"
+        "label": "AFP: Drone strikes across Sudan kill more than 100",
+        "url": "https://www.arabnews.com/tag/sudan-conflict"
       }
     ],
     "confidence": "low",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:39:35+00:00",
+    "updated": "2026-11-23T08:44:42+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in Sudan is being framed as a humanitarian crisis, with a focus on the growing danger to civilians and aid workers due to the use of drones. Both Western and regional sources agree on the severity of the situation.",
+      "dominant_frame": "The conflict in Sudan is being framed as a humanitarian catastrophe, with a focus on the high number of civilian casualties and the use of drone strikes. Tier 1 sources, such as the UN, are emphasizing the need for a ceasefire and an end to the violence, while Tier 3 sources, such as Al Jazeera, are highlighting the human cost of the conflict and the need for a more sustainable solution.",
       "divergence": "low"
     },
     "escalation": {
       "score": 85,
-      "note": "Drone strikes intensify",
-      "updated": "2026-11-23T01:39:35+00:00"
-    }
+      "note": "Drone strikes continue to kill civilians.",
+      "updated": "2026-11-23T08:44:42+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:44:42+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "Not enough recent, independently confirmed reporting to say."
+      }
+    ]
   },
   {
     "id": "mali",
@@ -161,33 +209,46 @@
     "what": "Jihadist fuel blockade and insurgency threatening the junta",
     "when": "Blockade of the capital began around September 2025",
     "how": "Fuel convoys attacked, schools and businesses paralyzed; blockade has since eased somewhat",
-    "current": "The Sahel region, particularly Mali, continues to face security challenges with militant attacks and a growing presence of Russian private military company Wagner. The International Crisis Group reports that militants simultaneously attacked seven locations in western Mali in July 2025. Meanwhile, the African Development Bank and the International Committee of the Red Cross have agreed on a three-year action plan to support conflict-affected communities in Africa, including those in the Sahel.",
+    "current": "The conflict in the Sahel region, particularly in Mali, continues with insurgent groups like JNIM attacking urban centers and disrupting fuel supplies. The situation is further complicated by the spread of disinformation, which is affecting the region. Meanwhile, international organizations like the AfDB and ICRC are working together to support conflict-affected communities in Africa.",
     "sources": [
       {
-        "label": "International Crisis Group: Handling JNIM’s Threat to the Sahel’s Urban Heartlands",
-        "url": "https://www.crisisgroup.org/brf/africa/burkina-faso-mali-niger/b213-handling-jnims-threat-sahels-urban-heartlands"
+        "label": "International Crisis Group: La bataille pour les villes",
+        "url": "https://www.crisisgroup.org/fr/brf/africa/burkina-faso-mali-niger/b213-handling-jnims-threat-sahels-urban-heartlands"
       },
       {
-        "label": "Asia Times: Mired in wars, US and Russia test new global power tactics",
-        "url": "https://asiatimes.com/2026/11/mired-in-wars-us-and-russia-test-new-global-power-tactics"
+        "label": "DW: Désinformation : l'autre bataille du Sahel",
+        "url": "https://www.dw.com/fr/desinformation-l-autre-bataille-du-sahel/video-79983653"
       },
       {
-        "label": "AllAfrica: AfDB, ICRC Agree Three-Year Action Plan for Conflict-Affected Communities in Africa",
+        "label": "allAfrica: AfDB, ICRC Agree Three-Year Action Plan for Conflict-Affected Communities in Africa",
         "url": "https://allafrica.com/stories/202611180194.html"
       }
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:40:10+00:00",
+    "updated": "2026-11-23T08:45:02+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in the Sahel is framed as a security challenge with militant attacks and a growing foreign presence, while also highlighting the need for support to conflict-affected communities. Tier 1 sources like the International Crisis Group and Tier 3 sources like Asia Times agree on the security challenges, but Tier 3 sources provide more regional perspective.",
+      "dominant_frame": "The conflict in the Sahel region is being framed as a complex issue with multiple factors, including insurgent groups, disinformation, and international support. Tier 1 sources like the International Crisis Group are emphasizing the need to counter JNIM's threat, while Tier 3 sources like DW are highlighting the impact of disinformation.",
       "divergence": "low"
     },
     "escalation": {
       "score": 79,
-      "note": "Militant attacks continue",
-      "updated": "2026-11-23T01:40:10+00:00"
-    }
+      "note": "Insurgent attacks continue",
+      "updated": "2026-11-23T08:45:02+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:45:02+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "Not enough recent, independently confirmed reporting to say."
+      }
+    ]
   },
   {
     "id": "myanmar",
@@ -199,33 +260,46 @@
     "what": "Civil war following the 2021 coup, now with a civilian facade",
     "when": "Coup Feb 1, 2021; Min Aung Hlaing elected president April 3, 2026",
     "how": "Junta-backed party swept a sham election; war with resistance forces continues in the borderlands",
-    "current": "Myanmar is reeling from a historic genocide verdict at the UN court over Rohingya massacres, with the court ruling that Myanmar security forces showed intent to 'destroy a substantial part of' the Rohingya minority. The conflict in Rakhine State continues, with the Arakan Army controlling most of the territory and the indigenous Rakhine population hostile to the idea of the Rohingyas returning. Many Rohingya villages have been destroyed, and international support for them has been evident.",
+    "current": "The International Court of Justice has ruled that Myanmar committed genocide against the Rohingya during a military crackdown in 2017. The ruling is a historic milestone in the Rohingya people's long quest for justice. The conflict in Rakhine State continues, with Rohingya civilians caught in the hostilities between the junta and ethnic Arakan Army forces.",
     "sources": [
       {
-        "label": "BBC: Myanmar faces historic genocide verdict at UN court over Rohingya massacres",
+        "label": "AP News: Top UN court says Myanmar committed genocide against the Rohingya",
+        "url": "https://apnews.com/article/rohingya-myanmar-genocide-court-icj-30df77b12bf3f911f1100e77ebe3973a"
+      },
+      {
+        "label": "Human Rights Watch: World Court Finds Myanmar Committed Rohingya Genocide",
+        "url": "https://www.hrw.org/news/2026/11/19/world-court-finds-myanmar-committed-rohingya-genocide"
+      },
+      {
+        "label": "BBC News: Myanmar committed genocide against its Rohingya minority, UN's top court rules",
         "url": "https://www.bbc.com/news/articles/c5m2l90ez144o"
-      },
-      {
-        "label": "South China Morning Post: UN top court says Myanmar committed genocide against Rohingya",
-        "url": "https://www.scmp.com/news/asia/southeast-asia/article/3375102/un-top-court-says-myanmar-committed-genocide-against-rohingya"
-      },
-      {
-        "label": "France 24: Myanmar committed genocide against Muslim Rohingya minority, UN court finds",
-        "url": "https://www.france24.com/en/asia-pacific/20261119-top-un-court-to-rule-if-myanmar-s-rohingya-crackdown-was-genocide"
       }
     ],
     "confidence": "high",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:40:45+00:00",
+    "updated": "2026-11-23T08:45:39+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in Myanmar is being framed as a historic genocide verdict, with the UN court ruling that Myanmar security forces committed genocide against the Rohingya minority. Tier 1 sources, such as the BBC, and Tier 3 sources, such as France 24, agree on the significance of the verdict.",
+      "dominant_frame": "The conflict in Myanmar is being framed as a historic genocide case, with the International Court of Justice ruling in favor of the Rohingya people. Western media outlets, such as AP News and BBC News, are emphasizing the significance of the ruling, while regional specialists, such as The Diplomat, are providing context on the ongoing conflict in Rakhine State.",
       "divergence": "low"
     },
     "escalation": {
       "score": 75,
-      "note": "Conflict continues in Rakhine State.",
-      "updated": "2026-11-23T01:40:45+00:00"
-    }
+      "note": "Conflict continues in Rakhine State",
+      "updated": "2026-11-23T08:45:39+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:45:39+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "Reports conflict on this right now, so nothing is shown as fact."
+      }
+    ]
   },
   {
     "id": "venezuela",
@@ -237,33 +311,34 @@
     "what": "Maduro captured in a US raid, transition still in limbo",
     "when": "Raid on Jan 3, 2026; still no election date set",
     "how": "Acting president installed with US backing; opposition leader repeatedly blocked from returning",
-    "current": "The US and Venezuela have signed a deal to reestablish military ties, according to US Defence Secretary Hegseth. This development comes after the Trump administration's influence over Venezuela's government following the abduction of former President Nicolas Maduro on January 3. Venezuela's current government, led by Rodriguez, is under heavy influence from the US.",
+    "current": "The US and Venezuela have signed a deal to reestablish military ties, with US Defense Secretary Pete Hegseth announcing the partnership during a trip to Venezuela. Hegseth boasted about the military operation that seized former President Nicolas Maduro, calling it 'the single most sophisticated military operation in the history of Latin America'. Venezuela's interim leader Delcy Rodriguez hailed the 'resumption of the technical-military relationship between both countries' after years of rupture and US sanctions.",
     "sources": [
       {
-        "label": "Al Jazeera: US defence secretary announces military partnership on trip to Venezuela",
-        "url": "https://www.aljazeera.com/news/2026/11/18/us-defence-secretary-announces-military-partnership-on-trip-to-venezuela"
+        "label": "Al Jazeera: US Defence Secretary Hegseth reveals military partnership on Venezuela trip",
+        "url": "https://www.aljazeera.com/amp/news/2026/11/18/us-defence-secretary-announces-military-partnership-on-trip-to-venezuela"
       },
       {
         "label": "AP News: Hegseth says US and Venezuela sign deal to reestablish military ties",
         "url": "https://apnews.com/article/hegseth-venezuela-maduro-trump-e02dd6173e575c644a37dd417d84296d"
       },
       {
-        "label": "Africanews: Cameroon U17s fall to Venezuela in World Cup opener",
-        "url": "http://africanews.com"
+        "label": "France 24: Hegseth makes surprise trip to Venezuela, renews military cooperation",
+        "url": "https://www.france24.com/en/americas/20261118-hegseth-makes-surprise-trip-to-venezuela-renews-military-cooperation"
       }
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:41:28+00:00",
+    "updated": "2026-11-23T08:46:18+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in Venezuela is framed as a US-influenced regime, with the Trump administration exerting heavy control over the government. Tier 1 sources like Al Jazeera and AP News focus on the military partnership and its implications, while Tier 3 sources like Africanews provide regional perspective on Venezuela's international engagements.",
+      "dominant_frame": "The US and Venezuelan governments are framing the reestablishment of military ties as a positive development, with Hegseth boasting about the military operation that seized Maduro and Rodriguez hailing the resumption of relations. Tier 1 sources such as Al Jazeera and AP News are reporting on the deal, while Tier 3 sources such as France 24 are providing additional context.",
       "divergence": "low"
     },
     "escalation": {
       "score": 75,
-      "note": "US-Venezuela military partnership",
-      "updated": "2026-11-23T01:41:28+00:00"
-    }
+      "note": "No new violence reported",
+      "updated": "2026-11-23T08:46:18+00:00"
+    },
+    "indicators": []
   },
   {
     "id": "drc",
@@ -275,37 +350,50 @@
     "what": "Peace deals signed, but M23 still controls the ground",
     "when": "Washington and Doha deals signed mid-2025; conflict decades old",
     "how": "M23 still controls Goma and Bukavu despite the agreements",
-    "current": "The Democratic Republic of Congo faces a worsening humanitarian crisis: an Ebola outbreak is still generating 400‑500 new cases each week and strain‑specific vaccine trials are set to begin, while the Allied Democratic Forces have killed at least 110 civilians in Ituri since early November. Rebel group M23 has seized mineral‑rich territories in the east, a move Kinshasa blames on Rwandan support, prompting a diplomatic row that led to the postponement of the Francophonie summit leadership vote.",
+    "current": "Fighting continues in eastern DR Congo, with civilians bearing the cost of conflict. Diplomatic efforts have struggled to end the violence, and the Ebola outbreak has resulted in 5,568 deaths. The situation remains unstable, with no ceasefire in place.",
     "sources": [
       {
-        "label": "AFP: Geography, violence, distrust hitting DR Congo Ebola fight",
-        "url": "https://www.afp.com/en/geography-violence-distrust-hitting-dr-congo-ebola-fight-handicap-international"
+        "label": "Al Jazeera: DR Congo’s rival peace efforts fail to halt violence in the east",
+        "url": "https://aljazeera.com/news/2026/11/18/dr-congos-rival-peace-efforts-fail-to-halt-violence-in-the-east"
       },
       {
-        "label": "BBC: Lobito Corridor: Can Trump‑backed mineral highway bring peace and prosperity to DR Congo and Angola?",
-        "url": "https://www.bbc.com/news/articles/cx053jrv9rz9o"
+        "label": "UN News: World News in Brief: Ebola cases double in DR Congo",
+        "url": "https://news.un.org/en/news"
       },
       {
-        "label": "France 24: Francophonie summit postpones new leader vote amid DR Congo‑Rwanda dispute",
-        "url": "https://www.france24.com/en/africa/20261116-francophonie-summit-postpones-new-leader-vote-amid-dr-congo-rwanda-dispute"
+        "label": "Africanews: DR Congo: Tshisekedi signs new referendum law amid third-term fears",
+        "url": "https://www.africanews.com/country/democratic-republic-of-congo"
       },
       {
-        "label": "The Hindu: Strain‑specific Ebola jab trials to start in DR Congo next week: WHO",
-        "url": "https://www.thehindu.com/sci-tech/health/strain-specific-ebola-jab-trials-to-start-in-dr-congo-ebola-fight-who/article71728070.ece"
+        "label": "Arab News: Geography, violence, distrust hitting DR Congo Ebola fight: Handicap International",
+        "url": "https://www.arabnews.com/world/geography-violence-distrust-hitting-dr-congo-ebola-fight-handicap-international-3013396"
       }
     ],
     "confidence": "medium",
-    "verified_by": "cloudflare+groq+groq-review",
-    "updated": "2026-11-23T01:42:05+00:00",
+    "verified_by": "cloudflare+groq",
+    "updated": "2026-11-23T08:46:59+00:00",
     "perspective": {
-      "dominant_frame": "Tier 1 outlets (AFP, BBC) foreground the on‑the‑ground violence—ADF attacks and M23’s seizure of mineral‑rich areas—while Tier 3 outlets (France 24, The Hindu) highlight the diplomatic fallout at the Francophonie summit and the upcoming Ebola vaccine trials. Both frames present the crisis as a mix of armed conflict, health emergency, and regional tension.",
+      "dominant_frame": "The conflict in eastern DR Congo is framed as a complex issue with multiple factors, including violence, distrust, and geopolitical tensions. Tier 1 sources emphasize the humanitarian crisis, while Tier 3 sources highlight the regional dynamics and the role of external actors.",
       "divergence": "moderate"
     },
     "escalation": {
-      "score": 79,
-      "note": "M23 holds mineral‑rich zones and Ebola cases remain at 400‑500 weekly",
-      "updated": "2026-11-23T01:42:05+00:00"
-    }
+      "score": 80,
+      "note": "Fighting continues in eastern DR Congo",
+      "updated": "2026-11-23T08:46:59+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:46:59+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "Not enough recent, independently confirmed reporting to say."
+      }
+    ]
   },
   {
     "id": "taiwan",
@@ -317,32 +405,32 @@
     "what": "Escalating military pressure just short of open conflict",
     "when": "Ongoing, intensified through 2026",
     "how": "Record Chinese aircraft and ship incursions into Taiwan’s air defense zone",
-    "current": "Tensions in the Taiwan Strait remain elevated as China continues to intensify military activity around Taiwan, with large-scale naval and coast guard deployments and exercises. World leaders, including Xi, Trump, and Putin, have gathered at the APEC summit to discuss trade and investment, but the conflict in the Taiwan Strait is also a point of attention. China's insistence on reunification with Taiwan, possibly by force, remains a concern.",
+    "current": "Tensions in the Taiwan Strait remain high, with China's military focus on developing a force to succeed in a fight over Taiwan. The US and China have had discussions on the Taiwan issue, with the US not supporting Taiwan independence. Japan's Prime Minister Sanae Takaichi has met with Chinese President Xi Jinping, but relations between the two countries remain strained due to Takaichi's previous comments on Taiwan.",
     "sources": [
       {
         "label": "Asia Times: China’s J-10C missile upgrade could become a Taiwan war trap",
         "url": "https://asiatimes.com/2026/11/chinas-j-10c-missile-upgrade-could-become-a-taiwan-war-trap"
       },
       {
-        "label": "DW: APEC summit: Xi, Trump and Putin kick off historic trilateral talks",
-        "url": "https://www.dw.com/en/apec-summit-xi-trump-and-putin-kick-off-historic-trilateral-talks/live-79964719"
+        "label": "Al Jazeera: Piecemeal wars: A new kind of world war is already under way",
+        "url": "https://www.aljazeera.com/opinions/2026/11/18/piecemeal-wars-a-new-kind-of-world-war-is-already-under-way"
       },
       {
-        "label": "The Jerusalem Post: Iran & China pose growing threats - Experts warn Israel & Australia to prepare",
-        "url": "https://www.jpost.com/conferences/article-915400"
+        "label": "SCMP: Xi greets Takaichi with a smile – but no words – as China-Japan freeze lingers",
+        "url": "https://www.scmp.com/news/china/diplomacy/article/3374944/xi-greets-takaichi-smile-no-words-china-japan-freeze-lingers"
       }
     ],
     "confidence": "low",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:42:22+00:00",
+    "updated": "2026-11-23T08:47:35+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in the Taiwan Strait is being framed as a point of tension between China and Taiwan, with China's military activity and insistence on reunification being major concerns. Tier 1 sources such as DW and Asia Times are emphasizing the military aspect, while Tier 3 sources like The Jerusalem Post are highlighting the regional implications.",
+      "dominant_frame": "The conflict is being framed as a high-stakes geopolitical issue, with China's military ambitions and the US's stance on Taiwan independence being major points of contention. Tier 1 sources such as Asia Times and Al Jazeera are emphasizing the potential for conflict, while Tier 3 sources such as SCMP are focusing on the diplomatic aspects.",
       "divergence": "moderate"
     },
     "escalation": {
       "score": 50,
-      "note": "China's continued military activity",
-      "updated": "2026-11-23T01:42:22+00:00"
+      "note": "Tensions remain high",
+      "updated": "2026-11-23T08:47:35+00:00"
     }
   },
   {
@@ -355,32 +443,32 @@
     "what": "Nuclear and missile buildup, with no active dialogue",
     "when": "Continuous missile testing through 2026",
     "how": "Repeated launches; Pyongyang calls Seoul a \"hostile enemy state\"",
-    "current": "Tensions on the Korean peninsula remain high, with North Korea's missile defense capabilities posing a significant threat to South Korea. The US alliance with South Korea is uncertain, and talks between the US, China, and Russia have raised concerns in Seoul. North Korean leader Kim Jong Un has been visiting various sites, including a ski resort and a naval university, where he emphasized the importance of maritime defense.",
+    "current": "The Korean peninsula is experiencing heightened tensions due to North Korea's expanding uranium enrichment facility and recent missile launches. South Korea has scrambled fighter jets in response to North Korean activity. The US, China, and Russia are set to hold talks, which has raised concerns in South Korea about being sidelined in decisions affecting its security.",
     "sources": [
       {
-        "label": "Asia Times: With US alliance less certain, Seoul needs to fix missile defense",
-        "url": "https://asiatimes.com/2026/11/with-us-alliance-less-certain-seoul-needs-to-fix-missile-defense"
-      },
-      {
-        "label": "South China Morning Post: US-China-Russia talks: as Seoul fears ‘another Yalta’, could Pyongyang emerge the winner?",
+        "label": "South China Morning Post: US-China-Russia talks",
         "url": "https://www.scmp.com/week-asia/politics/article/3374642/us-china-russia-talks-seoul-fears-another-yalta-could-pyongyang-emerge-winner"
       },
       {
-        "label": "France24: Trump says may meet with N. Korean leader Kim in China",
-        "url": "https://www.france24.com/en/live-news/20261116-trump-says-may-meet-with-n-korean-leader-kim-in-china"
+        "label": "Al Jazeera: North Korea expanding uranium enrichment facility",
+        "url": "https://www.aljazeera.com/news/2026/11/19/north-korea-expanding-uranium-enrichment-facility-un-nuclear-watchdog-says"
+      },
+      {
+        "label": "BBC: Meet the BBC Korean team in Seoul",
+        "url": "https://www.bbc.com/audio/play/p0gp4rzz"
       }
     ],
-    "confidence": "low",
+    "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:43:18+00:00",
+    "updated": "2026-11-23T08:48:12+00:00",
     "perspective": {
-      "dominant_frame": "The conflict is being framed as a complex geopolitical issue, with the US, China, and Russia playing key roles. Tier 1 sources such as the South China Morning Post and France24 are emphasizing the diplomatic tensions and potential consequences of the talks, while Tier 3 sources like Asia Times are focusing on the military aspects and North Korea's capabilities.",
-      "divergence": "moderate"
+      "dominant_frame": "The conflict is being framed as a concern for regional and global security, with a focus on North Korea's nuclear capabilities and the potential for talks between major world powers. Tier 1 sources such as the South China Morning Post and Al Jazeera are emphasizing the risks of North Korea's actions, while Tier 3 sources like the BBC are providing more nuanced coverage of the situation on the ground.",
+      "divergence": "low"
     },
     "escalation": {
       "score": 57,
-      "note": "Tensions remain high",
-      "updated": "2026-11-23T01:43:18+00:00"
+      "note": "North Korea expands uranium enrichment facility",
+      "updated": "2026-11-23T08:48:12+00:00"
     }
   },
   {
@@ -393,36 +481,32 @@
     "what": "Maritime and territorial dispute over reefs and shoals",
     "when": "Ongoing, flaring repeatedly through 2026",
     "how": "Water-cannon incidents and blocked resupply runs near Scarborough Shoal",
-    "current": "Tensions remain high in the South China Sea as China continues to bolster its military presence and Southeast Asian leaders pledge to avoid disputes. The US, China, and Russia have released a 'peace declaration' following an unprecedented meeting, but the situation remains volatile. China has been steadily reclaiming land and building infrastructure to gain military control of the sea.",
+    "current": "China and Southeast Asian leaders have pledged to avoid actions that can escalate disputes in the South China Sea, aiming to foster a conducive atmosphere for negotiations on a non-aggression pact. Beijing has been steadily reclaiming land and building infrastructure to gain military control of the sea. Malaysia's military is considering recruiting gamers for drone surveillance in the South China Sea.",
     "sources": [
       {
         "label": "RFI: Beijing bolsters South China Sea push with new island runway: analysts",
         "url": "https://www.rfi.fr/en/international-news/20261118-beijing-bolsters-south-china-sea-push-with-new-island-runway-analysts"
       },
       {
-        "label": "The Washington Post: China and Southeast Asia pledge to avoid disputes during talks on South China Sea pact",
-        "url": "https://www.washingtonpost.com/world/2026/11/16/south-china-sea-asean-code-conduct/a134079e-e1a0-11f1-a99e-b3e3805c6b8b_story.html"
+        "label": "The Hindu: China, Southeast Asia pledge to avoid disputes during talks on South China Sea pact",
+        "url": "https://www.thehindu.com/news/international/china-southeast-asia-pledge-to-avoid-disputes-during-talks-on-south-china-sea-pact/article71707568.ece"
       },
       {
-        "label": "The New York Times: Live Updates: Trump, Xi and Putin Seek to Project Power at Their First Summit",
-        "url": "https://www.nytimes.com/live/2026/11/18/world/trump-xi-putin-apec"
-      },
-      {
-        "label": "The Hindu: Quad sharpens its military role as US, China and Russia meet",
-        "url": "https://frontline.thehindu.com/world-affairs/quad-summit-india-shenzhen-manila-indo-pacific-security/article71727869.ece/amp"
+        "label": "AP News: China and Southeast Asia pledge to avoid disputes during talks on South China Sea pact",
+        "url": "https://apnews.com/article/south-china-sea-asean-code-conduct-a721229e4896584faa5fa64cc3686812"
       }
     ],
     "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:43:55+00:00",
+    "updated": "2026-11-23T08:49:08+00:00",
     "perspective": {
-      "dominant_frame": "The conflict is framed as a tense standoff between China and Southeast Asian nations, with the US and Russia playing a role in the region. Tier 1 sources emphasize China's military buildup, while Tier 3 sources highlight the regional implications and the need for diplomacy.",
+      "dominant_frame": "The conflict in the South China Sea is being framed as a complex issue with multiple stakeholders, with China's actions being closely watched by Southeast Asian leaders and other countries. Tier 1 sources such as AP News and The Hindu are reporting on the diplomatic efforts to avoid escalation, while Tier 3 sources such as RFI are highlighting China's military build-up in the region.",
       "divergence": "moderate"
     },
     "escalation": {
       "score": 45,
-      "note": "China's military buildup",
-      "updated": "2026-11-23T01:43:55+00:00"
+      "note": "No new violence reported",
+      "updated": "2026-11-23T08:49:08+00:00"
     }
   },
   {
@@ -435,33 +519,50 @@
     "what": "Their worst clash in decades, now a fragile truce",
     "when": "Crisis April–May 2025; ceasefire since May 10, 2025",
     "how": "Missile, drone and artillery exchange; US-mediated ceasefire holds, dispute unresolved",
-    "current": "The conflict in Kashmir remains ongoing, with recent encounters between security forces and terrorists. Indian forces have killed LeT commander Mohammad Lateef Bhat and rescued civilians. Diplomatic tensions between India and Pakistan remain high, with a Pakistani minister's visit to India not expected to lead to a breakthrough.",
+    "current": "Indian security forces carried out an operation in Kulgam district on 18 November, killing Lashkar‑e‑Taiba commander Mohammad Lateef Bhat and rescuing dozens of civilians from a nearby institute. The Lieutenant Governor said only a handful of foreign terrorists remain in Jammu and Kashmir. Meanwhile a Pakistani minister visited India for the SCO summit, the first such high‑level contact since the 2025 war, but no diplomatic breakthrough was reported.",
     "sources": [
       {
-        "label": "DW: Pakistan minister's India visit for SCO",
-        "url": "https://www.dw.com/en/pakistan-minister-to-visit-india-but-no-breakthrough-expected/a-79991717"
+        "label": "Washington Post: Indian troops kill a militant after siege of villages in south",
+        "url": "https://www.washingtonpost.com/world/2026/11/18/kashmir-india-pakistan-fighting-militant/a6232210-e31e-11f1-a99e-b3e3805c6b8b_story.html"
       },
       {
-        "label": "The Hindu: Fresh encounter in J&K’s Kulgam",
+        "label": "The Hindu: Fresh encounter in J&K’s Kulgam as security forces track escaped LeT terrorist Lateef Bhat",
         "url": "https://www.thehindu.com/news/national/fresh-encounter-in-kulgam-lateef-bhat-november-18-2026/article71714380.ece"
       },
       {
-        "label": "The Hindu: J&K soon to be terror-free",
-        "url": "https://www.thehindu.com/news/national/jammu-and-kashmir/jk-soon-to-be-terror-free-only-handful-of-foreign-terrorists-remain-l-g-sinha/article71716071.ece"
+        "label": "The Hindu: Kulgam encounter: 25 girls, 2 teachers rescued before final assault on LeT commander Bhat",
+        "url": "https://www.thehindu.com/news/national/jammu-and-kashmir/kulgam-encounter-25-girls-2-teachers-rescued-before-final-assault-on-let-commander-bhat/article71715908.ece"
+      },
+      {
+        "label": "Al Jazeera: Pakistan minister visits India for first time since 2025 war",
+        "url": "https://www.aljazeera.com/news-analysis/2026/11/20/pakistan-minister-visits-india-for-first-time-since-2025-war"
       }
     ],
-    "confidence": "low",
-    "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:44:30+00:00",
+    "confidence": "high",
+    "verified_by": "cloudflare+groq+groq-review",
+    "updated": "2026-11-23T08:49:59+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in Kashmir is framed as an ongoing terrorist threat, with Indian forces conducting operations to eliminate terrorists. The visit of a Pakistani minister to India is seen as unlikely to lead to a breakthrough in diplomatic relations.",
+      "dominant_frame": "Tier‑1 coverage (Washington Post) frames the incident as a routine counter‑terrorism strike, emphasizing the elimination of a militant commander and the ongoing unresolved conflict. Tier‑3 outlets (The Hindu, Al Jazeera) add on‑the‑ground details of the rescue operation and note the diplomatic significance of a Pakistani minister’s visit, while stressing India’s claim of moving toward a terror‑free status. The overall framing is consistent across sources.",
       "divergence": "low"
     },
     "escalation": {
       "score": 35,
-      "note": "Ongoing encounters between security forces and terrorists.",
-      "updated": "2026-11-23T01:44:30+00:00"
-    }
+      "note": "Kulgam encounter killing commander on 18 Nov shows sporadic violence, no new escalation",
+      "updated": "2026-11-23T08:49:59+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:49:59+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "Not enough recent, independently confirmed reporting to say."
+      }
+    ]
   },
   {
     "id": "caucasus",
@@ -473,32 +574,32 @@
     "what": "Preliminary peace signed, but a final treaty remains unsigned",
     "when": "Framework signed Aug 8, 2025; still unresolved in 2026",
     "how": "Azerbaijan wants an Armenian constitutional change before signing a final deal",
-    "current": "The conflict in the Caucasus region remains a concern, with Russia's involvement in the region and its relations with neighboring countries being closely watched. The European Union is seeking to strengthen its ties with Turkiye, which has significant leverage in the South Caucasus. Meanwhile, Russia's President Putin has been discussing a potential meeting with North Korea's leader in China.",
+    "current": "The conflict in the Caucasus region continues with ongoing tensions between Armenia and Azerbaijan, despite recent diplomatic efforts. German Foreign Minister Wadephul visited the region, aiming to capitalize on the 'positive momentum' between Baku and Yerevan. Meanwhile, Russia's troubles in the Caucasus persist, with limited access to information due to restricted media freedom.",
     "sources": [
       {
-        "label": "The New York Times: Putin Is Open to Meeting With North Korea’s Leader in China, Kremlin Says",
-        "url": "https://www.nytimes.com/2026/11/17/world/asia/putin-kim-jong-un-north-korea-china-meeting.html"
+        "label": "Arab News: Russia’s troubles in the Caucasus",
+        "url": "https://www.arabnews.com/archive/318467"
       },
       {
-        "label": "Arab News: Connectivity a new pillar in EU-Turkiye ties",
-        "url": "https://www.arabnews.com/opinion/connectivity-a-new-pillar-in-eu-turkiye-ties-3012959"
+        "label": "DW: Foreign Minister Wadephul visits Armenia, Azerbaijan",
+        "url": "https://www.dw.com/en/foreign-minister-wadephul-visits-armenia-azerbaijan/liveblog-post-79977508"
       },
       {
-        "label": "The New York Times: After Bridge Attack, Putin Says He Will ‘Not Be Negotiating’ Ukraine Cease-Fires",
-        "url": "https://www.nytimes.com/2026/11/19/world/europe/putin-shenzhen-crimea-bridge.html"
+        "label": "Kyiv Independent: South Caucasus",
+        "url": "https://kyivindependent.com/tag/south-caucasus/page/2"
       }
     ],
-    "confidence": "medium",
+    "confidence": "low",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:45:26+00:00",
+    "updated": "2026-11-23T08:50:55+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in the Caucasus region is being framed as a complex geopolitical issue, with Russia's involvement and relations with neighboring countries being closely watched. Tier 1 sources such as The New York Times are focusing on the diplomatic efforts, while Tier 3 sources like Arab News are emphasizing the regional implications.",
+      "dominant_frame": "The conflict is framed as an ongoing tension between Armenia and Azerbaijan, with diplomatic efforts attempting to capitalize on positive momentum. Tier 1 sources focus on the diplomatic aspect, while Tier 3 sources provide regional perspective and detail.",
       "divergence": "low"
     },
     "escalation": {
       "score": 34,
-      "note": "No new major incidents.",
-      "updated": "2026-11-23T01:45:26+00:00"
+      "note": "Tensions persist.",
+      "updated": "2026-11-23T08:50:55+00:00"
     }
   },
   {
@@ -511,33 +612,46 @@
     "what": "Long-running border dispute that turned into open war twice in 2025",
     "when": "5-day clash July 2025; worse fighting Dec 7–27, 2025",
     "how": "Artillery, tanks, drones and jets; 100+ killed before the latest ceasefire",
-    "current": "Thailand and Cambodia are vying for global backing as the conflict at their border continues. A ceasefire was signed last October, but tensions remain. The US has been involved in the negotiations, with President Trump expected to make a joint trade statement with the Thai PM.",
+    "current": "The Thai-Cambodia border dispute remains tense, with a fuel blockade and diplomatic criticism. US President Donald Trump is expected to sign a statement marking progress in trade negotiations with Thailand. A framework agreement was unveiled over a year ago, on the same day as Trump announced a short-lived ceasefire between Thailand and Cambodia.",
     "sources": [
       {
-        "label": "South China Morning Post: Thailand and Cambodia vie for global backing as Trump arrives for Asean summit",
-        "url": "https://amp.scmp.com/news/asia/southeast-asia/article/3374562/thailand-and-cambodia-vie-global-backing-trump-arrives-asean-summit"
-      },
-      {
-        "label": "France24: Trump, Thai PM to make joint trade statement in Manila",
+        "label": "France 24: Trump, Thai PM to make joint trade statement in Manila",
         "url": "https://www.france24.com/en/live-news/20261117-trump-thai-pm-to-make-joint-trade-statement-in-manila"
       },
       {
-        "label": "Arab News: French-speaking nations hold a summit in Cambodia as a conflict in Africa threatens a rift",
+        "label": "Arab News: French-speaking nations hold a summit in Cambodia",
         "url": "https://www.arabnews.com/tag/africa"
+      },
+      {
+        "label": "CFR: Global Conflict Tracker",
+        "url": "https://cfr.org/global-conflict-tracker/conflict/political-instability-lebanon/alerts"
       }
     ],
-    "confidence": "low",
+    "confidence": "medium",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:46:04+00:00",
+    "updated": "2026-11-23T08:51:30+00:00",
     "perspective": {
-      "dominant_frame": "The conflict between Thailand and Cambodia is being framed as a ongoing issue with a ceasefire in place, but tensions remain. The US is involved in the negotiations, with President Trump expected to make a joint trade statement with the Thai PM. Regional specialists are focusing on the economic aspects of the conflict.",
-      "divergence": "low"
+      "dominant_frame": "The conflict is framed as an ongoing dispute with periodic escalations, with Western sources focusing on the diplomatic efforts and regional specialists highlighting the tensions and ceasefire breaches.",
+      "divergence": "moderate"
     },
     "escalation": {
       "score": 79,
-      "note": "Ceasefire holds, but tensions remain.",
-      "updated": "2026-11-23T01:46:04+00:00"
-    }
+      "note": "Tensions remain high.",
+      "updated": "2026-11-23T08:51:30+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:51:30+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "The automated checks disagreed, so nothing is shown as fact."
+      }
+    ]
   },
   {
     "id": "horn",
@@ -549,7 +663,7 @@
     "what": "Troop buildups and real border clashes amid fears of wider war",
     "when": "Tensions escalated sharply from early 2026; clashes in August",
     "how": "Ethiopian troops clashed with Tigrayan forces near the Eritrea-Sudan border triangle",
-    "current": "The Horn of Africa is experiencing heightened tensions, with fresh clashes in the contested Ethiopia-Eritrea border area raising fears of a full-fledged war. Diplomatic relations between Ethiopia and Sudan have also hit new lows. Meanwhile, other conflicts in the region, such as the war in Ukraine and instability in Lebanon, continue to unfold.",
+    "current": "Tensions in the Horn of Africa are high due to clashes between Ethiopia and Eritrea, with fears of a full-scale war. Diplomatic relations between Ethiopia and Sudan have also hit new lows. Meanwhile, other conflicts such as the war in Ukraine and the Israel-Hezbollah conflict in Lebanon continue to escalate.",
     "sources": [
       {
         "label": "DW: Ethiopia-Eritrea conflict: New clashes risk full-scale war",
@@ -566,15 +680,28 @@
     ],
     "confidence": "low",
     "verified_by": "cloudflare+groq",
-    "updated": "2026-11-23T01:46:19+00:00",
+    "updated": "2026-11-23T08:51:51+00:00",
     "perspective": {
-      "dominant_frame": "The conflict in the Horn of Africa is being framed as a regional issue with potential for escalation, with Tier 1 sources emphasizing the risk of full-scale war and Tier 3 sources highlighting the complexities of the conflict.",
-      "divergence": "moderate"
+      "dominant_frame": "The conflict in the Horn of Africa is framed as a regional issue with potential for escalation into a full-scale war. Tier 1 sources such as DW emphasize the clashes between Ethiopia and Eritrea, while Tier 3 sources like Africanews provide context on the diplomatic relations between Ethiopia and Sudan.",
+      "divergence": "low"
     },
     "escalation": {
       "score": 70,
-      "note": "Fresh clashes in Ethiopia-Eritrea border area",
-      "updated": "2026-11-23T01:46:19+00:00"
-    }
+      "note": "Clashes between Ethiopia and Eritrea escalated.",
+      "updated": "2026-11-23T08:51:51+00:00"
+    },
+    "indicators": [
+      {
+        "id": "ceasefire",
+        "label": "Ceasefire in force",
+        "checked_at": "2026-11-23T08:51:51+00:00",
+        "state": "unknown",
+        "violations": false,
+        "carried": false,
+        "last_confirmed": null,
+        "evidence": [],
+        "note": "The automated checks disagreed, so nothing is shown as fact."
+      }
+    ]
   }
 ]
