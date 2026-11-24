@@ -492,8 +492,11 @@ def normalize_event_time(ev):
         count = int(ev.get("time_source_count") or 0)
     except (ValueError, TypeError):
         count = 0
+    # A variance of 0 is valid (sources agree exactly), so only fall back to
+    # 999 when the value is missing -- `or 999` would turn 0 into 999.
+    raw_variance = ev.get("time_variance_minutes")
     try:
-        variance = int(ev.get("time_variance_minutes") or 999)
+        variance = int(raw_variance) if raw_variance is not None else 999
     except (ValueError, TypeError):
         variance = 999
     parsed = parse_time_string(raw_time)
@@ -505,10 +508,10 @@ def normalize_event_time(ev):
         return ev
     h, mi = parsed
     time_str = f"{h:02d}:{mi:02d}"
-    if count >= 2 and variance <= 60:
+    if count >= 2 and variance <= 25:
         ev["time"] = time_str
         ev["time_verified"] = "verified"
-    elif count >= 3 and variance <= 60:
+    elif count >= 2 and variance <= 60:
         ev["time"] = time_str
         ev["time_verified"] = "approximate"
     else:
