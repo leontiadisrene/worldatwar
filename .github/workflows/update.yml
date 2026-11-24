@@ -21,9 +21,11 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+          cache: 'pip'
 
-      - run: pip install requests
-
+      - name: Install pinned dependencies 
+        run: pip install -r requirements.txt
+        
       - name: Refresh data
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
@@ -42,8 +44,8 @@ jobs:
           git pull --rebase -X ours origin main
           git push
 
-      - name: Install date-verifier dependencies
-        run: pip install ddgs requests
+      - name: Install pinned dependencies
+        run: pip install -r requirements.txt
 
       - name: Verify queued dates (article text + free APIs)
         env:
