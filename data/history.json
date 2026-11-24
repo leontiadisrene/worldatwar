@@ -1,5 +1,14 @@
 [
   {
+    "id": "71001a5e6ea8",
+    "date": "2026-11-24",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Evacuation warning on island",
+    "description": "South Korea issues evacuation warning on an island after Russian aircraft enter its air defence zone",
+    "source": "auto"
+  },
+  {
     "id": "a5f83bb40ae7",
     "date": "2026-11-23",
     "conflict": "Ukraine",
@@ -15,6 +24,60 @@
     "tier": "war",
     "title": "Russian strikes kill at least 4 in Odesa",
     "description": "At least four people were killed and thirteen injured after Russian strikes hit Odesa, which Zelenskyy described as brutal; Russia also struck a power substation in Dnipropetrovsk.",
+    "source": "auto"
+  },
+  {
+    "id": "7c853ad3be92",
+    "date": "2026-11-23",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine claims strikes on two Russian ships off Libya",
+    "description": "Ukraine has stepped up its strikes against Russia far from the frontlines, with President Volodymyr Zelenskyy saying Ukraine was behind strikes on two Russian vessels off Libya.",
+    "source": "auto"
+  },
+  {
+    "id": "78c778e26ead",
+    "date": "2026-11-23",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Palestinian critically wounded by Israeli gunfire",
+    "description": "A Palestinian was critically wounded by Israeli gunfire in Beit Lahia in the northern Gaza Strip, according to Al Jazeera.",
+    "source": "auto"
+  },
+  {
+    "id": "a31153c987b7",
+    "date": "2026-11-23",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli airstrike on Gaza City",
+    "description": "An Israeli airstrike in Gaza City killed two people, according to Palestinian media, with the IDF saying it targeted a terror operative.",
+    "source": "auto"
+  },
+  {
+    "id": "374d0b183d3d",
+    "date": "2026-11-23",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran strike wounds two in Bahrain",
+    "description": "Iran targeted a US air base in Bahrain, wounding two people.",
+    "source": "auto"
+  },
+  {
+    "id": "d39a300b8661",
+    "date": "2026-11-23",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Heavy fighting in Ituri province",
+    "description": "Heavy fighting near a hospital in Ituri province has disrupted the vital work of Ebola responders and trapped emergency teams in a maternity ward.",
+    "source": "auto"
+  },
+  {
+    "id": "fb65c7ef2bb8",
+    "date": "2026-11-23",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Militant Killed in Kashmir",
+    "description": "Indian troops killed a militant commander in Indian-controlled Kashmir, according to police.",
     "source": "auto"
   },
   {
@@ -45,13 +108,13 @@
     "source": "auto"
   },
   {
-    "id": "afb7f96ce7e2",
+    "id": "5c44f38f91a3",
     "date": "2026-11-22",
     "conflict": "Sudan",
     "tier": "war",
-    "title": "Drone strikes in Khartoum",
-    "description": "Drone strikes hit homes and a UN building in the capital, killing civilians and displacing more people.",
-    "source": "auto"
+    "title": "Drone strikes hit UN building and homes in Khartoum",
+    "description": "Sudanese army said drones struck a UN building and nearby residences, killing civilians and displacing people. Ethiopia was accused of allowing the attacks, which it denied.",
+    "source": "merged"
   },
   {
     "id": "a99dfbb933ec",
@@ -63,12 +126,21 @@
     "source": "auto"
   },
   {
-    "id": "c45e8e7c2152",
+    "id": "28995e595c03",
     "date": "2026-11-22",
-    "conflict": "Sudan",
+    "conflict": "Ukraine",
     "tier": "war",
-    "title": "Drone strikes hit UN building and residential areas in Khartoum",
-    "description": "Drone strikes damaged a UN building and nearby homes; the Sudanese army accused Ethiopia of permitting the attacks, which Ethiopia denied.",
+    "title": "Russian drone attack on Kyiv region",
+    "description": "A Russian drone attack on the Kyiv region hit a five-story apartment building, killing eleven people.",
+    "source": "auto"
+  },
+  {
+    "id": "f4c753fabd9e",
+    "date": "2026-11-22",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "ASEAN‑China Code of Conduct Talks",
+    "description": "ASEAN leaders and China met in Manila but failed to reach a code of conduct for the South China Sea.",
     "source": "auto"
   },
   {
@@ -186,6 +258,24 @@
     "tier": "war",
     "title": "Israeli drone attacks kill seven Palestinians",
     "description": "Israeli attacks have killed at least seven Palestinians and wounded others in the central part of the Gaza Strip.",
+    "source": "auto"
+  },
+  {
+    "id": "a5c8ec03e031",
+    "date": "2026-11-20",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran keeps diplomacy open",
+    "description": "Foreign Minister Abbas Araghchi said Iran remained willing to pursue diplomacy but wanted assurances that any agreement would prevent renewed hostilities.",
+    "source": "auto"
+  },
+  {
+    "id": "ca479b7841e5",
+    "date": "2026-11-20",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "Indonesia‑China Cooperation Discussion",
+    "description": "President Prabowo Subianto met Xi Jinping to discuss future cooperation in the South China Sea.",
     "source": "auto"
   },
   {
@@ -333,13 +423,13 @@
     "source": "auto"
   },
   {
-    "id": "40df007dd5c0",
+    "id": "e7b3cc70b648",
     "date": "2026-11-18",
     "conflict": "Iran",
     "tier": "war",
-    "title": "Iranian drone attack on US base in Bahrain",
-    "description": "Iran launched drones against a U.S. military installation in Bahrain, the third such strike in recent days.",
-    "source": "auto"
+    "title": "Iranian drone and missile attacks on US bases in Bahrain and Kuwait",
+    "description": "Iran launched drones against a U.S. installation in Bahrain and fired on a U.S. air base in Kuwait, also targeting a radar facility in Bahrain, according to Iranian statements. The strikes marked the third such attack on Bahrain in recent days.",
+    "source": "merged"
   },
   {
     "id": "f616f5a88fb0",
@@ -348,15 +438,6 @@
     "tier": "war",
     "title": "Russian air defenses intercept Ukrainian drones",
     "description": "Russian air defenses intercepted 1,336 Ukrainian drones in a major attack",
-    "source": "auto"
-  },
-  {
-    "id": "2142e517d634",
-    "date": "2026-11-18",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "Iran attacks U.S. base in Kuwait and radar in Bahrain",
-    "description": "Iran fired on a U.S. air base in Kuwait and launched drone attacks on a radar facility in Bahrain, widening the conflict.",
     "source": "auto"
   },
   {
