@@ -21,8 +21,11 @@ Perspective + Escalation:
 
 Date guards (event insertion, applied in this order):
   - URL override: correct dates using article URL paths or Tavily metadata
-  - Guard 0: require date_quote UNLESS the URL override successfully rescued the date
-  - Guard 1: reject events more than +1 day in the future (allows timezone slips)
+  - Guard 1 (pre-flight): reject events more than +1 day in the future
+    (allows timezone slips). Runs BEFORE Guard 0 so impossible dates never
+    consume external verifier (scripts/verify_dates_free.py) queries.
+  - Guard 0: queue event to data/pending_dates.json for external verification
+    (scripts/verify_dates_free.py) if unquoted AND not rescued by URL override.
   - Guard 2: reject events where the source article was published BEFORE the
     claimed event date (impossible — can't report on something that hasn't
     happened). Tolerates ±1 day for timezone differences.
@@ -1114,6 +1117,22 @@ def main():
                 # Track whether the URL override actually rescued the date
                 url_rescued = (ev["date"] != original_date)
 
+                # --- Guard 1 (pre-flight): reject far-future events BEFORE queueing ---
+                # Runs before Guard 0 so impossible dates never consume external
+                # verifier (scripts/verify_dates_free.py) queries.
+                try:
+                    ev_d_pre = date.fromisoformat(ev["date"])
+                except (ValueError, TypeError):
+                    continue
+
+                # Guard 1: reject anything more than +1 day in the future
+                # (allows legitimate timezone slips for Asia-Pacific timezones)
+                if ev_d_pre > run_date + timedelta(days=1):
+                    date_rejections += 1
+                    print(f"  rejected far-future event for {c['name']}: "
+                          f"{ev['title'][:50]} ({ev['date']})")
+                    continue
+
                 # --- Guard 0 (post-override): queue for external verification ---
                 date_quote = str(ev.get("date_quote", "") or "").strip()
                 if not url_rescued and (not date_quote or len(date_quote) < 4):
@@ -1133,18 +1152,10 @@ def main():
                     print(f"  queued for date verification: {c['name']} — {ev['title'][:60]}")
                     continue
 
-                # --- Date guards (Guard 1 + 2 + 3) ---
+                # --- Date guards (Guard 2 + 3; Guard 1 handled above) ---
                 try:
                     ev_d = date.fromisoformat(ev["date"])
                 except (ValueError, TypeError):
-                    continue
-
-                # Guard 1: reject anything more than +1 day in the future
-                # (allows legitimate timezone slips for Asia-Pacific timezones)
-                if ev_d > run_date + timedelta(days=1):
-                    date_rejections += 1
-                    print(f"  rejected far-future event for {c['name']}: "
-                          f"{ev['title'][:50]} ({ev['date']})")
                     continue
 
                 # Guard 2: reject if the source article was published BEFORE the
@@ -1212,26 +1223,48 @@ def main():
                 existing = []
         except (FileNotFoundError, json.JSONDecodeError):
             existing = []
-        # Skip events already queued (same conflict + title + LLM date)
-        queued_keys = {
-            (e.get("conflict"), e.get("title"), e.get("llm_date"))
-            for e in existing if isinstance(e, dict)
-        }
-        new_pending = [
-            p for p in pending_events
-            if (p["conflict"], p["title"], p["llm_date"]) not in queued_keys
-        ]
+
+        # Fuzzy dedup: skip events already queued with a similar title in
+        # the same conflict (Jaccard on title tokens >= 0.65). Catches
+        # rephrased re-reports (e.g. "Iran attacks tanker" vs "Iran
+        # attacks oil tanker") that would otherwise create duplicates.
+        def _already_queued(p, existing_list):
+            pt = _tokens(p.get("title", ""))
+            for e in existing_list:
+                if not isinstance(e, dict):
+                    continue
+                if e.get("conflict") != p["conflict"]:
+                    continue
+                et = _tokens(e.get("title", ""))
+                if pt and et and _jaccard(pt, et) >= 0.65:
+                    return True
+            return False
+
+        new_pending = [p for p in pending_events if not _already_queued(p, existing)]
         existing.extend(new_pending)
         with open(pending_path, "w") as f:
             json.dump(existing, f, indent=2, ensure_ascii=False)
             f.write("\n")
         print(f"Queued {len(new_pending)} new event(s) to data/pending_dates.json "
               f"for external verification ({len(pending_events) - len(new_pending)} already queued).")
+
+    # Count total pending entries in the file (for summary footer)
+    total_pending_after = 0
+    if os.path.exists("data/pending_dates.json"):
+        try:
+            with open("data/pending_dates.json") as f:
+                pd_data = json.load(f)
+            if isinstance(pd_data, list):
+                total_pending_after = len(pd_data)
+        except (FileNotFoundError, json.JSONDecodeError):
+            pass
+
     print(f"\n{ok}/{len(conflicts)} refreshed; "
           f"conflicts {'updated' if c_changed else 'unchanged'}, "
           f"history {'updated' if h_changed else 'unchanged'}")
     print(f"Fuzzy-dedup skips: {skipped_dupes} new event(s) rejected as duplicates")
-    print(f"Date-guard rejections: {date_rejections} event(s) rejected (unquoted/future/impossible/stale)")
+    print(f"Date-guard rejections: {date_rejections} event(s) rejected (future/impossible/stale)")
+    print(f"Pending verification: {total_pending_after} event(s) in data/pending_dates.json")
     print(f"Confidence adjustments: {confidence_adjustments} conflict(s) re-graded by tier floor")
     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
           f"advanced days done: {usage['advanced_days_done']}")
