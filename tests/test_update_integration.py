@@ -80,8 +80,10 @@ class EndToEnd(unittest.TestCase):
         os.makedirs("data")
         conflicts = [{"id": i, "name": i.title(), "tier": t, "lat": 0, "lon": 0, "who": "", "what": "", "when": "", "how": "",
                       "current": "old", "sources": []} for i, t in (("gaza", "war"), ("ukraine", "war"), ("taiwan", "flash"))]
-        json.dump(conflicts, open("data/conflicts.json", "w"))
-        json.dump([], open("data/history.json", "w"))
+        with open("data/conflicts.json", "w") as f:
+            json.dump(conflicts, f)
+        with open("data/history.json", "w") as f:
+            json.dump([], f)
         self.mode = {"cf_down": False}
         model = fake_model_factory(self.mode)
         update.tavily = lambda q, depth="basic": fake_results(next(i for i in ("gaza", "ukraine", "taiwan") if i in q.lower()))
@@ -99,7 +101,8 @@ class EndToEnd(unittest.TestCase):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def load(self):
-        return {c["id"]: c for c in json.load(open("data/conflicts.json"))}
+        with open("data/conflicts.json") as f:
+            return {c["id"]: c for c in json.load(f)}
 
     def test_full_run_then_partial_outage(self):
         update.main()
@@ -114,7 +117,8 @@ class EndToEnd(unittest.TestCase):
         u = c["ukraine"]["indicators"][0]
         self.assertEqual(u["state"], "no")
         self.assertNotIn("indicators", c["taiwan"])          # excluded conflicts get no ceasefire row at all
-        log = json.load(open("data/indicator_log.json"))
+        with open("data/indicator_log.json") as f:
+            log = json.load(f)
         self.assertEqual({x["conflict"] for x in log}, {"gaza", "ukraine"})
 
         # second run: Groq is down. Previous green/red must be kept (marked carried), never flipped.
