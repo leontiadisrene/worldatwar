@@ -9,6 +9,42 @@
     "source": "auto"
   },
   {
+    "id": "de9fbe01e9a6",
+    "date": "2026-11-24",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli airstrike kills seven",
+    "description": "Israeli airstrike kills at least seven people in Gaza, including a child, and injures many others",
+    "source": "auto"
+  },
+  {
+    "id": "4ddd1cf96a16",
+    "date": "2026-11-24",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "IDF strikes senior Hamas commander",
+    "description": "The IDF strikes a senior Hamas commander in Gaza City",
+    "source": "auto"
+  },
+  {
+    "id": "f8ebdd2bd165",
+    "date": "2026-11-24",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran threatens to use all tools against US blockade",
+    "description": "Iran has threatened to use all available tools against the US naval blockade, according to The Times of Israel.",
+    "source": "auto"
+  },
+  {
+    "id": "40f87e5d29c5",
+    "date": "2026-11-24",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "FRN rebels claim to shoot down plane",
+    "description": "The Congolese army is searching for a missing aircraft after FRN rebels said they had shot it down.",
+    "source": "auto"
+  },
+  {
     "id": "a5f83bb40ae7",
     "date": "2026-11-23",
     "conflict": "Ukraine",
@@ -81,6 +117,33 @@
     "source": "auto"
   },
   {
+    "id": "1deea2c2d435",
+    "date": "2026-11-23",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Indirect talks continue",
+    "description": "Indirect talks are continuing over an agreement to stop the fighting, despite major combat largely coming to a halt after an April ceasefire agreement, according to The Times of Israel.",
+    "source": "auto"
+  },
+  {
+    "id": "90e57e0ff0e5",
+    "date": "2026-11-23",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Heavy fighting traps Ebola responders",
+    "description": "Intense combat near a hospital in Ituri province forced emergency teams to take cover for more than 24 hours, hampering the Ebola response.",
+    "source": "auto"
+  },
+  {
+    "id": "ce576cf1d8b1",
+    "date": "2026-11-23",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Armenia Proposes New Constitution",
+    "description": "Armenia published a draft proposal of a new constitution, a step towards signing a formal peace agreement with Azerbaijan",
+    "source": "auto"
+  },
+  {
     "id": "98d9b0068bd6",
     "date": "2026-11-22",
     "conflict": "Iran",
@@ -141,6 +204,15 @@
     "tier": "flash",
     "title": "ASEAN‑China Code of Conduct Talks",
     "description": "ASEAN leaders and China met in Manila but failed to reach a code of conduct for the South China Sea.",
+    "source": "auto"
+  },
+  {
+    "id": "13552a60107b",
+    "date": "2026-11-22",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian strikes on Ukraine",
+    "description": "Russia launched around 2,700 attack drones, nearly 1,460 glide bombs, and 165 missiles of various types against Ukraine in a single week.",
     "source": "auto"
   },
   {
@@ -573,6 +645,15 @@
     "tier": "war",
     "title": "Ebola cases double in DR Congo",
     "description": "The current outbreak has resulted in 5,568 deaths out of 11,376 confirmed cases",
+    "source": "auto"
+  },
+  {
+    "id": "0933d89baf48",
+    "date": "2026-11-18",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Killing of Militant Commander",
+    "description": "Indian troops killed a militant commander in Indian-controlled Kashmir.",
     "source": "auto"
   },
   {
