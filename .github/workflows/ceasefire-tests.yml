@@ -1,4 +1,4 @@
-name: Ceasefire Tests
+name: Ceasefire Tests (from tests folder)
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
