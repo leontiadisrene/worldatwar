@@ -54,6 +54,15 @@
     "source": "auto"
   },
   {
+    "id": "77fc2cfa3b81",
+    "date": "2026-11-25",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian attacks",
+    "description": "Ten people were killed across several regions between 24 and 25 November, while thousands are without power after Russian strikes on energy infrastructure.",
+    "source": "auto"
+  },
+  {
     "id": "71001a5e6ea8",
     "date": "2026-11-24",
     "conflict": "Korean peninsula",
@@ -186,6 +195,42 @@
     "tier": "watch",
     "title": "Thailand cancels 2001 maritime MOU with Cambodia",
     "description": "The Thai cabinet voted to cancel a 2001 memorandum of understanding with Cambodia on overlapping claims in the Gulf of Thailand, which had provided for delimitation of maritime zones and joint development of hydrocarbon reserves.",
+    "source": "auto"
+  },
+  {
+    "id": "7bdb0e449743",
+    "date": "2026-11-24",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian drone attack",
+    "description": "Russian forces launched 112 drones at Ukraine overnight on Nov. 24, with Ukrainian air defenses downing or suppressing 88 drones.",
+    "source": "auto"
+  },
+  {
+    "id": "14539e077a23",
+    "date": "2026-11-24",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iran reiterates conditions for US talks",
+    "description": "Iran repeated that there will be no talks with the US unless its 7 conditions are met",
+    "source": "auto"
+  },
+  {
+    "id": "b9abc7b93570",
+    "date": "2026-11-24",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "RSF drone attacks kill 19",
+    "description": "Al Jazeera reported that overnight drone strikes by the RSF killed 19 people in Sudan.",
+    "source": "auto"
+  },
+  {
+    "id": "a2765ecee05e",
+    "date": "2026-11-24",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Protests over Sheshnag Lake excavation",
+    "description": "Footage of an excavator near Sheshnag Lake in Indian-administered Kashmir sparked outrage, with activists warning that government road and tunnel projects could damage the fragile Himalayan ecosystem.",
     "source": "auto"
   },
   {
