@@ -27,6 +27,24 @@
     "source": "auto"
   },
   {
+    "id": "c5dcd66f252d",
+    "date": "2026-11-25",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Ebola vaccine trials",
+    "description": "The WHO has announced strain-specific Ebola vaccine trials to start in the DRC next week",
+    "source": "auto"
+  },
+  {
+    "id": "415048434723",
+    "date": "2026-11-25",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "China-Cambodia Joint Drills",
+    "description": "China and Cambodia staged joint military drills, sparking concerns over China's growing presence in the region.",
+    "source": "auto"
+  },
+  {
     "id": "71001a5e6ea8",
     "date": "2026-11-24",
     "conflict": "Korean peninsula",
@@ -126,6 +144,24 @@
     "source": "auto"
   },
   {
+    "id": "70c9b4481fb0",
+    "date": "2026-11-24",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Russian jets enter South Korean airspace",
+    "description": "Russian military aircraft were detected near South Korean airspace, prompting a scramble of fighter jets.",
+    "source": "auto"
+  },
+  {
+    "id": "35cc8ee1b8fd",
+    "date": "2026-11-24",
+    "conflict": "South China Sea",
+    "tier": "flash",
+    "title": "Solomon Islands-Australia Security Pact",
+    "description": "The Solomon Islands signed a security treaty with Australia, excluding China and marking a shift in the region's balance of power.",
+    "source": "auto"
+  },
+  {
     "id": "a5f83bb40ae7",
     "date": "2026-11-23",
     "conflict": "Ukraine",
@@ -180,13 +216,13 @@
     "source": "auto"
   },
   {
-    "id": "d39a300b8661",
+    "id": "7763f688069d",
     "date": "2026-11-23",
     "conflict": "E. DR Congo",
     "tier": "war",
-    "title": "Heavy fighting in Ituri province",
-    "description": "Heavy fighting near a hospital in Ituri province has disrupted the vital work of Ebola responders and trapped emergency teams in a maternity ward.",
-    "source": "auto"
+    "title": "Intense fighting near Ituri hospital traps Ebola responders",
+    "description": "Heavy combat near a hospital in Ituri province disrupted Ebola work, forcing emergency teams to take cover for over 24 hours and trapping them in a maternity ward.",
+    "source": "merged"
   },
   {
     "id": "fb65c7ef2bb8",
@@ -207,15 +243,6 @@
     "source": "auto"
   },
   {
-    "id": "90e57e0ff0e5",
-    "date": "2026-11-23",
-    "conflict": "E. DR Congo",
-    "tier": "war",
-    "title": "Heavy fighting traps Ebola responders",
-    "description": "Intense combat near a hospital in Ituri province forced emergency teams to take cover for more than 24 hours, hampering the Ebola response.",
-    "source": "auto"
-  },
-  {
     "id": "ce576cf1d8b1",
     "date": "2026-11-23",
     "conflict": "Caucasus",
@@ -231,6 +258,15 @@
     "tier": "war",
     "title": "Drone attack on Colombian police base",
     "description": "Drone attacks targeted a police base in Colombia, injuring civilians and damaging homes",
+    "source": "auto"
+  },
+  {
+    "id": "d95e09473876",
+    "date": "2026-11-23",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukrainian drone strike on Russian warship off Libya kills two Libyan naval officers",
+    "description": "A Ukrainian naval drone attacked a Russian warship near Benghazi; two Libyan naval officers died in the aftermath.",
     "source": "auto"
   },
   {
@@ -321,6 +357,15 @@
     "tier": "war",
     "title": "WHO evacuates staff from Akwe hospital",
     "description": "Fighting near the hospital in Ituri forced WHO and aid partners to evacuate, disrupting Ebola response.",
+    "source": "auto"
+  },
+  {
+    "id": "7c637ce76180",
+    "date": "2026-11-22",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukrainian drones set fire to Russian military cargo ship in Baltic Sea",
+    "description": "Ukrainian drones ignited a Russian cargo vessel en route to Kaliningrad, causing it to drift into Finnish waters.",
     "source": "auto"
   },
   {
@@ -621,6 +666,15 @@
     "source": "auto"
   },
   {
+    "id": "14cbf31952a7",
+    "date": "2026-11-19",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Hegseth's Trip to Ecuador and Honduras",
+    "description": "Hegseth made lightning-fast trips to Ecuador and Honduras, with at least 20 US military flights to an isolated base on Ecuador's Pacific coast.",
+    "source": "auto"
+  },
+  {
     "id": "c4200532ee06",
     "date": "2026-11-18",
     "conflict": "Gaza",
@@ -657,12 +711,12 @@
     "source": "auto"
   },
   {
-    "id": "1d46c03ed4ab",
+    "id": "542c064e98f4",
     "date": "2026-11-18",
     "conflict": "Kashmir",
     "tier": "flash",
-    "title": "Indian forces kill LeT commander and rescue civilians in Kulgam",
-    "description": "Indian security forces eliminated LeT commander Mohammad Lateef Bhat in Kulgam, and, according to The Hindu and the Washington Post, rescued 25 girls and two teachers from a nearby Darul Uloom institute during the same operation.",
+    "title": "Indian forces kill LeT commander, rescue girls in Kulgam",
+    "description": "The Hindu and The Washington Post reported that Indian security forces eliminated LeT commander Mohammad Lateef Bhat in Kulgam and rescued 25 girls and two teachers from a nearby Darul Uloom institute. Indian troops also confirmed the killing of a militant commander in Indian‑controlled Kashmir.",
     "source": "merged"
   },
   {
@@ -780,15 +834,6 @@
     "tier": "war",
     "title": "Ebola cases double in DR Congo",
     "description": "The current outbreak has resulted in 5,568 deaths out of 11,376 confirmed cases",
-    "source": "auto"
-  },
-  {
-    "id": "0933d89baf48",
-    "date": "2026-11-18",
-    "conflict": "Kashmir",
-    "tier": "flash",
-    "title": "Killing of Militant Commander",
-    "description": "Indian troops killed a militant commander in Indian-controlled Kashmir.",
     "source": "auto"
   },
   {
