@@ -6,7 +6,7 @@ Balanced advanced/basic schedule + fuzzy/LLM duplicate handling
 Duplicate handling layers:
   1. Prompt injection — models see what's already recorded.
   2. LLM merge — same-date near-duplicates and same-incident multi-angle
-     accounts are combined into one entry.
+     accounts are combined into one entry (reviewed in small batches).
   3. Fuzzy prune — high-similarity cross-day repeats are dropped.
 
 Tier-aware trust layers (Options 1+2):
@@ -44,7 +44,7 @@ CF_ACCT   = os.environ["CF_ACCOUNT_ID"]
 CF_TOKEN  = os.environ["CF_API_TOKEN"]
 # Optional: independent fallback model used only when Groq fails. If it is not
 # set, the fallback fails gracefully (that run counts as a single-model run).
-MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 USAGE_FILE    = "data/tavily_usage.json"
 CYCLE_BUDGET  = 1000
@@ -589,14 +589,14 @@ def smooth_escalation(raw_score, prev_score, confidence, source_count):
     return max(0, min(100, prev_score + delta))
 
 # ---------- models ----------
-# Free fallback: Mistral, a model family independent of both Cloudflare's Llama
-# (researcher A) and Groq's models (researcher B). It is used only after Groq
-# retries are exhausted. It must NOT be the same model as researcher A: if it
-# were, one model answering twice would look like two models agreeing in the
+# Free fallback: Google Gemini, a model family independent of both Cloudflare's
+# Llama (researcher A) and Groq's models (researcher B). It is used only after
+# Groq retries are exhausted. It must NOT be the same model as researcher A: if
+# it were, one model answering twice would look like two models agreeing in the
 # ceasefire indicator. Its output passes through the same downstream
 # validation as the primary model.
-FALLBACK_PROVIDER = "mistral"
-FALLBACK_MODEL = "mistral-small-latest"
+FALLBACK_PROVIDER = "gemini"
+FALLBACK_MODEL = "gemini-2.5-flash"
 
 GROQ_MAX_ATTEMPTS = 5          # 1 initial request + 4 retries
 GROQ_INITIAL_BACKOFF = 2.0     # seconds
@@ -604,12 +604,13 @@ GROQ_MAX_BACKOFF = 60.0        # seconds
 GROQ_CALL_TIMEOUT = 120        # seconds
 GROQ_TOTAL_DEADLINE = 420      # seconds across all attempts
 
-MISTRAL_MAX_ATTEMPTS = 3       # 1 initial request + 2 retries (429 / 5xx only)
-MISTRAL_MAX_WAIT = 20.0        # seconds; cap on any single Mistral retry wait
+GEMINI_MAX_ATTEMPTS = 3        # 1 initial request + 2 retries (429 / 5xx only)
+GEMINI_MAX_WAIT = 20.0         # seconds; cap on any single Gemini retry wait
 
 
 def _backoff_seconds(attempt, retry_after=None):
-    """Exponential backoff with jitter. Honours Groq's Retry-After header."""
+    """Exponential backoff with jitter. Honours the Retry-After header when
+    present."""
     if retry_after is not None:
         try:
             base = max(0.0, float(retry_after))
@@ -734,46 +735,64 @@ def cloudflare(model, prompt, max_tokens=1200):
     return parse_json(result)
 
 
-def mistral(model, prompt, max_tokens=900, json_mode=True):
-    """OpenAI-compatible call to Mistral's API. Used only as the independent
-    fallback when Groq fails -- it must be a DIFFERENT model from both
-    Cloudflare (researcher A) and Groq (researcher B) so the ceasefire
-    indicator's two-model agreement check stays honest."""
-    if not MISTRAL_API_KEY:
-        raise RuntimeError("MISTRAL_API_KEY not set")
+def gemini(model, prompt, max_tokens=900, json_mode=True):
+    """Google Gemini free tier. Used only as the independent fallback when
+    Groq fails -- it must be a DIFFERENT model from both Cloudflare
+    (researcher A) and Groq (researcher B) so the ceasefire indicator's
+    two-model agreement check stays honest.
+
+    Free tier: no billing account, no credit card. Limits are shown in
+    AI Studio -> Rate limits per project (not published per-model)."""
+    if not GEMINI_API_KEY:
+        raise RuntimeError("GEMINI_API_KEY not set")
     payload = {
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.1,
-        "max_tokens": max_tokens,
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "temperature": 0.1,
+            "maxOutputTokens": max_tokens,
+        },
     }
-    # Mirror groq(): callers that expect a JSON array (e.g. the merge step)
-    # pass json_mode=False, because json_object mode only allows an object.
+    # JSON MIME type is set only when the caller wants a JSON *object*
+    # (json_mode=True). For array-returning prompts (merge step) we let
+    # the model reply with plain text; parse_json() strips any code fence.
     if json_mode:
-        payload["response_format"] = {"type": "json_object"}
-    # Short retry on rate limits (429) and server errors (5xx) only: a
-    # per-second burst limit clears in a moment, anything else fails fast.
+        payload["generationConfig"]["responseMimeType"] = "application/json"
+
     r = None
-    for attempt in range(MISTRAL_MAX_ATTEMPTS):
+    for attempt in range(GEMINI_MAX_ATTEMPTS):
         r = requests.post(
-            "https://api.mistral.ai/v1/chat/completions",
-            headers={"Authorization": f"Bearer {MISTRAL_API_KEY}",
-                     "Content-Type": "application/json"},
+            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+            headers={
+                "Content-Type": "application/json",
+                "x-goog-api-key": GEMINI_API_KEY,
+            },
             json=payload,
             timeout=120,
         )
         transient = (r.status_code == 429 or 500 <= r.status_code < 600)
-        if transient and attempt < MISTRAL_MAX_ATTEMPTS - 1:
-            wait = min(MISTRAL_MAX_WAIT,
-                       _backoff_seconds(attempt, r.headers.get("Retry-After")))
-            print(f"  mistral {model} HTTP {r.status_code}, waiting {wait:.1f}s "
-                  f"(attempt {attempt + 1}/{MISTRAL_MAX_ATTEMPTS})")
+        if transient and attempt < GEMINI_MAX_ATTEMPTS - 1:
+            wait = min(GEMINI_MAX_WAIT,
+                       _backoff_seconds(attempt,
+                                        r.headers.get("Retry-After")
+                                        or r.headers.get("retry-after")))
+            print(f"  gemini {model} HTTP {r.status_code}, waiting {wait:.1f}s "
+                  f"(attempt {attempt + 1}/{GEMINI_MAX_ATTEMPTS})")
             time.sleep(wait)
             continue
         break
     if not r.ok:
-        raise RuntimeError(f"Mistral HTTP {r.status_code}: {r.text[:200]}")
-    return parse_json(r.json()["choices"][0]["message"]["content"])
+        raise RuntimeError(f"Gemini HTTP {r.status_code}: {r.text[:200]}")
+
+    data = r.json()
+    cand = (data.get("candidates") or [{}])[0]
+    parts = (cand.get("content") or {}).get("parts") or []
+    text = "".join(p.get("text", "") for p in parts)
+    if not text:
+        # Some Gemini responses carry only a finishReason / safety block.
+        raise RuntimeError(
+            f"Gemini returned empty response: {json.dumps(cand)[:200]}"
+        )
+    return parse_json(text)
 
 
 def groq_with_fallback(model, prompt, max_tokens=900, json_mode=True):
@@ -786,10 +805,10 @@ def groq_with_fallback(model, prompt, max_tokens=900, json_mode=True):
     try:
         return groq(model, prompt, max_tokens=max_tokens, json_mode=json_mode)
     except Exception as e:
-        print(f"  groq {model} failed: {e}; trying Mistral fallback "
+        print(f"  groq {model} failed: {e}; trying Gemini fallback "
               f"({FALLBACK_MODEL})")
         try:
-            return mistral(
+            return gemini(
                 FALLBACK_MODEL,
                 prompt,
                 max_tokens=max(1200, max_tokens),
@@ -797,7 +816,7 @@ def groq_with_fallback(model, prompt, max_tokens=900, json_mode=True):
             )
         except Exception as fallback_error:
             raise RuntimeError(
-                f"Primary model {model} failed ({e}); Mistral fallback "
+                f"Primary model {model} failed ({e}); Gemini fallback "
                 f"also failed ({fallback_error})"
             ) from fallback_error
 
