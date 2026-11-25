@@ -394,5 +394,104 @@
   "model_a": "not_in_force",
   "model_b": "not_in_force",
   "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:43:18+00:00",
+  "conflict": "ukraine",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:43:40+00:00",
+  "conflict": "gaza",
+  "state": "unknown",
+  "reason": "disagree",
+  "model_a": "not_in_force",
+  "model_b": "in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:44:16+00:00",
+  "conflict": "iran",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:45:00+00:00",
+  "conflict": "sudan",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:45:53+00:00",
+  "conflict": "mali",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:46:12+00:00",
+  "conflict": "myanmar",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:47:03+00:00",
+  "conflict": "venezuela",
+  "state": "unknown",
+  "reason": "disagree",
+  "model_a": "not_in_force",
+  "model_b": "not_applicable",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:47:49+00:00",
+  "conflict": "drc",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:49:50+00:00",
+  "conflict": "kashmir",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:51:00+00:00",
+  "conflict": "thaicambodia",
+  "state": "unknown",
+  "reason": "disagree",
+  "model_a": "unclear",
+  "model_b": "in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T01:51:37+00:00",
+  "conflict": "horn",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "evidence": []
  }
 ]

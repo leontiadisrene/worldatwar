@@ -45,6 +45,33 @@
     "source": "auto"
   },
   {
+    "id": "b824392e69a0",
+    "date": "2026-11-24",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian air strike on Zaporizhzhia",
+    "description": "A Russian air strike on the city of Zaporizhzhia in Ukraine has killed at least two people and wounded more than 40.",
+    "source": "auto"
+  },
+  {
+    "id": "c269fc8482c1",
+    "date": "2026-11-24",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iranian ship hits mine in Strait of Hormuz",
+    "description": "An Iranian container ship hit a mine in the Strait of Hormuz, causing it to come to a stop.",
+    "source": "auto"
+  },
+  {
+    "id": "90e049fb7c3a",
+    "date": "2026-11-24",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Houthi attack on skyscraper in Saudi capital",
+    "description": "A Houthi militia strike on a skyscraper in Riyadh, the Saudi Arabian capital, injured 11 people.",
+    "source": "auto"
+  },
+  {
     "id": "a5f83bb40ae7",
     "date": "2026-11-23",
     "conflict": "Ukraine",
@@ -213,6 +240,15 @@
     "tier": "war",
     "title": "Russian strikes on Ukraine",
     "description": "Russia launched around 2,700 attack drones, nearly 1,460 glide bombs, and 165 missiles of various types against Ukraine in a single week.",
+    "source": "auto"
+  },
+  {
+    "id": "fbd86b100a5e",
+    "date": "2026-11-22",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "FRN claims aircraft shootdown",
+    "description": "FRN rebels said they shot down a military aircraft near Minembwe; Uganda denied any involvement.",
     "source": "auto"
   },
   {
@@ -654,6 +690,15 @@
     "tier": "flash",
     "title": "Killing of Militant Commander",
     "description": "Indian troops killed a militant commander in Indian-controlled Kashmir.",
+    "source": "auto"
+  },
+  {
+    "id": "497ad828582a",
+    "date": "2026-11-18",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli ground offensive",
+    "description": "Israeli forces launched a ground offensive in central Gaza, attacking refugee camps and killing several Palestinians.",
     "source": "auto"
   },
   {
