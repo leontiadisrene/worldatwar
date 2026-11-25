@@ -691,5 +691,86 @@
   "model_a": "not_in_force",
   "model_b": "not_in_force",
   "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:43:15+00:00",
+  "conflict": "ukraine",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:44:12+00:00",
+  "conflict": "iran",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": null,
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:44:58+00:00",
+  "conflict": "sudan",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:45:32+00:00",
+  "conflict": "mali",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:45:52+00:00",
+  "conflict": "myanmar",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": null,
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:46:48+00:00",
+  "conflict": "venezuela",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": "not_applicable",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:47:28+00:00",
+  "conflict": "drc",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": "not_in_force",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:50:08+00:00",
+  "conflict": "thaicambodia",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": "unclear",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-25T13:50:42+00:00",
+  "conflict": "horn",
+  "state": "unknown",
+  "reason": "single_model",
+  "model_a": null,
+  "model_b": "not_in_force",
+  "evidence": []
  }
 ]

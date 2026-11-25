@@ -45,6 +45,15 @@
     "source": "auto"
   },
   {
+    "id": "7016c87b3002",
+    "date": "2026-11-25",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Houthis threaten Saudi ports",
+    "description": "Houthis threatened Saudi ports in response to the coalition's order regarding Hodeidah, while IRGC chief warned that future wars could extend beyond the region.",
+    "source": "auto"
+  },
+  {
     "id": "71001a5e6ea8",
     "date": "2026-11-24",
     "conflict": "Korean peninsula",
@@ -162,6 +171,24 @@
     "source": "auto"
   },
   {
+    "id": "7f04cfb7c403",
+    "date": "2026-11-24",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Malaysia repatriation announcement",
+    "description": "Malaysia announced it will repatriate another 6,803 Myanmar nationals next month. Prime Minister Anwar Ibrahim defended the government’s engagement with Myanmar’s military leadership despite the ICJ ruling.",
+    "source": "auto"
+  },
+  {
+    "id": "684fcba14f78",
+    "date": "2026-11-24",
+    "conflict": "Thai–Cambodia border",
+    "tier": "watch",
+    "title": "Thailand cancels 2001 maritime MOU with Cambodia",
+    "description": "The Thai cabinet voted to cancel a 2001 memorandum of understanding with Cambodia on overlapping claims in the Gulf of Thailand, which had provided for delimitation of maritime zones and joint development of hydrocarbon reserves.",
+    "source": "auto"
+  },
+  {
     "id": "a5f83bb40ae7",
     "date": "2026-11-23",
     "conflict": "Ukraine",
@@ -270,6 +297,15 @@
     "source": "auto"
   },
   {
+    "id": "908123adce3f",
+    "date": "2026-11-23",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "International acknowledgment of ICJ ruling",
+    "description": "Fourteen countries acknowledged the ICJ ruling that Myanmar committed genocide against the Rohingya. The ruling was the first time in the ICJ's 80-year history that it has determined that a state committed genocide.",
+    "source": "auto"
+  },
+  {
     "id": "98d9b0068bd6",
     "date": "2026-11-22",
     "conflict": "Iran",
@@ -369,6 +405,24 @@
     "source": "auto"
   },
   {
+    "id": "ca3c93386621",
+    "date": "2026-11-22",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukrainian drone strike on Russian corvette in Benghazi",
+    "description": "Ukrainian forces launched seven sea drones at a Russian navy corvette docked in Benghazi, Libya, killing two Libyan naval officers. Zelenskyy claimed the operation, while Libyan authorities reported the ship was there to refuel.",
+    "source": "auto"
+  },
+  {
+    "id": "fe0f3ee7002e",
+    "date": "2026-11-22",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukrainian drone attack on Russian cargo ship in Gulf of Finland",
+    "description": "Ukraine claimed responsibility for a drone attack that set a Russian cargo ship ablaze in the Gulf of Finland, marking another instance of operations outside the immediate conflict zone.",
+    "source": "auto"
+  },
+  {
     "id": "186df4fa7116",
     "date": "2026-11-21",
     "conflict": "Gaza",
@@ -438,6 +492,15 @@
     "tier": "flash",
     "title": "Berbera's rising military power",
     "description": "Berbera is developing into a major strategic facility supported by substantial foreign investment and security cooperation.",
+    "source": "auto"
+  },
+  {
+    "id": "11d818541cf1",
+    "date": "2026-11-21",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Mass displacement in southern Ethiopia",
+    "description": "According to Islamic Relief, fighting sparked by a dispute over control of the town of Moyale has displaced around 700,000 people. The clashes between Oromo and Ethiopian Somali communities began in late October.",
     "source": "auto"
   },
   {
@@ -672,6 +735,15 @@
     "tier": "war",
     "title": "Hegseth's Trip to Ecuador and Honduras",
     "description": "Hegseth made lightning-fast trips to Ecuador and Honduras, with at least 20 US military flights to an isolated base on Ecuador's Pacific coast.",
+    "source": "auto"
+  },
+  {
+    "id": "3db06e1aea04",
+    "date": "2026-11-19",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Senate blocks war powers resolution",
+    "description": "Senate Republicans blocked a Democratic effort to end the war in Iran, weighing in on the conflict for the first time since their party’s sweeping losses in the midterm elections.",
     "source": "auto"
   },
   {
