@@ -1105,10 +1105,10 @@ def main():
                 b = groq_with_fallback(
                     "qwen/qwen3.8-27b", prompt, max_tokens=900
                 )
-                time.sleep(5.0)
+                time.sleep(8.0)
             except Exception as e:
                 print(f"  groq failed for {c['name']}: {e}")
-                time.sleep(5.0)
+                time.sleep(8.0)
 
             if a is None and b is None:
                 print(f"SKIP {c['name']}: both researchers failed")
@@ -1129,7 +1129,7 @@ def main():
                             max_tokens=2000,
                             json_mode=False,
                         )
-                        time.sleep(5.0)
+                        time.sleep(8.0)
                         verified = "cloudflare+groq+groq-review"
                     except Exception as e:
                         print(f"  reviewer failed for {c['name']}: {e}; using A")
