@@ -203,9 +203,17 @@ def find_same_day_groups(history, days_back=21):
         by_key[key].append(idx)
     return [indices for indices in by_key.values() if len(indices) >= 2]
 
-def merge_groups_with_llm(groups, history):
-    if not groups:
-        return []
+# The merge prompt used to carry EVERY same-day group in a single call. With
+# dozens of groups the reply came back cut off / malformed, the whole merge
+# failed, and the groups piled up run after run. They are now reviewed in
+# small batches so one bad reply only costs one batch.
+MERGE_BATCH_SIZE = 8       # same-day groups sent to the model per merge call
+MERGE_BATCH_PAUSE = 3.0    # seconds to wait between merge calls
+
+def _merge_batch(groups, history, label=""):
+    """Review ONE batch of same-day groups. Returns a list of merges (possibly
+    empty), or None if the model call or its reply could not be used. Group
+    ids in the prompt are local to the batch (0..n-1)."""
     groups_data = []
     for i, indices in enumerate(groups):
         entries = [history[idx] for idx in indices]
@@ -249,8 +257,8 @@ Groups:
             "openai/gpt-oss-120b", prompt, max_tokens=2500, json_mode=False
         )
     except Exception as e:
-        print(f"  merge LLM failed: {e}")
-        return []
+        print(f"  merge LLM failed{label}: {e}")
+        return None
 
     if isinstance(result, dict):
         for key in ("results", "merges", "groups"):
@@ -258,8 +266,8 @@ Groups:
                 result = result[key]
                 break
     if not isinstance(result, list):
-        print(f"  merge LLM returned unexpected type: {type(result).__name__}")
-        return []
+        print(f"  merge LLM returned unexpected type{label}: {type(result).__name__}")
+        return None
 
     merges = []
     for item in result:
@@ -276,6 +284,28 @@ Groups:
             "title": (item.get("title") or "").strip(),
             "description": (item.get("description") or "").strip(),
         })
+    return merges
+
+def merge_groups_with_llm(groups, history):
+    """Review all same-day groups, MERGE_BATCH_SIZE at a time. A batch that
+    fails is reported and skipped; the other batches still go ahead."""
+    if not groups:
+        return []
+    n_batches = (len(groups) + MERGE_BATCH_SIZE - 1) // MERGE_BATCH_SIZE
+    merges = []
+    failed = 0
+    for b in range(n_batches):
+        chunk = groups[b * MERGE_BATCH_SIZE:(b + 1) * MERGE_BATCH_SIZE]
+        if b > 0:
+            time.sleep(MERGE_BATCH_PAUSE)
+        got = _merge_batch(chunk, history, label=f" (batch {b + 1}/{n_batches})")
+        if got is None:
+            failed += 1
+        else:
+            merges.extend(got)
+    if failed:
+        print(f"  merge: {failed} of {n_batches} batch(es) FAILED - "
+              f"those groups were not reviewed this run")
     return merges
 
 def apply_merges(history, merges):
@@ -574,6 +604,9 @@ GROQ_MAX_BACKOFF = 60.0        # seconds
 GROQ_CALL_TIMEOUT = 120        # seconds
 GROQ_TOTAL_DEADLINE = 420      # seconds across all attempts
 
+MISTRAL_MAX_ATTEMPTS = 3       # 1 initial request + 2 retries (429 / 5xx only)
+MISTRAL_MAX_WAIT = 20.0        # seconds; cap on any single Mistral retry wait
+
 
 def _backoff_seconds(attempt, retry_after=None):
     """Exponential backoff with jitter. Honours Groq's Retry-After header."""
@@ -718,13 +751,26 @@ def mistral(model, prompt, max_tokens=900, json_mode=True):
     # pass json_mode=False, because json_object mode only allows an object.
     if json_mode:
         payload["response_format"] = {"type": "json_object"}
-    r = requests.post(
-        "https://api.mistral.ai/v1/chat/completions",
-        headers={"Authorization": f"Bearer {MISTRAL_API_KEY}",
-                 "Content-Type": "application/json"},
-        json=payload,
-        timeout=120,
-    )
+    # Short retry on rate limits (429) and server errors (5xx) only: a
+    # per-second burst limit clears in a moment, anything else fails fast.
+    r = None
+    for attempt in range(MISTRAL_MAX_ATTEMPTS):
+        r = requests.post(
+            "https://api.mistral.ai/v1/chat/completions",
+            headers={"Authorization": f"Bearer {MISTRAL_API_KEY}",
+                     "Content-Type": "application/json"},
+            json=payload,
+            timeout=120,
+        )
+        transient = (r.status_code == 429 or 500 <= r.status_code < 600)
+        if transient and attempt < MISTRAL_MAX_ATTEMPTS - 1:
+            wait = min(MISTRAL_MAX_WAIT,
+                       _backoff_seconds(attempt, r.headers.get("Retry-After")))
+            print(f"  mistral {model} HTTP {r.status_code}, waiting {wait:.1f}s "
+                  f"(attempt {attempt + 1}/{MISTRAL_MAX_ATTEMPTS})")
+            time.sleep(wait)
+            continue
+        break
     if not r.ok:
         raise RuntimeError(f"Mistral HTTP {r.status_code}: {r.text[:200]}")
     return parse_json(r.json()["choices"][0]["message"]["content"])
@@ -1033,7 +1079,8 @@ def main():
             history = apply_merges(history, merges)
             print(f"Merged {before - len(history)} duplicate entr{'y' if before-len(history)==1 else 'ies'}")
         else:
-            print("No mergeable duplicates found in same-day groups")
+            print("No merges applied from same-day groups "
+                  "(check for 'merge LLM failed' lines above)")
     else:
         print("No same-day duplicate groups to merge")
 
@@ -1064,6 +1111,11 @@ def main():
     confidence_adjustments = 0
     pending_events = []
     date_rejections = 0
+    # Diagnostics counters (log only, no effect on the data written):
+    logged_tavily_keys = False
+    ev_reached_time_check = 0
+    ev_model_time = 0
+    ev_time_kept = 0
     for i, c in enumerate(conflicts):
         use_adv = (i < advanced_count)
         depth = "advanced" if use_adv else "basic"
@@ -1116,6 +1168,18 @@ def main():
                             c["latest_source_domain"] = host
                     except Exception:
                         pass
+
+            # Diagnostics (log only, no behaviour change): why is
+            # latest_source_time empty? Shows whether Tavily returns dates at all.
+            pub_vals = [p for p in (r.get('published_date') or r.get('published')
+                                    for r in results) if p]
+            if not logged_tavily_keys and isinstance(results[0], dict):
+                logged_tavily_keys = True
+                print(f"  [diag] Tavily result fields: {sorted(results[0].keys())}")
+            print(f"  [diag] {c['name']}: {len(pub_vals)}/{len(results)} Tavily results "
+                  f"carry a published_date; usable={'yes' if src_time else 'no'}"
+                  + ("" if (src_time or not pub_vals)
+                     else f"; unparsed sample={pub_vals[0]!r}"))
 
             recent = recent_events_for_prompt(history, c['name'])
 
@@ -1341,7 +1405,16 @@ def main():
                           f"{ev['title'][:50]} ({ev['date']})")
                     continue
 
+                # Diagnostics (log only): what time information did the model give?
+                ev_reached_time_check += 1
+                if ev.get("time"):
+                    ev_model_time += 1
+                    print(f"  [diag] model time for {c['name']}: time={ev.get('time')!r} "
+                          f"sources={ev.get('time_source_count')!r} "
+                          f"variance={ev.get('time_variance_minutes')!r}")
                 ev = normalize_event_time(ev)
+                if ev.get("time") and ev.get("time_verified"):
+                    ev_time_kept += 1
                 eid = hashlib.sha1(
                     f"{c['id']}|{ev['date']}|{ev['title']}".encode()
                 ).hexdigest()[:12]
@@ -1432,6 +1505,8 @@ def main():
     print(f"Date-guard rejections: {date_rejections} event(s) rejected (future/impossible/stale)")
     print(f"Pending verification: {total_pending_after} event(s) in data/pending_dates.json")
     print(f"Confidence adjustments: {confidence_adjustments} conflict(s) re-graded by tier floor")
+    print(f"Event times: {ev_model_time} of {ev_reached_time_check} event(s) reaching the time check "
+          f"had a model-reported time; {ev_time_kept} passed the verification gate")
     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
           f"advanced days done: {usage['advanced_days_done']}")
 
