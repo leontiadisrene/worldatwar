@@ -1,5 +1,32 @@
 [
   {
+    "id": "f52b943fd17d",
+    "date": "2026-11-25",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Oil tankers hit mines in Strait of Hormuz",
+    "description": "Iran's IRGC Navy reported that two oil tankers hit mines and caught fire in the Strait of Hormuz while attempting to transit without authorization.",
+    "source": "auto"
+  },
+  {
+    "id": "24c392af2a28",
+    "date": "2026-11-25",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Protesters clash with police over minimum wage",
+    "description": "Protesters in Venezuela clashed with police over the country's poor minimum wage",
+    "source": "auto"
+  },
+  {
+    "id": "ab79a10fecbf",
+    "date": "2026-11-25",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "North Korea expels Swiss diplomat",
+    "description": "North Korea's foreign ministry has ordered Switzerland's diplomatic representative to leave within 48 hours and called for the office's closure, state media said Wednesday, a day after Pyongyang threatened to shut the newly opened mission over Swiss sanctions.",
+    "source": "auto"
+  },
+  {
     "id": "71001a5e6ea8",
     "date": "2026-11-24",
     "conflict": "Korean peninsula",
@@ -69,6 +96,33 @@
     "tier": "war",
     "title": "Houthi attack on skyscraper in Saudi capital",
     "description": "A Houthi militia strike on a skyscraper in Riyadh, the Saudi Arabian capital, injured 11 people.",
+    "source": "auto"
+  },
+  {
+    "id": "a6f22af1fc83",
+    "date": "2026-11-24",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli airstrike kills Hamas internal security chief",
+    "description": "Israeli airstrike kills Hamas internal security chief and several others, despite a ceasefire in place since last year.",
+    "source": "auto"
+  },
+  {
+    "id": "20c8d0f00aac",
+    "date": "2026-11-24",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "South Korea defends anti-piracy unit's deployment",
+    "description": "The minister tells lawmakers that the deployment is not indirect military participation in the conflict, adding that piracy activity in the area has more than tripled from a year earlier and that the mission’s purpose is to protect South Korean ships and citizens using the maritime route.",
+    "source": "auto"
+  },
+  {
+    "id": "49ac5eb3322c",
+    "date": "2026-11-24",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Russia Thwarts Terror Attack",
+    "description": "Russia claims to have thwarted an Islamist terror attack against a synagogue in the Caucasus city of Kislovodsk.",
     "source": "auto"
   },
   {
@@ -171,6 +225,15 @@
     "source": "auto"
   },
   {
+    "id": "50be95f793d3",
+    "date": "2026-11-23",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Drone attack on Colombian police base",
+    "description": "Drone attacks targeted a police base in Colombia, injuring civilians and damaging homes",
+    "source": "auto"
+  },
+  {
     "id": "98d9b0068bd6",
     "date": "2026-11-22",
     "conflict": "Iran",
@@ -252,6 +315,15 @@
     "source": "auto"
   },
   {
+    "id": "3afa0173e017",
+    "date": "2026-11-22",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "WHO evacuates staff from Akwe hospital",
+    "description": "Fighting near the hospital in Ituri forced WHO and aid partners to evacuate, disrupting Ebola response.",
+    "source": "auto"
+  },
+  {
     "id": "186df4fa7116",
     "date": "2026-11-21",
     "conflict": "Gaza",
@@ -312,6 +384,15 @@
     "tier": "war",
     "title": "Israeli attacks kill four Palestinians",
     "description": "Gaza’s Health Ministry reported on Saturday that 1,671 people had been killed since the ceasefire came into effect in October 2025.",
+    "source": "auto"
+  },
+  {
+    "id": "a2ffec891980",
+    "date": "2026-11-21",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Berbera's rising military power",
+    "description": "Berbera is developing into a major strategic facility supported by substantial foreign investment and security cooperation.",
     "source": "auto"
   },
   {
@@ -384,6 +465,15 @@
     "tier": "flash",
     "title": "Indonesia‑China Cooperation Discussion",
     "description": "President Prabowo Subianto met Xi Jinping to discuss future cooperation in the South China Sea.",
+    "source": "auto"
+  },
+  {
+    "id": "fde467ca4281",
+    "date": "2026-11-20",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Türkiye's military expansion in Somalia",
+    "description": "Türkiye is helping Mogadishu build maritime institutions and expand its military capabilities.",
     "source": "auto"
   },
   {
@@ -519,6 +609,15 @@
     "tier": "war",
     "title": "US-Rwanda tensions",
     "description": "Rwandan Foreign Minister Olivier Nduhungirehe criticizes the US for its approach to the DR Congo peace deal",
+    "source": "auto"
+  },
+  {
+    "id": "d8b67b50b503",
+    "date": "2026-11-19",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "RSF‑SPLM‑N alliance takes Bao headquarters in Blue Nile",
+    "description": "The RSF and the El Hilu faction of the SPLM‑N seized the Bao locality headquarters, sparking intensified clashes and civilian displacement in the region.",
     "source": "auto"
   },
   {
