@@ -691,7 +691,7 @@ def cloudflare(model, prompt, max_tokens=1200):
         raise RuntimeError(f"CF error: {body.get('errors')}")
     result = body["result"]["response"]
     if isinstance(result, (dict, list)):
-    return result
+        return result
     return parse_json(result)
 
 
