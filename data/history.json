@@ -63,6 +63,15 @@
     "source": "auto"
   },
   {
+    "id": "a3d8b3f37da8",
+    "date": "2026-11-25",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Houthi attack on Ras Tanura refinery",
+    "description": "Yemen's Houthi military leadership claimed an attack on the Ras Tanura oil refinery in Saudi Arabia, with satellite imagery showing a large smoke cloud over the facility. Missiles were also intercepted over Riyadh.",
+    "source": "auto"
+  },
+  {
     "id": "71001a5e6ea8",
     "date": "2026-11-24",
     "conflict": "Korean peninsula",
@@ -231,6 +240,42 @@
     "tier": "flash",
     "title": "Protests over Sheshnag Lake excavation",
     "description": "Footage of an excavator near Sheshnag Lake in Indian-administered Kashmir sparked outrage, with activists warning that government road and tunnel projects could damage the fragile Himalayan ecosystem.",
+    "source": "auto"
+  },
+  {
+    "id": "f35a9f217669",
+    "date": "2026-11-24",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Mass displacement in Blue Nile State",
+    "description": "Approximately 15,000 people fled Ed Damazin and El Roseires in Blue Nile State as fighting intensified. The IOM reported additional displacements from Ahmar Sidak and Buko localities amid continuing military operations.",
+    "source": "auto"
+  },
+  {
+    "id": "fef8e96828dd",
+    "date": "2026-11-24",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Malaysia announces Rohingya repatriation",
+    "description": "Malaysia announced it will return thousands of Rohingya refugees to Myanmar. This decision was made five days after the ICJ ruling on November 19, despite the court's finding of genocide and ongoing safety concerns in Myanmar.",
+    "source": "auto"
+  },
+  {
+    "id": "ec6a1861d9cf",
+    "date": "2026-11-24",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Uganda denies jet shootdown",
+    "description": "Uganda's military denied involvement in a fighter jet shot down by the Front for the Refoundation of the Nation (FRN) near Minembwe in eastern DR Congo on Sunday, November 22, 2026.",
+    "source": "auto"
+  },
+  {
+    "id": "d522709df14d",
+    "date": "2026-11-24",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Lee-Putin meeting at APEC",
+    "description": "South Korean President Lee Jae Myung and Russian President Vladimir Putin held a 10-minute meeting on the sidelines of the APEC summit, agreeing to pursue cooperation and ease tensions on the Korean Peninsula.",
     "source": "auto"
   },
   {
@@ -465,6 +510,15 @@
     "tier": "war",
     "title": "Ukrainian drone attack on Russian cargo ship in Gulf of Finland",
     "description": "Ukraine claimed responsibility for a drone attack that set a Russian cargo ship ablaze in the Gulf of Finland, marking another instance of operations outside the immediate conflict zone.",
+    "source": "auto"
+  },
+  {
+    "id": "84baffe4f0f6",
+    "date": "2026-11-22",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Khartoum drone strikes damage UN facility",
+    "description": "RSF drone attacks hit residential areas and a UN building in Khartoum, killing four people. The UN confirmed damage to its premises and condemned the risk to humanitarian workers. Sudan accused Ethiopia of facilitating the strikes, a claim denied by Addis Ababa.",
     "source": "auto"
   },
   {
@@ -792,6 +846,15 @@
     "source": "auto"
   },
   {
+    "id": "1899ac4156f7",
+    "date": "2026-11-19",
+    "conflict": "Taiwan Strait",
+    "tier": "flash",
+    "title": "Xi-Trump-Putin Trilateral Meeting",
+    "description": "US President Donald Trump, Chinese President Xi Jinping, and Russian President Vladimir Putin held a trilateral meeting in Shenzhen. Xi warned Trump to do the 'right thing' on Taiwan, while the talks occurred amid ongoing US-China trade and technology disputes.",
+    "source": "auto"
+  },
+  {
     "id": "c4200532ee06",
     "date": "2026-11-18",
     "conflict": "Gaza",
@@ -960,6 +1023,15 @@
     "tier": "war",
     "title": "Israeli ground offensive",
     "description": "Israeli forces launched a ground offensive in central Gaza, attacking refugee camps and killing several Palestinians.",
+    "source": "auto"
+  },
+  {
+    "id": "79ad3de8ac0b",
+    "date": "2026-11-18",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "IDF ground operation near Nuseirat and Bureij",
+    "description": "The Israeli military launched a ground operation near the Nuseirat and Bureij refugee camps, west of the 'Yellow Line'. This action displaced about 6,000 Palestinians and led to the closure of Salah al-Din Street. Hamas condemned the incursion as a ceasefire violation, while the Israeli military accused Hamas of violating the agreement.",
     "source": "auto"
   },
   {
