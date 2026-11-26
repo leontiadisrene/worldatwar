@@ -36,6 +36,33 @@
     "source": "auto"
   },
   {
+    "id": "78b102d75110",
+    "date": "2026-11-26",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukrainian drone attack on Russian oil pipeline hub",
+    "description": "Ukraine launched a sweeping overnight drone attack against Russia’s energy and industrial infrastructure, reportedly hitting an oil pipeline hub in Bashkortostan.",
+    "source": "auto"
+  },
+  {
+    "id": "a2acb3e72f65",
+    "date": "2026-11-26",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine drone attack kills five in Russian-occupied Zaporizhia",
+    "description": "A Ukraine drone attack killed five people in Russian-occupied Zaporizhia, according to reports.",
+    "source": "auto"
+  },
+  {
+    "id": "472485e80a14",
+    "date": "2026-11-26",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "US-Venezuela Military Cooperation Agreement",
+    "description": "The US and Venezuela signed an agreement to boost military cooperation, according to The Jerusalem Post",
+    "source": "auto"
+  },
+  {
     "id": "f52b943fd17d",
     "date": "2026-11-25",
     "conflict": "Iran",
@@ -54,13 +81,13 @@
     "source": "auto"
   },
   {
-    "id": "ab79a10fecbf",
+    "id": "7a5a1a4ac487",
     "date": "2026-11-25",
     "conflict": "Korean peninsula",
     "tier": "flash",
-    "title": "North Korea expels Swiss diplomat",
-    "description": "North Korea's foreign ministry has ordered Switzerland's diplomatic representative to leave within 48 hours and called for the office's closure, state media said Wednesday, a day after Pyongyang threatened to shut the newly opened mission over Swiss sanctions.",
-    "source": "auto"
+    "title": "North Korea expels Swiss diplomat, forcing office closure",
+    "description": "North Korean foreign ministry ordered the Swiss diplomat to leave within 48 hours, citing Swiss sanctions, while state media said the move would shut the newly opened Swiss office. Switzerland confirmed it must close its mission, describing the decision as a result of the sanctions dispute.",
+    "source": "merged"
   },
   {
     "id": "c5dcd66f252d",
@@ -117,21 +144,30 @@
     "source": "auto"
   },
   {
-    "id": "78a721999105",
-    "date": "2026-11-25",
-    "conflict": "Korean peninsula",
-    "tier": "flash",
-    "title": "Switzerland forced to close office in North Korea",
-    "description": "Switzerland is forced to close its office in North Korea due to sanctions feud",
-    "source": "auto"
-  },
-  {
     "id": "d4e726ba33a4",
     "date": "2026-11-25",
     "conflict": "Kashmir",
     "tier": "flash",
     "title": "J&K's Reasi police identify five men accused of funding terror from Pakistan",
     "description": "Police say they are linked to Hizbul Mujahideen and are accused of supplying arms, ammunition and funds to revive terrorism in the region",
+    "source": "auto"
+  },
+  {
+    "id": "75ea0623e90a",
+    "date": "2026-11-25",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iranian drone attack on Kuwait",
+    "description": "An Iranian drone attack on Kuwait left two Italians dead, according to the Italian Foreign Ministry.",
+    "source": "auto"
+  },
+  {
+    "id": "5f26b2b28233",
+    "date": "2026-11-25",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iranian drone strike on Kuwait's international airport",
+    "description": "Smoke rises from an area of Kuwait's international airport after a reported drone strike.",
     "source": "auto"
   },
   {
@@ -450,6 +486,24 @@
     "source": "auto"
   },
   {
+    "id": "575746c1c21c",
+    "date": "2026-11-23",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone strikes in Khartoum",
+    "description": "Drone strikes hit homes and UN premises in Khartoum, with the army accusing neighboring Ethiopia of launching the attacks.",
+    "source": "auto"
+  },
+  {
+    "id": "7f20435ffdce",
+    "date": "2026-11-23",
+    "conflict": "Venezuela",
+    "tier": "war",
+    "title": "Drone Attacks in Catatumbo",
+    "description": "Armed groups carried out six attacks using drones armed with explosives in Catatumbo, killing at least five people, according to Human Rights Watch",
+    "source": "auto"
+  },
+  {
     "id": "98d9b0068bd6",
     "date": "2026-11-22",
     "conflict": "Iran",
@@ -564,6 +618,15 @@
     "tier": "war",
     "title": "Ukrainian drone attack on Russian cargo ship in Gulf of Finland",
     "description": "Ukraine claimed responsibility for a drone attack that set a Russian cargo ship ablaze in the Gulf of Finland, marking another instance of operations outside the immediate conflict zone.",
+    "source": "auto"
+  },
+  {
+    "id": "8945e591c5c3",
+    "date": "2026-11-22",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "DR Congo and Kenya agree to restore diplomatic ties",
+    "description": "DR Congo's President Felix Tshisekedi met Kenyan President William Ruto over the weekend, agreeing to restore normal bilateral relations and deepen economic and regional cooperation after years of strained diplomatic ties.",
     "source": "auto"
   },
   {
@@ -897,6 +960,15 @@
     "tier": "flash",
     "title": "Xi-Trump-Putin Trilateral Meeting",
     "description": "US President Donald Trump, Chinese President Xi Jinping, and Russian President Vladimir Putin held a trilateral meeting in Shenzhen. Xi warned Trump to do the 'right thing' on Taiwan, while the talks occurred amid ongoing US-China trade and technology disputes.",
+    "source": "auto"
+  },
+  {
+    "id": "5cb36fa36622",
+    "date": "2026-11-19",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Fighting intensifies in Blue Nile",
+    "description": "Fighting intensified in Blue Nile State after an alliance between the RSF and the El Hilu faction of the SPLM-N announced that it had taken control of the headquarters of Bao locality.",
     "source": "auto"
   },
   {
@@ -1590,6 +1662,15 @@
     "tier": "war",
     "title": "Armed men kill civilians in Niger",
     "description": "At least 37 civilians were killed by armed men in western Niger",
+    "source": "auto"
+  },
+  {
+    "id": "f4ff5c5f69e3",
+    "date": "2026-11-12",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "SPOs go missing",
+    "description": "Two Special Police Officers (SPOs) went missing and were found dead in Kishtwar",
     "source": "auto"
   },
   {
