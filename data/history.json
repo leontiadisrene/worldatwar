@@ -1,5 +1,41 @@
 [
   {
+    "id": "752e647ebafc",
+    "date": "2026-11-26",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian missile strikes on Kyiv",
+    "description": "Ballistic missiles hit key crossings in Kyiv and railway stations overnight, according to BBC News",
+    "source": "auto"
+  },
+  {
+    "id": "4d3bc25ae1ac",
+    "date": "2026-11-26",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli airstrikes kill nine Palestinians",
+    "description": "Israeli airstrikes and gunfire killed at least nine Palestinians in Gaza, including a deputy minister of education.",
+    "source": "auto"
+  },
+  {
+    "id": "8518a2296208",
+    "date": "2026-11-26",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone attack in southeast Sudan",
+    "description": "A drone strike in southeast Sudan killed 14 people, according to a medical source.",
+    "source": "auto"
+  },
+  {
+    "id": "b01f5e0bf5de",
+    "date": "2026-11-26",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Kim Jong Un calls for tactical nuclear deployment",
+    "description": "North Korea's leader calls for the deployment of tactical nuclear weapons in response to the country's 'most dangerous enemy state'",
+    "source": "auto"
+  },
+  {
     "id": "f52b943fd17d",
     "date": "2026-11-25",
     "conflict": "Iran",
@@ -72,6 +108,33 @@
     "source": "auto"
   },
   {
+    "id": "b3d09c05bc91",
+    "date": "2026-11-25",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli strike kills Hamas official",
+    "description": "An Israeli strike killed a Hamas official, his wife, and children in the Beach refugee camp in western Gaza City.",
+    "source": "auto"
+  },
+  {
+    "id": "78a721999105",
+    "date": "2026-11-25",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Switzerland forced to close office in North Korea",
+    "description": "Switzerland is forced to close its office in North Korea due to sanctions feud",
+    "source": "auto"
+  },
+  {
+    "id": "d4e726ba33a4",
+    "date": "2026-11-25",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "J&K's Reasi police identify five men accused of funding terror from Pakistan",
+    "description": "Police say they are linked to Hizbul Mujahideen and are accused of supplying arms, ammunition and funds to revive terrorism in the region",
+    "source": "auto"
+  },
+  {
     "id": "71001a5e6ea8",
     "date": "2026-11-24",
     "conflict": "Korean peninsula",
@@ -108,13 +171,13 @@
     "source": "auto"
   },
   {
-    "id": "40f87e5d29c5",
+    "id": "6219974ab3a1",
     "date": "2026-11-24",
     "conflict": "E. DR Congo",
     "tier": "war",
-    "title": "FRN rebels claim to shoot down plane",
-    "description": "The Congolese army is searching for a missing aircraft after FRN rebels said they had shot it down.",
-    "source": "auto"
+    "title": "FRN rebels claim plane shot down; Uganda denies involvement",
+    "description": "FRN rebels said they shot down a fighter jet near Minembwe in eastern DR Congo, prompting a search for the missing aircraft. Uganda’s military denied any role in the incident. The Congolese army is investigating the claim.",
+    "source": "merged"
   },
   {
     "id": "b824392e69a0",
@@ -189,13 +252,13 @@
     "source": "auto"
   },
   {
-    "id": "7f04cfb7c403",
+    "id": "1e72ac3d9d10",
     "date": "2026-11-24",
     "conflict": "Myanmar",
     "tier": "war",
-    "title": "Malaysia repatriation announcement",
-    "description": "Malaysia announced it will repatriate another 6,803 Myanmar nationals next month. Prime Minister Anwar Ibrahim defended the government’s engagement with Myanmar’s military leadership despite the ICJ ruling.",
-    "source": "auto"
+    "title": "Malaysia announces repatriation of thousands of Myanmar nationals",
+    "description": "Malaysia said it will repatriate 6,803 Myanmar nationals next month, including thousands of Rohingya refugees. Prime Minister Anwar Ibrahim defended the move despite the recent ICJ ruling on genocide. The plan aims to return the migrants safely to Myanmar.",
+    "source": "merged"
   },
   {
     "id": "684fcba14f78",
@@ -252,30 +315,21 @@
     "source": "auto"
   },
   {
-    "id": "fef8e96828dd",
-    "date": "2026-11-24",
-    "conflict": "Myanmar",
-    "tier": "war",
-    "title": "Malaysia announces Rohingya repatriation",
-    "description": "Malaysia announced it will return thousands of Rohingya refugees to Myanmar. This decision was made five days after the ICJ ruling on November 19, despite the court's finding of genocide and ongoing safety concerns in Myanmar.",
-    "source": "auto"
-  },
-  {
-    "id": "ec6a1861d9cf",
-    "date": "2026-11-24",
-    "conflict": "E. DR Congo",
-    "tier": "war",
-    "title": "Uganda denies jet shootdown",
-    "description": "Uganda's military denied involvement in a fighter jet shot down by the Front for the Refoundation of the Nation (FRN) near Minembwe in eastern DR Congo on Sunday, November 22, 2026.",
-    "source": "auto"
-  },
-  {
     "id": "d522709df14d",
     "date": "2026-11-24",
     "conflict": "Korean peninsula",
     "tier": "flash",
     "title": "Lee-Putin meeting at APEC",
     "description": "South Korean President Lee Jae Myung and Russian President Vladimir Putin held a 10-minute meeting on the sidelines of the APEC summit, agreeing to pursue cooperation and ease tensions on the Korean Peninsula.",
+    "source": "auto"
+  },
+  {
+    "id": "bba51c846583",
+    "date": "2026-11-24",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Sudan Medicine Shortages",
+    "description": "Sudanese patients with chronic diseases struggle with medicine shortages, soaring prices",
     "source": "auto"
   },
   {
@@ -428,7 +482,7 @@
     "conflict": "Sudan",
     "tier": "war",
     "title": "Drone strikes hit UN building and homes in Khartoum",
-    "description": "Sudanese army said drones struck a UN building and nearby residences, killing civilians and displacing people. Ethiopia was accused of allowing the attacks, which it denied.",
+    "description": "Sudanese army said drones hit a UN building and adjacent homes in Khartoum, killing civilians and displacing residents. The RSF accused Ethiopia of permitting the strikes, a charge Ethiopia denied, while the UN confirmed damage to its facility and warned of risks to aid workers.",
     "source": "merged"
   },
   {
@@ -510,15 +564,6 @@
     "tier": "war",
     "title": "Ukrainian drone attack on Russian cargo ship in Gulf of Finland",
     "description": "Ukraine claimed responsibility for a drone attack that set a Russian cargo ship ablaze in the Gulf of Finland, marking another instance of operations outside the immediate conflict zone.",
-    "source": "auto"
-  },
-  {
-    "id": "84baffe4f0f6",
-    "date": "2026-11-22",
-    "conflict": "Sudan",
-    "tier": "war",
-    "title": "Khartoum drone strikes damage UN facility",
-    "description": "RSF drone attacks hit residential areas and a UN building in Khartoum, killing four people. The UN confirmed damage to its premises and condemned the risk to humanitarian workers. Sudan accused Ethiopia of facilitating the strikes, a claim denied by Addis Ababa.",
     "source": "auto"
   },
   {
