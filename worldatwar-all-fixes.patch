@@ -1,0 +1,1382 @@
+diff --git a/.github/workflows/ceasefire-tests.yml b/.github/workflows/ceasefire-tests.yml
+index a56c63f..aa93d57 100644
+--- a/.github/workflows/ceasefire-tests.yml
++++ b/.github/workflows/ceasefire-tests.yml
+@@ -18,3 +18,9 @@ jobs:
+ 
+       - name: Run integration test (update.py pipeline)
+         run: python -m unittest tests.test_update_integration -v
++
++      - name: Run baseline tests (ceasefire option A)
++        run: python -m unittest tests.test_ceasefire_baseline -v
++
++      - name: Run hardening tests (dates, Cloudflare quota fallback, model independence)
++        run: python -m unittest tests.test_update_hardening -v
+diff --git a/.github/workflows/update.yml b/.github/workflows/update.yml
+index a2c5dce..3374e37 100644
+--- a/.github/workflows/update.yml
++++ b/.github/workflows/update.yml
+@@ -32,7 +32,8 @@ jobs:
+           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+-          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
++          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
++          GEMINI_MODELS: ${{ vars.GEMINI_MODELS }}
+         run: python scripts/update.py
+ 
+       - name: Commit
+diff --git a/README.md b/README.md
+index 9ad9ab2..469a3ad 100644
+--- a/README.md
++++ b/README.md
+@@ -73,6 +73,8 @@ Every conflict panel shows a provenance line beneath its sources:
+ |---|---|
+ | `cloudflare+groq` | Both researchers agreed. Source gate passed. |
+ | `cloudflare+groq+groq-review` | Researchers disagreed; the reviewer resolved it against the raw evidence. |
++| `gemini+groq`, `cloudflare+gemini`, `gemini+gpt-oss`, ... | Same as above, but one researcher was replaced by an independent fallback model because the usual one was out of free quota. The two researchers are always different model families. |
++| `<model>-only` | Only one researcher answered (e.g. `groq-only`). |
+ | `Manually curated` | Seed entry, not yet refreshed by the pipeline. |
+ 
+ The `confidence` field comes from the model's own assessment of how
+diff --git a/config/ceasefire_baseline.json b/config/ceasefire_baseline.json
+new file mode 100644
+index 0000000..cf0d3ee
+--- /dev/null
++++ b/config/ceasefire_baseline.json
+@@ -0,0 +1,84 @@
++{
++  "_readme": [
++    "Human-verified starting point for the 'Ceasefire in force' indicator (option A). Read by scripts/update.py via scripts/ceasefire_indicator.py.",
++    "status: yes | no | unknown | hidden.  yes/no = shown as green/red and HELD up to hold_days (default 60) while nothing contradicts it.  unknown = grey until the live check (both AI models + 2 independent sources) can say.  hidden = row not shown.",
++    "verified: the date YOU checked it (YYYY-MM-DD). To change a status later: edit status, evidence and verified (set verified to today). A newer baseline always overrides the stored result.",
++    "evidence: exact quotes copied from the cited pages (shown to visitors under 'Show the sentences behind this').",
++    "subject: lowercase words; only search results whose title/url/opening text contain one of them can influence this conflict's live check.",
++    "Re-verify every entry at least every 60 days: after that the row turns grey on its own."
++  ],
++  "conflicts": {
++    "gaza": {
++      "status": "yes", "violations": true, "verified": "2026-11-25", "hold_days": 60,
++      "subject": ["gaza", "hamas"],
++      "evidence": [
++        {"outlet": "aljazeera.com", "date": "2026-11-18", "url": "https://www.aljazeera.com/news/2026/11/18/board-of-peace-warns-gaza-ceasefire-faces-imminent-collapse-without-action", "quote": "The ceasefire formally began on October 10, 2025, though attacks have continued since."},
++        {"outlet": "adn.com (AP)", "date": "2026-10-10", "url": "https://www.adn.com/nation-world/2026/10/10/a-us-brokered-ceasefire-was-supposed-to-end-the-war-in-gaza-a-year-later-progress-has-stalled/", "quote": "It’s been a year since a ceasefire deal brokered by U.S. President Donald Trump"}
++      ]
++    },
++    "thaicambodia": {
++      "status": "yes", "violations": true, "verified": "2026-11-25", "hold_days": 60,
++      "subject": ["thai", "cambod"],
++      "evidence": [
++        {"outlet": "asianews.network (Straits Times)", "date": "2026-11-25", "url": "https://asianews.network/asean-sec-gen-warns-of-renewed-thai-cambodian-clashes-upbeat-on-finalising-south-china-sea-pact/", "quote": "A ceasefire reached on Dec 27 that year has largely held, though both sides have accused each other of violations."},
++        {"outlet": "csis.org", "date": "2026-10-29", "url": "https://www.csis.org/blogs/latest-southeast-asia/latest-southeast-asia-thailand-cambodia-disputes-ongoing-one-year-after", "quote": "a second ceasefire was reached after three weeks of fighting and remains in place."}
++      ]
++    },
++    "ukraine": {
++      "status": "no", "verified": "2026-11-25", "hold_days": 60,
++      "subject": ["ukrain", "kyiv", "kiev", "zelensk", "donbas", "donetsk", "kharkiv"],
++      "evidence": [
++        {"outlet": "aljazeera.com", "date": "2026-11-17", "url": "https://aljazeera.com/news/2026/11/17/ukraine-holds-peace-talks-with-us-europe-as-conflict-escalates", "quote": "Those negotiations produced an agreement on a prisoner exchange but no breakthrough on ending the war."},
++        {"outlet": "cp24.com (AP)", "date": "2026-11-12", "url": "https://cp24.com/news/world/2026/11/12/us-envoys-go-to-meet-putin-at-the-kremlin-following-ukraine-talks-in-abu-dhabi", "quote": "Amid the negotiations, fighting continues along the 1,200-kilometre (about 750-mile) front line."}
++      ]
++    },
++    "sudan": {
++      "status": "no", "verified": "2026-11-25", "hold_days": 60,
++      "subject": ["sudan", "rsf", "darfur", "khartoum", "kordofan"],
++      "evidence": [
++        {"outlet": "thenationalnews.com", "date": "2026-11-25", "url": "https://www.thenationalnews.com/news/mena/2026/11/25/sudan-war-grinds-on-with-rsf-seeking-to-stretch-safs-resources-thin/", "quote": "insisting on continuing with the war until the RSF is defeated or surrenders."},
++        {"outlet": "hngn.com", "date": "2026-11-19", "url": "https://www.hngn.com/articles/273887/20261119/sudans-army-advances-kordofan-drone-strikes-kill-civilians.htm", "quote": "army chief Gen. Abdel Fattah al-Burhan has vowed to keep fighting until the RSF is defeated"}
++      ]
++    },
++    "horn": {
++      "status": "no", "verified": "2026-11-25", "hold_days": 45,
++      "subject": ["ethiopia", "eritrea", "tigray", "tplf", "amhara", "fano", "somali", "shabaab"],
++      "evidence": [
++        {"outlet": "allafrica.com", "date": "2026-11-18", "url": "https://allafrica.com/stories/202611180081.html", "quote": "fresh clashes in the contested Ethiopia-Eritrea border area have raised fears of a full-fledged war"},
++        {"outlet": "criticalthreats.org", "date": "2026-11-17", "url": "https://www.criticalthreats.org/briefs/ethiopia-war-security-review/november-17-2026", "quote": "Ethiopian federal and Tigray People's Liberation Front (TPLF) forces reportedly clashed in multiple locations"}
++      ]
++    },
++    "myanmar": {
++      "status": "no", "verified": "2026-11-25", "hold_days": 45,
++      "subject": ["myanmar", "burma", "junta", "tatmadaw"],
++      "evidence": [
++        {"outlet": "bdnews24.com (Reuters)", "date": "2026-11-02", "url": "https://bdnews24.com/neighbours/bmhno6ypnb", "quote": "But his forces are struggling to dislodge opposition groups and increasingly rely on airstrikes"},
++        {"outlet": "moemaka.net", "date": "2026-07-28", "url": "https://moemaka.net/eng/2026/07/war-ceasefires-and-peace-talks/", "quote": "The offer was extended only to ethnic armed organizations and excluded the National Unity Government (NUG)."}
++      ]
++    },
++    "iran": {
++      "status": "unknown", "verified": "2026-11-25",
++      "subject": ["iran", "tehran", "hormuz"],
++      "note": "Informal standoff with intermittent attacks; no formal ceasefire reported. Left unconfirmed on purpose."
++    },
++    "drc": {
++      "status": "unknown", "verified": "2026-11-25",
++      "subject": ["congo", "drc", "m23", "goma", "kivu"],
++      "note": "Doha framework signed, but fighting continues and recent reporting does not say whether a ceasefire is in force."
++    },
++    "mali": {
++      "status": "unknown", "verified": "2026-11-25",
++      "subject": ["mali", "jnim", "bamako", "sahel"],
++      "note": "Not verified from recent sources; left unconfirmed."
++    },
++    "kashmir": {
++      "status": "unknown", "verified": "2026-11-25",
++      "subject": ["kashmir", "pahalgam", "line of control"],
++      "note": "Not verified from recent sources; left unconfirmed."
++    },
++    "venezuela": {
++      "status": "hidden", "verified": "2026-11-25",
++      "subject": ["venezuela", "maduro", "caracas"]
++    }
++  }
++}
+diff --git a/index.html b/index.html
+index 1118707..0194174 100644
+--- a/index.html
++++ b/index.html
+@@ -586,7 +586,7 @@
+         if (ev.length){
+           var names = [];
+           ev.forEach(function(e){ if (e.outlet && names.indexOf(e.outlet) < 0) names.push(e.outlet); });
+-          parts.push('confirmed by ' + names.join(', '));
++          parts.push((ind.basis === 'baseline' ? 'based on ' : 'confirmed by ') + names.join(', '));
+           var newest = ev.map(function(e){ return e.date || ''; }).sort().pop();
+           if (newest) parts.push('newest report ' + fmtDay(newest));
+         }
+diff --git a/scripts/ceasefire_indicator.py b/scripts/ceasefire_indicator.py
+index f938e47..27cf068 100644
+--- a/scripts/ceasefire_indicator.py
++++ b/scripts/ceasefire_indicator.py
+@@ -15,6 +15,13 @@ How a green or red dot is earned (all must hold, otherwise the dot is grey "unco
+ A previous green/red is carried forward for at most 10 days when a run simply finds no new
+ evidence (e.g. one model was rate-limited), but never when sources conflict or the models disagree.
+ 
++BASELINE MODE (config/ceasefire_baseline.json, option A): a human-verified, sourced status per conflict
++is the starting point and is HELD (up to `hold_days`, default 60) while nothing contradicts it:
++  * the live strict rule above can confirm it (refreshes the date) or, if it says the opposite,
++    start a pending flip that needs a second strict confirmation on a later run (>= 6 h, <= 3 days);
++  * tripwires turn the row grey as soon as fresh reporting points the other way (see `tripwire`);
++  * a standing status that is too old, or is being contested, is shown grey, never as fact.
++
+ Nothing here can guarantee a number like "98% sure". It is tuned for precision at the cost of recall,
+ and every decision is logged (data/indicator_log.json) so accuracy can be audited by sampling.
+ """
+@@ -34,6 +41,10 @@ EXCLUDED_CONFLICTS = {"taiwan", "korea", "scs", "caucasus"}  # no active hostili
+ MAX_AGE_DAYS = 7
+ NEWEST_MAX_AGE_DAYS = 4
+ CARRY_DAYS = 10
++HOLD_DAYS = 60              # baseline mode: how long a standing status may be shown without re-confirmation
++PENDING_MIN_HOURS = 6       # a flip must be confirmed by a different (later) run
++PENDING_MAX_DAYS = 3
++TRIP_RELEASE_DAYS = 7       # a tripped row stays grey this long after the last contradicting report
+ MAX_EVIDENCE = 16
+ MAX_PER_RESULT = 3
+ 
+@@ -188,11 +199,18 @@ def fetch_texts(results: list[dict], tier_fn, cap: int = 4, timeout: int = 6, bu
+ 
+ 
+ # ---------------------------------------------------------------- evidence extraction
+-def extract_evidence(results: list[dict], texts: dict[str, str], today: date, tier_fn) -> list[dict]:
+-    """Ceasefire-related sentences from results that have a known date within MAX_AGE_DAYS."""
++def extract_evidence(results: list[dict], texts: dict[str, str], today: date, tier_fn, subject: list | None = None) -> list[dict]:
++    """Ceasefire-related sentences from results that have a known date within MAX_AGE_DAYS.
++    `subject` (optional): lowercase terms; a result is used only if its title, url or opening text names one,
++    so a sentence about another conflict can never decide this one."""
+     items, seen = [], set()
++    terms = [t.lower() for t in (subject or []) if t]
+     for r in results:
+         url = r.get("url") or ""
++        if terms:
++            head = " ".join([r.get("title") or "", url, (r.get("content") or "")[:1500]]).lower()
++            if not any(t in head for t in terms):
++                continue
+         pub = parse_date(r.get("published_date") or r.get("published") or "")
+         if not url or pub is None:
+             continue
+@@ -310,29 +328,167 @@ NOTES = {
+ }
+ 
+ 
+-def build_indicator(prev: list | None, a: dict | None, b: dict | None, evid: list[dict], now_iso: str, today: date):
+-    """Return (indicators_list, decision). The list is empty when the indicator does not apply."""
+-    d = decide(a, b, evid)
++def _build_legacy(prev, d, now_iso: str, today: date):
++    """No baseline for this conflict: strict live rule plus a short carry-forward."""
+     if d.state == "hidden":
+-        return [], d
++        return []
+     base = {"id": INDICATOR_ID, "label": "Ceasefire in force", "checked_at": now_iso}
+     if d.state in ("yes", "no"):
+         return [{**base, "state": d.state, "violations": d.violations, "carried": False,
+-                 "last_confirmed": now_iso, "evidence": d.evidence, "note": ""}], d
++                 "last_confirmed": now_iso, "evidence": d.evidence, "note": ""}]
+     prev_item = next((x for x in (prev or []) if isinstance(x, dict) and x.get("id") == INDICATOR_ID), None)
+     if prev_item and d.reason in ("no_evidence", "single_model") and prev_item.get("state") in ("yes", "no"):
+         lc = parse_date(prev_item.get("last_confirmed") or "")
+         if lc and 0 <= (today - lc).days <= CARRY_DAYS:
+             n = (today - lc).days
+             return [{**prev_item, "checked_at": now_iso, "carried": True,
+-                     "note": f"Last confirmed {n} day{'s' if n != 1 else ''} ago; no new confirming reports this run."}], d
++                     "note": f"Last confirmed {n} day{'s' if n != 1 else ''} ago; no new confirming reports this run."}]
+     return [{**base, "state": "unknown", "violations": False, "carried": False,
+              "last_confirmed": (prev_item or {}).get("last_confirmed"), "evidence": [],
+-             "note": NOTES.get(d.reason, NOTES["no_evidence"])}], d
++             "note": NOTES.get(d.reason, NOTES["no_evidence"])}]
++
++
++def load_baseline(path: str) -> dict:
++    """{conflict_id: entry} from the maintainer-verified baseline file; {} if missing or broken (never raises)."""
++    try:
++        with open(path, encoding="utf-8") as f:
++            data = json.load(f)
++    except (OSError, json.JSONDecodeError):
++        return {}
++    cons = data.get("conflicts") if isinstance(data, dict) else None
++    return {k: v for k, v in cons.items() if isinstance(v, dict)} if isinstance(cons, dict) else {}
++
++
++def tripwire(state: str, evid: list[dict]) -> bool:
++    """True when fresh reporting points the other way from the standing status `state` ('yes'|'no').
++    Deliberately easier to trip than the strict rule is to pass: a false trip only costs a grey dot."""
++    opp = "collapse" if state == "yes" else "holds"
++    fresh = [e for e in evid if e["polarity"] == opp and e["age"] <= NEWEST_MAX_AGE_DAYS]
++    if not fresh:
++        return False
++    origins = {e["origin"] for e in fresh}
++    if state == "yes":
++        return len(origins) >= 2 or any(e["tier"] in (1, 2) and _COLLAPSE_END.search(e["sentence"]) for e in fresh)
++    return len(origins) >= 2 and any(e["tier"] in (1, 2) for e in fresh)
++
++
++def _hours_between(a_iso: str, b_iso: str) -> float | None:
++    try:
++        a = datetime.fromisoformat(str(a_iso).replace("Z", "+00:00"))
++        b = datetime.fromisoformat(str(b_iso).replace("Z", "+00:00"))
++        if a.tzinfo is None:
++            a = a.replace(tzinfo=timezone.utc)
++        if b.tzinfo is None:
++            b = b.replace(tzinfo=timezone.utc)
++        return (b - a).total_seconds() / 3600
++    except ValueError:
++        return None
++
++
++def _standing(prev_item: dict | None, base: dict) -> dict | None:
++    """The status currently 'held': the previous result, or the baseline when the maintainer set a newer
++    (or, on the same day, a different) one. None when nothing yes/no is held."""
++    held = None
++    if prev_item:
++        src = prev_item if prev_item.get("state") in ("yes", "no") else (prev_item.get("prior") or {})
++        if src.get("state") in ("yes", "no"):
++            held = {"state": src["state"], "last_confirmed": src.get("last_confirmed"), "evidence": src.get("evidence") or [],
++                    "violations": bool(src.get("violations")), "basis": src.get("basis") or "live"}
++    seed = None
++    if base.get("status") in ("yes", "no") and parse_date(base.get("verified") or ""):
++        seed = {"state": base["status"], "last_confirmed": base["verified"], "evidence": base.get("evidence") or [],
++                "violations": bool(base.get("violations")), "basis": "baseline"}
++    if held and seed:
++        hl, sv = parse_date(held["last_confirmed"] or ""), parse_date(seed["last_confirmed"])
++        if hl is None or sv > hl or (sv == hl and seed["state"] != held["state"]):
++            return seed
++        return held
++    return held or seed
++
++
++def _pack(st: dict) -> dict:
++    return {k: st.get(k) for k in ("state", "last_confirmed", "evidence", "violations", "basis")}
++
++
++def _build_baseline(prev, d: Decision, evid: list[dict], now_iso: str, today: date, base: dict):
++    prev_item = next((x for x in (prev or []) if isinstance(x, dict) and x.get("id") == INDICATOR_ID), None)
++    st = _standing(prev_item, base)
++    try:
++        hold = int(base.get("hold_days", HOLD_DAYS))
++    except (TypeError, ValueError):
++        hold = HOLD_DAYS
++    head = {"id": INDICATOR_ID, "label": "Ceasefire in force", "checked_at": now_iso}
++    word = {"yes": "in force", "no": "not in force"}
++
++    def live(state):
++        return {**head, "state": state, "violations": d.violations, "carried": False, "basis": "live",
++                "last_confirmed": now_iso, "evidence": d.evidence, "note": ""}
++
++    def grey(note, **extra):
++        item = {**head, "state": "unknown", "violations": False, "carried": False, "basis": None,
++                "last_confirmed": (st or {}).get("last_confirmed") or (prev_item or {}).get("last_confirmed"),
++                "evidence": [], "note": note}
++        item.update(extra)
++        return [item]
++
++    pend = (prev_item or {}).get("pending") or {}
++    pend_age = _hours_between(pend.get("first_seen"), now_iso) if pend.get("first_seen") else None
++    pend_alive = bool(pend) and pend_age is not None and 0 <= pend_age <= PENDING_MAX_DAYS * 24
++
++    # 1. strict live verdict (both models + sources, see decide())
++    if d.state in ("yes", "no"):
++        if st is None or st["state"] == d.state:
++            return [live(d.state)]
++        if pend_alive and pend.get("state") == d.state and pend_age >= PENDING_MIN_HOURS:
++            item = live(d.state)
++            item["note"] = f"Changed from {word[st['state']]}; confirmed on two separate checks."
++            return [item]
++        first = pend["first_seen"] if pend_alive and pend.get("state") == d.state else now_iso
++        return grey(f"Recent reports say this changed (was: {word[st['state']]}). Waiting for a second confirmation before showing it.",
++                    prior=_pack(st), pending={"state": d.state, "first_seen": first, "evidence": d.evidence})
++
++    # 2. no strict verdict this run
++    if st is None:
++        if base.get("status") == "hidden":
++            return []
++        return grey(base.get("note") or NOTES.get(d.reason, NOTES["no_evidence"]))
++    lc = parse_date(st["last_confirmed"] or "")
++    age = (today - lc).days if lc else None
++    if age is None or age < 0 or age > hold:
++        return grey(f"The last verified status ({word[st['state']]}) is {age if age is not None else 'many'} days old and was not re-confirmed.")
++    if pend_alive:
++        return grey(f"Recent reports say this changed (was: {word[st['state']]}). Waiting for a second confirmation before showing it.",
++                    prior=_pack(st), pending=pend)
++    trip = prev_item.get("tripped") if prev_item else None
++    if tripwire(st["state"], evid):
++        return grey(f"Fresh reports may contradict the last verified status ({word[st['state']]}, {st['last_confirmed'][:10]}). Shown as unconfirmed until clarified.",
++                    prior=_pack(st), tripped={"first": (trip or {}).get("first") or now_iso, "last": now_iso})
++    if trip:
++        tl = parse_date(trip.get("last") or "")
++        if tl and 0 <= (today - tl).days < TRIP_RELEASE_DAYS:
++            return grey(f"Fresh reports may contradict the last verified status ({word[st['state']]}, {st['last_confirmed'][:10]}). Shown as unconfirmed until clarified.",
++                        prior=_pack(st), tripped=trip)
++    return [{**head, "state": st["state"], "violations": st["violations"], "carried": True, "basis": st["basis"],
++             "last_confirmed": st["last_confirmed"], "evidence": st["evidence"],
++             "note": f"Standing status, last verified {age} day{'s' if age != 1 else ''} ago; no contradicting reports."}]
++
++
++def build_indicator(prev: list | None, a: dict | None, b: dict | None, evid: list[dict], now_iso: str, today: date,
++                    baseline: dict | None = None):
++    """Return (indicators_list, decision). The list is empty when the indicator does not apply.
++    `baseline` is this conflict's entry from the baseline file; None keeps the original strict-only behaviour."""
++    d = decide(a, b, evid)
++    if baseline is None:
++        if d.state == "hidden":
++            return [], d
++        return _build_legacy(prev, d, now_iso, today), d
++    if d.state == "hidden":
++        d = Decision("unknown", "no_evidence")      # both models said N/A: not enough on its own to override a human baseline
++    return _build_baseline(prev, d, evid, now_iso, today, baseline), d
+ 
+ 
+ # ---------------------------------------------------------------- audit log
+-def log_decision(path: str, conflict_id: str, d: Decision, a, b, now_iso: str, keep: int = 1500):
++def log_decision(path: str, conflict_id: str, d: Decision, a, b, now_iso: str, keep: int = 1500, shown: list | None = None):
+     try:
+         try:
+             with open(path, encoding="utf-8") as f:
+@@ -343,6 +499,8 @@ def log_decision(path: str, conflict_id: str, d: Decision, a, b, now_iso: str, k
+             log = []
+         log.append({"at": now_iso, "conflict": conflict_id, "state": d.state, "reason": d.reason,
+                     "model_a": _status(a), "model_b": _status(b),
++                    "shown": (shown[0].get("state") if shown else "hidden") if shown is not None else None,
++                    "basis": (shown[0].get("basis") if shown else None) if shown is not None else None,
+                     "evidence": [{"url": e["url"], "date": e["date"], "quote": e["quote"]} for e in d.evidence]})
+         with open(path, "w", encoding="utf-8") as f:
+             json.dump(log[-keep:], f, indent=1, ensure_ascii=False)
+diff --git a/scripts/update.py b/scripts/update.py
+index d9d2199..3f13ac5 100644
+--- a/scripts/update.py
++++ b/scripts/update.py
+@@ -26,11 +26,12 @@ Date guards (event insertion, applied in this order):
+     consume external verifier (scripts/verify_dates_free.py) queries.
+   - Guard 0: queue event to data/pending_dates.json for external verification
+     (scripts/verify_dates_free.py) if unquoted AND not rescued by URL override.
+-  - Guard 2: reject events where the source article was published BEFORE the
+-    claimed event date (impossible — can't report on something that hasn't
+-    happened). Tolerates ±1 day for timezone differences.
++  - Guard 2: reject events where even the NEWEST source article was published
++    BEFORE the claimed event date (impossible — can't report on something that
++    hasn't happened). Tolerates ±1 day for timezone differences.
+   - Guard 3: reject stale events older than 14 days (backstop for wrong-month errors)
+ """
++import email.utils
+ import json, os, re, time, hashlib, random, requests
+ from collections import defaultdict
+ from datetime import date, datetime, timezone, timedelta
+@@ -365,35 +366,54 @@ def recent_events_for_prompt(history, conflict_name, days=21):
+             rows.append(f"- {h['date']}: {h.get('title', '')}")
+     return "\n".join(rows) if rows else "(none recorded recently)"
+ 
+-def earliest_source_time_from_results(results):
+-    """Extract the earliest published_date from Tavily results
+-    to find when the story actually broke.
++def parse_pub_date(v):
++    """Parse a search-result publication date into an aware UTC datetime, or None.
++
++    Tavily returns RFC-2822 ('Wed, 25 Nov 2026 18:53:38 GMT'); other sources use
++    ISO-8601 ('2026-11-25T18:53:38Z') or a bare date ('2026-11-25'). All three are
++    accepted. Anything else returns None (never raises)."""
++    if not v or not isinstance(v, str):
++        return None
++    v = v.strip()
++    try:
++        dt = datetime.fromisoformat(v.replace('Z', '+00:00'))
++    except ValueError:
++        try:
++            dt = email.utils.parsedate_to_datetime(v)
++        except (TypeError, ValueError, IndexError):
++            try:
++                dt = datetime.combine(date.fromisoformat(v[:10]), datetime.min.time())
++            except ValueError:
++                return None
++    if dt is None:
++        return None
++    if dt.tzinfo is None:
++        dt = dt.replace(tzinfo=timezone.utc)
++    return dt.astimezone(timezone.utc)
++
++
++def latest_source_time_from_results(results, now=None):
++    """Newest published_date among the Tavily results.
++
++    This is what the page shows as "Last update" (field `latest_source_time`) and
++    what Guard 2 compares event dates against: an event cannot be newer than the
++    newest article reporting it. Dates more than 1 day in the future are treated
++    as bad metadata and ignored.
+     Returns (datetime_utc_or_None, source_metadata_or_None)."""
+-    earliest = None
+-    earliest_meta = None
++    now = now or datetime.now(timezone.utc)
++    latest = None
++    latest_meta = None
+     for r in results:
+-        pd = r.get('published_date') or r.get('published') or ''
+-        if not pd or not isinstance(pd, str):
++        dt = parse_pub_date(r.get('published_date') or r.get('published') or '')
++        if dt is None or dt > now + timedelta(days=1):
+             continue
+-        try:
+-            dt = datetime.fromisoformat(pd.replace('Z', '+00:00'))
+-            if dt.tzinfo is None:
+-                dt = dt.replace(tzinfo=timezone.utc)
+-            elif dt.tzinfo != timezone.utc:
+-                dt = dt.astimezone(timezone.utc)
+-        except (ValueError, TypeError):
+-            try:
+-                d = date.fromisoformat(pd[:10])
+-                dt = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
+-            except (ValueError, TypeError):
+-                continue
+-        if earliest is None or dt < earliest:
+-            earliest = dt
+-            earliest_meta = {
++        if latest is None or dt > latest:
++            latest = dt
++            latest_meta = {
+                 "url": r.get('url', ''),
+                 "title": (r.get('title') or '')[:100],
+             }
+-    return earliest, earliest_meta
++    return latest, latest_meta
+ 
+ def extract_date_from_url(url):
+     """Extract YYYY-MM-DD from news URL paths (e.g. /2026-11-16/)."""
+@@ -596,7 +616,15 @@ def smooth_escalation(raw_score, prev_score, confidence, source_count):
+ # ceasefire indicator. Its output passes through the same downstream
+ # validation as the primary model.
+ FALLBACK_PROVIDER = "gemini"
+-FALLBACK_MODEL = "gemini-2.5-flash"
++# Gemini models are tried in this order; each has its own free-tier quota, and one that is
++# retired, not available to this key, or out of quota is skipped for the rest of the run.
++# gemini-2.5-flash is last because Google now serves it only to accounts that used it before.
++# Override without a code change: set the GEMINI_MODELS repository variable/env (comma-separated).
++GEMINI_MODELS = [m.strip() for m in (os.environ.get("GEMINI_MODELS") or
++    "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash-lite,gemini-2.5-flash").split(",")
++    if m.strip()]
++FALLBACK_MODEL = GEMINI_MODELS[0]
++GEMINI_MIN_OUTPUT_TOKENS = 4096   # Gemini counts hidden "thinking" tokens inside maxOutputTokens
+ 
+ GROQ_MAX_ATTEMPTS = 5          # 1 initial request + 4 retries
+ GROQ_INITIAL_BACKOFF = 2.0     # seconds
+@@ -717,22 +745,66 @@ def groq(model, prompt, max_tokens=900, json_mode=True,
+     )
+ 
+ 
++CF_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
++CF_DAILY_NEURONS = 10000                  # Workers AI free allocation per day
++CF_NEURONS_PER_M = (26668, 204805)        # neurons per 1M input / output tokens for CF_MODEL (Cloudflare pricing page)
++CF_STATE = {"dead": "", "calls": 0, "tokens_in": 0, "tokens_out": 0}
++
++
++def _cf_quota_error(text):
++    t = (text or "").lower()
++    return "daily free allocation" in t or '"code":4006' in t.replace(" ", "")
++
++
++def cloudflare_neurons_used():
++    return (CF_STATE["tokens_in"] * CF_NEURONS_PER_M[0] + CF_STATE["tokens_out"] * CF_NEURONS_PER_M[1]) / 1e6
++
++
+ def cloudflare(model, prompt, max_tokens=1200):
+-    r = requests.post(
+-        f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCT}/ai/run/{model}",
+-        headers={"Authorization": f"Bearer {CF_TOKEN}", "Content-Type": "application/json"},
+-        json={"messages": [{"role": "user", "content": prompt}], "max_tokens": max_tokens},
+-        timeout=120,
+-    )
+-    if not r.ok:
+-        raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
+-    body = r.json()
+-    if not body.get("success"):
+-        raise RuntimeError(f"CF error: {body.get('errors')}")
+-    result = body["result"]["response"]
+-    if isinstance(result, (dict, list)):
+-        return result
+-    return parse_json(result)
++    """Cloudflare Workers AI (researcher A). Once Cloudflare says the daily free allocation is
++    used up, it is not called again in this run (the caller falls back to another model family)."""
++    if CF_STATE["dead"]:
++        raise RuntimeError(f"Cloudflare skipped: {CF_STATE['dead']}")
++    last = None
++    for attempt in range(3):
++        try:
++            r = requests.post(
++                f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCT}/ai/run/{model}",
++                headers={"Authorization": f"Bearer {CF_TOKEN}", "Content-Type": "application/json"},
++                json={"messages": [{"role": "user", "content": prompt}], "max_tokens": max_tokens},
++                timeout=120,
++            )
++        except (requests.Timeout, requests.ConnectionError) as e:
++            last = RuntimeError(f"Cloudflare network error: {e}")
++        else:
++            if not r.ok and _cf_quota_error(r.text):
++                CF_STATE["dead"] = (f"daily free allocation ({CF_DAILY_NEURONS:,} neurons) used up; "
++                                    f"not used again this run, resets 00:00 UTC")
++                raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
++            if r.status_code == 429 or 500 <= r.status_code < 600:
++                last = RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
++            elif not r.ok:
++                raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
++            else:
++                body = r.json()
++                if not body.get("success"):
++                    raise RuntimeError(f"CF error: {body.get('errors')}")
++                try:
++                    u = (body.get("result") or {}).get("usage") or {}
++                    CF_STATE["calls"] += 1
++                    CF_STATE["tokens_in"] += int(u.get("prompt_tokens") or 0)
++                    CF_STATE["tokens_out"] += int(u.get("completion_tokens") or 0)
++                except (TypeError, ValueError):
++                    pass
++                result = body["result"]["response"]
++                if isinstance(result, (dict, list)):
++                    return result
++                return parse_json(result)
++        if attempt < 2:
++            wait = _backoff_seconds(attempt)
++            print(f"  cloudflare transient error, waiting {wait:.1f}s (attempt {attempt + 1}/3): {last}")
++            time.sleep(wait)
++    raise last
+ 
+ 
+ def gemini(model, prompt, max_tokens=900, json_mode=True):
+@@ -795,31 +867,103 @@ def gemini(model, prompt, max_tokens=900, json_mode=True):
+     return parse_json(text)
+ 
+ 
+-def groq_with_fallback(model, prompt, max_tokens=900, json_mode=True):
+-    """Call the requested Groq model, then use the configured free fallback.
++_GEMINI_DEAD = {}   # model -> reason; models unusable for the rest of this run
+ 
+-    The fallback is for availability only: the returned result is still
+-    subjected to the same source, date, duplicate, confidence, and ceasefire
+-    validation as a primary-model result.
+-    """
++
++def gemini_chain(prompt, max_tokens=900, json_mode=True):
++    """Try each model in GEMINI_MODELS until one answers. A model that is retired / not available to
++    this key (403/404) or still rate-limited after its retries (429) is skipped for the rest of the run."""
++    if not GEMINI_API_KEY:
++        raise RuntimeError("GEMINI_API_KEY not set")
++    errors = []
++    for m in GEMINI_MODELS:
++        if m in _GEMINI_DEAD:
++            continue
++        try:
++            out = gemini(m, prompt, max_tokens=max(GEMINI_MIN_OUTPUT_TOKENS, max_tokens), json_mode=json_mode)
++            print(f"  gemini answered with {m}")
++            return out
++        except Exception as e:
++            msg = str(e)
++            errors.append(f"{m}: {msg[:120]}")
++            if re.search(r"HTTP (403|404|429)\b", msg):
++                _GEMINI_DEAD[m] = msg[:120]
++    raise RuntimeError("all Gemini models failed (" + "; ".join(errors) + ")" if errors
++                       else "all Gemini models were unavailable earlier in this run")
++
++
++def groq_with_fallback_src(model, prompt, max_tokens=900, json_mode=True):
++    """Like groq_with_fallback() but returns (result, source) with source 'groq' or 'gemini', so the
++    published provenance label names the model that actually answered."""
+     try:
+-        return groq(model, prompt, max_tokens=max_tokens, json_mode=json_mode)
++        return groq(model, prompt, max_tokens=max_tokens, json_mode=json_mode), "groq"
+     except Exception as e:
+-        print(f"  groq {model} failed: {e}; trying Gemini fallback "
+-              f"({FALLBACK_MODEL})")
++        print(f"  groq {model} failed: {e}; trying Gemini fallback")
+         try:
+-            return gemini(
+-                FALLBACK_MODEL,
+-                prompt,
+-                max_tokens=max(1200, max_tokens),
+-                json_mode=json_mode,
+-            )
++            return gemini_chain(prompt, max_tokens=max_tokens, json_mode=json_mode), "gemini"
+         except Exception as fallback_error:
+             raise RuntimeError(
+                 f"Primary model {model} failed ({e}); Gemini fallback "
+                 f"also failed ({fallback_error})"
+             ) from fallback_error
+ 
++
++def groq_with_fallback(model, prompt, max_tokens=900, json_mode=True):
++    """Call the requested Groq model, then use the configured free fallback.
++
++    The fallback is for availability only: the returned result is still
++    subjected to the same source, date, duplicate, confidence, and ceasefire
++    validation as a primary-model result.
++    """
++    return groq_with_fallback_src(model, prompt, max_tokens=max_tokens, json_mode=json_mode)[0]
++
++
++# ---------- researchers A and B ----------
++RUN_SOFT_DEADLINE_S = 22 * 60   # stop starting new conflicts after this; data is saved after the loop
++QWEN_MODEL = "qwen/qwen3.8-27b"
++GPTOSS_MODEL = "openai/gpt-oss-120b"
++# Independent model lineages. A and B must come from DIFFERENT families for the same conflict, otherwise
++# "both models agree" would just be one model agreeing with itself.
++FAMILY = {"cloudflare": "llama", "groq": "qwen", "gemini": "gemini", "gpt-oss": "gpt-oss"}
++
++
++def run_researcher(role, prompt, taken):
++    """Run researcher A or B; returns (result_dict, source). Raises if every option failed.
++
++    A: Cloudflare Llama  -> Gemini        -> Groq gpt-oss
++    B: Groq Qwen         -> Gemini        -> Groq gpt-oss
++    Families already used for this conflict (`taken`) are skipped, so A and B can never be the same model;
++    the chosen family is added to `taken`."""
++    gptoss = lambda: groq(GPTOSS_MODEL, prompt, max_tokens=2500, json_mode=False, retries=1, total_timeout=90)
++    if role == "A":
++        steps = [("cloudflare", lambda: cloudflare(CF_MODEL, prompt)),
++                 ("gemini", lambda: gemini_chain(prompt, max_tokens=1200)),
++                 ("gpt-oss", gptoss)]
++    else:
++        steps = [("groq", lambda: groq(QWEN_MODEL, prompt, max_tokens=900)),
++                 ("gemini", lambda: gemini_chain(prompt, max_tokens=900)),
++                 ("gpt-oss", gptoss)]
++    errors = []
++    for src, fn in steps:
++        if FAMILY[src] in taken:
++            continue
++        if src == "cloudflare" and CF_STATE["dead"]:
++            errors.append("cloudflare: skipped (daily allocation used up)")
++            continue
++        try:
++            res = fn()
++        except Exception as e:
++            errors.append(f"{src}: {str(e)[:160]}")
++            print(f"  researcher {role}: {src} failed: {str(e)[:200]}")
++            continue
++        if not isinstance(res, dict):
++            errors.append(f"{src}: returned {type(res).__name__}, expected an object")
++            print(f"  researcher {role}: {src} returned a non-object; ignored")
++            continue
++        taken.add(FAMILY[src])
++        return res, src
++    raise RuntimeError("; ".join(errors) or "no model available")
++
+ # ---------- prompts ----------
+ SCHEMA = """{
+   "current": "2-4 sentences on the present situation",
+@@ -1135,7 +1279,13 @@ def main():
+     ev_reached_time_check = 0
+     ev_model_time = 0
+     ev_time_kept = 0
++    researcher_counts = {"A": defaultdict(int), "B": defaultdict(int)}
++    run_started = time.monotonic()
+     for i, c in enumerate(conflicts):
++        if time.monotonic() - run_started > RUN_SOFT_DEADLINE_S:
++            print(f"STOP: time budget of {RUN_SOFT_DEADLINE_S // 60} min reached; the remaining "
++                  f"{len(conflicts) - i} conflict(s) keep their previous data (the job timeout is 30 min)")
++            break
+         use_adv = (i < advanced_count)
+         depth = "advanced" if use_adv else "basic"
+         try:
+@@ -1161,21 +1311,12 @@ def main():
+             url_to_pub_date = {}
+             for r in results:
+                 u = r.get('url')
+-                pd = r.get('published_date') or r.get('published') or ''
+-                if u and pd:
+-                    try:
+-                        dt = datetime.fromisoformat(pd.replace('Z', '+00:00'))
+-                        if dt.tzinfo is None:
+-                            dt = dt.replace(tzinfo=timezone.utc)
+-                        url_to_pub_date[u.split('?')[0].rstrip('/')] = dt.date()
+-                    except (ValueError, TypeError):
+-                        try:
+-                            url_to_pub_date[u.split('?')[0].rstrip('/')] = date.fromisoformat(pd[:10])
+-                        except (ValueError, TypeError):
+-                            pass
+-
+-            # Capture the earliest source publish time (when the story broke)
+-            src_time, src_meta = earliest_source_time_from_results(results)
++                pdt = parse_pub_date(r.get('published_date') or r.get('published') or '')
++                if u and pdt:
++                    url_to_pub_date[u.split('?')[0].rstrip('/')] = pdt.date()
++
++            # Capture the NEWEST source publish time (shown as "Last update"; also used by Guard 2)
++            src_time, src_meta = latest_source_time_from_results(results)
+             if src_time:
+                 c["latest_source_time"] = src_time.isoformat(timespec="seconds")
+                 if src_meta:
+@@ -1205,28 +1346,33 @@ def main():
+             # --- Ceasefire indicator evidence: sentences copied by code from the results above
+             #     (+ optional free page downloads). No extra Tavily credits are used. ---
+             cf_on = c.get("id") not in cfi.EXCLUDED_CONFLICTS
++            cf_entry = cfi.load_baseline("config/ceasefire_baseline.json").get(c.get("id"))  # None -> strict-only mode
+             cf_evid, cf_block = [], ""
+             if cf_on:
+                 cf_texts = cfi.fetch_texts(results, tier_of) if os.environ.get("CEASEFIRE_FETCH", "1") == "1" else {}
+-                cf_evid = cfi.extract_evidence(results, cf_texts, datetime.now(timezone.utc).date(), tier_of)
++                cf_evid = cfi.extract_evidence(results, cf_texts, datetime.now(timezone.utc).date(), tier_of,
++                                                subject=(cf_entry or {}).get("subject"))
+                 cf_block = cfi.prompt_block(cf_evid)
+             prompt = research_prompt(c, results, recent, prev_escalation, cf_block)
+ 
+-            a = None
++            # Researchers A and B come from different model families (see run_researcher). If Cloudflare is
++            # out of daily quota, A is Gemini (or Groq gpt-oss) instead; the label below names who answered.
++            taken = set()
++            a, a_src = None, None
+             try:
+-                a = cloudflare("@cf/meta/llama-3.3-70b-instruct-fp8-fast", prompt)
++                a, a_src = run_researcher("A", prompt, taken)
++                researcher_counts["A"][a_src] += 1
+                 time.sleep(1.0)
+             except Exception as e:
+-                print(f"  cloudflare failed for {c['name']}: {e}")
++                print(f"  researcher A failed for {c['name']}: {e}")
+ 
+-            b = None
++            b, b_src = None, None
+             try:
+-                b = groq_with_fallback(
+-                    "qwen/qwen3.8-27b", prompt, max_tokens=900
+-                )
++                b, b_src = run_researcher("B", prompt, taken)
++                researcher_counts["B"][b_src] += 1
+                 time.sleep(8.0)
+             except Exception as e:
+-                print(f"  groq failed for {c['name']}: {e}")
++                print(f"  researcher B failed for {c['name']}: {e}")
+                 time.sleep(8.0)
+ 
+             if a is None and b is None:
+@@ -1234,27 +1380,28 @@ def main():
+                 continue
+ 
+             if a is None:
+-                final, verified = b, "groq-only"
++                final, verified = b, f"{b_src}-only"
+             elif b is None:
+-                final, verified = a, "cloudflare-only"
++                final, verified = a, f"{a_src}-only"
+             else:
++                pair = f"{a_src}+{b_src}"
+                 flags = compare(a, b)
+                 if flags:
+                     print(f"  review {c['name']}: {flags}")
+                     try:
+-                        final = groq_with_fallback(
++                        final, rev_src = groq_with_fallback_src(
+                             "openai/gpt-oss-120b",
+                             review_prompt(c, results, a, b, flags, recent, prev_escalation),
+                             max_tokens=2000,
+                             json_mode=False,
+                         )
+                         time.sleep(8.0)
+-                        verified = "cloudflare+groq+groq-review"
++                        verified = f"{pair}+{rev_src}-review"
+                     except Exception as e:
+                         print(f"  reviewer failed for {c['name']}: {e}; using A")
+-                        final, verified = a, "cloudflare+groq (no review)"
++                        final, verified = a, f"{pair} (no review)"
+                 else:
+-                    final, verified = a, "cloudflare+groq"
++                    final, verified = a, pair
+ 
+             if not isinstance(final, dict) or "current" not in final:
+                 print(f"SKIP {c['name']}: final output missing 'current'")
+@@ -1286,13 +1433,18 @@ def main():
+                 run_now = datetime.now(timezone.utc)
+                 cf_a = a.get("ceasefire") if isinstance(a, dict) else None
+                 cf_b = b.get("ceasefire") if isinstance(b, dict) else None
++                if a_src and b_src and FAMILY.get(a_src) == FAMILY.get(b_src):
++                    cf_b = None     # one model must never "agree" with itself (cannot happen by construction)
+                 inds, cf_dec = cfi.build_indicator(c.get("indicators"), cf_a, cf_b, cf_evid,
+-                                                   run_now.isoformat(timespec="seconds"), run_now.date())
++                                                   run_now.isoformat(timespec="seconds"), run_now.date(),
++                                                   baseline=cf_entry)
+                 c["indicators"] = inds
+                 cfi.log_decision("data/indicator_log.json", c["id"], cf_dec, cf_a, cf_b,
+-                                 run_now.isoformat(timespec="seconds"))
+-                print(f"  ceasefire indicator for {c['name']}: {cf_dec.state} ({cf_dec.reason or 'n/a'}, "
+-                      f"{len(cf_evid)} candidate sentences)")
++                                 run_now.isoformat(timespec="seconds"), shown=inds)
++                shown = inds[0] if inds else {}
++                print(f"  ceasefire indicator for {c['name']}: live={cf_dec.state} ({cf_dec.reason or 'n/a'}, "
++                      f"{len(cf_evid)} candidate sentences); shown={shown.get('state', 'hidden')}"
++                      f"{' (' + str(shown.get('basis')) + ')' if shown.get('basis') else ''}")
+ 
+             # --- Perspective (no smoothing, save as-is if model returned it) ---
+             persp = final.get("perspective")
+@@ -1407,9 +1559,10 @@ def main():
+                 except (ValueError, TypeError):
+                     continue
+ 
+-                # Guard 2: reject if the source article was published BEFORE the
+-                # claimed event date (impossible — can't report on something that
+-                # hasn't happened). Tolerates ±1 day for timezone differences.
++                # Guard 2: reject if even the NEWEST source article was published
++                # BEFORE the claimed event date (impossible — can't report on
++                # something that hasn't happened). Tolerates ±1 day for timezone
++                # differences. (src_time = newest published_date in the results.)
+                 if src_time and src_time.date() < (ev_d - timedelta(days=1)):
+                     date_rejections += 1
+                     print(f"  rejected impossible-date event for {c['name']}: "
+@@ -1528,6 +1681,14 @@ def main():
+           f"had a model-reported time; {ev_time_kept} passed the verification gate")
+     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
+           f"advanced days done: {usage['advanced_days_done']}")
++    for role in ("A", "B"):
++        counts = ", ".join(f"{k} {v}" for k, v in sorted(researcher_counts[role].items())) or "none"
++        print(f"Researcher {role} answered by: {counts}")
++    print(f"Cloudflare: {CF_STATE['calls']} call(s), about {cloudflare_neurons_used():,.0f} of "
++          f"{CF_DAILY_NEURONS:,} free neurons/day used by this run"
++          + (f"; STOPPED: {CF_STATE['dead']}" if CF_STATE["dead"] else ""))
++    if _GEMINI_DEAD:
++        print("Gemini models skipped this run: " + "; ".join(f"{m} ({r})" for m, r in _GEMINI_DEAD.items()))
+ 
+ if __name__ == "__main__":
+     main()
+diff --git a/tests/test_ceasefire_baseline.py b/tests/test_ceasefire_baseline.py
+new file mode 100644
+index 0000000..bf517e0
+--- /dev/null
++++ b/tests/test_ceasefire_baseline.py
+@@ -0,0 +1,187 @@
++"""Option A: baseline hold, tripwires, two-run flips, expiry, subject guard. Run: python -m unittest discover -s tests -v"""
++import json
++import os
++import sys
++import tempfile
++import unittest
++from datetime import date
++
++sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "scripts"))
++import ceasefire_indicator as cfi  # noqa: E402
++
++T0 = "2026-11-26T01:00:00+00:00"
++T1 = "2026-11-26T13:00:00+00:00"   # next run, 12 h later
++TODAY = date(2026, 11, 26)
++
++
++def ev(i, sentence, origin, tier=1, age=1, domain=None):
++    return {"id": f"E{i}", "url": f"https://{domain or origin + '.com'}/a{i}", "domain": domain or origin + ".com", "origin": origin,
++            "tier": tier, "date": "2026-11-25", "age": age, "sentence": sentence, "polarity": cfi.polarity(sentence)}
++
++
++def base(status="yes", verified="2026-11-25", **kw):
++    return {"status": status, "verified": verified, "violations": False,
++            "evidence": [{"outlet": "x.com", "date": verified, "url": "https://x.com/a", "quote": "q"}], **kw}
++
++
++HOLDS = [ev(1, "The ceasefire has been in effect since October, but both sides accuse each other of violations.", "reuters"),
++         ev(2, "Hamas said Israel violated the truce again this week, despite the ceasefire.", "bbc", tier=1)]
++NONE_ = [ev(1, "Talks ended with a prisoner swap but there is no ceasefire in place, officials said.", "reuters"),
++         ev(2, "Russia rejected a proposed ceasefire on Friday and launched fresh drone strikes.", "guardian", tier=1)]
++YES = {"status": "in_force", "evidence_ids": ["E1", "E2"]}
++NO = {"status": "not_in_force", "evidence_ids": ["E1", "E2"]}
++
++
++def run(prev, a, b, evid, now=T0, entry=None):
++    inds, d = cfi.build_indicator(prev, a, b, evid, now, cfi.parse_date(now), baseline=entry)
++    return inds, d
++
++
++class Baseline(unittest.TestCase):
++    def test_seed_is_shown_without_any_live_evidence(self):
++        inds, _ = run(None, None, None, [], entry=base("yes"))
++        it = inds[0]
++        self.assertEqual((it["state"], it["basis"], it["carried"]), ("yes", "baseline", True))
++        self.assertEqual(it["last_confirmed"], "2026-11-25")
++        self.assertIn("1 day ago", it["note"])
++        self.assertTrue(it["evidence"])
++
++    def test_unknown_and_hidden_baselines(self):
++        inds, _ = run(None, None, None, [], entry=base("unknown", note="Informal standoff."))
++        self.assertEqual((inds[0]["state"], inds[0]["note"]), ("unknown", "Informal standoff."))
++        self.assertEqual(run(None, None, None, [], entry=base("hidden"))[0], [])
++        # both models saying not_applicable must not hide a human-verified row
++        inds, _ = run(None, {"status": "not_applicable"}, {"status": "not_applicable"}, [], entry=base("yes"))
++        self.assertEqual(inds[0]["state"], "yes")
++
++    def test_models_down_or_disagreeing_do_not_disturb_the_held_status(self):
++        for a, b in ((None, None), (None, YES), ({"status": "unclear"}, YES), ({"status": "not_in_force"}, YES)):
++            inds, _ = run(None, a, b, [], entry=base("no"))
++            self.assertEqual(inds[0]["state"], "no", (a, b))
++
++    def test_live_confirmation_refreshes_and_replaces_baseline_evidence(self):
++        inds, d = run(None, YES, YES, HOLDS, entry=base("yes"))
++        it = inds[0]
++        self.assertEqual((d.state, it["state"], it["basis"], it["carried"]), ("yes", "yes", "live", False))
++        self.assertEqual(it["last_confirmed"], T0)
++
++    def test_expiry_turns_grey(self):
++        inds, _ = run(None, None, None, [], entry=base("yes", verified="2026-09-01"))
++        self.assertEqual(inds[0]["state"], "unknown")
++        self.assertIn("not re-confirmed", inds[0]["note"])
++        inds, _ = run(None, None, None, [], entry=base("yes", verified="2026-10-20", hold_days=30))
++        self.assertEqual(inds[0]["state"], "unknown")
++        inds, _ = run(None, None, None, [], entry=base("yes", verified="2026-10-20", hold_days=60))
++        self.assertEqual(inds[0]["state"], "yes")
++
++    def test_flip_needs_two_separate_strict_runs(self):
++        entry = base("yes")
++        i1, d1 = run(None, NO, NO, NONE_, now=T0, entry=entry)            # strict opposite, first sighting
++        self.assertEqual(d1.state, "no")
++        self.assertEqual(i1[0]["state"], "unknown")
++        self.assertEqual(i1[0]["pending"]["state"], "no")
++        self.assertEqual(i1[0]["prior"]["state"], "yes")
++        i1b, _ = run(i1, None, None, [], now=T0, entry=entry)             # same instant / no evidence: stays grey
++        self.assertEqual(i1b[0]["state"], "unknown")
++        i1c, _ = run(i1, NO, NO, NONE_, now="2026-11-26T02:00:00+00:00", entry=entry)   # < 6 h later: not a separate run
++        self.assertEqual(i1c[0]["state"], "unknown")
++        i2, _ = run(i1, NO, NO, NONE_, now=T1, entry=entry)               # 12 h later, confirmed again
++        self.assertEqual((i2[0]["state"], i2[0]["basis"]), ("no", "live"))
++        self.assertIn("two separate checks", i2[0]["note"])
++
++    def test_pending_flip_expires_and_standing_returns(self):
++        entry = base("yes")
++        i1, _ = run(None, NO, NO, NONE_, now="2026-11-20T01:00:00+00:00", entry=entry)
++        self.assertIn("pending", i1[0])
++        inds, _ = run(i1, None, None, [], now=T0, entry=entry)            # 6 days later, never re-confirmed
++        self.assertEqual(inds[0]["state"], "yes")
++
++    def test_tripwire_yes_needs_two_origins_or_explicit_end_from_tier12(self):
++        one_rejected = [ev(1, "Israel rejected a Hamas proposal for a ceasefire extension on Monday.", "reuters")]
++        self.assertFalse(cfi.tripwire("yes", one_rejected))               # one origin, not an explicit "ended"
++        two = one_rejected + [ev(2, "The government said there is no ceasefire with the group.", "bbc")]
++        self.assertTrue(cfi.tripwire("yes", two))
++        ended = [ev(1, "The ceasefire collapsed on Tuesday after heavy shelling, officials said.", "reuters")]
++        self.assertTrue(cfi.tripwire("yes", ended))
++        ended3 = [ev(1, "The ceasefire collapsed on Tuesday after heavy shelling, officials said.", "blog", tier=3)]
++        self.assertFalse(cfi.tripwire("yes", ended3))
++        stale = [ev(1, "The ceasefire collapsed on Tuesday after heavy shelling, officials said.", "reuters", age=6)]
++        self.assertFalse(cfi.tripwire("yes", stale))
++
++    def test_tripwire_no_needs_two_origins_with_tier12(self):
++        a = ev(1, "The ceasefire has been in effect since Sunday and is holding, officials said.", "reuters")
++        b = ev(2, "A ceasefire took effect on Sunday under the deal brokered by Qatar.", "bbc")
++        self.assertTrue(cfi.tripwire("no", [a, b]))
++        self.assertFalse(cfi.tripwire("no", [a]))
++        self.assertFalse(cfi.tripwire("no", [ev(3, a["sentence"], "blog1", tier=3), ev(4, b["sentence"], "blog2", tier=3)]))
++
++    def test_trip_turns_grey_then_stays_grey_a_week_then_returns(self):
++        entry = base("yes")
++        ended = [ev(1, "The ceasefire collapsed on Tuesday after heavy shelling, officials said.", "reuters")]
++        i1, _ = run(None, None, None, ended, now=T0, entry=entry)
++        self.assertEqual(i1[0]["state"], "unknown")
++        self.assertIn("contradict", i1[0]["note"])
++        i2, _ = run(i1, None, None, [], now="2026-11-28T01:00:00+00:00", entry=entry)   # quiet, but only 2 days later
++        self.assertEqual(i2[0]["state"], "unknown")
++        i3, _ = run(i1, None, None, [], now="2026-12-04T01:00:00+00:00", entry=entry)
++        self.assertEqual(i3[0]["state"], "yes")
++
++    def test_strict_confirmation_clears_a_trip_immediately(self):
++        entry = base("yes")
++        ended = [ev(1, "The ceasefire collapsed on Tuesday after heavy shelling, officials said.", "reuters")]
++        i1, _ = run(None, None, None, ended, now=T0, entry=entry)
++        i2, _ = run(i1, YES, YES, HOLDS, now=T1, entry=entry)
++        self.assertEqual((i2[0]["state"], i2[0]["basis"]), ("yes", "live"))
++
++    def test_newer_baseline_overrides_stored_result(self):
++        i1, _ = run(None, None, None, [], entry=base("yes", verified="2026-11-20"))
++        inds, _ = run(i1, None, None, [], entry=base("no", verified="2026-11-26"))
++        self.assertEqual((inds[0]["state"], inds[0]["basis"]), ("no", "baseline"))
++        inds, _ = run(i1, None, None, [], entry=base("no", verified="2026-11-20"))   # same day, different -> human wins
++        self.assertEqual(inds[0]["state"], "no")
++
++    def test_no_baseline_entry_keeps_strict_only_behaviour(self):
++        inds, d = run(None, None, None, [], entry=None)
++        self.assertEqual((inds[0]["state"], d.reason), ("unknown", "single_model"))
++        inds, d = run(None, {"status": "not_applicable"}, {"status": "not_applicable"}, [], entry=None)
++        self.assertEqual(inds, [])
++
++
++class Loading(unittest.TestCase):
++    def test_load_baseline_is_forgiving(self):
++        self.assertEqual(cfi.load_baseline("/nonexistent/x.json"), {})
++        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
++            f.write("{not json")
++        self.assertEqual(cfi.load_baseline(f.name), {})
++        os.unlink(f.name)
++
++    def test_shipped_baseline_is_valid(self):
++        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config", "ceasefire_baseline.json")
++        b = cfi.load_baseline(path)
++        self.assertTrue(b)
++        for cid, e in b.items():
++            self.assertIn(e["status"], ("yes", "no", "unknown", "hidden"), cid)
++            self.assertIsNotNone(cfi.parse_date(e["verified"]), cid)
++            self.assertNotIn(cid, cfi.EXCLUDED_CONFLICTS)
++            if e["status"] in ("yes", "no"):
++                self.assertGreaterEqual(len(e["evidence"]), 2, cid)
++                self.assertTrue(e["subject"], cid)
++                for x in e["evidence"]:
++                    self.assertTrue(x["url"].startswith("https://") and x["quote"] and cfi.parse_date(x["date"]), cid)
++
++
++class SubjectGuard(unittest.TestCase):
++    def test_results_about_other_conflicts_are_ignored(self):
++        res = [{"url": "https://www.reuters.com/world/a", "title": "Russia rejects ceasefire in Ukraine", "published_date": "2026-11-25T10:00:00Z",
++                "content": "Moscow said there is no ceasefire in sight, officials said on Tuesday."},
++               {"url": "https://www.bbc.com/news/b", "title": "Gaza ceasefire strained", "published_date": "2026-11-25T10:00:00Z",
++                "content": "The ceasefire in Gaza has held since October, but both sides accuse each other of violations."}]
++        tier = lambda u: 1
++        all_ = cfi.extract_evidence(res, {}, TODAY, tier)
++        gaza = cfi.extract_evidence(res, {}, TODAY, tier, subject=["gaza", "hamas"])
++        self.assertTrue(any("Ukraine" in e["sentence"] or "Moscow" in e["sentence"] for e in all_))
++        self.assertTrue(gaza and all("Moscow" not in e["sentence"] for e in gaza))
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_update_hardening.py b/tests/test_update_hardening.py
+new file mode 100644
+index 0000000..34fe18e
+--- /dev/null
++++ b/tests/test_update_hardening.py
+@@ -0,0 +1,221 @@
++"""Date parsing, Guard-2 date source, Cloudflare quota breaker, Gemini model chain, A/B independence.
++No network, no keys. Run: python -m unittest discover -s tests -v"""
++import os
++import sys
++import unittest
++from datetime import datetime, timedelta, timezone
++
++HERE = os.path.dirname(os.path.abspath(__file__))
++sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
++for k in ("TAVILY_API_KEY", "GROQ_API_KEY", "CF_ACCOUNT_ID", "CF_API_TOKEN"):
++    os.environ.setdefault(k, "test")
++os.environ["CEASEFIRE_FETCH"] = "0"
++
++import update  # noqa: E402
++
++
++class DateParsing(unittest.TestCase):
++    def test_all_formats_the_pipeline_can_see(self):
++        want = datetime(2026, 11, 25, 18, 53, 38, tzinfo=timezone.utc)
++        for v in ("Wed, 25 Nov 2026 18:53:38 GMT",          # Tavily (RFC-2822), the format that was silently dropped
++                  "2026-11-25T18:53:38Z", "2026-11-25T18:53:38+00:00", "2026-11-25T20:53:38+02:00", "2026-11-25T18:53:38"):
++            self.assertEqual(update.parse_pub_date(v), want, v)
++        self.assertEqual(update.parse_pub_date("2026-11-25"), datetime(2026, 11, 25, tzinfo=timezone.utc))
++
++    def test_garbage_never_raises(self):
++        for v in (None, "", "   ", "garbage", 12345, "Wed, 99 Foo 2026", "2026-13-45"):
++            self.assertIsNone(update.parse_pub_date(v), v)
++
++    def test_latest_not_earliest_and_ignores_future_junk(self):
++        now = datetime(2026, 11, 26, 12, 0, tzinfo=timezone.utc)
++        res = [{"url": "https://a.com/1", "published_date": "Thu, 19 Nov 2026 06:00:00 GMT"},
++               {"url": "https://b.com/2", "published_date": "Wed, 25 Nov 2026 15:03:21 GMT"},
++               {"url": "https://c.com/3", "published_date": "Tue, 24 Nov 2026 10:43:00 GMT"},
++               {"url": "https://d.com/4", "published_date": "Mon, 01 Jan 2029 00:00:00 GMT"},   # bad metadata
++               {"url": "https://e.com/5"}]
++        dt, meta = update.latest_source_time_from_results(res, now=now)
++        self.assertEqual(dt, datetime(2026, 11, 25, 15, 3, 21, tzinfo=timezone.utc))
++        self.assertEqual(meta["url"], "https://b.com/2")
++        self.assertEqual(update.latest_source_time_from_results([], now=now), (None, None))
++        self.assertEqual(update.latest_source_time_from_results([{"url": "x", "published_date": "nope"}], now=now), (None, None))
++
++    def test_guard2_would_keep_a_recent_real_event(self):
++        """Event on Nov 24, articles Nov 19..25: the newest article (Nov 25) proves the event can have been reported."""
++        res = [{"url": f"https://x.com/{d}", "published_date": f"2026-11-{d}T10:00:00Z"} for d in (19, 21, 23, 24, 25)]
++        newest, _ = update.latest_source_time_from_results(res, now=datetime(2026, 11, 26, tzinfo=timezone.utc))
++        event = datetime(2026, 11, 24).date()
++        self.assertFalse(newest.date() < event - timedelta(days=1))
++
++
++class FakeResp:
++    def __init__(self, status=200, text="", body=None):
++        self.status_code, self.text, self._body = status, text, body
++        self.ok = 200 <= status < 300
++        self.headers = {}
++
++    def json(self):
++        return self._body
++
++
++QUOTA = ('{"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, '
++         'please upgrade to Cloudflare\'s Workers Paid plan if you would like to continue usage.","code":4006}],"success":false}')
++
++
++class CloudflareBreaker(unittest.TestCase):
++    def setUp(self):
++        self.post = update.requests.post
++        self.sleep = update.time.sleep
++        update.time.sleep = lambda s: None
++        update.CF_STATE.update({"dead": "", "calls": 0, "tokens_in": 0, "tokens_out": 0})
++        self.calls = 0
++
++    def tearDown(self):
++        update.requests.post = self.post
++        update.time.sleep = self.sleep
++        update.CF_STATE.update({"dead": "", "calls": 0, "tokens_in": 0, "tokens_out": 0})
++
++    def test_quota_error_stops_all_further_calls_in_the_run(self):
++        def post(*a, **k):
++            self.calls += 1
++            return FakeResp(429, QUOTA)
++        update.requests.post = post
++        with self.assertRaises(RuntimeError):
++            update.cloudflare("m", "p")
++        self.assertEqual(self.calls, 1)                      # no pointless retries on a quota error
++        self.assertIn("daily free allocation", update.CF_STATE["dead"])
++        with self.assertRaises(RuntimeError) as cm:
++            update.cloudflare("m", "p")
++        self.assertIn("skipped", str(cm.exception))
++        self.assertEqual(self.calls, 1)                      # and no HTTP request at all afterwards
++
++    def test_transient_429_is_retried_then_succeeds_and_usage_is_counted(self):
++        seq = [FakeResp(429, "rate limited"), FakeResp(503, "unavailable"),
++               FakeResp(200, "", {"success": True, "result": {"response": '{"current": "x"}',
++                                                              "usage": {"prompt_tokens": 6000, "completion_tokens": 800}}})]
++        def post(*a, **k):
++            self.calls += 1
++            return seq.pop(0)
++        update.requests.post = post
++        self.assertEqual(update.cloudflare("m", "p"), {"current": "x"})
++        self.assertEqual((self.calls, update.CF_STATE["dead"]), (3, ""))
++        self.assertAlmostEqual(update.cloudflare_neurons_used(), 6000 * 26668 / 1e6 + 800 * 204805 / 1e6, places=3)
++
++    def test_other_errors_fail_fast(self):
++        update.requests.post = lambda *a, **k: (setattr(self, "calls", self.calls + 1), FakeResp(401, "bad token"))[1]
++        with self.assertRaises(RuntimeError):
++            update.cloudflare("m", "p")
++        self.assertEqual((self.calls, update.CF_STATE["dead"]), (1, ""))
++
++
++class GeminiChain(unittest.TestCase):
++    def setUp(self):
++        self.gem, self.key, self.models = update.gemini, update.GEMINI_API_KEY, update.GEMINI_MODELS
++        update.GEMINI_API_KEY = "k"
++        update.GEMINI_MODELS = ["gemini-new", "gemini-mid", "gemini-old"]
++        update._GEMINI_DEAD.clear()
++        self.seen = []
++
++    def tearDown(self):
++        update.gemini, update.GEMINI_API_KEY, update.GEMINI_MODELS = self.gem, self.key, self.models
++        update._GEMINI_DEAD.clear()
++
++    def test_unavailable_model_is_skipped_for_the_rest_of_the_run(self):
++        def fake(model, prompt, max_tokens=900, json_mode=True):
++            self.seen.append((model, max_tokens))
++            if model == "gemini-new":
++                raise RuntimeError("Gemini HTTP 404: model no longer available to new users")
++            return {"current": model}
++        update.gemini = fake
++        self.assertEqual(update.gemini_chain("p", max_tokens=900), {"current": "gemini-mid"})
++        self.assertEqual(update.gemini_chain("p", max_tokens=1200), {"current": "gemini-mid"})
++        self.assertEqual([m for m, _ in self.seen], ["gemini-new", "gemini-mid", "gemini-mid"])   # 404 model tried only once
++        self.assertTrue(all(t >= update.GEMINI_MIN_OUTPUT_TOKENS for _, t in self.seen))          # room for hidden thinking tokens
++
++    def test_400_does_not_blacklist_a_model_but_moves_on(self):
++        def fake(model, *a, **k):
++            if model == "gemini-new":
++                raise RuntimeError("Gemini HTTP 400: bad request")
++            return {"current": model}
++        update.gemini = fake
++        self.assertEqual(update.gemini_chain("p"), {"current": "gemini-mid"})
++        self.assertNotIn("gemini-new", update._GEMINI_DEAD)
++
++    def test_all_fail_and_no_key(self):
++        update.gemini = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("Gemini HTTP 429: quota"))
++        with self.assertRaises(RuntimeError):
++            update.gemini_chain("p")
++        with self.assertRaises(RuntimeError):
++            update.gemini_chain("p")                          # all marked dead: fails fast, no calls
++        update.GEMINI_API_KEY = ""
++        with self.assertRaises(RuntimeError) as cm:
++            update.gemini_chain("p")
++        self.assertIn("GEMINI_API_KEY", str(cm.exception))
++
++
++class Independence(unittest.TestCase):
++    """A and B must never be the same model family; the source label must name who really answered."""
++    def setUp(self):
++        self.saved = (update.cloudflare, update.groq, update.gemini_chain)
++        update.CF_STATE.update({"dead": "", "calls": 0, "tokens_in": 0, "tokens_out": 0})
++        self.down = set()
++        def cf(m, p, max_tokens=1200):
++            if "cloudflare" in self.down:
++                raise RuntimeError("Cloudflare HTTP 429: daily free allocation")
++            return {"current": "llama"}
++        def groq(m, p, max_tokens=900, json_mode=True, retries=2, total_timeout=None):
++            key = "gpt-oss" if "gpt-oss" in m else "groq"
++            if key in self.down:
++                raise RuntimeError("Groq 429")
++            return {"current": key}
++        def gem(p, max_tokens=900, json_mode=True):
++            if "gemini" in self.down:
++                raise RuntimeError("Gemini down")
++            return {"current": "gemini"}
++        update.cloudflare, update.groq, update.gemini_chain = cf, groq, gem
++
++    def tearDown(self):
++        update.cloudflare, update.groq, update.gemini_chain = self.saved
++        update.CF_STATE.update({"dead": "", "calls": 0, "tokens_in": 0, "tokens_out": 0})
++
++    def pair(self):
++        taken = set()
++        out = []
++        for role in ("A", "B"):
++            try:
++                out.append(update.run_researcher(role, "p", taken)[1])
++            except RuntimeError:
++                out.append(None)
++        return tuple(out)
++
++    def test_normal(self):
++        self.assertEqual(self.pair(), ("cloudflare", "groq"))
++
++    def test_cloudflare_out_gemini_replaces_A(self):
++        self.down = {"cloudflare"}
++        self.assertEqual(self.pair(), ("gemini", "groq"))
++
++    def test_cloudflare_breaker_skips_A_without_calling(self):
++        update.CF_STATE["dead"] = "quota"
++        self.assertEqual(self.pair(), ("gemini", "groq"))
++
++    def test_groq_out_gemini_replaces_B(self):
++        self.down = {"groq"}
++        self.assertEqual(self.pair(), ("cloudflare", "gemini"))
++
++    def test_cloudflare_and_groq_out_never_two_geminis(self):
++        self.down = {"cloudflare", "groq"}
++        a, b = self.pair()
++        self.assertEqual((a, b), ("gemini", "gpt-oss"))
++        self.assertNotEqual(update.FAMILY[a], update.FAMILY[b])
++
++    def test_everything_but_gemini_out_gives_single_model_not_a_fake_pair(self):
++        self.down = {"cloudflare", "groq", "gpt-oss"}
++        self.assertEqual(self.pair(), ("gemini", None))
++
++    def test_non_object_answers_are_ignored(self):
++        update.cloudflare = lambda *a, **k: ["not", "an", "object"]
++        self.assertEqual(self.pair(), ("gemini", "groq"))
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_update_integration.py b/tests/test_update_integration.py
+index 0cbd3fd..28f8651 100644
+--- a/tests/test_update_integration.py
++++ b/tests/test_update_integration.py
+@@ -88,15 +88,18 @@ class EndToEnd(unittest.TestCase):
+         model = fake_model_factory(self.mode)
+         update.tavily = lambda q, depth="basic": fake_results(next(i for i in ("gaza", "ukraine", "taiwan") if i in q.lower()))
+         update.cloudflare = lambda m, prompt, max_tokens=1200: model(prompt)
+-        def groq(m, prompt, max_tokens=900, json_mode=True, retries=2):
++        def groq(m, prompt, max_tokens=900, json_mode=True, retries=2, total_timeout=None):
+             if self.mode["cf_down"]:
+                 raise RuntimeError("Groq 429")
+             return model(prompt)
+         update.groq = groq
+         update.url_valid = lambda url, urls: True
+         update.time.sleep = lambda s: None
++        self._saved_gemini_chain = update.gemini_chain      # default: no Gemini key -> fallback unavailable
++        update.gemini_chain = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("GEMINI_API_KEY not set"))
+ 
+     def tearDown(self):
++        update.gemini_chain = self._saved_gemini_chain
+         os.chdir(self.old)
+         shutil.rmtree(self.tmp, ignore_errors=True)
+ 
+@@ -109,6 +112,7 @@ class EndToEnd(unittest.TestCase):
+         c = self.load()
+         g = c["gaza"]["indicators"][0]
+         self.assertEqual((g["state"], g["carried"]), ("yes", False))
++        self.assertEqual(c["gaza"]["verified_by"], "cloudflare+groq")      # provenance label unchanged on the normal path
+         self.assertTrue(g["violations"])
+         self.assertGreaterEqual(len({e["outlet"] for e in g["evidence"]}), 2)
+         for e in g["evidence"]:
+@@ -130,6 +134,62 @@ class EndToEnd(unittest.TestCase):
+             self.assertEqual((it["state"], it["carried"]), (state, True))
+             self.assertIn("Last confirmed", it["note"])
+ 
++    def test_baseline_keeps_dots_when_models_are_down(self):
++        """The situation in the real Actions log: Cloudflare/Groq quota gone, no strict verdict possible."""
++        today = datetime.now(timezone.utc).date().isoformat()
++        ev = lambda o: [{"outlet": o, "date": today, "url": f"https://{o}/a", "quote": "q"}] * 2
++        os.makedirs("config")
++        json.dump({"conflicts": {
++            "gaza": {"status": "yes", "violations": True, "verified": today, "subject": ["gaza"], "evidence": ev("a.com")},
++            "ukraine": {"status": "no", "verified": today, "subject": ["ukrain"], "evidence": ev("b.com")},
++        }}, open("config/ceasefire_baseline.json", "w"))
++        self.mode["cf_down"] = True            # Groq (model B) down; model A answers alone -> single_model
++        update.main()
++        c = self.load()
++        g, u = c["gaza"]["indicators"][0], c["ukraine"]["indicators"][0]
++        self.assertEqual((g["state"], g["basis"], g["violations"]), ("yes", "baseline", True))
++        self.assertEqual((u["state"], u["basis"]), ("no", "baseline"))
++        self.assertNotIn("indicators", c["taiwan"])
++        log = json.load(open("data/indicator_log.json"))
++        self.assertTrue(all(x["shown"] in ("yes", "no") and x["basis"] == "baseline" for x in log))
++        # a second run changes nothing and never flips
++        update.main()
++        c2 = self.load()
++        self.assertEqual([c2[i]["indicators"][0]["state"] for i in ("gaza", "ukraine")], ["yes", "no"])
++
++    def test_cloudflare_quota_gemini_replaces_A_and_label_is_honest(self):
++        """Cloudflare out of free neurons: researcher A becomes Gemini, B stays Groq; the run still verifies with two
++        different models and the published label names them."""
++        update.cloudflare = lambda m, prompt, max_tokens=1200: (_ for _ in ()).throw(
++            RuntimeError("Cloudflare HTTP 429: you have used up your daily free allocation of 10,000 neurons"))
++        update.gemini_chain = lambda prompt, max_tokens=900, json_mode=True: fake_model_factory(self.mode)(prompt)
++        update.main()
++        c = self.load()
++        self.assertEqual({c[i]["verified_by"] for i in ("gaza", "ukraine", "taiwan")}, {"gemini+groq"})
++        self.assertEqual((c["gaza"]["indicators"][0]["state"], c["ukraine"]["indicators"][0]["state"]), ("yes", "no"))
++
++    def test_cloudflare_and_groq_out_gives_gemini_plus_gptoss_never_gemini_twice(self):
++        update.cloudflare = lambda m, prompt, max_tokens=1200: (_ for _ in ()).throw(RuntimeError("Cloudflare HTTP 429: daily free allocation"))
++        model = fake_model_factory(self.mode)
++        def groq(m, prompt, max_tokens=900, json_mode=True, retries=2, total_timeout=None):
++            if "gpt-oss" in m:
++                return model(prompt)
++            raise RuntimeError("Groq 429")
++        update.groq = groq
++        update.gemini_chain = lambda prompt, max_tokens=900, json_mode=True: model(prompt)
++        update.main()
++        c = self.load()
++        self.assertEqual({c[i]["verified_by"] for i in ("gaza", "ukraine", "taiwan")}, {"gemini+gpt-oss"})
++
++    def test_everything_down_but_gemini_is_single_model_and_never_green(self):
++        update.cloudflare = lambda m, prompt, max_tokens=1200: (_ for _ in ()).throw(RuntimeError("Cloudflare HTTP 429: daily free allocation"))
++        update.groq = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("Groq 429"))
++        update.gemini_chain = lambda prompt, max_tokens=900, json_mode=True: fake_model_factory(self.mode)(prompt)
++        update.main()
++        c = self.load()
++        self.assertEqual(c["gaza"]["verified_by"], "gemini-only")
++        self.assertEqual(c["gaza"]["indicators"][0]["state"], "unknown")      # one model alone can never make a dot
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
