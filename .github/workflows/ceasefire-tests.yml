@@ -18,3 +18,9 @@ jobs:
 
       - name: Run integration test (update.py pipeline)
         run: python -m unittest tests.test_update_integration -v
+
+      - name: Run baseline tests (ceasefire option A)
+        run: python -m unittest tests.test_ceasefire_baseline -v
+
+      - name: Run hardening tests (dates, Cloudflare quota fallback, model independence)
+        run: python -m unittest tests.test_update_hardening -v

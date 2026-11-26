@@ -88,15 +88,18 @@ class EndToEnd(unittest.TestCase):
         model = fake_model_factory(self.mode)
         update.tavily = lambda q, depth="basic": fake_results(next(i for i in ("gaza", "ukraine", "taiwan") if i in q.lower()))
         update.cloudflare = lambda m, prompt, max_tokens=1200: model(prompt)
-        def groq(m, prompt, max_tokens=900, json_mode=True, retries=2):
+        def groq(m, prompt, max_tokens=900, json_mode=True, retries=2, total_timeout=None):
             if self.mode["cf_down"]:
                 raise RuntimeError("Groq 429")
             return model(prompt)
         update.groq = groq
         update.url_valid = lambda url, urls: True
         update.time.sleep = lambda s: None
+        self._saved_gemini_chain = update.gemini_chain      # default: no Gemini key -> fallback unavailable
+        update.gemini_chain = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("GEMINI_API_KEY not set"))
 
     def tearDown(self):
+        update.gemini_chain = self._saved_gemini_chain
         os.chdir(self.old)
         shutil.rmtree(self.tmp, ignore_errors=True)
 
@@ -109,6 +112,7 @@ class EndToEnd(unittest.TestCase):
         c = self.load()
         g = c["gaza"]["indicators"][0]
         self.assertEqual((g["state"], g["carried"]), ("yes", False))
+        self.assertEqual(c["gaza"]["verified_by"], "cloudflare+groq")      # provenance label unchanged on the normal path
         self.assertTrue(g["violations"])
         self.assertGreaterEqual(len({e["outlet"] for e in g["evidence"]}), 2)
         for e in g["evidence"]:
@@ -129,6 +133,62 @@ class EndToEnd(unittest.TestCase):
             it = c2[cid]["indicators"][0]
             self.assertEqual((it["state"], it["carried"]), (state, True))
             self.assertIn("Last confirmed", it["note"])
+
+    def test_baseline_keeps_dots_when_models_are_down(self):
+        """The situation in the real Actions log: Cloudflare/Groq quota gone, no strict verdict possible."""
+        today = datetime.now(timezone.utc).date().isoformat()
+        ev = lambda o: [{"outlet": o, "date": today, "url": f"https://{o}/a", "quote": "q"}] * 2
+        os.makedirs("config")
+        json.dump({"conflicts": {
+            "gaza": {"status": "yes", "violations": True, "verified": today, "subject": ["gaza"], "evidence": ev("a.com")},
+            "ukraine": {"status": "no", "verified": today, "subject": ["ukrain"], "evidence": ev("b.com")},
+        }}, open("config/ceasefire_baseline.json", "w"))
+        self.mode["cf_down"] = True            # Groq (model B) down; model A answers alone -> single_model
+        update.main()
+        c = self.load()
+        g, u = c["gaza"]["indicators"][0], c["ukraine"]["indicators"][0]
+        self.assertEqual((g["state"], g["basis"], g["violations"]), ("yes", "baseline", True))
+        self.assertEqual((u["state"], u["basis"]), ("no", "baseline"))
+        self.assertNotIn("indicators", c["taiwan"])
+        log = json.load(open("data/indicator_log.json"))
+        self.assertTrue(all(x["shown"] in ("yes", "no") and x["basis"] == "baseline" for x in log))
+        # a second run changes nothing and never flips
+        update.main()
+        c2 = self.load()
+        self.assertEqual([c2[i]["indicators"][0]["state"] for i in ("gaza", "ukraine")], ["yes", "no"])
+
+    def test_cloudflare_quota_gemini_replaces_A_and_label_is_honest(self):
+        """Cloudflare out of free neurons: researcher A becomes Gemini, B stays Groq; the run still verifies with two
+        different models and the published label names them."""
+        update.cloudflare = lambda m, prompt, max_tokens=1200: (_ for _ in ()).throw(
+            RuntimeError("Cloudflare HTTP 429: you have used up your daily free allocation of 10,000 neurons"))
+        update.gemini_chain = lambda prompt, max_tokens=900, json_mode=True: fake_model_factory(self.mode)(prompt)
+        update.main()
+        c = self.load()
+        self.assertEqual({c[i]["verified_by"] for i in ("gaza", "ukraine", "taiwan")}, {"gemini+groq"})
+        self.assertEqual((c["gaza"]["indicators"][0]["state"], c["ukraine"]["indicators"][0]["state"]), ("yes", "no"))
+
+    def test_cloudflare_and_groq_out_gives_gemini_plus_gptoss_never_gemini_twice(self):
+        update.cloudflare = lambda m, prompt, max_tokens=1200: (_ for _ in ()).throw(RuntimeError("Cloudflare HTTP 429: daily free allocation"))
+        model = fake_model_factory(self.mode)
+        def groq(m, prompt, max_tokens=900, json_mode=True, retries=2, total_timeout=None):
+            if "gpt-oss" in m:
+                return model(prompt)
+            raise RuntimeError("Groq 429")
+        update.groq = groq
+        update.gemini_chain = lambda prompt, max_tokens=900, json_mode=True: model(prompt)
+        update.main()
+        c = self.load()
+        self.assertEqual({c[i]["verified_by"] for i in ("gaza", "ukraine", "taiwan")}, {"gemini+gpt-oss"})
+
+    def test_everything_down_but_gemini_is_single_model_and_never_green(self):
+        update.cloudflare = lambda m, prompt, max_tokens=1200: (_ for _ in ()).throw(RuntimeError("Cloudflare HTTP 429: daily free allocation"))
+        update.groq = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("Groq 429"))
+        update.gemini_chain = lambda prompt, max_tokens=900, json_mode=True: fake_model_factory(self.mode)(prompt)
+        update.main()
+        c = self.load()
+        self.assertEqual(c["gaza"]["verified_by"], "gemini-only")
+        self.assertEqual(c["gaza"]["indicators"][0]["state"], "unknown")      # one model alone can never make a dot
 
 
 if __name__ == "__main__":

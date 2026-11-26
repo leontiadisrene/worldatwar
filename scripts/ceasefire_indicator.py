@@ -15,6 +15,13 @@ How a green or red dot is earned (all must hold, otherwise the dot is grey "unco
 A previous green/red is carried forward for at most 10 days when a run simply finds no new
 evidence (e.g. one model was rate-limited), but never when sources conflict or the models disagree.
 
+BASELINE MODE (config/ceasefire_baseline.json, option A): a human-verified, sourced status per conflict
+is the starting point and is HELD (up to `hold_days`, default 60) while nothing contradicts it:
+  * the live strict rule above can confirm it (refreshes the date) or, if it says the opposite,
+    start a pending flip that needs a second strict confirmation on a later run (>= 6 h, <= 3 days);
+  * tripwires turn the row grey as soon as fresh reporting points the other way (see `tripwire`);
+  * a standing status that is too old, or is being contested, is shown grey, never as fact.
+
 Nothing here can guarantee a number like "98% sure". It is tuned for precision at the cost of recall,
 and every decision is logged (data/indicator_log.json) so accuracy can be audited by sampling.
 """
@@ -34,6 +41,10 @@ EXCLUDED_CONFLICTS = {"taiwan", "korea", "scs", "caucasus"}  # no active hostili
 MAX_AGE_DAYS = 7
 NEWEST_MAX_AGE_DAYS = 4
 CARRY_DAYS = 10
+HOLD_DAYS = 60              # baseline mode: how long a standing status may be shown without re-confirmation
+PENDING_MIN_HOURS = 6       # a flip must be confirmed by a different (later) run
+PENDING_MAX_DAYS = 3
+TRIP_RELEASE_DAYS = 7       # a tripped row stays grey this long after the last contradicting report
 MAX_EVIDENCE = 16
 MAX_PER_RESULT = 3
 
@@ -188,11 +199,18 @@ def fetch_texts(results: list[dict], tier_fn, cap: int = 4, timeout: int = 6, bu
 
 
 # ---------------------------------------------------------------- evidence extraction
-def extract_evidence(results: list[dict], texts: dict[str, str], today: date, tier_fn) -> list[dict]:
-    """Ceasefire-related sentences from results that have a known date within MAX_AGE_DAYS."""
+def extract_evidence(results: list[dict], texts: dict[str, str], today: date, tier_fn, subject: list | None = None) -> list[dict]:
+    """Ceasefire-related sentences from results that have a known date within MAX_AGE_DAYS.
+    `subject` (optional): lowercase terms; a result is used only if its title, url or opening text names one,
+    so a sentence about another conflict can never decide this one."""
     items, seen = [], set()
+    terms = [t.lower() for t in (subject or []) if t]
     for r in results:
         url = r.get("url") or ""
+        if terms:
+            head = " ".join([r.get("title") or "", url, (r.get("content") or "")[:1500]]).lower()
+            if not any(t in head for t in terms):
+                continue
         pub = parse_date(r.get("published_date") or r.get("published") or "")
         if not url or pub is None:
             continue
@@ -310,29 +328,167 @@ NOTES = {
 }
 
 
-def build_indicator(prev: list | None, a: dict | None, b: dict | None, evid: list[dict], now_iso: str, today: date):
-    """Return (indicators_list, decision). The list is empty when the indicator does not apply."""
-    d = decide(a, b, evid)
+def _build_legacy(prev, d, now_iso: str, today: date):
+    """No baseline for this conflict: strict live rule plus a short carry-forward."""
     if d.state == "hidden":
-        return [], d
+        return []
     base = {"id": INDICATOR_ID, "label": "Ceasefire in force", "checked_at": now_iso}
     if d.state in ("yes", "no"):
         return [{**base, "state": d.state, "violations": d.violations, "carried": False,
-                 "last_confirmed": now_iso, "evidence": d.evidence, "note": ""}], d
+                 "last_confirmed": now_iso, "evidence": d.evidence, "note": ""}]
     prev_item = next((x for x in (prev or []) if isinstance(x, dict) and x.get("id") == INDICATOR_ID), None)
     if prev_item and d.reason in ("no_evidence", "single_model") and prev_item.get("state") in ("yes", "no"):
         lc = parse_date(prev_item.get("last_confirmed") or "")
         if lc and 0 <= (today - lc).days <= CARRY_DAYS:
             n = (today - lc).days
             return [{**prev_item, "checked_at": now_iso, "carried": True,
-                     "note": f"Last confirmed {n} day{'s' if n != 1 else ''} ago; no new confirming reports this run."}], d
+                     "note": f"Last confirmed {n} day{'s' if n != 1 else ''} ago; no new confirming reports this run."}]
     return [{**base, "state": "unknown", "violations": False, "carried": False,
              "last_confirmed": (prev_item or {}).get("last_confirmed"), "evidence": [],
-             "note": NOTES.get(d.reason, NOTES["no_evidence"])}], d
+             "note": NOTES.get(d.reason, NOTES["no_evidence"])}]
+
+
+def load_baseline(path: str) -> dict:
+    """{conflict_id: entry} from the maintainer-verified baseline file; {} if missing or broken (never raises)."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return {}
+    cons = data.get("conflicts") if isinstance(data, dict) else None
+    return {k: v for k, v in cons.items() if isinstance(v, dict)} if isinstance(cons, dict) else {}
+
+
+def tripwire(state: str, evid: list[dict]) -> bool:
+    """True when fresh reporting points the other way from the standing status `state` ('yes'|'no').
+    Deliberately easier to trip than the strict rule is to pass: a false trip only costs a grey dot."""
+    opp = "collapse" if state == "yes" else "holds"
+    fresh = [e for e in evid if e["polarity"] == opp and e["age"] <= NEWEST_MAX_AGE_DAYS]
+    if not fresh:
+        return False
+    origins = {e["origin"] for e in fresh}
+    if state == "yes":
+        return len(origins) >= 2 or any(e["tier"] in (1, 2) and _COLLAPSE_END.search(e["sentence"]) for e in fresh)
+    return len(origins) >= 2 and any(e["tier"] in (1, 2) for e in fresh)
+
+
+def _hours_between(a_iso: str, b_iso: str) -> float | None:
+    try:
+        a = datetime.fromisoformat(str(a_iso).replace("Z", "+00:00"))
+        b = datetime.fromisoformat(str(b_iso).replace("Z", "+00:00"))
+        if a.tzinfo is None:
+            a = a.replace(tzinfo=timezone.utc)
+        if b.tzinfo is None:
+            b = b.replace(tzinfo=timezone.utc)
+        return (b - a).total_seconds() / 3600
+    except ValueError:
+        return None
+
+
+def _standing(prev_item: dict | None, base: dict) -> dict | None:
+    """The status currently 'held': the previous result, or the baseline when the maintainer set a newer
+    (or, on the same day, a different) one. None when nothing yes/no is held."""
+    held = None
+    if prev_item:
+        src = prev_item if prev_item.get("state") in ("yes", "no") else (prev_item.get("prior") or {})
+        if src.get("state") in ("yes", "no"):
+            held = {"state": src["state"], "last_confirmed": src.get("last_confirmed"), "evidence": src.get("evidence") or [],
+                    "violations": bool(src.get("violations")), "basis": src.get("basis") or "live"}
+    seed = None
+    if base.get("status") in ("yes", "no") and parse_date(base.get("verified") or ""):
+        seed = {"state": base["status"], "last_confirmed": base["verified"], "evidence": base.get("evidence") or [],
+                "violations": bool(base.get("violations")), "basis": "baseline"}
+    if held and seed:
+        hl, sv = parse_date(held["last_confirmed"] or ""), parse_date(seed["last_confirmed"])
+        if hl is None or sv > hl or (sv == hl and seed["state"] != held["state"]):
+            return seed
+        return held
+    return held or seed
+
+
+def _pack(st: dict) -> dict:
+    return {k: st.get(k) for k in ("state", "last_confirmed", "evidence", "violations", "basis")}
+
+
+def _build_baseline(prev, d: Decision, evid: list[dict], now_iso: str, today: date, base: dict):
+    prev_item = next((x for x in (prev or []) if isinstance(x, dict) and x.get("id") == INDICATOR_ID), None)
+    st = _standing(prev_item, base)
+    try:
+        hold = int(base.get("hold_days", HOLD_DAYS))
+    except (TypeError, ValueError):
+        hold = HOLD_DAYS
+    head = {"id": INDICATOR_ID, "label": "Ceasefire in force", "checked_at": now_iso}
+    word = {"yes": "in force", "no": "not in force"}
+
+    def live(state):
+        return {**head, "state": state, "violations": d.violations, "carried": False, "basis": "live",
+                "last_confirmed": now_iso, "evidence": d.evidence, "note": ""}
+
+    def grey(note, **extra):
+        item = {**head, "state": "unknown", "violations": False, "carried": False, "basis": None,
+                "last_confirmed": (st or {}).get("last_confirmed") or (prev_item or {}).get("last_confirmed"),
+                "evidence": [], "note": note}
+        item.update(extra)
+        return [item]
+
+    pend = (prev_item or {}).get("pending") or {}
+    pend_age = _hours_between(pend.get("first_seen"), now_iso) if pend.get("first_seen") else None
+    pend_alive = bool(pend) and pend_age is not None and 0 <= pend_age <= PENDING_MAX_DAYS * 24
+
+    # 1. strict live verdict (both models + sources, see decide())
+    if d.state in ("yes", "no"):
+        if st is None or st["state"] == d.state:
+            return [live(d.state)]
+        if pend_alive and pend.get("state") == d.state and pend_age >= PENDING_MIN_HOURS:
+            item = live(d.state)
+            item["note"] = f"Changed from {word[st['state']]}; confirmed on two separate checks."
+            return [item]
+        first = pend["first_seen"] if pend_alive and pend.get("state") == d.state else now_iso
+        return grey(f"Recent reports say this changed (was: {word[st['state']]}). Waiting for a second confirmation before showing it.",
+                    prior=_pack(st), pending={"state": d.state, "first_seen": first, "evidence": d.evidence})
+
+    # 2. no strict verdict this run
+    if st is None:
+        if base.get("status") == "hidden":
+            return []
+        return grey(base.get("note") or NOTES.get(d.reason, NOTES["no_evidence"]))
+    lc = parse_date(st["last_confirmed"] or "")
+    age = (today - lc).days if lc else None
+    if age is None or age < 0 or age > hold:
+        return grey(f"The last verified status ({word[st['state']]}) is {age if age is not None else 'many'} days old and was not re-confirmed.")
+    if pend_alive:
+        return grey(f"Recent reports say this changed (was: {word[st['state']]}). Waiting for a second confirmation before showing it.",
+                    prior=_pack(st), pending=pend)
+    trip = prev_item.get("tripped") if prev_item else None
+    if tripwire(st["state"], evid):
+        return grey(f"Fresh reports may contradict the last verified status ({word[st['state']]}, {st['last_confirmed'][:10]}). Shown as unconfirmed until clarified.",
+                    prior=_pack(st), tripped={"first": (trip or {}).get("first") or now_iso, "last": now_iso})
+    if trip:
+        tl = parse_date(trip.get("last") or "")
+        if tl and 0 <= (today - tl).days < TRIP_RELEASE_DAYS:
+            return grey(f"Fresh reports may contradict the last verified status ({word[st['state']]}, {st['last_confirmed'][:10]}). Shown as unconfirmed until clarified.",
+                        prior=_pack(st), tripped=trip)
+    return [{**head, "state": st["state"], "violations": st["violations"], "carried": True, "basis": st["basis"],
+             "last_confirmed": st["last_confirmed"], "evidence": st["evidence"],
+             "note": f"Standing status, last verified {age} day{'s' if age != 1 else ''} ago; no contradicting reports."}]
+
+
+def build_indicator(prev: list | None, a: dict | None, b: dict | None, evid: list[dict], now_iso: str, today: date,
+                    baseline: dict | None = None):
+    """Return (indicators_list, decision). The list is empty when the indicator does not apply.
+    `baseline` is this conflict's entry from the baseline file; None keeps the original strict-only behaviour."""
+    d = decide(a, b, evid)
+    if baseline is None:
+        if d.state == "hidden":
+            return [], d
+        return _build_legacy(prev, d, now_iso, today), d
+    if d.state == "hidden":
+        d = Decision("unknown", "no_evidence")      # both models said N/A: not enough on its own to override a human baseline
+    return _build_baseline(prev, d, evid, now_iso, today, baseline), d
 
 
 # ---------------------------------------------------------------- audit log
-def log_decision(path: str, conflict_id: str, d: Decision, a, b, now_iso: str, keep: int = 1500):
+def log_decision(path: str, conflict_id: str, d: Decision, a, b, now_iso: str, keep: int = 1500, shown: list | None = None):
     try:
         try:
             with open(path, encoding="utf-8") as f:
@@ -343,6 +499,8 @@ def log_decision(path: str, conflict_id: str, d: Decision, a, b, now_iso: str, k
             log = []
         log.append({"at": now_iso, "conflict": conflict_id, "state": d.state, "reason": d.reason,
                     "model_a": _status(a), "model_b": _status(b),
+                    "shown": (shown[0].get("state") if shown else "hidden") if shown is not None else None,
+                    "basis": (shown[0].get("basis") if shown else None) if shown is not None else None,
                     "evidence": [{"url": e["url"], "date": e["date"], "quote": e["quote"]} for e in d.evidence]})
         with open(path, "w", encoding="utf-8") as f:
             json.dump(log[-keep:], f, indent=1, ensure_ascii=False)

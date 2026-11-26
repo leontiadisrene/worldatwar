@@ -586,7 +586,7 @@
         if (ev.length){
           var names = [];
           ev.forEach(function(e){ if (e.outlet && names.indexOf(e.outlet) < 0) names.push(e.outlet); });
-          parts.push('confirmed by ' + names.join(', '));
+          parts.push((ind.basis === 'baseline' ? 'based on ' : 'confirmed by ') + names.join(', '));
           var newest = ev.map(function(e){ return e.date || ''; }).sort().pop();
           if (newest) parts.push('newest report ' + fmtDay(newest));
         }

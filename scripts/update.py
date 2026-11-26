@@ -26,11 +26,12 @@ Date guards (event insertion, applied in this order):
     consume external verifier (scripts/verify_dates_free.py) queries.
   - Guard 0: queue event to data/pending_dates.json for external verification
     (scripts/verify_dates_free.py) if unquoted AND not rescued by URL override.
-  - Guard 2: reject events where the source article was published BEFORE the
-    claimed event date (impossible — can't report on something that hasn't
-    happened). Tolerates ±1 day for timezone differences.
+  - Guard 2: reject events where even the NEWEST source article was published
+    BEFORE the claimed event date (impossible — can't report on something that
+    hasn't happened). Tolerates ±1 day for timezone differences.
   - Guard 3: reject stale events older than 14 days (backstop for wrong-month errors)
 """
+import email.utils
 import json, os, re, time, hashlib, random, requests
 from collections import defaultdict
 from datetime import date, datetime, timezone, timedelta
@@ -365,35 +366,54 @@ def recent_events_for_prompt(history, conflict_name, days=21):
             rows.append(f"- {h['date']}: {h.get('title', '')}")
     return "\n".join(rows) if rows else "(none recorded recently)"
 
-def earliest_source_time_from_results(results):
-    """Extract the earliest published_date from Tavily results
-    to find when the story actually broke.
-    Returns (datetime_utc_or_None, source_metadata_or_None)."""
-    earliest = None
-    earliest_meta = None
-    for r in results:
-        pd = r.get('published_date') or r.get('published') or ''
-        if not pd or not isinstance(pd, str):
-            continue
+def parse_pub_date(v):
+    """Parse a search-result publication date into an aware UTC datetime, or None.
+
+    Tavily returns RFC-2822 ('Wed, 25 Nov 2026 18:53:38 GMT'); other sources use
+    ISO-8601 ('2026-11-25T18:53:38Z') or a bare date ('2026-11-25'). All three are
+    accepted. Anything else returns None (never raises)."""
+    if not v or not isinstance(v, str):
+        return None
+    v = v.strip()
+    try:
+        dt = datetime.fromisoformat(v.replace('Z', '+00:00'))
+    except ValueError:
         try:
-            dt = datetime.fromisoformat(pd.replace('Z', '+00:00'))
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-            elif dt.tzinfo != timezone.utc:
-                dt = dt.astimezone(timezone.utc)
-        except (ValueError, TypeError):
+            dt = email.utils.parsedate_to_datetime(v)
+        except (TypeError, ValueError, IndexError):
             try:
-                d = date.fromisoformat(pd[:10])
-                dt = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
-            except (ValueError, TypeError):
-                continue
-        if earliest is None or dt < earliest:
-            earliest = dt
-            earliest_meta = {
+                dt = datetime.combine(date.fromisoformat(v[:10]), datetime.min.time())
+            except ValueError:
+                return None
+    if dt is None:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
+def latest_source_time_from_results(results, now=None):
+    """Newest published_date among the Tavily results.
+
+    This is what the page shows as "Last update" (field `latest_source_time`) and
+    what Guard 2 compares event dates against: an event cannot be newer than the
+    newest article reporting it. Dates more than 1 day in the future are treated
+    as bad metadata and ignored.
+    Returns (datetime_utc_or_None, source_metadata_or_None)."""
+    now = now or datetime.now(timezone.utc)
+    latest = None
+    latest_meta = None
+    for r in results:
+        dt = parse_pub_date(r.get('published_date') or r.get('published') or '')
+        if dt is None or dt > now + timedelta(days=1):
+            continue
+        if latest is None or dt > latest:
+            latest = dt
+            latest_meta = {
                 "url": r.get('url', ''),
                 "title": (r.get('title') or '')[:100],
             }
-    return earliest, earliest_meta
+    return latest, latest_meta
 
 def extract_date_from_url(url):
     """Extract YYYY-MM-DD from news URL paths (e.g. /2026-11-16/)."""
@@ -596,7 +616,15 @@ def smooth_escalation(raw_score, prev_score, confidence, source_count):
 # ceasefire indicator. Its output passes through the same downstream
 # validation as the primary model.
 FALLBACK_PROVIDER = "gemini"
-FALLBACK_MODEL = "gemini-2.5-flash"
+# Gemini models are tried in this order; each has its own free-tier quota, and one that is
+# retired, not available to this key, or out of quota is skipped for the rest of the run.
+# gemini-2.5-flash is last because Google now serves it only to accounts that used it before.
+# Override without a code change: set the GEMINI_MODELS repository variable/env (comma-separated).
+GEMINI_MODELS = [m.strip() for m in (os.environ.get("GEMINI_MODELS") or
+    "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash-lite,gemini-2.5-flash").split(",")
+    if m.strip()]
+FALLBACK_MODEL = GEMINI_MODELS[0]
+GEMINI_MIN_OUTPUT_TOKENS = 4096   # Gemini counts hidden "thinking" tokens inside maxOutputTokens
 
 GROQ_MAX_ATTEMPTS = 5          # 1 initial request + 4 retries
 GROQ_INITIAL_BACKOFF = 2.0     # seconds
@@ -717,22 +745,66 @@ def groq(model, prompt, max_tokens=900, json_mode=True,
     )
 
 
+CF_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+CF_DAILY_NEURONS = 10000                  # Workers AI free allocation per day
+CF_NEURONS_PER_M = (26668, 204805)        # neurons per 1M input / output tokens for CF_MODEL (Cloudflare pricing page)
+CF_STATE = {"dead": "", "calls": 0, "tokens_in": 0, "tokens_out": 0}
+
+
+def _cf_quota_error(text):
+    t = (text or "").lower()
+    return "daily free allocation" in t or '"code":4006' in t.replace(" ", "")
+
+
+def cloudflare_neurons_used():
+    return (CF_STATE["tokens_in"] * CF_NEURONS_PER_M[0] + CF_STATE["tokens_out"] * CF_NEURONS_PER_M[1]) / 1e6
+
+
 def cloudflare(model, prompt, max_tokens=1200):
-    r = requests.post(
-        f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCT}/ai/run/{model}",
-        headers={"Authorization": f"Bearer {CF_TOKEN}", "Content-Type": "application/json"},
-        json={"messages": [{"role": "user", "content": prompt}], "max_tokens": max_tokens},
-        timeout=120,
-    )
-    if not r.ok:
-        raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
-    body = r.json()
-    if not body.get("success"):
-        raise RuntimeError(f"CF error: {body.get('errors')}")
-    result = body["result"]["response"]
-    if isinstance(result, (dict, list)):
-        return result
-    return parse_json(result)
+    """Cloudflare Workers AI (researcher A). Once Cloudflare says the daily free allocation is
+    used up, it is not called again in this run (the caller falls back to another model family)."""
+    if CF_STATE["dead"]:
+        raise RuntimeError(f"Cloudflare skipped: {CF_STATE['dead']}")
+    last = None
+    for attempt in range(3):
+        try:
+            r = requests.post(
+                f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCT}/ai/run/{model}",
+                headers={"Authorization": f"Bearer {CF_TOKEN}", "Content-Type": "application/json"},
+                json={"messages": [{"role": "user", "content": prompt}], "max_tokens": max_tokens},
+                timeout=120,
+            )
+        except (requests.Timeout, requests.ConnectionError) as e:
+            last = RuntimeError(f"Cloudflare network error: {e}")
+        else:
+            if not r.ok and _cf_quota_error(r.text):
+                CF_STATE["dead"] = (f"daily free allocation ({CF_DAILY_NEURONS:,} neurons) used up; "
+                                    f"not used again this run, resets 00:00 UTC")
+                raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
+            if r.status_code == 429 or 500 <= r.status_code < 600:
+                last = RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
+            elif not r.ok:
+                raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:200]}")
+            else:
+                body = r.json()
+                if not body.get("success"):
+                    raise RuntimeError(f"CF error: {body.get('errors')}")
+                try:
+                    u = (body.get("result") or {}).get("usage") or {}
+                    CF_STATE["calls"] += 1
+                    CF_STATE["tokens_in"] += int(u.get("prompt_tokens") or 0)
+                    CF_STATE["tokens_out"] += int(u.get("completion_tokens") or 0)
+                except (TypeError, ValueError):
+                    pass
+                result = body["result"]["response"]
+                if isinstance(result, (dict, list)):
+                    return result
+                return parse_json(result)
+        if attempt < 2:
+            wait = _backoff_seconds(attempt)
+            print(f"  cloudflare transient error, waiting {wait:.1f}s (attempt {attempt + 1}/3): {last}")
+            time.sleep(wait)
+    raise last
 
 
 def gemini(model, prompt, max_tokens=900, json_mode=True):
@@ -795,6 +867,47 @@ def gemini(model, prompt, max_tokens=900, json_mode=True):
     return parse_json(text)
 
 
+_GEMINI_DEAD = {}   # model -> reason; models unusable for the rest of this run
+
+
+def gemini_chain(prompt, max_tokens=900, json_mode=True):
+    """Try each model in GEMINI_MODELS until one answers. A model that is retired / not available to
+    this key (403/404) or still rate-limited after its retries (429) is skipped for the rest of the run."""
+    if not GEMINI_API_KEY:
+        raise RuntimeError("GEMINI_API_KEY not set")
+    errors = []
+    for m in GEMINI_MODELS:
+        if m in _GEMINI_DEAD:
+            continue
+        try:
+            out = gemini(m, prompt, max_tokens=max(GEMINI_MIN_OUTPUT_TOKENS, max_tokens), json_mode=json_mode)
+            print(f"  gemini answered with {m}")
+            return out
+        except Exception as e:
+            msg = str(e)
+            errors.append(f"{m}: {msg[:120]}")
+            if re.search(r"HTTP (403|404|429)\b", msg):
+                _GEMINI_DEAD[m] = msg[:120]
+    raise RuntimeError("all Gemini models failed (" + "; ".join(errors) + ")" if errors
+                       else "all Gemini models were unavailable earlier in this run")
+
+
+def groq_with_fallback_src(model, prompt, max_tokens=900, json_mode=True):
+    """Like groq_with_fallback() but returns (result, source) with source 'groq' or 'gemini', so the
+    published provenance label names the model that actually answered."""
+    try:
+        return groq(model, prompt, max_tokens=max_tokens, json_mode=json_mode), "groq"
+    except Exception as e:
+        print(f"  groq {model} failed: {e}; trying Gemini fallback")
+        try:
+            return gemini_chain(prompt, max_tokens=max_tokens, json_mode=json_mode), "gemini"
+        except Exception as fallback_error:
+            raise RuntimeError(
+                f"Primary model {model} failed ({e}); Gemini fallback "
+                f"also failed ({fallback_error})"
+            ) from fallback_error
+
+
 def groq_with_fallback(model, prompt, max_tokens=900, json_mode=True):
     """Call the requested Groq model, then use the configured free fallback.
 
@@ -802,23 +915,54 @@ def groq_with_fallback(model, prompt, max_tokens=900, json_mode=True):
     subjected to the same source, date, duplicate, confidence, and ceasefire
     validation as a primary-model result.
     """
-    try:
-        return groq(model, prompt, max_tokens=max_tokens, json_mode=json_mode)
-    except Exception as e:
-        print(f"  groq {model} failed: {e}; trying Gemini fallback "
-              f"({FALLBACK_MODEL})")
+    return groq_with_fallback_src(model, prompt, max_tokens=max_tokens, json_mode=json_mode)[0]
+
+
+# ---------- researchers A and B ----------
+RUN_SOFT_DEADLINE_S = 22 * 60   # stop starting new conflicts after this; data is saved after the loop
+QWEN_MODEL = "qwen/qwen3.8-27b"
+GPTOSS_MODEL = "openai/gpt-oss-120b"
+# Independent model lineages. A and B must come from DIFFERENT families for the same conflict, otherwise
+# "both models agree" would just be one model agreeing with itself.
+FAMILY = {"cloudflare": "llama", "groq": "qwen", "gemini": "gemini", "gpt-oss": "gpt-oss"}
+
+
+def run_researcher(role, prompt, taken):
+    """Run researcher A or B; returns (result_dict, source). Raises if every option failed.
+
+    A: Cloudflare Llama  -> Gemini        -> Groq gpt-oss
+    B: Groq Qwen         -> Gemini        -> Groq gpt-oss
+    Families already used for this conflict (`taken`) are skipped, so A and B can never be the same model;
+    the chosen family is added to `taken`."""
+    gptoss = lambda: groq(GPTOSS_MODEL, prompt, max_tokens=2500, json_mode=False, retries=1, total_timeout=90)
+    if role == "A":
+        steps = [("cloudflare", lambda: cloudflare(CF_MODEL, prompt)),
+                 ("gemini", lambda: gemini_chain(prompt, max_tokens=1200)),
+                 ("gpt-oss", gptoss)]
+    else:
+        steps = [("groq", lambda: groq(QWEN_MODEL, prompt, max_tokens=900)),
+                 ("gemini", lambda: gemini_chain(prompt, max_tokens=900)),
+                 ("gpt-oss", gptoss)]
+    errors = []
+    for src, fn in steps:
+        if FAMILY[src] in taken:
+            continue
+        if src == "cloudflare" and CF_STATE["dead"]:
+            errors.append("cloudflare: skipped (daily allocation used up)")
+            continue
         try:
-            return gemini(
-                FALLBACK_MODEL,
-                prompt,
-                max_tokens=max(1200, max_tokens),
-                json_mode=json_mode,
-            )
-        except Exception as fallback_error:
-            raise RuntimeError(
-                f"Primary model {model} failed ({e}); Gemini fallback "
-                f"also failed ({fallback_error})"
-            ) from fallback_error
+            res = fn()
+        except Exception as e:
+            errors.append(f"{src}: {str(e)[:160]}")
+            print(f"  researcher {role}: {src} failed: {str(e)[:200]}")
+            continue
+        if not isinstance(res, dict):
+            errors.append(f"{src}: returned {type(res).__name__}, expected an object")
+            print(f"  researcher {role}: {src} returned a non-object; ignored")
+            continue
+        taken.add(FAMILY[src])
+        return res, src
+    raise RuntimeError("; ".join(errors) or "no model available")
 
 # ---------- prompts ----------
 SCHEMA = """{
@@ -1135,7 +1279,13 @@ def main():
     ev_reached_time_check = 0
     ev_model_time = 0
     ev_time_kept = 0
+    researcher_counts = {"A": defaultdict(int), "B": defaultdict(int)}
+    run_started = time.monotonic()
     for i, c in enumerate(conflicts):
+        if time.monotonic() - run_started > RUN_SOFT_DEADLINE_S:
+            print(f"STOP: time budget of {RUN_SOFT_DEADLINE_S // 60} min reached; the remaining "
+                  f"{len(conflicts) - i} conflict(s) keep their previous data (the job timeout is 30 min)")
+            break
         use_adv = (i < advanced_count)
         depth = "advanced" if use_adv else "basic"
         try:
@@ -1161,21 +1311,12 @@ def main():
             url_to_pub_date = {}
             for r in results:
                 u = r.get('url')
-                pd = r.get('published_date') or r.get('published') or ''
-                if u and pd:
-                    try:
-                        dt = datetime.fromisoformat(pd.replace('Z', '+00:00'))
-                        if dt.tzinfo is None:
-                            dt = dt.replace(tzinfo=timezone.utc)
-                        url_to_pub_date[u.split('?')[0].rstrip('/')] = dt.date()
-                    except (ValueError, TypeError):
-                        try:
-                            url_to_pub_date[u.split('?')[0].rstrip('/')] = date.fromisoformat(pd[:10])
-                        except (ValueError, TypeError):
-                            pass
+                pdt = parse_pub_date(r.get('published_date') or r.get('published') or '')
+                if u and pdt:
+                    url_to_pub_date[u.split('?')[0].rstrip('/')] = pdt.date()
 
-            # Capture the earliest source publish time (when the story broke)
-            src_time, src_meta = earliest_source_time_from_results(results)
+            # Capture the NEWEST source publish time (shown as "Last update"; also used by Guard 2)
+            src_time, src_meta = latest_source_time_from_results(results)
             if src_time:
                 c["latest_source_time"] = src_time.isoformat(timespec="seconds")
                 if src_meta:
@@ -1205,28 +1346,33 @@ def main():
             # --- Ceasefire indicator evidence: sentences copied by code from the results above
             #     (+ optional free page downloads). No extra Tavily credits are used. ---
             cf_on = c.get("id") not in cfi.EXCLUDED_CONFLICTS
+            cf_entry = cfi.load_baseline("config/ceasefire_baseline.json").get(c.get("id"))  # None -> strict-only mode
             cf_evid, cf_block = [], ""
             if cf_on:
                 cf_texts = cfi.fetch_texts(results, tier_of) if os.environ.get("CEASEFIRE_FETCH", "1") == "1" else {}
-                cf_evid = cfi.extract_evidence(results, cf_texts, datetime.now(timezone.utc).date(), tier_of)
+                cf_evid = cfi.extract_evidence(results, cf_texts, datetime.now(timezone.utc).date(), tier_of,
+                                                subject=(cf_entry or {}).get("subject"))
                 cf_block = cfi.prompt_block(cf_evid)
             prompt = research_prompt(c, results, recent, prev_escalation, cf_block)
 
-            a = None
+            # Researchers A and B come from different model families (see run_researcher). If Cloudflare is
+            # out of daily quota, A is Gemini (or Groq gpt-oss) instead; the label below names who answered.
+            taken = set()
+            a, a_src = None, None
             try:
-                a = cloudflare("@cf/meta/llama-3.3-70b-instruct-fp8-fast", prompt)
+                a, a_src = run_researcher("A", prompt, taken)
+                researcher_counts["A"][a_src] += 1
                 time.sleep(1.0)
             except Exception as e:
-                print(f"  cloudflare failed for {c['name']}: {e}")
+                print(f"  researcher A failed for {c['name']}: {e}")
 
-            b = None
+            b, b_src = None, None
             try:
-                b = groq_with_fallback(
-                    "qwen/qwen3.8-27b", prompt, max_tokens=900
-                )
+                b, b_src = run_researcher("B", prompt, taken)
+                researcher_counts["B"][b_src] += 1
                 time.sleep(8.0)
             except Exception as e:
-                print(f"  groq failed for {c['name']}: {e}")
+                print(f"  researcher B failed for {c['name']}: {e}")
                 time.sleep(8.0)
 
             if a is None and b is None:
@@ -1234,27 +1380,28 @@ def main():
                 continue
 
             if a is None:
-                final, verified = b, "groq-only"
+                final, verified = b, f"{b_src}-only"
             elif b is None:
-                final, verified = a, "cloudflare-only"
+                final, verified = a, f"{a_src}-only"
             else:
+                pair = f"{a_src}+{b_src}"
                 flags = compare(a, b)
                 if flags:
                     print(f"  review {c['name']}: {flags}")
                     try:
-                        final = groq_with_fallback(
+                        final, rev_src = groq_with_fallback_src(
                             "openai/gpt-oss-120b",
                             review_prompt(c, results, a, b, flags, recent, prev_escalation),
                             max_tokens=2000,
                             json_mode=False,
                         )
                         time.sleep(8.0)
-                        verified = "cloudflare+groq+groq-review"
+                        verified = f"{pair}+{rev_src}-review"
                     except Exception as e:
                         print(f"  reviewer failed for {c['name']}: {e}; using A")
-                        final, verified = a, "cloudflare+groq (no review)"
+                        final, verified = a, f"{pair} (no review)"
                 else:
-                    final, verified = a, "cloudflare+groq"
+                    final, verified = a, pair
 
             if not isinstance(final, dict) or "current" not in final:
                 print(f"SKIP {c['name']}: final output missing 'current'")
@@ -1286,13 +1433,18 @@ def main():
                 run_now = datetime.now(timezone.utc)
                 cf_a = a.get("ceasefire") if isinstance(a, dict) else None
                 cf_b = b.get("ceasefire") if isinstance(b, dict) else None
+                if a_src and b_src and FAMILY.get(a_src) == FAMILY.get(b_src):
+                    cf_b = None     # one model must never "agree" with itself (cannot happen by construction)
                 inds, cf_dec = cfi.build_indicator(c.get("indicators"), cf_a, cf_b, cf_evid,
-                                                   run_now.isoformat(timespec="seconds"), run_now.date())
+                                                   run_now.isoformat(timespec="seconds"), run_now.date(),
+                                                   baseline=cf_entry)
                 c["indicators"] = inds
                 cfi.log_decision("data/indicator_log.json", c["id"], cf_dec, cf_a, cf_b,
-                                 run_now.isoformat(timespec="seconds"))
-                print(f"  ceasefire indicator for {c['name']}: {cf_dec.state} ({cf_dec.reason or 'n/a'}, "
-                      f"{len(cf_evid)} candidate sentences)")
+                                 run_now.isoformat(timespec="seconds"), shown=inds)
+                shown = inds[0] if inds else {}
+                print(f"  ceasefire indicator for {c['name']}: live={cf_dec.state} ({cf_dec.reason or 'n/a'}, "
+                      f"{len(cf_evid)} candidate sentences); shown={shown.get('state', 'hidden')}"
+                      f"{' (' + str(shown.get('basis')) + ')' if shown.get('basis') else ''}")
 
             # --- Perspective (no smoothing, save as-is if model returned it) ---
             persp = final.get("perspective")
@@ -1407,9 +1559,10 @@ def main():
                 except (ValueError, TypeError):
                     continue
 
-                # Guard 2: reject if the source article was published BEFORE the
-                # claimed event date (impossible — can't report on something that
-                # hasn't happened). Tolerates ±1 day for timezone differences.
+                # Guard 2: reject if even the NEWEST source article was published
+                # BEFORE the claimed event date (impossible — can't report on
+                # something that hasn't happened). Tolerates ±1 day for timezone
+                # differences. (src_time = newest published_date in the results.)
                 if src_time and src_time.date() < (ev_d - timedelta(days=1)):
                     date_rejections += 1
                     print(f"  rejected impossible-date event for {c['name']}: "
@@ -1528,6 +1681,14 @@ def main():
           f"had a model-reported time; {ev_time_kept} passed the verification gate")
     print(f"Tavily total: {usage['credits_used']}/{usage['cycle_budget']} credits, "
           f"advanced days done: {usage['advanced_days_done']}")
+    for role in ("A", "B"):
+        counts = ", ".join(f"{k} {v}" for k, v in sorted(researcher_counts[role].items())) or "none"
+        print(f"Researcher {role} answered by: {counts}")
+    print(f"Cloudflare: {CF_STATE['calls']} call(s), about {cloudflare_neurons_used():,.0f} of "
+          f"{CF_DAILY_NEURONS:,} free neurons/day used by this run"
+          + (f"; STOPPED: {CF_STATE['dead']}" if CF_STATE["dead"] else ""))
+    if _GEMINI_DEAD:
+        print("Gemini models skipped this run: " + "; ".join(f"{m} ({r})" for m, r in _GEMINI_DEAD.items()))
 
 if __name__ == "__main__":
     main()

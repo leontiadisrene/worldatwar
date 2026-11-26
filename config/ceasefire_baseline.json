@@ -1,0 +1,84 @@
+{
+  "_readme": [
+    "Human-verified starting point for the 'Ceasefire in force' indicator (option A). Read by scripts/update.py via scripts/ceasefire_indicator.py.",
+    "status: yes | no | unknown | hidden.  yes/no = shown as green/red and HELD up to hold_days (default 60) while nothing contradicts it.  unknown = grey until the live check (both AI models + 2 independent sources) can say.  hidden = row not shown.",
+    "verified: the date YOU checked it (YYYY-MM-DD). To change a status later: edit status, evidence and verified (set verified to today). A newer baseline always overrides the stored result.",
+    "evidence: exact quotes copied from the cited pages (shown to visitors under 'Show the sentences behind this').",
+    "subject: lowercase words; only search results whose title/url/opening text contain one of them can influence this conflict's live check.",
+    "Re-verify every entry at least every 60 days: after that the row turns grey on its own."
+  ],
+  "conflicts": {
+    "gaza": {
+      "status": "yes", "violations": true, "verified": "2026-11-25", "hold_days": 60,
+      "subject": ["gaza", "hamas"],
+      "evidence": [
+        {"outlet": "aljazeera.com", "date": "2026-11-18", "url": "https://www.aljazeera.com/news/2026/11/18/board-of-peace-warns-gaza-ceasefire-faces-imminent-collapse-without-action", "quote": "The ceasefire formally began on October 10, 2025, though attacks have continued since."},
+        {"outlet": "adn.com (AP)", "date": "2026-10-10", "url": "https://www.adn.com/nation-world/2026/10/10/a-us-brokered-ceasefire-was-supposed-to-end-the-war-in-gaza-a-year-later-progress-has-stalled/", "quote": "It’s been a year since a ceasefire deal brokered by U.S. President Donald Trump"}
+      ]
+    },
+    "thaicambodia": {
+      "status": "yes", "violations": true, "verified": "2026-11-25", "hold_days": 60,
+      "subject": ["thai", "cambod"],
+      "evidence": [
+        {"outlet": "asianews.network (Straits Times)", "date": "2026-11-25", "url": "https://asianews.network/asean-sec-gen-warns-of-renewed-thai-cambodian-clashes-upbeat-on-finalising-south-china-sea-pact/", "quote": "A ceasefire reached on Dec 27 that year has largely held, though both sides have accused each other of violations."},
+        {"outlet": "csis.org", "date": "2026-10-29", "url": "https://www.csis.org/blogs/latest-southeast-asia/latest-southeast-asia-thailand-cambodia-disputes-ongoing-one-year-after", "quote": "a second ceasefire was reached after three weeks of fighting and remains in place."}
+      ]
+    },
+    "ukraine": {
+      "status": "no", "verified": "2026-11-25", "hold_days": 60,
+      "subject": ["ukrain", "kyiv", "kiev", "zelensk", "donbas", "donetsk", "kharkiv"],
+      "evidence": [
+        {"outlet": "aljazeera.com", "date": "2026-11-17", "url": "https://aljazeera.com/news/2026/11/17/ukraine-holds-peace-talks-with-us-europe-as-conflict-escalates", "quote": "Those negotiations produced an agreement on a prisoner exchange but no breakthrough on ending the war."},
+        {"outlet": "cp24.com (AP)", "date": "2026-11-12", "url": "https://cp24.com/news/world/2026/11/12/us-envoys-go-to-meet-putin-at-the-kremlin-following-ukraine-talks-in-abu-dhabi", "quote": "Amid the negotiations, fighting continues along the 1,200-kilometre (about 750-mile) front line."}
+      ]
+    },
+    "sudan": {
+      "status": "no", "verified": "2026-11-25", "hold_days": 60,
+      "subject": ["sudan", "rsf", "darfur", "khartoum", "kordofan"],
+      "evidence": [
+        {"outlet": "thenationalnews.com", "date": "2026-11-25", "url": "https://www.thenationalnews.com/news/mena/2026/11/25/sudan-war-grinds-on-with-rsf-seeking-to-stretch-safs-resources-thin/", "quote": "insisting on continuing with the war until the RSF is defeated or surrenders."},
+        {"outlet": "hngn.com", "date": "2026-11-19", "url": "https://www.hngn.com/articles/273887/20261119/sudans-army-advances-kordofan-drone-strikes-kill-civilians.htm", "quote": "army chief Gen. Abdel Fattah al-Burhan has vowed to keep fighting until the RSF is defeated"}
+      ]
+    },
+    "horn": {
+      "status": "no", "verified": "2026-11-25", "hold_days": 45,
+      "subject": ["ethiopia", "eritrea", "tigray", "tplf", "amhara", "fano", "somali", "shabaab"],
+      "evidence": [
+        {"outlet": "allafrica.com", "date": "2026-11-18", "url": "https://allafrica.com/stories/202611180081.html", "quote": "fresh clashes in the contested Ethiopia-Eritrea border area have raised fears of a full-fledged war"},
+        {"outlet": "criticalthreats.org", "date": "2026-11-17", "url": "https://www.criticalthreats.org/briefs/ethiopia-war-security-review/november-17-2026", "quote": "Ethiopian federal and Tigray People's Liberation Front (TPLF) forces reportedly clashed in multiple locations"}
+      ]
+    },
+    "myanmar": {
+      "status": "no", "verified": "2026-11-25", "hold_days": 45,
+      "subject": ["myanmar", "burma", "junta", "tatmadaw"],
+      "evidence": [
+        {"outlet": "bdnews24.com (Reuters)", "date": "2026-11-02", "url": "https://bdnews24.com/neighbours/bmhno6ypnb", "quote": "But his forces are struggling to dislodge opposition groups and increasingly rely on airstrikes"},
+        {"outlet": "moemaka.net", "date": "2026-07-28", "url": "https://moemaka.net/eng/2026/07/war-ceasefires-and-peace-talks/", "quote": "The offer was extended only to ethnic armed organizations and excluded the National Unity Government (NUG)."}
+      ]
+    },
+    "iran": {
+      "status": "unknown", "verified": "2026-11-25",
+      "subject": ["iran", "tehran", "hormuz"],
+      "note": "Informal standoff with intermittent attacks; no formal ceasefire reported. Left unconfirmed on purpose."
+    },
+    "drc": {
+      "status": "unknown", "verified": "2026-11-25",
+      "subject": ["congo", "drc", "m23", "goma", "kivu"],
+      "note": "Doha framework signed, but fighting continues and recent reporting does not say whether a ceasefire is in force."
+    },
+    "mali": {
+      "status": "unknown", "verified": "2026-11-25",
+      "subject": ["mali", "jnim", "bamako", "sahel"],
+      "note": "Not verified from recent sources; left unconfirmed."
+    },
+    "kashmir": {
+      "status": "unknown", "verified": "2026-11-25",
+      "subject": ["kashmir", "pahalgam", "line of control"],
+      "note": "Not verified from recent sources; left unconfirmed."
+    },
+    "venezuela": {
+      "status": "hidden", "verified": "2026-11-25",
+      "subject": ["venezuela", "maduro", "caracas"]
+    }
+  }
+}

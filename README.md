@@ -73,6 +73,8 @@ Every conflict panel shows a provenance line beneath its sources:
 |---|---|
 | `cloudflare+groq` | Both researchers agreed. Source gate passed. |
 | `cloudflare+groq+groq-review` | Researchers disagreed; the reviewer resolved it against the raw evidence. |
+| `gemini+groq`, `cloudflare+gemini`, `gemini+gpt-oss`, ... | Same as above, but one researcher was replaced by an independent fallback model because the usual one was out of free quota. The two researchers are always different model families. |
+| `<model>-only` | Only one researcher answered (e.g. `groq-only`). |
 | `Manually curated` | Seed entry, not yet refreshed by the pipeline. |
 
 The `confidence` field comes from the model's own assessment of how
