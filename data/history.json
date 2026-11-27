@@ -9,13 +9,13 @@
     "source": "auto"
   },
   {
-    "id": "4d3bc25ae1ac",
+    "id": "f5f9bc042565",
     "date": "2026-11-26",
     "conflict": "Gaza",
     "tier": "war",
-    "title": "Israeli airstrikes kill nine Palestinians",
-    "description": "Israeli airstrikes and gunfire killed at least nine Palestinians in Gaza, including a deputy minister of education.",
-    "source": "auto"
+    "title": "Israeli airstrike kills at least nine Palestinians, including Hamas official",
+    "description": "BBC reported the strike killed at least nine people, among them a deputy minister of education. Hamas sources said a Hamas political official and his wife were also among the dead, confirming it was the same Israeli airstrike in Gaza.",
+    "source": "merged"
   },
   {
     "id": "8518a2296208",
@@ -72,15 +72,6 @@
     "source": "auto"
   },
   {
-    "id": "78af8a03c0c2",
-    "date": "2026-11-26",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Hamas official and wife among eight Palestinians killed",
-    "description": "Israeli strikes on Gaza killed a Hamas political official and his wife, among eight Palestinians killed in the attack.",
-    "source": "auto"
-  },
-  {
     "id": "153b178a5dd2",
     "date": "2026-11-26",
     "conflict": "Iran",
@@ -123,6 +114,15 @@
     "tier": "flash",
     "title": "India tells US to resolve tariff concerns in trade talks",
     "description": "India asked the United States to settle tariff issues before trade talks can move forward, noting delays in negotiations.",
+    "source": "auto"
+  },
+  {
+    "id": "8f1106936bfa",
+    "date": "2026-11-26",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Ethiopia‑Eritrea border clashes",
+    "description": "Conflict monitors reported overnight clashes as both sides continued to amass troops along the border.",
     "source": "auto"
   },
   {
@@ -711,6 +711,15 @@
     "source": "auto"
   },
   {
+    "id": "abe7a724f5e0",
+    "date": "2026-11-22",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Zelensky warns of major Russian attack",
+    "description": "Ukrainian President Volodymyr Zelensky warned of a major Russian attack looming, while US President Trump urged Putin to 'pull back'.",
+    "source": "auto"
+  },
+  {
     "id": "186df4fa7116",
     "date": "2026-11-21",
     "conflict": "Gaza",
@@ -789,6 +798,24 @@
     "tier": "flash",
     "title": "Mass displacement in southern Ethiopia",
     "description": "According to Islamic Relief, fighting sparked by a dispute over control of the town of Moyale has displaced around 700,000 people. The clashes between Oromo and Ethiopian Somali communities began in late October.",
+    "source": "auto"
+  },
+  {
+    "id": "f86c2162d2e9",
+    "date": "2026-11-21",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Bahrain industrial site strike and Hormuz tanker hits",
+    "description": "Bahrain accused Iran of striking a civilian industrial facility, causing a fire but no casualties, while two tankers were hit in the Strait of Hormuz, one reportedly struck on the stern by an unknown projectile.",
+    "source": "auto"
+  },
+  {
+    "id": "8f329d2f373c",
+    "date": "2026-11-21",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Ebola Jab Trials Announcement",
+    "description": "The World Health Organization (WHO) announced that strain-specific Ebola jab trials will start in the DR Congo next week.",
     "source": "auto"
   },
   {
@@ -1071,13 +1098,13 @@
     "source": "auto"
   },
   {
-    "id": "c4200532ee06",
+    "id": "408842a927f9",
     "date": "2026-11-18",
     "conflict": "Gaza",
     "tier": "war",
-    "title": "Israeli strike on residential building",
-    "description": "Airstrike on a residential building in Gaza killed at least eight people (BBC) and reportedly up to 13 (France 24).",
-    "source": "auto"
+    "title": "Israeli ground offensive and residential airstrike in central Gaza",
+    "description": "Israeli forces launched a large‑scale ground offensive west of the Yellow Line in central Gaza, advancing tanks, seizing parts of the Nuseirat and Bureij refugee camps and ordering evacuations, which displaced about 6,000 residents and closed Salah al‑Din Street. At the same time an airstrike hit a residential building, killing at least eight people (BBC) and possibly up to 13 (France 24). Hamas denounced the incursion as a cease‑fire breach, while the Israeli military said Hamas had violated the agreement.",
+    "source": "merged"
   },
   {
     "id": "e7b3cc70b648",
@@ -1188,15 +1215,6 @@
     "source": "auto"
   },
   {
-    "id": "997ff292ca86",
-    "date": "2026-11-18",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Israeli ground offensive in central Gaza",
-    "description": "Israeli forces launched a ground operation, advancing tanks west of the Yellow Line and issuing evacuation orders.",
-    "source": "auto"
-  },
-  {
     "id": "aaded574d61a",
     "date": "2026-11-18",
     "conflict": "E. DR Congo",
@@ -1215,39 +1233,12 @@
     "source": "auto"
   },
   {
-    "id": "c044600cf074",
-    "date": "2026-11-18",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Israeli ground operation",
-    "description": "Israeli forces launch ground operation in central Gaza",
-    "source": "auto"
-  },
-  {
     "id": "7435fc7ab3a2",
     "date": "2026-11-18",
     "conflict": "E. DR Congo",
     "tier": "war",
     "title": "Ebola cases double in DR Congo",
     "description": "The current outbreak has resulted in 5,568 deaths out of 11,376 confirmed cases",
-    "source": "auto"
-  },
-  {
-    "id": "497ad828582a",
-    "date": "2026-11-18",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "Israeli ground offensive",
-    "description": "Israeli forces launched a ground offensive in central Gaza, attacking refugee camps and killing several Palestinians.",
-    "source": "auto"
-  },
-  {
-    "id": "79ad3de8ac0b",
-    "date": "2026-11-18",
-    "conflict": "Gaza",
-    "tier": "war",
-    "title": "IDF ground operation near Nuseirat and Bureij",
-    "description": "The Israeli military launched a ground operation near the Nuseirat and Bureij refugee camps, west of the 'Yellow Line'. This action displaced about 6,000 Palestinians and led to the closure of Salah al-Din Street. Hamas condemned the incursion as a ceasefire violation, while the Israeli military accused Hamas of violating the agreement.",
     "source": "auto"
   },
   {
@@ -1473,6 +1464,15 @@
     "tier": "war",
     "title": "Francophonie Summit Leadership Vote Postponed",
     "description": "Election of the new Francophonie chief was delayed on Monday due to the DRC‑Rwanda dispute.",
+    "source": "auto"
+  },
+  {
+    "id": "2a497b8a78df",
+    "date": "2026-11-16",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Israeli ground operation near Nuseirat and Bureij refugee camps",
+    "description": "The Israeli military launched a ground operation near the Nuseirat and Bureij refugee camps, west of the “Yellow Line”, and closed Salah al‑Din Street, displacing around 6,000 Palestinians.",
     "source": "auto"
   },
   {
