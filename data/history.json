@@ -63,6 +63,69 @@
     "source": "auto"
   },
   {
+    "id": "bd49e9071499",
+    "date": "2026-11-26",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine drone attack on Russian oil facilities",
+    "description": "Ukraine launched a drone attack on two Russian oil facilities and an air field in Volgograd Oblast, according to the Ukrainian General Staff.",
+    "source": "auto"
+  },
+  {
+    "id": "78af8a03c0c2",
+    "date": "2026-11-26",
+    "conflict": "Gaza",
+    "tier": "war",
+    "title": "Hamas official and wife among eight Palestinians killed",
+    "description": "Israeli strikes on Gaza killed a Hamas political official and his wife, among eight Palestinians killed in the attack.",
+    "source": "auto"
+  },
+  {
+    "id": "153b178a5dd2",
+    "date": "2026-11-26",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Iranian drone attack on US base in Bahrain",
+    "description": "Iran launched drones that struck a US military base in Bahrain, the second such attack in three days.",
+    "source": "auto"
+  },
+  {
+    "id": "b0670233dc72",
+    "date": "2026-11-26",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Drone strike kills two Italian technicians in Kuwait",
+    "description": "Two Italian technicians were killed by falling debris during an Iranian drone attack on a Kuwaiti air‑defence site; Iran denied responsibility, with its foreign minister calling the incident suspicious.",
+    "source": "auto"
+  },
+  {
+    "id": "ec984cbf8115",
+    "date": "2026-11-26",
+    "conflict": "Myanmar",
+    "tier": "war",
+    "title": "Myanmar Leader Rejects Genocide Ruling",
+    "description": "Myanmar's leader has stated that the country will not comply with 'inappropriate' parts of the genocide ruling.",
+    "source": "auto"
+  },
+  {
+    "id": "97f1d50f5e1a",
+    "date": "2026-11-26",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Ebola cases surpass 12,000",
+    "description": "The Ebola outbreak in the Democratic Republic of Congo has surpassed 12,000 cases.",
+    "source": "auto"
+  },
+  {
+    "id": "882f2d9df957",
+    "date": "2026-11-26",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "India tells US to resolve tariff concerns in trade talks",
+    "description": "India asked the United States to settle tariff issues before trade talks can move forward, noting delays in negotiations.",
+    "source": "auto"
+  },
+  {
     "id": "f52b943fd17d",
     "date": "2026-11-25",
     "conflict": "Iran",
@@ -168,6 +231,24 @@
     "tier": "war",
     "title": "Iranian drone strike on Kuwait's international airport",
     "description": "Smoke rises from an area of Kuwait's international airport after a reported drone strike.",
+    "source": "auto"
+  },
+  {
+    "id": "64af6001f953",
+    "date": "2026-11-25",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "AJK Assembly proposes dialogue conditions",
+    "description": "The Azad Jammu and Kashmir Legislative Assembly offered to reopen negotiations with the proscribed Joint Awami Action Committee (JAAC) subject to disbandment of armed groups and surrender of those involved in serious crimes.",
+    "source": "auto"
+  },
+  {
+    "id": "8dceaa994744",
+    "date": "2026-11-25",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Abductions and Sexual Violence in Blue Nile State",
+    "description": "The Strategic Initiative for Women in the Horn of Africa reported the abduction of 28 women and girls fleeing fighting in Damazin and 15 cases of conflict-related sexual violence against girls under the age of 18 in Blue Nile state.",
     "source": "auto"
   },
   {
@@ -969,6 +1050,24 @@
     "tier": "war",
     "title": "Fighting intensifies in Blue Nile",
     "description": "Fighting intensified in Blue Nile State after an alliance between the RSF and the El Hilu faction of the SPLM-N announced that it had taken control of the headquarters of Bao locality.",
+    "source": "auto"
+  },
+  {
+    "id": "d434699b0804",
+    "date": "2026-11-19",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Intensified fighting and sexual violence in Blue Nile",
+    "description": "Clashes led to the abduction of 28 women and girls and 15 cases of sexual violence against minors, displacing civilians.",
+    "source": "auto"
+  },
+  {
+    "id": "27dabf0dcc9f",
+    "date": "2026-11-19",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "Intense Overnight Drone Strikes and Heavy Artillery Bombardments",
+    "description": "Intense overnight drone strikes and heavy artillery bombardments were reported in areas surrounding the border town of Badme, as Ethiopian and Eritrean forces continued building up their military presence.",
     "source": "auto"
   },
   {
