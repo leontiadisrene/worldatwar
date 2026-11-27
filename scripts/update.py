@@ -1392,7 +1392,7 @@ def main():
                         final, rev_src = groq_with_fallback_src(
                             "openai/gpt-oss-120b",
                             review_prompt(c, results, a, b, flags, recent, prev_escalation),
-                            max_tokens=2000,
+                            max_tokens=4000,
                             json_mode=False,
                         )
                         time.sleep(8.0)
