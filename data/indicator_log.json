@@ -1544,5 +1544,126 @@
   "shown": "no",
   "basis": "baseline",
   "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:25:26+00:00",
+  "conflict": "ukraine",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "shown": "no",
+  "basis": "baseline",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:26:04+00:00",
+  "conflict": "gaza",
+  "state": "unknown",
+  "reason": "disagree",
+  "model_a": "not_in_force",
+  "model_b": "in_force",
+  "shown": "yes",
+  "basis": "baseline",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:26:43+00:00",
+  "conflict": "iran",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "shown": "unknown",
+  "basis": null,
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:27:28+00:00",
+  "conflict": "sudan",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "shown": "no",
+  "basis": "baseline",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:28:10+00:00",
+  "conflict": "mali",
+  "state": "unknown",
+  "reason": "conflict",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "shown": "unknown",
+  "basis": null,
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:28:50+00:00",
+  "conflict": "myanmar",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "shown": "no",
+  "basis": "baseline",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:29:29+00:00",
+  "conflict": "venezuela",
+  "state": "unknown",
+  "reason": "disagree",
+  "model_a": "not_in_force",
+  "model_b": "unclear",
+  "shown": "hidden",
+  "basis": null,
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:30:06+00:00",
+  "conflict": "drc",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "not_in_force",
+  "model_b": "not_in_force",
+  "shown": "unknown",
+  "basis": null,
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:33:12+00:00",
+  "conflict": "kashmir",
+  "state": "unknown",
+  "reason": "disagree",
+  "model_a": "not_in_force",
+  "model_b": "unclear",
+  "shown": "unknown",
+  "basis": null,
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:33:59+00:00",
+  "conflict": "thaicambodia",
+  "state": "unknown",
+  "reason": "no_evidence",
+  "model_a": "unclear",
+  "model_b": "unclear",
+  "shown": "yes",
+  "basis": "baseline",
+  "evidence": []
+ },
+ {
+  "at": "2026-11-28T13:34:20+00:00",
+  "conflict": "horn",
+  "state": "unknown",
+  "reason": "disagree",
+  "model_a": "not_in_force",
+  "model_b": "unclear",
+  "shown": "no",
+  "basis": "baseline",
+  "evidence": []
  }
 ]

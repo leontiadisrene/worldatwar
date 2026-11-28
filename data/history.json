@@ -54,6 +54,42 @@
     "source": "auto"
   },
   {
+    "id": "af7456f25f22",
+    "date": "2026-11-27",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine downs Russian drone",
+    "description": "Ukraine downed a Russian drone with laser technology as Moscow intercepted an overnight assault.",
+    "source": "auto"
+  },
+  {
+    "id": "dcaeaa1d6cae",
+    "date": "2026-11-27",
+    "conflict": "Sahel (Mali)",
+    "tier": "war",
+    "title": "Armed men kill 13 guards in Niger",
+    "description": "Armed men killed 13 guards in a 'terrorist attack' in western Niger, near the border with Mali and Burkina Faso.",
+    "source": "auto"
+  },
+  {
+    "id": "9ab9f29df3be",
+    "date": "2026-11-27",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Uganda Troop Withdrawal",
+    "description": "Uganda announced plans to withdraw troops from the Lubero town",
+    "source": "auto"
+  },
+  {
+    "id": "af8d74778c98",
+    "date": "2026-11-27",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "India asks Netflix to ban Pakistani series",
+    "description": "India formally requested that Netflix remove a Pakistani series from its platform, citing heightened bilateral tensions after the 2025 Kashmir terror attack.",
+    "source": "auto"
+  },
+  {
     "id": "752e647ebafc",
     "date": "2026-11-26",
     "conflict": "Ukraine",
@@ -81,13 +117,13 @@
     "source": "auto"
   },
   {
-    "id": "b01f5e0bf5de",
+    "id": "0b711be91fd9",
     "date": "2026-11-26",
     "conflict": "Korean peninsula",
     "tier": "flash",
-    "title": "Kim Jong Un calls for tactical nuclear deployment",
-    "description": "North Korea's leader calls for the deployment of tactical nuclear weapons in response to the country's 'most dangerous enemy state'",
-    "source": "auto"
+    "title": "Kim Jong Un pledges deployment and expansion of tactical nuclear arsenal",
+    "description": "In a televised address, Kim Jong Un said North Korea will deploy tactical nuclear weapons and accelerate production of new nukes, citing threats from the United States and South Korea.",
+    "source": "merged"
   },
   {
     "id": "78b102d75110",
@@ -180,12 +216,21 @@
     "source": "auto"
   },
   {
-    "id": "64b070a63f26",
+    "id": "bb23822b5ef3",
     "date": "2026-11-26",
-    "conflict": "Korean peninsula",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Ebola Workers Evacuate",
+    "description": "Ebola workers were forced to evacuate due to fighting in eastern Congo",
+    "source": "auto"
+  },
+  {
+    "id": "31ce89ca7be6",
+    "date": "2026-11-26",
+    "conflict": "South China Sea",
     "tier": "flash",
-    "title": "Kim Jong Un vows to build more nuclear weapons",
-    "description": "North Korea's Kim Jong Un has vowed to build more nuclear weapons, citing threats from the US and South Korea.",
+    "title": "US Submarine Forces Commander Comments",
+    "description": "US Submarine Forces commander Vice-Admiral Richard Seif said the US is moving forward with the SLCM missile program.",
     "source": "auto"
   },
   {
@@ -321,6 +366,24 @@
     "tier": "war",
     "title": "Ebola workers evacuate Ituri hospital",
     "description": "Escalating fighting near a hospital in Ituri province forced WHO and other Ebola response staff to evacuate, disrupting outbreak response.",
+    "source": "auto"
+  },
+  {
+    "id": "e13bfad18309",
+    "date": "2026-11-25",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "RSF Drone Attack",
+    "description": "RSF drone attacks killed 19 people in Sudan overnight",
+    "source": "auto"
+  },
+  {
+    "id": "ef8b60dd8e56",
+    "date": "2026-11-25",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "French Foreign Minister Supports Ukraine",
+    "description": "French Foreign Minister Jean-Noël Barrot reaffirmed Ukraine's right to self-defense and pointed to daily Russian missile and drone attacks on Ukrainian cities.",
     "source": "auto"
   },
   {
@@ -810,13 +873,13 @@
     "source": "merged"
   },
   {
-    "id": "789ba79675f2",
+    "id": "e6bbd5a714c1",
     "date": "2026-11-21",
     "conflict": "Iran",
     "tier": "war",
-    "title": "Iran downs US drone over Hormuz",
-    "description": "Iran's IRGC downs US drone over Hormuz as efforts to end war remain stalled",
-    "source": "auto"
+    "title": "Iran conducts multiple attacks on Bahrain and US assets, injuring two",
+    "description": "Iran’s IRGC said it downed a U.S. drone over Hormuz and struck radars at a U.S. base in Bahrain, while Bahrain’s interior ministry reported two injuries from an attack on an industrial site. Bahrain also accused Iran of hitting two tankers in the Strait of Hormuz. The IRGC and Bahrain officials provided these differing accounts.",
+    "source": "merged"
   },
   {
     "id": "71043c0a7180",
@@ -834,24 +897,6 @@
     "tier": "war",
     "title": "Russian strike on Kryvyi Rih",
     "description": "Russian ballistic missile strikes on Ukraine's southern city of Kryvyi Rih, President Volodymyr Zelenskyy's hometown, killed two people and wounded dozens of others.",
-    "source": "auto"
-  },
-  {
-    "id": "dfdf929a43eb",
-    "date": "2026-11-21",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "Iranian attack on Bahrain",
-    "description": "Bahrain's Interior Ministry reported two people were injured in Iranian attacks on the country.",
-    "source": "auto"
-  },
-  {
-    "id": "fe50cd670cc2",
-    "date": "2026-11-21",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "IRGC claims US base attack",
-    "description": "The Islamic Revolutionary Guard Corps (IRGC) claimed to have targeted radars at a United States military base in Bahrain.",
     "source": "auto"
   },
   {
@@ -879,15 +924,6 @@
     "tier": "flash",
     "title": "Mass displacement in southern Ethiopia",
     "description": "According to Islamic Relief, fighting sparked by a dispute over control of the town of Moyale has displaced around 700,000 people. The clashes between Oromo and Ethiopian Somali communities began in late October.",
-    "source": "auto"
-  },
-  {
-    "id": "f86c2162d2e9",
-    "date": "2026-11-21",
-    "conflict": "Iran",
-    "tier": "war",
-    "title": "Bahrain industrial site strike and Hormuz tanker hits",
-    "description": "Bahrain accused Iran of striking a civilian industrial facility, causing a fire but no casualties, while two tankers were hit in the Strait of Hormuz, one reportedly struck on the stern by an unknown projectile.",
     "source": "auto"
   },
   {
@@ -1215,12 +1251,12 @@
     "source": "auto"
   },
   {
-    "id": "542c064e98f4",
+    "id": "113c8a806612",
     "date": "2026-11-18",
     "conflict": "Kashmir",
     "tier": "flash",
-    "title": "Indian forces kill LeT commander, rescue girls in Kulgam",
-    "description": "The Hindu and The Washington Post reported that Indian security forces eliminated LeT commander Mohammad Lateef Bhat in Kulgam and rescued 25 girls and two teachers from a nearby Darul Uloom institute. Indian troops also confirmed the killing of a militant commander in Indian‑controlled Kashmir.",
+    "title": "Indian forces kill LeT commander and rescue 25 girls in Kulgam",
+    "description": "The Hindu and The Washington Post reported that Indian security forces eliminated Lashkar‑e‑Taiba commander Mohammad Lateef Bhat in Kulgam, Jammu & Kashmir, and rescued 25 girls and two teachers from a nearby Darul Uloom institute. Indian troops confirmed the killing, describing it as a precision operation against the militant leader. The operation was hailed as a successful rescue of the girls and a blow to LeT.",
     "source": "merged"
   },
   {
@@ -1320,15 +1356,6 @@
     "tier": "war",
     "title": "Ebola cases double in DR Congo",
     "description": "The current outbreak has resulted in 5,568 deaths out of 11,376 confirmed cases",
-    "source": "auto"
-  },
-  {
-    "id": "23eb0c2a9547",
-    "date": "2026-11-18",
-    "conflict": "Kashmir",
-    "tier": "flash",
-    "title": "LeT Commander Killed",
-    "description": "Indian forces killed a Lashkar-e-Taiba commander and rescued girls in Kulgam",
     "source": "auto"
   },
   {
