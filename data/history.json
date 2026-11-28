@@ -1,5 +1,59 @@
 [
   {
+    "id": "4572d16f044f",
+    "date": "2026-11-27",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Russian strikes in Kharkiv region",
+    "description": "Russian forces struck Kharkiv and surrounding communities, injuring at least 13 people, including three children.",
+    "source": "auto"
+  },
+  {
+    "id": "37eec6d7e60f",
+    "date": "2026-11-27",
+    "conflict": "Ukraine",
+    "tier": "war",
+    "title": "Ukraine hits missile fuel production facility",
+    "description": "Ukraine hit a missile fuel production facility in Russia's Tula Oblast, according to the military.",
+    "source": "auto"
+  },
+  {
+    "id": "3d237ac99282",
+    "date": "2026-11-27",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "Drone strike on Kuwait",
+    "description": "A drone strike killed two Italian defense contractors in Kuwait, with Iran denying responsibility.",
+    "source": "auto"
+  },
+  {
+    "id": "6932ab14044c",
+    "date": "2026-11-27",
+    "conflict": "Iran",
+    "tier": "war",
+    "title": "US disables ship in Gulf of Oman",
+    "description": "The US disabled a commercial vessel in the Gulf of Oman that tried to breach the US naval blockade on Iran.",
+    "source": "auto"
+  },
+  {
+    "id": "88c8c309aec4",
+    "date": "2026-11-27",
+    "conflict": "Sudan",
+    "tier": "war",
+    "title": "Drone strikes in Khartoum",
+    "description": "Drone strikes hit residential buildings in Omdurman and Jebel Awlia, killing four civilians and damaging a UN building.",
+    "source": "auto"
+  },
+  {
+    "id": "3639843bf230",
+    "date": "2026-11-27",
+    "conflict": "Horn of Africa",
+    "tier": "flash",
+    "title": "DRC-Uganda Tensions Escalate",
+    "description": "Kinshasa summons Ugandan diplomat due to controversial statements by Uganda’s army chief, General",
+    "source": "auto"
+  },
+  {
     "id": "752e647ebafc",
     "date": "2026-11-26",
     "conflict": "Ukraine",
@@ -126,6 +180,15 @@
     "source": "auto"
   },
   {
+    "id": "64b070a63f26",
+    "date": "2026-11-26",
+    "conflict": "Korean peninsula",
+    "tier": "flash",
+    "title": "Kim Jong Un vows to build more nuclear weapons",
+    "description": "North Korea's Kim Jong Un has vowed to build more nuclear weapons, citing threats from the US and South Korea.",
+    "source": "auto"
+  },
+  {
     "id": "f52b943fd17d",
     "date": "2026-11-25",
     "conflict": "Iran",
@@ -249,6 +312,15 @@
     "tier": "flash",
     "title": "Abductions and Sexual Violence in Blue Nile State",
     "description": "The Strategic Initiative for Women in the Horn of Africa reported the abduction of 28 women and girls fleeing fighting in Damazin and 15 cases of conflict-related sexual violence against girls under the age of 18 in Blue Nile state.",
+    "source": "auto"
+  },
+  {
+    "id": "d33801ca6af4",
+    "date": "2026-11-25",
+    "conflict": "E. DR Congo",
+    "tier": "war",
+    "title": "Ebola workers evacuate Ituri hospital",
+    "description": "Escalating fighting near a hospital in Ituri province forced WHO and other Ebola response staff to evacuate, disrupting outbreak response.",
     "source": "auto"
   },
   {
@@ -447,6 +519,15 @@
     "tier": "flash",
     "title": "Sudan Medicine Shortages",
     "description": "Sudanese patients with chronic diseases struggle with medicine shortages, soaring prices",
+    "source": "auto"
+  },
+  {
+    "id": "1bfa7f7b266f",
+    "date": "2026-11-24",
+    "conflict": "Caucasus",
+    "tier": "watch",
+    "title": "Iran Threatens to Escalate Conflict",
+    "description": "Iranian Parliament Speaker Mohammad Ghalibaf threatened to shift the geographical scope of the current conflict",
     "source": "auto"
   },
   {
@@ -1242,6 +1323,15 @@
     "source": "auto"
   },
   {
+    "id": "23eb0c2a9547",
+    "date": "2026-11-18",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "LeT Commander Killed",
+    "description": "Indian forces killed a Lashkar-e-Taiba commander and rescued girls in Kulgam",
+    "source": "auto"
+  },
+  {
     "id": "b3f99b43405d",
     "date": "2026-11-17",
     "conflict": "Ukraine",
@@ -1572,6 +1662,15 @@
     "tier": "war",
     "title": "Diplomatic tension with Rwanda",
     "description": "Kinshasa threatens to exit the Francophonie over accusations that Rwanda backs the M23 rebel group.",
+    "source": "auto"
+  },
+  {
+    "id": "c62fde042bf0",
+    "date": "2026-11-15",
+    "conflict": "Kashmir",
+    "tier": "flash",
+    "title": "Protests Over Recruitment Board",
+    "description": "Job aspirants in Jammu and Kashmir have been protesting over a recruitment board's cheating case",
     "source": "auto"
   },
   {
